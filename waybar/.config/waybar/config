@@ -1,0 +1,154 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "modules-left": [
+                      "sway/workspaces",
+                      "sway/window",
+                      "sway/mode"
+                    ],
+    "modules-right": ["tray",
+                      "custom/separator",
+                      "custom/playerctl",
+                      "custom/separator",
+                      "idle_inhibitor",
+                      "custom/separator",
+                      "network",
+                      "custom/separator",
+                      "battery",
+                      "custom/separator",
+                      "pulseaudio",
+                      "custom/separator",
+                      "temperature",
+                      "custom/separator",
+                      "clock",
+                      "custom/separator",
+                      "custom/shutdown"
+                      ],
+
+    // modules
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{icon}",
+        "format-icons": {
+            "1:web": "",
+            "2:code": "",
+            "3:term": "",
+            "4:docs": "",
+            "5:5": "V",
+            "6:6": "VI",
+            "7:7": "VII",
+            "8:8": "VIII",
+            "9:9": "IX",
+            "10:discord": "",
+            "urgent": "",
+            "focused": "",
+            "default": ""
+        }
+    },
+    "sway/mode": {
+        "format": "Mode: {}",
+        "max-length": 50
+    },
+    "sway/window": {
+        "max-length": 20
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "network": {
+        "interval": 1,
+        "format": "",
+        "format-wifi": " {essid}",
+        "format-ethernet": "",
+        "format-disconnected": "",
+        "tooltip-format": "Internet Disabled",
+        "tooltip-format-ethernet": "{ifname}: {ipaddr}/{cidr}  {bandwidthUpBits}  {bandwidthDownBits}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)  {bandwidthUpBits}  {bandwidthDownBits}",
+        "tooltip-format-disconnected": "Disconnected",
+        "on-click": "kitty --title='Network Management' -e $HOME/.scripts/wifi.sh"
+    },
+    "tray": {
+        "icon-size": 16,
+        "spacing": 10
+    },
+    "battery": {
+        "interval": 15,
+        "bat": "BAT0",
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-icons": [" ", " ", " ", " ", " "]
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}% {format_source}",
+        "format-bluetooth": "{icon} {volume}% {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": " {volume}%",
+        "format-source-muted": " ",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": [
+                "",
+                "",
+                ""
+            ]
+        },
+        "on-click": "pavucontrol"
+    },
+    "temperature": {
+        "interval": 1,
+        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 85,
+        "format": "{icon}{temperatureC}°C",
+        "format-icons": [
+            " ",
+            " ",
+            " ",
+            " ",
+            " "
+        ],
+        "tooltip-format": " CPU Temp: {temperatureC}°C"
+    },
+    "clock": {
+        "format": "{: %H:%M  %Y-%m-%d}",
+    },
+    "custom/shutdown": {
+        "format": "",
+        "tooltip-format": "Power Options",
+        "on-click": "$HOME/.scripts/power_menu.sh",
+        "tooltip": false
+    },
+    "custom/playerctl": {
+      "interval": 1,
+      "tooltip": true,
+      "return-type": "json",
+      "format" : "{icon}",
+      "format-icons": {
+        "Playing": "",
+        "Paused": ""
+        },
+      "exec": "status=$(playerctl status) && title=$(playerctl metadata title) && artist=$(playerctl metadata artist) && echo {'\"alt\"':'\"'$status'\"', '\"tooltip\"':'\"'$title - $artist'\"'}",
+      "on-click": "playerctl play-pause",
+      "on-click-right": "playerctl next",
+      "on-scroll-up": "playerctl position 10+", 
+      "on-scroll-down": "playerctl position 10-", 
+    },
+    "custom/separator": {
+        "format": "|",
+        "tooltip": false
+		},
+}

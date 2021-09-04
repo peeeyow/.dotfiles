@@ -1,0 +1,139 @@
+@define-color black            #282c34;
+@define-color white            #abb2bf;
+@define-color light_red        #e06c75;
+@define-color dark_red         #be5046;
+@define-color green            #98c379;
+@define-color light_yellow     #e5c07b;
+@define-color dark_yellow      #d19a66;
+@define-color blue             #61afef;
+@define-color light_blue       #8fc4ef;
+@define-color magenta          #c678dd;
+@define-color cyan             #56b6c2;
+@define-color gutter_grey      #4b5263;
+@define-color comment_grey     #5c6370;
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Fira Mono", "Font Awesome 5 Free", "Font Awesome 5 Brands";
+    font-size: 13px;
+    font-weight: bold;
+    min-height: 0;
+}
+
+window#waybar {
+    background: transparent;
+    color: @white;
+}
+
+.modules-left,
+.modules-right {
+    background-color: @black;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.875em;
+}
+
+/* sway/workspace */
+#workspaces button {
+    padding: 0 5px;
+    background: transparent;
+    color: @white;
+    /* border-top: 2px solid transparent; */
+}
+
+#workspaces button.focused {
+    background-color: @gutter_grey;
+    color: @light_red;
+    border-top: 2px solid @light_red;
+}
+
+#workspaces button.urgent {
+    background-color: @gutter_grey;
+    color: @light_yellow;
+    border-top: 2px solid @light_yellow;
+}
+
+/* sway/mode */
+#mode {
+    background: @light_yellow;
+    color: @black;
+}
+
+/* sway/window */
+#window {
+    color: @magenta;
+    font-family: "Fira Mono", "Noto Color Emoji";
+}
+
+#window, #mode, #network, #custom-playerctl, #tray, #idle_inhibitor, #pulseaudio, #temperature, #clock, #custom-shutdown {
+    padding: 0 3px;
+    margin: 0 2px;
+}
+
+#tray {}
+
+#custom-playerctl {
+    color: @light_blue;
+}
+
+#idle_inhibitor {
+    color: @cyan;
+}
+
+#network {
+    color: @blue;
+}
+
+#network.disconnected {
+    background: #f53c3c;
+    color: @black;
+}
+
+#pulseaudio {
+    color: @green;
+}
+
+#pulseaudio.muted {
+}
+
+#battery {
+  color: @light_yellow;
+}
+
+#battery icon {
+    color: @dark_red;
+}
+
+#battery.charging {
+}
+
+#battery.warning:not(.charging) {
+    color: white;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#temperature {
+    color: @dark_yellow;
+}
+
+#clock {}
+
+#custom-shutdown {
+    color: @dark_red;
+}
+
+#custom-separator {
+    color: @gutter_grey;
+}
+
+
+@keyframes blink {
+    to {
+        background-color: @white;
+        color: black;
+    }
+}
