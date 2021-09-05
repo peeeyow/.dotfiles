@@ -138,7 +138,11 @@ pasteinit() {
  zstyle :bracketed-paste-magic paste-init pasteinit
  zstyle :bracketed-paste-magic paste-finish pastefinish
 
- eval "$(fnm env)"
+# eval "$(fnm env)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# fnm
+export PATH=/home/pio/.fnm:$PATH
+eval "`fnm env`"
