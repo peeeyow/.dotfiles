@@ -278,12 +278,6 @@ exec swayidle -w \
 		swaylock -i /tmp/blurshot.png && \
 		rm /tmp/blurshot.png &'
 
-### waybar
-
-bar {
-  swaybar_command waybar
-}
-
 ### program assignment
 
 assign [class="Brave" window_type="normal"] $ws1
@@ -324,9 +318,6 @@ for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
 for_window [instance="update_installer"] floating enable
 
-
-
-
 ### xwayland support 
 
 # enable xwayland
@@ -344,3 +335,7 @@ exec_always $HOME/.scripts/mako.sh
 # exec autotiling
 
 include /etc/sway/config.d/*
+
+### waybar
+
+exec_always --no-startup-id $HOME/.scripts/waybar.sh
