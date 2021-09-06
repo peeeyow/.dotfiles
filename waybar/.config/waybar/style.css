@@ -62,10 +62,9 @@ window#waybar {
 /* sway/window */
 #window {
     color: @magenta;
-    font-family: "Fira Mono", "Noto Color Emoji";
 }
 
-#window, #mode, #network, #custom-playerctl, #tray, #idle_inhibitor, #pulseaudio, #temperature, #clock, #custom-shutdown {
+#window, #mode, #network, #custom-playerctl, #tray, #idle_inhibitor, #pulseaudio, #temperature, #clock, #battery, #custom-shutdown {
     padding: 0 3px;
     margin: 0 2px;
 }

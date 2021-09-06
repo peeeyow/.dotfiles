@@ -15,7 +15,8 @@
                       "custom/separator",
                       "network",
                       "custom/separator",
-                      "battery",
+                      "battery#0",
+                      "battery#1",
                       "custom/separator",
                       "pulseaudio",
                       "custom/separator",
@@ -52,7 +53,7 @@
         "max-length": 50
     },
     "sway/window": {
-        "max-length": 20
+        "max-length": 40
     },
     "idle_inhibitor": {
         "format": "{icon}",
@@ -77,15 +78,27 @@
         "icon-size": 16,
         "spacing": 10
     },
-    "battery": {
+    "battery#0": {
         "interval": 15,
         "bat": "BAT0",
         "states": {
             "warning": 30,
             "critical": 15
         },
+        "format-charging": "{capacity}% {icon}",
         "format": "{capacity}% {icon}",
-        "format-icons": [" ", " ", " ", " ", " "]
+        "format-icons": ["", "", "", "", ""],
+    },
+    "battery#1": {
+        "interval": 15,
+        "bat": "BAT1",
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format-charging": "{capacity}% {icon}",
+        "format": "{capacity}% {icon}",
+        "format-icons": ["", "", "", "", ""]
     },
     "pulseaudio": {
         "format": "{icon} {volume}% {format_source}",
