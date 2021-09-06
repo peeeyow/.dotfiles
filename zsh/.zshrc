@@ -85,6 +85,7 @@ plugins=(
 	zsh-autosuggestions
 	history-substring-search
 	zsh-syntax-highlighting
+	z
 )
 
 source $ZSH/oh-my-zsh.sh
