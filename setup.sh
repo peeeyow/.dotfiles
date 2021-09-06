@@ -15,7 +15,7 @@ makepkg -si
 cd ..
 sudo mv yay /opt
 
-sudo pacman -S --noconfirm sway swayidle swaylock grim waybar wofi pactl pavucontrol slurp wl-clipboard jq xdg-desktop-portal-wlr libpipewire02 zenity mako lsd noto-fonts-emoji bluez bluez-utils blueman awesome-terminal-fonts openssh stow otf-fira-mono libappindicator-gtk2 libappindicator-gtk3 thunar
+sudo pacman -S --noconfirm sway swayidle swaylock grim waybar wofi pactl pavucontrol slurp wl-clipboard jq xdg-desktop-portal-wlr libpipewire02 mako lsd noto-fonts-emoji bluez bluez-utils blueman awesome-terminal-fonts openssh stow otf-fira-mono libappindicator-gtk2 libappindicator-gtk3 thunar arc-gtk-theme
 
 # yay -S autotiling
 yay -S seatd
