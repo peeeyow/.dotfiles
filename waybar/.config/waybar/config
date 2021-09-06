@@ -75,7 +75,7 @@
         "on-click": "kitty --title='Network Management' -e $HOME/.scripts/wifi.sh"
     },
     "tray": {
-        "icon-size": 16,
+        "icon-size": 20,
         "spacing": 10
     },
     "battery#0": {
