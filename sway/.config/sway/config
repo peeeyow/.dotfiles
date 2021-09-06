@@ -21,7 +21,7 @@ set $term kitty
 set $menu wofi --show run
 
 # background path
-set $background_path ~/Pictures/minimalist_nord_arctic.png
+set $background_path ~/.background_images/minimalist_nord_arctic.png
 # set $background_path ~/Pictures/bg.jpeg
 
 # screenshot path
