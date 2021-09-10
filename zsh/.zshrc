@@ -127,6 +127,9 @@ alias n="nvim "
 alias ls="lsd "
 alias r="ranger "
 
+[ -f $HOME/.config/zsh/_fnm ] && fpath+="$HOME/.config/zsh"
+compinit
+
 # Disable zsh-autocompletion on paste
 pasteinit() {
   OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
