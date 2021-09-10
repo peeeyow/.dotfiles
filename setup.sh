@@ -20,3 +20,8 @@ sudo pacman -S sway swayidle swaylock grim waybar wofi pactl pavucontrol slurp w
 # yay -S autotiling
 yay -S seatd
 
+# TODO
+# 1. fix setup.sh
+# 2. modularize zsh
+# 3. setup nvim config
+
