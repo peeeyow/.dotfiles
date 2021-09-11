@@ -3,3 +3,5 @@
 	email = pio.lauren.mendoza@gmail.com
 [core]
 	editor = nvim
+[init]
+	defaultBranch = main
