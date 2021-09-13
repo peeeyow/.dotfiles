@@ -13,9 +13,14 @@ lvim.log.level = "warn"
 lvim.format_on_save = true
 lvim.colorscheme = "onedarker"
 lvim.transparent_window = true
+lvim.line_wrap_cursor_movement = true
+
+vim.opt.wrap = true
 vim.g.python3_host_prog = os.getenv("HOME") .. "/.config/lvim/neovim/bin/python3"
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
+lvim.keys.normal_mode["j"] = { [[v:count ? "j" : "gj"]], {expr = true} }
+lvim.keys.normal_mode["k"] = { [[v:count ? "k" : "gk"]], {expr = true} }
 -- add your own keymapping
 -- unmap a default keymapping
 -- lvim.keys.normal_mode["<C-Up>"] = ""
@@ -27,8 +32,7 @@ lvim.leader = "space"
 --   local actions = require "telescope.actions"
 --   -- for input mode
 --   lvim.builtin.telescope.defaults.mappings.i["<C-j>"] = actions.move_selection_next
---   lvim.builtin.telescope.defaults.mappings.i["<C-k>"] = actions.move_selection_previous
---   lvim.builtin.telescope.defaults.mappings.i["<C-n>"] = actions.cycle_history_next
+--   lvim.builtin.telescope.defaults.mappings.i["<C-k>"] = actions.move_selection_previous lvim.builtin.telescope.defaults.mappings.i["<C-n>"] = actions.cycle_history_next
 --   lvim.builtin.telescope.defaults.mappings.i["<C-p>"] = actions.cycle_history_prev
 --   -- for normal mode
 --   lvim.builtin.telescope.defaults.mappings.n["<C-j>"] = actions.move_selection_next
