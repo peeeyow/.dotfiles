@@ -113,7 +113,7 @@ floating_modifier $mod normal
 bindsym $mod+Shift+r reload
 
 # Exit sway (logs you out of your Wayland session)
-bindsym $mod+Shift+e exec $HOME/.scripts/power_menu.sh
+bindsym $mod+Shift+e exec $HOME/.scripts/sway_power_menu.sh
 # -b '🌚️Suspend' 'systemctl suspend' \
 #     -b '⚡️Shutdown' 'systemctl -i poweroff' \
 #     -b '🌀️Reboot' 'systemctl -i reboot' \
@@ -121,7 +121,7 @@ bindsym $mod+Shift+e exec $HOME/.scripts/power_menu.sh
 #-m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
 # lockscreen
-bindsym $mod+Control+l exec $HOME/.scripts/screenlock.sh
+bindsym $mod+Control+l exec $HOME/.scripts/sway_screenlock.sh
 
 ## Movement keys
 
@@ -240,9 +240,9 @@ bindsym Shift+Print exec grim -g "$(slurp)" $screenshot_path
 bindsym Control+Shift+Print exec grim -g "$(slurp)" - | wl-copy --type image/png
 
 # screenshot current focused window and save to ~/Pictures
-bindsym Mod1+Print exec --no-startup-id $HOME/.scripts/screencapture_active.sh
+bindsym Mod1+Print exec --no-startup-id $HOME/.scripts/sway_screencapture_active.sh
 # screenshot current focused window and copy to clipboard
-bindsym Control+Mod1+Print exec --no-startup-id $HOME/.scripts/screencapture_active_clipboard.sh
+bindsym Control+Mod1+Print exec --no-startup-id $HOME/.scripts/sway_screencapture_active_clipboard.sh
 
 # mako controls
 bindsym $mod+x exec makoctl dismiss --all
