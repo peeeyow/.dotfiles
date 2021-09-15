@@ -307,12 +307,12 @@ focus_on_window_activation focus
 for_window [title="Network Management"] floating enable
 # for_window [title="zoom"] floating enable
 # For pop up notification windows that don't use notifications api
-for_window [app_id="zoom" title="^zoom$"] border none, floating enable
+for_window [class="zoom" title="^zoom$"] border none, floating enable
 # For specific Zoom windows
-for_window [app_id="zoom" title="^(Zoom|About)$"] border pixel, floating enable
-for_window [app_id="zoom" title="Settings"] floating enable, floating_minimum_size 960 x 700
+for_window [class="zoom" title="^(Zoom|About)$"] border pixel, floating enable
+for_window [class="zoom" title="Settings"] floating enable, floating_minimum_size 960 x 700
 # Open Zoom Meeting windows on a new workspace (a bit hacky)
-for_window [app_id="zoom" title="Zoom Meeting(.*)?"] workspace next_on_output --create, move container to workspace current, floating disable, inhibit_idle openoom"] floating enable
+for_window [class="zoom" title="Zoom Meeting(.*)?"] workspace next_on_output --create, move container to workspace current, floating disable, inhibit_idle openoom"] floating enable
 
 # floating enable anything pop-up like
 for_window [window_role="pop-up"] floating enable
