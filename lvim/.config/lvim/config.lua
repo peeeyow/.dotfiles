@@ -109,6 +109,7 @@ lvim.plugins = {
       "folke/trouble.nvim",
       cmd = "TroubleToggle",
     },
+    {"aurieh/discord.nvim"},
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
