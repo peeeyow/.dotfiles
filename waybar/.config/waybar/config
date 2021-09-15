@@ -143,7 +143,7 @@
     "custom/shutdown": {
         "format": "",
         "tooltip-format": "Power Options",
-        "on-click": "$HOME/.scripts/power_menu.sh",
+        "on-click": "$HOME/.scripts/sway_power_menu.sh",
         "tooltip": false
     },
     "custom/playerctl": {
