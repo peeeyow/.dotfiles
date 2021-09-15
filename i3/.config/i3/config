@@ -1,0 +1,242 @@
+# i3 config
+
+### variables
+
+# modifier keys - windows key
+set $mod Mod4
+
+# direction keys
+set $left h
+set $down j
+set $up k
+set $right l
+
+# terminal
+set $term kitty
+
+# on the original workspace that the command was run on.
+set $menu rofi -show run
+
+# background path
+set $background_path ~/.background_images/minimalist_nord_arctic.png
+# set $background_path ~/Pictures/bg.jpeg
+
+# screenshot path
+set $screenshot_path ~/Pictures/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
+
+# gaps width
+set $gaps 5
+
+# border width
+set $border 2
+
+# workspaces
+set $ws1   1:web
+set $ws2   2:code
+set $ws3   3:term
+set $ws4   4:docs
+set $ws5   5:5
+set $ws6   6:6
+set $ws7   7:7
+set $ws8   8:8
+set $ws9   9:9
+set $ws0   10:discord
+
+set $base00 #282c34
+set $base01 #353b45
+set $base02 #3e4451
+set $base03 #545862
+set $base04 #565c64
+set $base05 #abb2bf
+set $base06 #b6bdca
+set $base07 #c8ccd4
+set $base08 #e06c75
+set $base09 #d19a66
+set $base0A #e5c07b
+set $base0B #98c379
+set $base0C #56b6c2
+set $base0D #61afef
+set $base0E #c678dd
+set $base0F #be5046
+
+### appearance configuration
+
+# borders
+default_border pixel $border
+
+# gaps
+gaps inner $gaps
+
+# Property Name         Border  BG      Text    Indicator Child Border
+client.focused          $base05 $base0D $base00 $base0D $base0D
+client.focused_inactive $base01 $base01 $base05 $base03 $base01
+client.unfocused        $base01 $base00 $base05 $base01 $base01
+client.urgent           $base08 $base08 $base00 $base08 $base08
+client.placeholder      $base00 $base00 $base05 $base00 $base00
+client.background       $base07
+
+### Key bindings
+
+# Start a terminal
+bindsym $mod+Return exec $term
+
+# Kill focused window
+bindsym $mod+q kill
+
+# Start your launcher
+bindsym $mod+slash exec $menu
+
+# dragging key
+floating_modifier $mod
+
+# Reload the configuration file
+bindsym $mod+Shift+r reload
+
+# show powermenu
+bindsym $mod+Shift+e exec $HOME/.scripts/power_menu.sh
+
+# lockscreen
+bindsym $mod+Control+l exec $HOME/.scripts/screenlock.sh
+
+## Movement keys
+
+# Move your focus around
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+# Move the focused window with the same, but add Shift
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+# workspace keys
+
+# Switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws0
+
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1, workspace $ws1, focus
+bindsym $mod+Shift+2 move container to workspace $ws2, workspace $ws2, focus
+bindsym $mod+Shift+3 move container to workspace $ws3, workspace $ws3, focus
+bindsym $mod+Shift+4 move container to workspace $ws4, workspace $ws4, focus
+bindsym $mod+Shift+5 move container to workspace $ws5, workspace $ws5, focus
+bindsym $mod+Shift+6 move container to workspace $ws6, workspace $ws6, focus
+bindsym $mod+Shift+7 move container to workspace $ws7, workspace $ws7, focus
+bindsym $mod+Shift+8 move container to workspace $ws8, workspace $ws8, focus
+bindsym $mod+Shift+9 move container to workspace $ws9, workspace $ws9, focus
+bindsym $mod+Shift+0 move container to workspace $ws0, workspace $ws0, focus
+
+# move to previous workspace
+bindsym $mod+Tab workspace back_and_forth
+
+# layout keys
+
+# horizontal split
+bindsym $mod+b splith
+# vertical split
+bindsym $mod+v splitv
+
+# stacking mode
+bindsym $mod+s layout stacking
+# tabbed mode
+bindsym $mod+w layout tabbed
+# split vertical/horizontal mode
+bindsym $mod+e layout toggle split
+
+# toogle fullscreen
+bindsym $mod+m fullscreen
+
+# toggle to floating
+bindsym $mod+f floating toggle
+
+# toogle focus floating/normal
+bindsym $mod+space focus mode_toggle
+
+# Move focus to the parent container
+bindsym $mod+a focus parent
+# Move focus to the child 
+bindsym $mod+z focus child
+
+# scratch pad keys
+# Move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+# get windows from scratch pad
+bindsym $mod+minus scratchpad show
+
+### inhibit_idle focus
+bindsym $mod+i inhibit_idle focus
+bindsym $mod+shift+i inhibit_idle none
+
+# media controls# Audio controls
+# uses pactl commands
+bindsym  XF86AudioRaiseVolume exec --no-startup-id $HOME/.scripts/volume_up.sh
+bindsym  XF86AudioLowerVolume exec --no-startup-id $HOME/.scripts/volume_down.sh
+bindsym  XF86AudioMute exec --no-startup-id $HOME/.scripts/toggle_mute.sh
+
+# media control
+# uses playerctl
+bindsym  XF86AudioPlay exec playerctl play-pause
+bindsym  XF86AudioNext exec playerctl next
+bindsym  XF86AudioPrev exec playerctl previous
+
+# Screen brightness
+# uses brightnessctl
+bindsym XF86MonBrightnessUp exec brightnessctl set '+5%'
+bindsym XF86MonBrightnessDown exec brightnessctl set '5%-'
+
+### screenshot hotkeys
+
+# screenshot whole screen and save to ~/Pictures
+bindsym Print exec grim $screenshot_path
+# screenshot whole screen and copy to clipboard
+bindsym Control+Print exec grim - | wl-copy --type image/png
+
+# screenshot select region and save to ~/Pictures 
+bindsym Shift+Print exec grim -g "$(slurp)" $screenshot_path
+# screenshot select region and copy to clipboard
+bindsym Control+Shift+Print exec grim -g "$(slurp)" - | wl-copy --type image/png
+
+# screenshot current focused window and save to ~/Pictures
+bindsym Mod1+Print exec --no-startup-id $HOME/.scripts/screencapture_active.sh
+# screenshot current focused window and copy to clipboard
+bindsym Control+Mod1+Print exec --no-startup-id $HOME/.scripts/screencapture_active_clipboard.sh
+
+# mako controls
+bindsym $mod+x exec makoctl dismiss --all
+bindsym $mod+shift+x exec makoctl restore
+
+### resizing containers
+
+mode "resize" {
+    # left will shrink the containers width
+    bindsym $left resize shrink width 10px
+    # right will grow the containers width
+    bindsym $down resize grow height 10px
+    # up will shrink the containers height
+    bindsym $up resize shrink height 10px
+    # down will grow the containers height
+    bindsym $right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# TODO  
+# Change power menu
+# Change screen lock
+# Change notification daemon
+# Change print screen
