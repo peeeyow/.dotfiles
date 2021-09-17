@@ -21,7 +21,8 @@ sudo pacman -S sway swayidle swaylock grim waybar wofi pactl pavucontrol slurp w
 yay -S seatd
 
 # sudo pacman -S i3-gaps i3lock rofi maim xdotools
-# yay -S polybar
+# yay -S polybar betterlockscreen
+# systemctl enable betterlockscreen@$USER
 
 # TODO
 # 1. fix setup.sh
