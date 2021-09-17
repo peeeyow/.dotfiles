@@ -20,7 +20,7 @@ sudo pacman -S sway swayidle swaylock grim waybar wofi pactl pavucontrol slurp w
 # yay -S autotiling
 yay -S seatd
 
-# sudo pacman -S i3-gaps rofi maim xdotools
+# sudo pacman -S i3-gaps i3lock rofi maim xdotools
 # yay -S polybar
 
 # TODO
