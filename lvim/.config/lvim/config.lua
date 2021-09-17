@@ -110,6 +110,7 @@ lvim.plugins = {
       cmd = "TroubleToggle",
     },
     {"aurieh/discord.nvim"},
+    {'norcalli/nvim-colorizer.lua'}
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
