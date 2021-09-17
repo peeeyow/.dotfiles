@@ -25,7 +25,7 @@ set $background_path ~/.background_images/minimalist_nord_arctic.png
 set $screenshot_path ~/Pictures/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
 
 # gaps width
-set $gaps 5
+set $gaps 12
 
 # border width
 set $border 2
@@ -92,11 +92,14 @@ floating_modifier $mod
 # Reload the configuration file
 bindsym $mod+Shift+r reload
 
+# Reload the configuration file
+bindsym $mod+Shift+c restart
+
 # show powermenu
 bindsym $mod+Shift+e exec $HOME/.scripts/power_menu.sh
 
 # lockscreen
-bindsym $mod+Control+l exec $HOME/.scripts/screenlock.sh
+bindsym $mod+Control+l exec $HOME/.scripts/i3_screenlock.sh
 
 ## Movement keys
 
@@ -278,8 +281,9 @@ for_window [instance="update_installer"] floating enable
 ### urgent workspace (triggered by mako)
 focus_on_window_activation focus
 
+exec_always --no-startup-id feh --bg-fill $background_path
+exec_always --no-startup-id picom
+
 # TODO  
 # Change power menu
-# Change screen lock
 # Change notification daemon
-# Change print screen
