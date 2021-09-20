@@ -283,7 +283,8 @@ focus_on_window_activation focus
 
 exec_always --no-startup-id feh --bg-fill $background_path
 exec_always --no-startup-id picom
-exec_always --no-startup-id $HOME/.config/polybar/polybar.sh
+exec_always --no-startup-id $HOME/.scripts/polybar.sh
+
 
 # TODO  
 # Change power menu

@@ -18,9 +18,9 @@ sudo mv yay /opt
 sudo pacman -S sway swayidle swaylock grim waybar wofi pactl pavucontrol slurp wl-clipboard jq xdg-desktop-portal-wlr libpipewire02 mako lsd noto-fonts-emoji noto-fonts-extra noto-fonts bluez bluez-utils blueman awesome-terminal-fonts openssh stow otf-fira-mono libappindicator-gtk2 libappindicator-gtk3 thunar arc-gtk-theme adobe-source-han-sans-jp-fonts adobe-source-han-serif-jp-fonts ranger python-pillow
 
 # yay -S autotiling
-yay -S seatd
+yay -S seatd libinput-gestures
 
-# sudo pacman -S i3-gaps i3lock rofi maim xdotools
+# sudo pacman -S i3-gaps i3lock rofi maim xdotools wmctrl
 # yay -S polybar betterlockscreen
 # systemctl enable betterlockscreen@$USER
 
