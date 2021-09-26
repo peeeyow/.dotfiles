@@ -202,20 +202,17 @@ bindsym XF86MonBrightnessDown exec brightnessctl set '5%-'
 ### screenshot hotkeys
 
 # screenshot whole screen and save to ~/Pictures
-bindsym Print exec maim -u $screenshot_path
+bindsym --release Print exec scrot -z -q 100 $screenshot_path
 # screenshot whole screen and copy to clipboard
-bindsym Control+Print exec maim -u | xclip -selection clipboard -t image/png
-
+bindsym --release Control+Print exec scrot -z -q 100 -e 'xclip -selection clipboard -t image/png -i $f'
 # screenshot select region and save to ~/Pictures 
-bindsym Shift+Print exec maim -s -u $screenshot_path
+bindsym --release Shift+Print exec scrot -zfs -q 100 $screenshot_path
 # screenshot select region and copy to clipboard
-bindsym Control+Shift+Print exec maim -s -u | xclip -selection clipboard -t image/png
-
+bindsym --release Control+Shift+Print exec scrot -zfs -q 100 -e 'xclip -selection clipboard -t image/png -i $f'
 # screenshot current focused window and save to ~/Pictures
-bindsym Mod1+Print exec --no-startup-id $HOME/.scripts/i3_screencapture_active.sh
+bindsym --release $mod+Print exec scrot -zu -q 100 $screenshot_path
 # screenshot current focused window and copy to clipboard
-bindsym Control+Mod1+Print exec --no-startup-id $HOME/.scripts/i3_screencapture_active_clipboard.sh
-
+bindsym --release Control+$mod+Print exec scrot -zu -q 100 -e 'xclip -selection clipboard -t image/png -i $f'
 # mako controls
 bindsym $mod+x exec makoctl dismiss --all
 bindsym $mod+shift+x exec makoctl restore
