@@ -5,3 +5,9 @@
 	editor = nvim
 [init]
 	defaultBranch = main
+[pull]
+	rebase = true
+[fetch]
+	prune = true
+[color]
+	ui = auto
