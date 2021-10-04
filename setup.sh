@@ -21,7 +21,7 @@ sudo pacman -S sway swayidle swaylock grim waybar wofi pactl pavucontrol slurp w
 yay -S seatd libinput-gestures
 
 # sudo pacman -S i3-gaps i3lock rofi maim xdotools wmctrl xcompmgr
-# yay -S polybar betterlockscreen
+# yay -S polybar betterlockscreen xidlehook
 # systemctl enable betterlockscreen@$USER
 
 # TODO
