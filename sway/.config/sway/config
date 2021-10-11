@@ -289,9 +289,8 @@ assign [class="Brave" window_type="normal"] $ws1
 for_window [class="Brave"] focus
 assign [class="discord"] $ws0
 for_window [class="discord"] focus
-assign [class="code"] $ws2
-for_window [class="code"] focus
-assign [class="Code"] $ws2
+assign [class="Code" window_type="normal"] $ws2
+for_window [class="Code"] focus
 assign [app_id="qbittorrent"] $ws9
 
 ### inhibit_idle
