@@ -151,3 +151,8 @@ pasteinit() {
 # fnm
 export PATH=$HOME/.scripts:/home/pio/.fnm:$PATH
 eval "`fnm env`"
+
+autoload -Uz compinit
+zstyle ':completion:*' menu select
+fpath+=~/.zfunc
+
