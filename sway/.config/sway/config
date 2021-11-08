@@ -296,7 +296,7 @@ assign [app_id="qbittorrent"] $ws9
 ### inhibit_idle
 
 # don't close when brave is open
-for_window [class="Brave"] inhibit_idle focus
+for_window [class="Brave"] inhibit_idle fullscreen
 for_window [class="vlc"] inhibit_idle focus
 
 ### urgent workspace (triggered by mako)
