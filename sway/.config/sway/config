@@ -308,6 +308,7 @@ focus_on_window_activation focus
 for_window [title="Network Management"] floating enable
 # for_window [title="zoom"] floating enable
 # For pop up notification windows that don't use notifications api
+for_window [app_id="zoom"] floating enable
 for_window [app_id="zoom" title="^zoom$"] border none, floating enable
 # For specific Zoom windows
 for_window [app_id="zoom" title="^(Zoom|About)$"] border pixel, floating enable
