@@ -149,7 +149,7 @@ pasteinit() {
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # fnm
-export PATH=$HOME/.scripts:/home/pio/.fnm:$PATH
+export PATH=$HOME/.cargo/bin:$HOME/.scripts:/home/pio/.fnm:$PATH
 eval "`fnm env`"
 
 autoload -Uz compinit
