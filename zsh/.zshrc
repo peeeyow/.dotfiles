@@ -122,7 +122,7 @@ bindkey -M vicmd 'j' history-substring-search-down
 alias zshconfig="nvim ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias sudo="sudo "
-alias rm="rm -i"
+alias rm="rm -I"
 alias v="lvim "
 alias n="nvim "
 alias ls="lsd "
