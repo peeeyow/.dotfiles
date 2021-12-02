@@ -125,8 +125,8 @@
     "temperature": {
         "interval": 1,
         // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-        // "thermal-zone": 3, # arch
-        "thermal-zone": 2,
+        "thermal-zone": 3,
+        // "thermal-zone": 2,
         "critical-threshold": 75,
         "format": "{icon}{temperatureC}°C",
         "format-icons": [
