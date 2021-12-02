@@ -18,7 +18,7 @@ set $right l
 set $term kitty
 
 # on the original workspace that the command was run on.
-set $menu wofi --show run
+set $menu wofi -i --show run
 
 # background path
 set $background_path ~/.background_images/minimalist_nord_arctic.png
