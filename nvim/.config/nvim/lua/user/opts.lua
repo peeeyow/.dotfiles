@@ -6,7 +6,7 @@ local options = {
     -- more space in the neovim command line for displaying messages
     cmdheight = 2,
     -- mostly just for cmp
-    completeopt = { "menuone","noselect" },
+    completeopt = { "menu", "menuone", "noselect" },
     -- so that `` is visible in markdown files
     conceallevel = 0,
     -- the encoding written to a file
@@ -46,9 +46,9 @@ local options = {
     -- convert tabs to spaces
     expandtab = true,
     -- the number of spaces inserted for each indentation
-    shiftwidth = 4,
+    shiftwidth = 2,
      -- insert 2 spaces for a tab
-    tabstop = 4,
+    tabstop = 2,
     -- highlight the current line
     cursorline = true,
     -- set numbered lines
@@ -56,7 +56,7 @@ local options = {
     -- set relative numbered lines
     relativenumber = true,
     -- set number column width to 2 {default 4}
-    numberwidth = 4,
+    numberwidth = 2,
     -- always show the sign column, otherwise it would shift the text each time
     signcolumn = "yes",
     -- display lines as one long line
