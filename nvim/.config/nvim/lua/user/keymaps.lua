@@ -43,8 +43,8 @@ map("v", "p", '"_dP', opts)
 
 -- Normal Mode --
 -- move through buffers
-map("n", "S-l", ":bnext<CR>", opts)
-map("n", "S-h", ":bprevious<CR>", opts)
+map("n", "<S-l>", ":bnext<CR>", opts)
+map("n", "<S-h>", ":bprevious<CR>", opts)
 
 -- remove search highlights
 map("n", "<Leader>h", ":noh<CR>", opts)
