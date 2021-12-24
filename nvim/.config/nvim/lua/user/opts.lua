@@ -89,7 +89,7 @@ vim.api.nvim_exec([[
 
 vim.opt.shortmess:append "c"
 
--- -- don't auto comment new line
+-- don't auto comment new line
 vim.api.nvim_command([[ autocmd BufNewFile,BufRead * setlocal formatoptions-=cro ]])
 -- vim.opt.formatoptions:remove("cro")
 
