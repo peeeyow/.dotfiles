@@ -34,7 +34,7 @@ local options = {
     -- creates a swapfile
     swapfile = false,
     -- set term gui colors (most terminals support this)
-    -- termguicolors = true,
+    termguicolors = true,
     -- time to wait for a mapped sequence to complete (in milliseconds)
     timeoutlen = 1000,
     -- enable persistent undo

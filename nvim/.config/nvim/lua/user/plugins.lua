@@ -47,6 +47,8 @@ return packer.startup(function(use)
   -- Useful lua functions used ny lots of plugins
   use "nvim-lua/plenary.nvim"
 
+  -- Colorschemes 
+  use "lunarvim/colorschemes"
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
