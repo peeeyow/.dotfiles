@@ -1,20 +1,23 @@
-local dependencies = {
-    "settings",
-    "keymappings",
-}
+require "user.opts"
+require "user.keymaps"
 
-for _, dependency in ipairs(dependencies) do
-    local isLoaded, value = pcall(require, dependency)
-    if not isLoaded then
-        print("Error loading " .. dependency .. " module!")
-	    print(value)
-    end
-end
+-- local dependencies = {
+--     "settings",
+--     "keymappings",
+-- }
 
--- initialize packer.nvim
-local packer = require("packer-plugin").init()
--- load plugins
-local plugins = require "plugins"
-packer:load_plugins(plugins)
+-- for _, dependency in ipairs(dependencies) do
+--     local isLoaded, value = pcall(require, dependency)
+--     if not isLoaded then
+--         print("Error loading " .. dependency .. " module!")
+--         print(value)
+--     end
+-- end
+
+-- -- initialize packer.nvim
+-- local packer = require("packer-plugin").init()
+-- -- load plugins
+-- local plugins = require "plugins"
+-- packer:load_plugins(plugins)
 
 
