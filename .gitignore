@@ -41,8 +41,10 @@ luac.out
 
 # LunarVim
 plugin/
+.netrwhist
 
 # python3 neovim virtual environment
 neovim/
 
 spell/en.utf-8.add.spl
+
