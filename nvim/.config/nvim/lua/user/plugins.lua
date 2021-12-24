@@ -47,8 +47,35 @@ return packer.startup(function(use)
   -- Useful lua functions used ny lots of plugins
   use "nvim-lua/plenary.nvim"
 
-  -- Colorschemes 
-  use "lunarvim/colorschemes"
+  -- cmp plugins
+  -- The completion plugin
+  use "hrsh7th/nvim-cmp"
+  -- buffer completions
+  use "hrsh7th/cmp-buffer"
+  -- path completions
+  use "hrsh7th/cmp-path"
+  -- cmdline completions
+  use "hrsh7th/cmp-cmdline"
+  -- snippet completions
+  use "saadparwaiz1/cmp_luasnip"
+  -- lsp completions
+  use "hrsh7th/cmp-nvim-lsp"
+  -- lua completions
+  use "hrsh7th/cmp-nvim-lua"
+
+  -- LSP
+  use "neovim/nvim-lspconfig" -- enable LSP
+  use "williamboman/nvim-lsp-installer" -- simple to use language server installer
+
+  -- snippets
+  --snippet engine
+  use "L3MON4D3/LuaSnip"
+  -- a bunch of snippets to use
+  use "rafamadriz/friendly-snippets"
+
+  -- Colorschemes
+  use "folke/tokyonight.nvim"
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
