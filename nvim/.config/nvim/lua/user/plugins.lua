@@ -75,6 +75,10 @@ return packer.startup(function(use)
   -- a bunch of snippets to use
   use "rafamadriz/friendly-snippets"
 
+  -- telescope
+  use "nvim-telescope/telescope.nvim"
+  use "nvim-telescope/telescope-media-files.nvim"
+
   -- Colorschemes
   use "folke/tokyonight.nvim"
 
