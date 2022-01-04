@@ -66,6 +66,7 @@
         "interval": 1,
         "format": "",
         "format-wifi": " {essid}",
+        "max-length": 12,
         "format-ethernet": "",
         "format-disconnected": "",
         "tooltip-format": "Internet Disabled",
