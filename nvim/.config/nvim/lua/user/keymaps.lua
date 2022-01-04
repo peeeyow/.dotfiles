@@ -43,18 +43,18 @@ map("v", "p", '"_dP', opts)
 
 -- Normal Mode --
 -- move through buffers
-map("n", "<S-l>", ":bnext<CR>", opts)
-map("n", "<S-h>", ":bprevious<CR>", opts)
+map("n", "<M-l>", ":bnext<CR>", opts)
+map("n", "<M-h>", ":bprevious<CR>", opts)
 
 -- remove search highlights
 map("n", "<Leader>h", ":noh<CR>", opts)
 
 -- Terminal Mode --
 -- better terminal navigation
-map("t", "<C-h>", "<C-\\><C-n><C-w>h", opts)
-map("t", "<C-j>", "<C-\\><C-n><C-w>j", opts)
-map("t", "<C-k>", "<C-\\><C-n><C-w>k", opts)
-map("t", "<C-l>", "<C-\\><C-n><C-w>l", opts)
+map("t", "<C-h>", [[<C-\><C-n><C-w>h]], opts)
+map("t", "<C-j>", [[<C-\><C-n><C-w>j]], opts)
+map("t", "<C-k>", [[<C-\><C-n><C-w>k]], opts)
+map("t", "<C-l>", [[<C-\><C-n><C-w>l]], opts)
 
 -- Plugins --
 -- NvimTree
