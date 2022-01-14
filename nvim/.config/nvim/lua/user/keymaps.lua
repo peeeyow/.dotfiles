@@ -43,8 +43,8 @@ map("v", "p", '"_dP', opts)
 
 -- Normal Mode --
 -- move through buffers
-map("n", "<M-l>", ":bnext<CR>", opts)
-map("n", "<M-h>", ":bprevious<CR>", opts)
+map("n", "L", ":bnext<CR>", opts)
+map("n", "H", ":bprevious<CR>", opts)
 
 -- remove search highlights
 map("n", "<Leader>h", ":noh<CR>", opts)
@@ -59,7 +59,7 @@ map("t", "<C-l>", [[<C-\><C-n><C-w>l]], opts)
 -- Plugins --
 -- NvimTree
 -- map("n", "<Leader>e", ":NvimTreeToggle<CR>", opts)
-map("n", "<Leader>e", ":Lex 30<CR>", opts)
+map("n", "<Leader>e", ":NvimTreeToggle<CR>", opts)
 
 
 -- compe mappings
