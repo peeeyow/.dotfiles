@@ -3,7 +3,10 @@ return {
   "nvim-lua/popup.nvim",
   "nvim-lua/plenary.nvim",
 
-  "hrsh7th/nvim-cmp",
+  {"hrsh7th/nvim-cmp",
+  config = function ()
+    require "user.cmp"
+  end},
   "hrsh7th/cmp-buffer",
   "hrsh7th/cmp-path",
   "hrsh7th/cmp-cmdline",
