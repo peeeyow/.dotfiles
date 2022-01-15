@@ -38,67 +38,69 @@ packer.init {
   },
 }
 
-return packer.startup(function(use)
+-- return packer.startup(function(use)
 
+return {
   -- Have packer manage itself
-  use "wbthomason/packer.nvim"
+  "wbthomason/packer.nvim",
   -- An implementation of the Popup API from vim in Neovim
-  use "nvim-lua/popup.nvim"
+  "nvim-lua/popup.nvim",
   -- Useful lua functions used ny lots of plugins
-  use "nvim-lua/plenary.nvim"
+  "nvim-lua/plenary.nvim",
 
   -- cmp plugins
   -- The completion plugin
-  use "hrsh7th/nvim-cmp"
+  "hrsh7th/nvim-cmp",
   -- buffer completions
-  use "hrsh7th/cmp-buffer"
+  "hrsh7th/cmp-buffer",
   -- path completions
-  use "hrsh7th/cmp-path"
+  "hrsh7th/cmp-path",
   -- cmdline completions
-  use "hrsh7th/cmp-cmdline"
+  "hrsh7th/cmp-cmdline",
   -- snippet completions
-  use "saadparwaiz1/cmp_luasnip"
+  "saadparwaiz1/cmp_luasnip",
   -- lsp completions
-  use "hrsh7th/cmp-nvim-lsp"
+  "hrsh7th/cmp-nvim-lsp",
   -- lua completions
-  use "hrsh7th/cmp-nvim-lua"
+  "hrsh7th/cmp-nvim-lua",
 
   -- LSP
   -- enable LSP
-  use "neovim/nvim-lspconfig"
-  -- simple to use language server installer
-  use "williamboman/nvim-lsp-installer"
+  "neovim/nvim-lspconfig",
+  -- simple to language server installer
+  "williamboman/nvim-lsp-installer",
 
   -- snippets
   --snippet engine
-  use "L3MON4D3/LuaSnip"
+  "L3MON4D3/LuaSnip",
   -- a bunch of snippets to use
-  use "rafamadriz/friendly-snippets"
+  "rafamadriz/friendly-snippets",
 
   -- telescope
-  use "nvim-telescope/telescope.nvim"
-  use "nvim-telescope/telescope-media-files.nvim"
+  "nvim-telescope/telescope.nvim",
+  "nvim-telescope/telescope-media-files.nvim",
 
   -- Colorschemes
-  use "folke/tokyonight.nvim"
-  use "lunarvim/darkplus.nvim"
-  use "joshdick/onedark.vim"
+  "folke/tokyonight.nvim",
+  "lunarvim/darkplus.nvim",
+  "joshdick/onedark.vim",
 
   -- Nvim-tree
-  use "kyazdani42/nvim-tree.lua"
+  "kyazdani42/nvim-tree.lua",
 
   -- Autopair
-  use "windwp/nvim-autopairs"
+  "windwp/nvim-autopairs",
 
   -- TreeSitter
-  use {
+  {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
   }
-
+}
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
+  --[[
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end
-end)
+end)--]]
