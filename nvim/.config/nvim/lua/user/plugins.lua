@@ -81,9 +81,20 @@ return packer.startup(function(use)
 
   -- Colorschemes
   use "folke/tokyonight.nvim"
+  use "lunarvim/darkplus.nvim"
+  use "joshdick/onedark.vim"
 
   -- Nvim-tree
   use "kyazdani42/nvim-tree.lua"
+
+  -- Autopair
+  use "windwp/nvim-autopairs"
+
+  -- TreeSitter
+  use {
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+  }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
