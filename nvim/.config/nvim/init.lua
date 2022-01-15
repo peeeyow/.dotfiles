@@ -1,6 +1,6 @@
 require "user.opts"
 require "user.keymaps"
-require "user.plugin-load"
+require "user.plugins"
 require "user.colorscheme"
 require "user.cmp"
 require "user.lsp"
