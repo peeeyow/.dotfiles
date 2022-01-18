@@ -40,6 +40,7 @@ return {
   "folke/tokyonight.nvim",
   "lunarvim/darkplus.nvim",
   "joshdick/onedark.vim",
+  "LunarVim/onedarker.nvim",
 
   {"kyazdani42/nvim-tree.lua",
   config = function ()
