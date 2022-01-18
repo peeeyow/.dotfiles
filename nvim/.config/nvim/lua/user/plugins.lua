@@ -6,7 +6,18 @@ return {
   {"hrsh7th/nvim-cmp",
   config = function ()
     require "user.cmp"
-  end},
+  end,
+  requires = {
+      "L3MON4D3/LuaSnip",
+      "rafamadriz/friendly-snippets",
+    },
+  },
+  "rafamadriz/friendly-snippets",
+  {"L3MON4D3/LuaSnip",
+    config = function ()
+      require("luasnip/loaders/from_vscode").lazy_load()
+    end
+  },
   "hrsh7th/cmp-buffer",
   "hrsh7th/cmp-path",
   "hrsh7th/cmp-cmdline",
@@ -17,10 +28,12 @@ return {
   "neovim/nvim-lspconfig",
   "williamboman/nvim-lsp-installer",
 
-  "L3MON4D3/LuaSnip",
-  "rafamadriz/friendly-snippets",
 
-  "nvim-telescope/telescope.nvim",
+  {"nvim-telescope/telescope.nvim",
+    config = function ()
+      require "user.telescope"
+    end
+  },
   "nvim-telescope/telescope-media-files.nvim",
 
   -- Colorschemes
@@ -28,12 +41,22 @@ return {
   "lunarvim/darkplus.nvim",
   "joshdick/onedark.vim",
 
-  "kyazdani42/nvim-tree.lua",
+  {"kyazdani42/nvim-tree.lua",
+  config = function ()
+    require "user.nvim-tree"
+  end},
 
-  "windwp/nvim-autopairs",
+  {"windwp/nvim-autopairs",
+    config = function ()
+      require "user.autopairs"
+    end
+  },
 
   {
     "nvim-treesitter/nvim-treesitter",
+    config = function ()
+      require "user.treesitter"
+    end,
     run = ":TSUpdate",
   }
 }
