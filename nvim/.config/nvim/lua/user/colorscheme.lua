@@ -1,4 +1,4 @@
-local colorscheme = "onedark"
+local colorscheme = "tokyonight"
 
 vim.g.tokyonight_style = "night"
 vim.g.tokyonight_italic_functions = true
