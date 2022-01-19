@@ -19,8 +19,6 @@ comment.setup {
       location = location,
     }
   end,
-  active = true,
-  on_config_done = nil,
   padding = true,
   ignore = "^$",
   mappings = {
