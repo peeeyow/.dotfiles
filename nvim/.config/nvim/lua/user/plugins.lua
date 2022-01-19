@@ -79,4 +79,11 @@ return {
     "JoosepAlviste/nvim-ts-context-commentstring",
     event = "BufReadPost"
   },
+  {
+    "lewis6991/gitsigns.nvim",
+    config = function ()
+      require "user.gitsigns"
+    end,
+    -- event = "BufRead"
+  },
 }
