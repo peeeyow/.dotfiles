@@ -67,5 +67,13 @@ return {
     config = function()
       require('spellsitter').setup()
     end
-  }
+  },
+
+  {
+    "numToStr/Comment.nvim",
+    config = function()
+      require "user.comment"
+    end
+  },
+  "JoosepAlviste/nvim-ts-context-commentstring",
 }

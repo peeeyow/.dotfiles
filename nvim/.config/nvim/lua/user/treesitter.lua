@@ -41,4 +41,8 @@ configs.setup {
     },
   },
   indent = { enable = true, disable = { "yaml" } },
+  context_commentstring = {
+    enable = true,
+    enable_autocmd = false,
+  },
 }
