@@ -61,6 +61,7 @@ return {
     run = ":TSUpdate",
   },
   "p00f/nvim-ts-rainbow",
+  "nvim-treesitter/playground",
   {
     'lewis6991/spellsitter.nvim',
     config = function()
