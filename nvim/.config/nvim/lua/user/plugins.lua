@@ -59,5 +59,6 @@ return {
       require "user.treesitter"
     end,
     run = ":TSUpdate",
-  }
+  },
+  "p00f/nvim-ts-rainbow",
 }
