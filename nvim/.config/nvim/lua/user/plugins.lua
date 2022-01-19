@@ -75,5 +75,8 @@ return {
       require "user.comment"
     end
   },
-  "JoosepAlviste/nvim-ts-context-commentstring",
+  {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    event = "BufReadPost"
+  },
 }
