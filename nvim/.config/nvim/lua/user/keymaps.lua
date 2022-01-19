@@ -47,7 +47,7 @@ map("n", "L", ":bnext<CR>", opts)
 map("n", "H", ":bprevious<CR>", opts)
 
 -- remove search highlights
-map("n", "<Leader>l", ":noh<CR>", opts)
+map("n", "<Leader>h", ":noh<CR>", opts)
 
 -- Terminal Mode --
 -- better terminal navigation
