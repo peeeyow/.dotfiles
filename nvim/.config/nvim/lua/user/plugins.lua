@@ -61,4 +61,10 @@ return {
     run = ":TSUpdate",
   },
   "p00f/nvim-ts-rainbow",
+  {
+    'lewis6991/spellsitter.nvim',
+    config = function()
+      require('spellsitter').setup()
+    end
+  }
 }
