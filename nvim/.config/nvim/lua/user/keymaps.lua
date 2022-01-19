@@ -58,11 +58,10 @@ map("t", "<C-l>", [[<C-\><C-n><C-w>l]], opts)
 
 -- Plugins --
 -- NvimTree
--- map("n", "<Leader>e", ":NvimTreeToggle<CR>", opts)
 map("n", "<Leader>e", ":NvimTreeToggle<CR>", opts)
 
-
--- compe mappings
--- map("i", "<C-j>", 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', { expr = true })
--- map("i", "<C-k>", 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', { expr = true })
--- map("i", "<C-Space>", "compe#complete()", { expr = true })
+-- Comment
+map('n', '<C-_>', '<CMD>lua require("Comment.api").call("toggle_current_linewise_op")<CR>g@$')
+map('n', '<C-\\>', '<CMD>lua require("Comment.api").call("toggle_current_blockwise_op")<CR>g@$')
+map('x', '<C-_>', '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>')
+map('x', '<C-\\>', '<ESC><CMD>lua require("Comment.api").toggle_blockwise_op(vim.fn.visualmode())<CR>')
