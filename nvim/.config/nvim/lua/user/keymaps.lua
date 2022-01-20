@@ -27,15 +27,20 @@ map("", "<C-Down>", ":resize +2<CR>", opts)
 map("", "<C-Left>", ":vertical resize -2<CR>", opts)
 map("", "<C-Right>", ":vertical resize +2<CR>", opts)
 
--- Visual Mode --
+-- Visual Select Mode --
 -- better indentation
 map("v", "<", "<gv", opts)
 map("v", ">", ">gv", opts)
 map("v", "<A-j>", ":m '>+1<CR>gv-gv", opts)
 map("v", "<A-k>", ":m '<-2<CR>gv-gv", opts)
 
+-- Visual Mode --
+-- make wrap text movement better when wrap is true
 map("x", "j", 'v:count ? "j" : "gj"', {expr = true})
 map("x", "k", 'v:count ? "k" : "gk"', {expr = true})
+
+-- don't copy what is being overwritten
+map("x", "p", '"_dP', opts)
 
 -- Normal Mode --
 -- move through buffers
