@@ -38,9 +38,6 @@ map("", "<C-Right>", ":vertical resize +2<CR>", opts)
 map("v", "<", "<gv", opts)
 map("v", ">", ">gv", opts)
 
--- don't copy what was replaced
-map("v", "p", '"_dP', opts)
-
 -- Normal Mode --
 -- move through buffers
 map("n", "L", ":bnext<CR>", opts)
