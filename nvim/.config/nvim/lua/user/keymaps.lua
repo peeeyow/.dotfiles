@@ -15,12 +15,6 @@ map("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 
 -- Normal Visual Select Operator-Pending Mode
--- make wrap text movement better when wrap is true
-map("", "j", 'v:count ? "j" : "gj"', {expr = true})
-map("", "k", 'v:count ? "k" : "gk"', {expr = true})
-map("", "<Down>", 'v:count ? "j" : "gj"', {expr = true})
-map("", "<Up>", 'v:count ? "k" : "gk"', {expr = true})
-
 -- easy window movement
 map("", "<C-h>", "<C-w>h", opts)
 map("", "<C-j>", "<C-w>j", opts)
@@ -37,6 +31,11 @@ map("", "<C-Right>", ":vertical resize +2<CR>", opts)
 -- better indentation
 map("v", "<", "<gv", opts)
 map("v", ">", ">gv", opts)
+map("v", "<A-j>", ":m '>+1<CR>gv-gv", opts)
+map("v", "<A-k>", ":m '<-2<CR>gv-gv", opts)
+
+map("x", "j", 'v:count ? "j" : "gj"', {expr = true})
+map("x", "k", 'v:count ? "k" : "gk"', {expr = true})
 
 -- Normal Mode --
 -- move through buffers
@@ -45,6 +44,10 @@ map("n", "H", ":bprevious<CR>", opts)
 
 -- remove search highlights
 map("n", "<Leader>h", ":noh<CR>", opts)
+
+-- make wrap text movement better when wrap is true
+map("n", "j", 'v:count ? "j" : "gj"', {expr = true})
+map("n", "k", 'v:count ? "k" : "gk"', {expr = true})
 
 -- Terminal Mode --
 -- better terminal navigation
