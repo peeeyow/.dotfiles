@@ -43,9 +43,11 @@ return {
   "LunarVim/onedarker.nvim",
 
   {"kyazdani42/nvim-tree.lua",
+  "kyazdani42/nvim-web-devicons",
   config = function ()
     require "user.nvim-tree"
-  end},
+  end,
+  requires = "kyazdani42/nvim-web-devicons"},
 
   {"windwp/nvim-autopairs",
     config = function ()
