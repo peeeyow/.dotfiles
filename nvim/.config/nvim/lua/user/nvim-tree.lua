@@ -25,8 +25,7 @@ g.nvim_tree_show_icons = {
     files = 1,
     folder_arrows = 1,
     tree_width = 30,
-  }
--- g.nvim_tree_quit_on_open = 0
+}
 g.nvim_tree_git_hl = 1
 g.nvim_tree_disable_window_picker = 0
 g.nvim_tree_root_folder_modifier = ":t"
@@ -57,7 +56,7 @@ nvim_tree.setup{
       },
       auto_close = true,
       open_on_tab = false,
-      hijack_cursor = false,
+      hijack_cursor = true,
       update_cwd = false,
       diagnostics = {
         enable = true,
