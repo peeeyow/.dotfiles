@@ -55,11 +55,6 @@ local source_names = {
 }
 
 local function jumpable(dir)
-  local luasnip_ok, luasnip = pcall(require, "luasnip")
-  if not luasnip_ok then
-    return
-  end
-
   local win_get_cursor = vim.api.nvim_win_get_cursor
   local get_current_buf = vim.api.nvim_get_current_buf
 
@@ -171,14 +166,11 @@ cmp.setup {
     ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
     ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-    ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+    ["<C-y>"] = cmp.config.disable,
     ["<C-e>"] = cmp.mapping {
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
     },
-    -- Accept currently selected item. If none selected, `select` first item.
-    -- Set `select` to `false` to only confirm explicitly selected items.
-    ["<CR>"] = cmp.mapping.confirm { select = true },
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -199,19 +191,34 @@ cmp.setup {
       if cmp.visible() then
         cmp.select_prev_item()
       elseif jumpable(-1) then
-          luasnip.jump(-1)      else
+          luasnip.jump(-1)
+      else
         fallback()
       end
     end, {
       "i",
       "s",
     }),
+    ["<CR>"] = cmp.mapping(function(fallback)
+        if cmp.visible() and cmp.confirm(cmp.confirm_opts) then
+          if jumpable() then
+            luasnip.jump(1)
+          end
+          return
+        end
+
+        if jumpable() then
+          if not luasnip.jump(1) then
+            fallback()
+          end
+        else
+          fallback()
+        end
+      end),
   },
   formatting = {
     fields = { "kind", "abbr", "menu" },
     format = function(entry, vim_item)
-      -- Kind icons
-      -- vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
       vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
       vim_item.menu = source_names[entry.source.name]
       return vim_item
