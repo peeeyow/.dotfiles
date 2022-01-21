@@ -70,3 +70,18 @@ map('n', '<C-_>', '<CMD>lua require("Comment.api").call("toggle_current_linewise
 map('n', '<C-\\>', '<CMD>lua require("Comment.api").call("toggle_current_blockwise_op")<CR>g@$')
 map('x', '<C-_>', '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>')
 map('x', '<C-\\>', '<ESC><CMD>lua require("Comment.api").toggle_blockwise_op(vim.fn.visualmode())<CR>')
+
+-- barbar
+map('n', '[b', ':BufferPrevious<CR>', opts)
+map('n', ']b', ':BufferNext<CR>', opts)
+-- Re-order to previous/next
+map('n', '<Leader><', ':BufferMovePrevious<CR>', opts)
+map('n', '<Leader>>', ' :BufferMoveNext<CR>', opts)
+-- Close buffer
+map('n', '<Leader>c', ':BufferClose<CR>', opts)
+-- Magic buffer-picking mode
+map('n', '<Leader>p', ':BufferPick<CR>', opts)
+-- Sort automatically by...
+map('n', '<Space>bb', ':BufferOrderByBufferNumber<CR>', opts)
+map('n', '<Space>bd', ':BufferOrderByDirectory<CR>', opts)
+map('n', '<Space>bl', ':BufferOrderByLanguage<CR>', opts)
