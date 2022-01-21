@@ -44,8 +44,8 @@ map("x", "p", '"_dP', opts)
 
 -- Normal Mode --
 -- move through buffers
-map("n", "[b", ":bnext<CR>", opts)
-map("n", "]b", ":bprevious<CR>", opts)
+-- map("n", "[b", ":bnext<CR>", opts)
+-- map("n", "]b", ":bprevious<CR>", opts)
 
 -- remove search highlights
 map("n", "<Leader>h", ":noh<CR>", opts)
@@ -63,7 +63,7 @@ map("t", "<C-l>", [[<C-\><C-n><C-w>l]], opts)
 
 -- Plugins --
 -- NvimTree
-map("n", "<Leader>e", ":NvimTreeToggle<CR>", opts)
+map("n", "<Leader>e", [[<CMD>lua require("user.tree-toggle").toggle()<CR>]], opts)
 
 -- Comment
 map('n', '<C-_>', '<CMD>lua require("Comment.api").call("toggle_current_linewise_op")<CR>g@$')
