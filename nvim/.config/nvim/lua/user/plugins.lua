@@ -42,12 +42,14 @@ return {
   "joshdick/onedark.vim",
   "LunarVim/onedarker.nvim",
 
-  {"kyazdani42/nvim-tree.lua",
   "kyazdani42/nvim-web-devicons",
-  config = function ()
-    require "user.nvim-tree"
-  end,
-  requires = "kyazdani42/nvim-web-devicons"},
+  {
+    "kyazdani42/nvim-tree.lua",
+    config = function ()
+      require "user.nvim-tree"
+    end,
+    requires = "kyazdani42/nvim-web-devicons"
+  },
 
   {"windwp/nvim-autopairs",
     config = function ()
@@ -93,7 +95,14 @@ return {
   {
     "andweeb/presence.nvim",
     config = function ()
-        require("presence"):setup()
+        require "presence":setup()
+    end
+  },
+
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    config = function ()
+      require "user.indent-blankline"
     end
   },
 }
