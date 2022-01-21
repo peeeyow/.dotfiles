@@ -105,4 +105,13 @@ return {
       require "user.indent-blankline"
     end
   },
+
+  {
+    'romgrk/barbar.nvim',
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = function ()
+      require "user.barbar"
+    end,
+    event = "BufWinEnter",
+  }
 }
