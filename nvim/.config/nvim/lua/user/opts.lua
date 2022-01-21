@@ -54,6 +54,8 @@ vim.api.nvim_exec([[
 
 vim.opt.shortmess:append "c"
 
+-- vim.opt.listchars = { lead = "·" }
+
 -- don't auto comment new line
 --[=[
 vim.api.nvim_exec([[
