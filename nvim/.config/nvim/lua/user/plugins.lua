@@ -63,6 +63,7 @@ return {
       require "user.treesitter"
     end,
     run = ":TSUpdate",
+    commit = "d7c4ae886d90471b1839dd601887bdd6e882efd9",
   },
   "p00f/nvim-ts-rainbow",
   "nvim-treesitter/playground",
