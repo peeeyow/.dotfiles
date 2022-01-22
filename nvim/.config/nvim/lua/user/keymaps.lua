@@ -72,16 +72,16 @@ map('x', '<C-_>', '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.f
 map('x', '<C-\\>', '<ESC><CMD>lua require("Comment.api").toggle_blockwise_op(vim.fn.visualmode())<CR>')
 
 -- barbar
-map('n', '[b', ':BufferPrevious<CR>', opts)
-map('n', ']b', ':BufferNext<CR>', opts)
+map('n', '[b', ':BufferLineCyclePrev<CR>', opts)
+map('n', ']b', ':BufferLineCycleNext<CR>', opts)
 -- Re-order to previous/next
-map('n', '<Leader><', ':BufferMovePrevious<CR>', opts)
-map('n', '<Leader>>', ' :BufferMoveNext<CR>', opts)
--- Close buffer
-map('n', '<Leader>c', ':BufferClose<CR>', opts)
+map('n', '<Leader><', ':BufferLineMovePrev<CR>', opts)
+map('n', '<Leader>>', ':BufferLineMoveNext<CR>', opts)
 -- Magic buffer-picking mode
-map('n', '<Leader>p', ':BufferPick<CR>', opts)
+map('n', '<Leader>p', ':BufferLinePick<CR>', opts)
 -- Sort automatically by...
-map('n', '<Space>bb', ':BufferOrderByBufferNumber<CR>', opts)
-map('n', '<Space>bd', ':BufferOrderByDirectory<CR>', opts)
-map('n', '<Space>bl', ':BufferOrderByLanguage<CR>', opts)
+map('n', '<Space>bt', ':BufferLineSortByTabs<CR>', opts)
+map('n', '<Space>bd', ':BufferLineSortByDirectory<CR>', opts)
+map('n', '<Space>be', ':BufferLineSortByExtension<CR>', opts)
+-- Close buffer
+map('n', '<Leader>c', ':bp<bar>sp<bar>bn<bar>bd<CR>', opts)
