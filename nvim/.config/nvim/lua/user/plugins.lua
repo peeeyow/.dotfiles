@@ -107,12 +107,20 @@ return {
     end
   },
 
-  {
+  --[[ {
     'romgrk/barbar.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
     config = function ()
       require "user.barbar"
     end,
     event = "BufWinEnter",
-  }
+  }, ]]
+
+  {
+    "akinsho/bufferline.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function ()
+      require "user.bufferline"
+    end
+  },
 }
