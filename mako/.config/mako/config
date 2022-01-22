@@ -1,5 +1,5 @@
 sort=-time
-layer=overlay
+layer=top
 width=300
 height=110
 border-size=2
