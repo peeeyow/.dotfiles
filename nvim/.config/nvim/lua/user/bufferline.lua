@@ -6,7 +6,7 @@ end
 bufferline.setup {
   options = {
     numbers = "none",
-    close_command = "Bdelete! %d",
+    close_command = "bp<bar>sp<bar>bn<bar>bd",
     indicator_icon = '▎',
     buffer_close_icon = '',
     modified_icon = '●',
@@ -17,12 +17,12 @@ bufferline.setup {
     max_prefix_length = 15,
     tab_size = 18,
     diagnostics = "nvim_lsp",
-    diagnostics_update_in_insert = false,
-    diagnostics_indicator = function(count, level, diagnostics_dict, context)
+    diagnostics_update_in_insert = true,
+    diagnostics_indicator = function(_, _, diagnostics_dict, _)
       local s = " "
       for e, n in pairs(diagnostics_dict) do
         local sym = e == "error" and " "
-          or (e == "warning" and " " or "" )
+          or (e == "warning" and " " or " " )
         s = s .. n .. sym
       end
       return s
