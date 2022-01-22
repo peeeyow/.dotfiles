@@ -123,4 +123,11 @@ return {
       require "user.bufferline"
     end
   },
+
+  {
+    "akinsho/toggleterm.nvim",
+    config = function ()
+      require "user.toggleterm"
+    end,
+  },
 }

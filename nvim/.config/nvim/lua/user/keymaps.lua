@@ -67,9 +67,9 @@ map("n", "<Leader>e", [[<CMD>lua require("user.tree-toggle").toggle()<CR>]], opt
 
 -- Comment
 map('n', '<C-_>', '<CMD>lua require("Comment.api").call("toggle_current_linewise_op")<CR>g@$')
-map('n', '<C-\\>', '<CMD>lua require("Comment.api").call("toggle_current_blockwise_op")<CR>g@$')
 map('x', '<C-_>', '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>')
-map('x', '<C-\\>', '<ESC><CMD>lua require("Comment.api").toggle_blockwise_op(vim.fn.visualmode())<CR>')
+-- map('n', [[<C-'>]], '<CMD>lua require("Comment.api").call("toggle_current_blockwise_op")<CR>g@$')
+-- map('x', [[<C-'>]], '<ESC><CMD>lua require("Comment.api").toggle_blockwise_op(vim.fn.visualmode())<CR>')
 
 -- barbar
 map('n', '[b', ':BufferLineCyclePrev<CR>', opts)
