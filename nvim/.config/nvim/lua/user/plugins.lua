@@ -31,6 +31,7 @@ return {
   "williamboman/nvim-lsp-installer",
   "tamago324/nlsp-settings.nvim",
   "jose-elias-alvarez/null-ls.nvim",
+  "ray-x/lsp_signature.nvim",
 
   {
     "nvim-telescope/telescope.nvim",
