@@ -73,6 +73,36 @@ local spaces = function()
 	return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
 end
 
+
+function env_cleanup(venv)
+  if string.find(venv, "/") then
+    local final_venv = venv
+    for w in venv:gmatch "([^/]+)" do
+      final_venv = w
+    end
+    venv = final_venv
+  end
+  return venv
+end
+
+local python_env = {
+  function()
+    if vim.bo.filetype == "python" then
+      local venv = os.getenv "CONDA_DEFAULT_ENV"
+      if venv then
+        return string.format("  (%s)", env_cleanup(venv))
+      end
+      venv = os.getenv "VIRTUAL_ENV"
+      if venv then
+        return string.format("  (%s)", env_cleanup(venv))
+      end
+      return ""
+    end
+    return ""
+  end,
+  cond = hide_in_width,
+}
+
 lualine.setup({
 	options = {
 		icons_enabled = true,
@@ -87,7 +117,7 @@ lualine.setup({
 		lualine_b = { branch, diff, diagnostics },
 		lualine_c = {},
 		-- lualine_x = { "encoding", "fileformat", "filetype" },
-    lualine_x = { "encoding", filetype },
+    lualine_x = { python_env, "encoding", filetype },
 		lualine_y = { "progress" },
 		lualine_z = { location },
 	},
