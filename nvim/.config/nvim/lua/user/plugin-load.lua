@@ -42,7 +42,8 @@ if not plugins_status_ok then
   return
 end
 
-return packer.startup({function (use)
+return packer.startup {
+  function(use)
     for _, plugin in ipairs(plugins) do
       use(plugin)
     end
@@ -52,5 +53,5 @@ return packer.startup({function (use)
   end,
   config = {
     -- compile_path = vim.fn.stdpath('config')..'/lua/packer_compiled.lua'
-  }
-})
+  },
+}

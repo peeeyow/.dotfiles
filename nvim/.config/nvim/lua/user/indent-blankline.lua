@@ -52,5 +52,5 @@ indent_blankline.setup {
     "catch_clause",
     "import_statement",
     "operation_type",
-  }
+  },
 }

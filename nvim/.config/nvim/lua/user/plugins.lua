@@ -3,20 +3,22 @@ return {
   "nvim-lua/popup.nvim",
   "nvim-lua/plenary.nvim",
 
-  {"hrsh7th/nvim-cmp",
-  config = function ()
-    require "user.cmp"
-  end,
-  requires = {
+  {
+    "hrsh7th/nvim-cmp",
+    config = function()
+      require "user.cmp"
+    end,
+    requires = {
       "L3MON4D3/LuaSnip",
       "rafamadriz/friendly-snippets",
     },
   },
   "rafamadriz/friendly-snippets",
-  {"L3MON4D3/LuaSnip",
-    config = function ()
+  {
+    "L3MON4D3/LuaSnip",
+    config = function()
       require("luasnip/loaders/from_vscode").lazy_load()
-    end
+    end,
   },
   "hrsh7th/cmp-buffer",
   "hrsh7th/cmp-path",
@@ -27,12 +29,14 @@ return {
 
   "neovim/nvim-lspconfig",
   "williamboman/nvim-lsp-installer",
+  "tamago324/nlsp-settings.nvim",
+  "jose-elias-alvarez/null-ls.nvim",
 
-
-  {"nvim-telescope/telescope.nvim",
-    config = function ()
+  {
+    "nvim-telescope/telescope.nvim",
+    config = function()
       require "user.telescope"
-    end
+    end,
   },
   "nvim-telescope/telescope-media-files.nvim",
 
@@ -45,21 +49,22 @@ return {
   "kyazdani42/nvim-web-devicons",
   {
     "kyazdani42/nvim-tree.lua",
-    config = function ()
+    config = function()
       require "user.nvim-tree"
     end,
-    requires = "kyazdani42/nvim-web-devicons"
+    requires = "kyazdani42/nvim-web-devicons",
   },
 
-  {"windwp/nvim-autopairs",
-    config = function ()
+  {
+    "windwp/nvim-autopairs",
+    config = function()
       require "user.autopairs"
-    end
+    end,
   },
 
   {
     "nvim-treesitter/nvim-treesitter",
-    config = function ()
+    config = function()
       require "user.treesitter"
     end,
     run = ":TSUpdate",
@@ -68,26 +73,26 @@ return {
   "p00f/nvim-ts-rainbow",
   "nvim-treesitter/playground",
   {
-    'lewis6991/spellsitter.nvim',
+    "lewis6991/spellsitter.nvim",
     config = function()
-      require('spellsitter').setup()
-    end
+      require("spellsitter").setup()
+    end,
   },
 
   {
     "numToStr/Comment.nvim",
     config = function()
       require "user.comment"
-    end
+    end,
   },
   {
     "JoosepAlviste/nvim-ts-context-commentstring",
-    event = "BufReadPost"
+    event = "BufReadPost",
   },
 
   {
     "lewis6991/gitsigns.nvim",
-    config = function ()
+    config = function()
       require "user.gitsigns"
     end,
     -- event = "BufRead"
@@ -95,16 +100,16 @@ return {
 
   {
     "andweeb/presence.nvim",
-    config = function ()
-        require "presence":setup()
-    end
+    config = function()
+      require("presence"):setup()
+    end,
   },
 
   {
     "lukas-reineke/indent-blankline.nvim",
-    config = function ()
+    config = function()
       require "user.indent-blankline"
-    end
+    end,
   },
 
   --[[ {
@@ -119,29 +124,29 @@ return {
   {
     "akinsho/bufferline.nvim",
     requires = "kyazdani42/nvim-web-devicons",
-    config = function ()
+    config = function()
       require "user.bufferline"
-    end
+    end,
   },
 
   {
     "akinsho/toggleterm.nvim",
-    config = function ()
+    config = function()
       require "user.toggleterm"
     end,
   },
 
   {
     "nvim-lualine/lualine.nvim",
-    config = function ()
+    config = function()
       require "user.lualine"
-    end
+    end,
   },
 
   {
     "lewis6991/impatient.nvim",
-    config = function ()
+    config = function()
       require "user.impatient"
-    end
+    end,
   },
 }

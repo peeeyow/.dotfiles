@@ -9,14 +9,14 @@ local nvim_tree_view = require "nvim-tree.view"
 --   return
 -- end
 
-local tree ={}
-tree.toggle = function ()
+local tree = {}
+tree.toggle = function()
   if nvim_tree_view.win_open() then
     -- bufferline_state.set_offset(0)
     nvim_tree.close()
   else
     -- bufferline_state.set_offset(nvim_tree_view.View.width + 1, "NvimTree")
-    if vim.api.nvim_buf_get_name(0) == '' then
+    if vim.api.nvim_buf_get_name(0) == "" then
       nvim_tree.open()
     else
       nvim_tree.find_file(true)

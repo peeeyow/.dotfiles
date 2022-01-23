@@ -1,10 +1,10 @@
 local function map(mode, lhs, rhs, opts)
-    local options = { noremap = true, silent = true }
-    -- extend options with opts having higher priority on conflict
-    if opts then
-        options = vim.tbl_extend("force", options, opts)
-    end
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+  local options = { noremap = true, silent = true }
+  -- extend options with opts having higher priority on conflict
+  if opts then
+    options = vim.tbl_extend("force", options, opts)
+  end
+  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
 -- empty opts
@@ -36,8 +36,8 @@ map("v", "<A-k>", ":m '<-2<CR>gv-gv", opts)
 
 -- Visual Mode --
 -- make wrap text movement better when wrap is true
-map("x", "j", 'v:count ? "j" : "gj"', {expr = true})
-map("x", "k", 'v:count ? "k" : "gk"', {expr = true})
+map("x", "j", 'v:count ? "j" : "gj"', { expr = true })
+map("x", "k", 'v:count ? "k" : "gk"', { expr = true })
 
 -- don't copy what is being overwritten
 map("x", "p", '"_dP', opts)
@@ -51,8 +51,8 @@ map("x", "p", '"_dP', opts)
 map("n", "<Leader>h", ":noh<CR>", opts)
 
 -- make wrap text movement better when wrap is true
-map("n", "j", 'v:count ? "j" : "gj"', {expr = true})
-map("n", "k", 'v:count ? "k" : "gk"', {expr = true})
+map("n", "j", 'v:count ? "j" : "gj"', { expr = true })
+map("n", "k", 'v:count ? "k" : "gk"', { expr = true })
 
 -- Terminal Mode --
 -- better terminal navigation
@@ -66,22 +66,22 @@ map("t", "<C-l>", [[<C-\><C-n><C-w>l]], opts)
 map("n", "<Leader>e", [[<CMD>lua require("user.tree-toggle").toggle()<CR>]], opts)
 
 -- Comment
-map('n', '<C-_>', '<CMD>lua require("Comment.api").call("toggle_current_linewise_op")<CR>g@$')
-map('x', '<C-_>', '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>')
+map("n", "<C-_>", '<CMD>lua require("Comment.api").call("toggle_current_linewise_op")<CR>g@$')
+map("x", "<C-_>", '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>')
 -- map('n', [[<C-'>]], '<CMD>lua require("Comment.api").call("toggle_current_blockwise_op")<CR>g@$')
 -- map('x', [[<C-'>]], '<ESC><CMD>lua require("Comment.api").toggle_blockwise_op(vim.fn.visualmode())<CR>')
 
 -- barbar
-map('n', '[b', ':BufferLineCyclePrev<CR>', opts)
-map('n', ']b', ':BufferLineCycleNext<CR>', opts)
+map("n", "[b", ":BufferLineCyclePrev<CR>", opts)
+map("n", "]b", ":BufferLineCycleNext<CR>", opts)
 -- Re-order to previous/next
-map('n', '<Leader><', ':BufferLineMovePrev<CR>', opts)
-map('n', '<Leader>>', ':BufferLineMoveNext<CR>', opts)
+map("n", "<Leader><", ":BufferLineMovePrev<CR>", opts)
+map("n", "<Leader>>", ":BufferLineMoveNext<CR>", opts)
 -- Magic buffer-picking mode
-map('n', '<Leader>p', ':BufferLinePick<CR>', opts)
+map("n", "<Leader>p", ":BufferLinePick<CR>", opts)
 -- Sort automatically by...
-map('n', '<Space>bt', ':BufferLineSortByTabs<CR>', opts)
-map('n', '<Space>bd', ':BufferLineSortByDirectory<CR>', opts)
-map('n', '<Space>be', ':BufferLineSortByExtension<CR>', opts)
+map("n", "<Space>bt", ":BufferLineSortByTabs<CR>", opts)
+map("n", "<Space>bd", ":BufferLineSortByDirectory<CR>", opts)
+map("n", "<Space>be", ":BufferLineSortByExtension<CR>", opts)
 -- Close buffer
-map('n', '<Leader>c', ':bp<bar>sp<bar>bn<bar>bd<CR>', opts)
+map("n", "<Leader>c", ":bp<bar>sp<bar>bn<bar>bd<CR>", opts)

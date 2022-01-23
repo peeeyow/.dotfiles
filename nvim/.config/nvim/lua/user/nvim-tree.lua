@@ -20,16 +20,15 @@ g.nvim_tree_icons = {
   },
 }
 g.nvim_tree_show_icons = {
-    git = 1,
-    folders = 1,
-    files = 1,
-    folder_arrows = 1,
-    tree_width = 30,
+  git = 1,
+  folders = 1,
+  files = 1,
+  folder_arrows = 1,
+  tree_width = 30,
 }
 g.nvim_tree_git_hl = 1
 g.nvim_tree_disable_window_picker = 0
 g.nvim_tree_root_folder_modifier = ":t"
-
 
 local status_ok, nvim_tree = pcall(require, "nvim-tree")
 if not status_ok then
@@ -41,10 +40,9 @@ if not config_status_ok then
   return
 end
 
-
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
-nvim_tree.setup{
+nvim_tree.setup {
   disable_netrw = true,
   hijack_netrw = true,
   open_on_setup = false,
@@ -120,5 +118,5 @@ nvim_tree.setup{
     files = 1,
     folder_arrows = 1,
     tree_width = 30,
-  }
+  },
 }
