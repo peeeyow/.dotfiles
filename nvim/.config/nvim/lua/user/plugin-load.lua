@@ -42,11 +42,15 @@ if not plugins_status_ok then
   return
 end
 
-return packer.startup(function (use)
-  for _, plugin in ipairs(plugins) do
-    use(plugin)
-  end
-  if PACKER_BOOTSTRAP then
-    require("packer").sync()
-  end
-end)
+return packer.startup({function (use)
+    for _, plugin in ipairs(plugins) do
+      use(plugin)
+    end
+    if PACKER_BOOTSTRAP then
+      require("packer").sync()
+    end
+  end,
+  config = {
+    compile_path = vim.fn.stdpath('config')..'/lua/packer_compiled.lua'
+  }
+})

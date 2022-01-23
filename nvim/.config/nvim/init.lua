@@ -1,5 +1,6 @@
 require "user.options"
 require "user.keymaps"
+require "impatient"
 require "user.plugin-load"
 require "user.colorscheme"
 require "user.lsp"

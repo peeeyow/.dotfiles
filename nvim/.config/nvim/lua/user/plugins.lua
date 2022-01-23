@@ -137,4 +137,11 @@ return {
       require "user.lualine"
     end
   },
+
+  {
+    "lewis6991/impatient.nvim",
+    config = function ()
+      require "user.impatient"
+    end
+  },
 }
