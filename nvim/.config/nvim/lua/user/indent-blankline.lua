@@ -29,6 +29,7 @@ indent_blankline.setup {
     "Trouble",
     "startify",
     "neogitstatus",
+    "lsp-installer",
     "",
   },
   context_patterns = {
