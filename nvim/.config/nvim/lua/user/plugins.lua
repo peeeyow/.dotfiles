@@ -130,4 +130,11 @@ return {
       require "user.toggleterm"
     end,
   },
+
+  {
+    "nvim-lualine/lualine.nvim",
+    config = function ()
+      require "user.lualine"
+    end
+  },
 }
