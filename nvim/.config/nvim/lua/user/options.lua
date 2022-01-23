@@ -65,7 +65,7 @@ vim.api.nvim_exec([[
   augroup END
 ]], false)
 --]=]
-vim.opt.formatoptions:append { c = false, r = false, o = false }
+vim.cmd [[au BufEnter * set fo-=c fo-=r fo-=o]]
 
 -- highlight when yanking
 vim.api.nvim_exec([[
