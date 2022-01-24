@@ -5,15 +5,17 @@ end
 
 local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
+local codeactions = null_ls.builtins.code_actions
 
 null_ls.setup {
   debug = false,
   sources = {
-    formatting.prettier.with {
+    formatting.prettierd.with {
       prefer_local = "node_modules/.bin",
     },
-    formatting.black,
+    formatting.black.with { prefer_local = "venv/bin" },
     formatting.stylua,
-    diagnostics.flake8,
+    diagnostics.flake8.with { prefer_local = "venv/bin" },
+    codeactions.gitsigns,
   },
 }
