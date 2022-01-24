@@ -9,7 +9,9 @@ local diagnostics = null_ls.builtins.diagnostics
 null_ls.setup {
   debug = false,
   sources = {
-    formatting.prettier,
+    formatting.prettier.with {
+      prefer_local = "node_modules/.bin",
+    },
     formatting.black,
     formatting.stylua,
     diagnostics.flake8,
