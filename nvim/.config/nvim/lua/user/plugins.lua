@@ -40,6 +40,7 @@ return {
     end,
   },
   "nvim-telescope/telescope-media-files.nvim",
+  { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
 
   -- Colorschemes
   "folke/tokyonight.nvim",
@@ -112,15 +113,6 @@ return {
       require "user.indent-blankline"
     end,
   },
-
-  --[[ {
-    'romgrk/barbar.nvim',
-    requires = 'kyazdani42/nvim-web-devicons',
-    config = function ()
-      require "user.barbar"
-    end,
-    event = "BufWinEnter",
-  }, ]]
 
   {
     "akinsho/bufferline.nvim",
