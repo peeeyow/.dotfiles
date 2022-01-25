@@ -54,16 +54,18 @@ map("n", "<Leader>h", ":noh<CR>", opts)
 map("n", "j", 'v:count ? "j" : "gj"', { expr = true })
 map("n", "k", 'v:count ? "k" : "gk"', { expr = true })
 
+-- move line
+map("n", "<A-j>", ":m .+1<CR>==", opts)
+map("n", "<A-k>", ":m .-2<CR>==", opts)
+
 -- Terminal Mode --
 -- better terminal navigation
-map("t", "<C-h>", [[<C-\><C-n><C-w>h]], opts)
-map("t", "<C-j>", [[<C-\><C-n><C-w>j]], opts)
-map("t", "<C-k>", [[<C-\><C-n><C-w>k]], opts)
-map("t", "<C-l>", [[<C-\><C-n><C-w>l]], opts)
+-- map("t", "<C-h>", [[<C-\><C-n><C-w>h]], opts)
+-- map("t", "<C-j>", [[<C-\><C-n><C-w>j]], opts)
+-- map("t", "<C-k>", [[<C-\><C-n><C-w>k]], opts)
+-- map("t", "<C-l>", [[<C-\><C-n><C-w>l]], opts)
 
 -- Plugins --
--- NvimTree
-map("n", "<Leader>e", [[<CMD>lua require("user.tree-toggle").toggle()<CR>]], opts)
 
 -- Comment
 map("n", "<C-_>", '<CMD>lua require("Comment.api").call("toggle_current_linewise_op")<CR>g@$')

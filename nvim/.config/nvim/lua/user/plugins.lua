@@ -145,5 +145,8 @@ return {
 
   {
     "folke/which-key.nvim",
+    config = function()
+      require "user.which-key"
+    end,
   },
 }
