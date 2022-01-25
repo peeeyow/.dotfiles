@@ -56,17 +56,78 @@ which_key.setup {
   },
 }
 
-local opts = {
-  mode = "n",
-  prefix = "<leader>",
-  buffer = nil,
-  silent = true,
-  noremap = true,
-  nowait = true,
+local normal = {
+  opts = {
+    mode = "n",
+    prefix = nil,
+    buffer = nil,
+    silent = true,
+    noremap = true,
+    nowait = true,
+  },
+  mappings = {
+    ["<C-_>"] = { [[<CMD>lua require("Comment.api").call("toggle_current_linewise_op")<CR>g@$]], "Line Comment" },
+    ["[b"] = { ":BufferLineCyclePrev<CR>", "Previous Buffer" },
+    ["]b"] = { ":BufferLineCycleNext<CR>", "Next Buffer" },
+    ["<C-\\>"] = { "Open Last Terminal" },
+    ["<C-Left"] = { "Resize Left" },
+    ["<C-Down"] = { "Resize Down" },
+    ["<C-Up"] = { "Resize Up" },
+    ["<C-Right"] = { "Resize Right" },
+    ["<C-h>"] = { "Move to Left Window" },
+    ["<C-j>"] = { "Move to Down Window" },
+    ["<C-k>"] = { "Move to Up Window" },
+    ["<C-l>"] = { "Move to Right Window" },
+    ["<M-j>"] = { "Move Line One Step Below" },
+    ["<M-k>"] = { "Move Line One Step Above" },
+    ["K"] = { "Show Hover (LSP) " },
+    ["<leader>"] = { "Leader Options" },
+  },
 }
 
-local mappings = {
-  ["e"] = { [[<CMD>lua require("user.tree-toggle").toggle()<CR>]], "File Explorer" },
+local visual = {
+  opts = {
+    mode = "x",
+    prefix = nil,
+    buffer = nil,
+    silent = true,
+    noremap = true,
+    nowait = true,
+  },
+  mappings = {
+    ["<C-_>"] = {
+      [[<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>]],
+      "Line Comment",
+    },
+  },
 }
 
-which_key.register(mappings, opts)
+local leader = {
+  opts = {
+    mode = "n",
+    prefix = "<leader>",
+    buffer = nil,
+    silent = true,
+    noremap = true,
+    nowait = true,
+  },
+  mappings = {
+    ["c"] = { "Close Buffer" },
+    ["e"] = { [[<CMD>lua require("user.tree-toggle").toggle()<CR>]], "File Explorer" },
+    ["<"] = { ":BufferLineMovePrev<CR>", "Move Buffer to Left" },
+    [">"] = { ":BufferLineMoveNext<CR>", "Move Buffer to Right" },
+    b = {
+      name = "Buffer",
+      ["p"] = { ":BufferLinePick<CR>", "Pick Buffer" },
+      ["t"] = { ":BufferLineSortByTabs<CR>", "Sort buffers by Tab" },
+      ["d"] = { ":BufferLineSortByDirectory<CR>", "Sort buffers by Directory" },
+      ["e"] = { ":BufferLineSortByExtension<CR>", "Sort buffers by Extension" },
+    },
+  },
+}
+
+local keymaps = { normal, visual, leader }
+
+for _, keymap in ipairs(keymaps) do
+  which_key.register(keymap.mappings, keymap.opts)
+end

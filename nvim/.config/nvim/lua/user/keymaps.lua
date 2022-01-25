@@ -58,6 +58,9 @@ map("n", "k", 'v:count ? "k" : "gk"', { expr = true })
 map("n", "<A-j>", ":m .+1<CR>==", opts)
 map("n", "<A-k>", ":m .-2<CR>==", opts)
 
+-- close current buffer
+map("n", "<Leader>c", ":bp<bar>sp<bar>bn<bar>bd<CR>", opts)
+
 -- Terminal Mode --
 -- better terminal navigation
 -- map("t", "<C-h>", [[<C-\><C-n><C-w>h]], opts)
@@ -68,22 +71,7 @@ map("n", "<A-k>", ":m .-2<CR>==", opts)
 -- Plugins --
 
 -- Comment
-map("n", "<C-_>", '<CMD>lua require("Comment.api").call("toggle_current_linewise_op")<CR>g@$')
-map("x", "<C-_>", '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>')
+-- map("n", "<C-_>", '<CMD>lua require("Comment.api").call("toggle_current_linewise_op")<CR>g@$')
+-- map("x", "<C-_>", '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>')
 -- map('n', [[<C-'>]], '<CMD>lua require("Comment.api").call("toggle_current_blockwise_op")<CR>g@$')
 -- map('x', [[<C-'>]], '<ESC><CMD>lua require("Comment.api").toggle_blockwise_op(vim.fn.visualmode())<CR>')
-
--- barbar
-map("n", "[b", ":BufferLineCyclePrev<CR>", opts)
-map("n", "]b", ":BufferLineCycleNext<CR>", opts)
--- Re-order to previous/next
-map("n", "<Leader><", ":BufferLineMovePrev<CR>", opts)
-map("n", "<Leader>>", ":BufferLineMoveNext<CR>", opts)
--- Magic buffer-picking mode
-map("n", "<Leader>p", ":BufferLinePick<CR>", opts)
--- Sort automatically by...
-map("n", "<Space>bt", ":BufferLineSortByTabs<CR>", opts)
-map("n", "<Space>bd", ":BufferLineSortByDirectory<CR>", opts)
-map("n", "<Space>be", ":BufferLineSortByExtension<CR>", opts)
--- Close buffer
-map("n", "<Leader>c", ":bp<bar>sp<bar>bn<bar>bd<CR>", opts)
