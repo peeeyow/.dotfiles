@@ -116,7 +116,8 @@ local leader = {
   mappings = {
     ["c"] = { "Close Buffer" },
     ["e"] = { [[<CMD>lua require("user.tree-toggle").toggle()<CR>]], "File Explorer" },
-    ["<"] = { ":BufferLineMovePrev<CR>", "Move Buffer to Left" },
+    -- https://github.com/folke/which-key.nvim/issues/173
+    ["<lt>"] = { ":BufferLineMovePrev<CR>", "Move Buffer to Left" },
     [">"] = { ":BufferLineMoveNext<CR>", "Move Buffer to Right" },
     ["b"] = {
       name = "Buffer",
@@ -126,6 +127,7 @@ local leader = {
       ["e"] = { ":BufferLineSortByExtension<CR>", "Sort buffers by Extension" },
     },
     ["g"] = {
+      name = "Git",
       ["g"] = { "<CMD>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
       ["l"] = { '<CMD>lua require"gitsigns".blame_line{full=true}<CR>', "Blame" },
       ["s"] = { "<CMD>Gitsigns stage_hunk<CR>", "Stage Hunk" },

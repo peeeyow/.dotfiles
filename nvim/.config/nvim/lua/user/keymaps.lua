@@ -11,8 +11,8 @@ end
 local opts = {}
 
 -- set leader key
-map("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- Normal Visual Select Operator-Pending Mode
 -- easy window movement
