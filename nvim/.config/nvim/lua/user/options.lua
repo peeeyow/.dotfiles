@@ -17,7 +17,7 @@ local options = {
   splitright = true,
   swapfile = false,
   termguicolors = true,
-  timeoutlen = 1000,
+  timeoutlen = 300,
   undofile = true,
   updatetime = 300,
   writebackup = false,
@@ -79,7 +79,6 @@ vim.api.nvim_exec(
 ]],
   false
 )
-
 -- -- add node provider
 -- --[=[
 -- vim.api.nvim_exec([[
