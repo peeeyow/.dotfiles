@@ -73,7 +73,7 @@ local spaces = function()
   return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
 end
 
-function env_cleanup(venv)
+local function env_cleanup(venv)
   if string.find(venv, "/") then
     local final_venv = venv
     for w in venv:gmatch "([^/]+)" do
