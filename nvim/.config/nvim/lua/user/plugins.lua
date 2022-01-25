@@ -142,4 +142,8 @@ return {
       require "user.impatient"
     end,
   },
+
+  {
+    "folke/which-key.nvim",
+  },
 }
