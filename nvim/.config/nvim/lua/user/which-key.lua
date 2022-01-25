@@ -67,8 +67,6 @@ local normal = {
   },
   mappings = {
     ["<C-_>"] = { [[<CMD>lua require("Comment.api").call("toggle_current_linewise_op")<CR>g@$]], "Line Comment" },
-    ["[b"] = { ":BufferLineCyclePrev<CR>", "Previous Buffer" },
-    ["]b"] = { ":BufferLineCycleNext<CR>", "Next Buffer" },
     ["<C-\\>"] = { "Open Last Terminal" },
     ["<C-Left"] = { "Resize Left" },
     ["<C-Down"] = { "Resize Down" },
@@ -82,6 +80,10 @@ local normal = {
     ["<M-k>"] = { "Move Line One Step Above" },
     ["K"] = { "Show Hover (LSP) " },
     ["<leader>"] = { "Leader Options" },
+    ["[b"] = { ":BufferLineCyclePrev<CR>", "Prev Buffer" },
+    ["]b"] = { ":BufferLineCycleNext<CR>", "Next Buffer" },
+    ["[c"] = { "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", "Prev Hunk" },
+    ["]c"] = { "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", "Next Hunk" },
   },
 }
 
@@ -116,12 +118,29 @@ local leader = {
     ["e"] = { [[<CMD>lua require("user.tree-toggle").toggle()<CR>]], "File Explorer" },
     ["<"] = { ":BufferLineMovePrev<CR>", "Move Buffer to Left" },
     [">"] = { ":BufferLineMoveNext<CR>", "Move Buffer to Right" },
-    b = {
+    ["b"] = {
       name = "Buffer",
       ["p"] = { ":BufferLinePick<CR>", "Pick Buffer" },
       ["t"] = { ":BufferLineSortByTabs<CR>", "Sort buffers by Tab" },
       ["d"] = { ":BufferLineSortByDirectory<CR>", "Sort buffers by Directory" },
       ["e"] = { ":BufferLineSortByExtension<CR>", "Sort buffers by Extension" },
+    },
+    ["g"] = {
+      ["g"] = { "<CMD>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
+      ["l"] = { '<CMD>lua require"gitsigns".blame_line{full=true}<CR>', "Blame" },
+      ["s"] = { "<CMD>Gitsigns stage_hunk<CR>", "Stage Hunk" },
+      ["S"] = { "<CMD>Gitsigns stage_buffer<CR>", "Stage Buffer" },
+      ["u"] = { "<CMD>Gitsigns undo_stage_hunk<CR>", "Undo Stage Hunk" },
+      ["r"] = { "<CMD>Gitsigns reset_hunk<CR>", "Reset Hunk" },
+      ["R"] = { "<CMD>Gitsigns reset_buffer<CR>", "Reset Buffer" },
+      ["p"] = { "<CMD>Gitsigns preview_hunk<CR>", "Preview Hunk" },
+      ["o"] = { "<cmd>Telescope git_status<cr>", "Open changed file" },
+      ["b"] = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+      ["c"] = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
+      ["d"] = {
+        "<cmd>Gitsigns diffthis HEAD<cr>",
+        "Diff",
+      },
     },
   },
 }
