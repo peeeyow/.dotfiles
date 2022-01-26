@@ -119,12 +119,22 @@ local leader = {
     -- https://github.com/folke/which-key.nvim/issues/173
     ["<lt>"] = { ":BufferLineMovePrev<CR>", "Move Buffer to Left" },
     [">"] = { ":BufferLineMoveNext<CR>", "Move Buffer to Right" },
+    ["f"] = {
+      "<cmd>lua require('telescope.builtin').find_files()<cr>",
+      "Find files",
+    },
+    ["F"] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
+    ["P"] = { "<cmd>lua require'telescope'.extensions.project.project{}<cr>", "Projects" },
     ["b"] = {
       name = "Buffer",
       ["p"] = { ":BufferLinePick<CR>", "Pick Buffer" },
       ["t"] = { ":BufferLineSortByTabs<CR>", "Sort buffers by Tab" },
       ["d"] = { ":BufferLineSortByDirectory<CR>", "Sort buffers by Directory" },
       ["e"] = { ":BufferLineSortByExtension<CR>", "Sort buffers by Extension" },
+      ["b"] = {
+        "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+        "Buffers",
+      },
     },
     ["g"] = {
       name = "Git",
@@ -143,6 +153,22 @@ local leader = {
         "<cmd>Gitsigns diffthis HEAD<cr>",
         "Diff",
       },
+    },
+    ["l"] = {
+      name = "LSP",
+      ["a"] = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+      ["d"] = { "<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics" },
+      ["w"] = { "<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" },
+      ["f"] = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
+      ["i"] = { "<cmd>LspInfo<cr>", "Info" },
+      ["I"] = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
+      ["j"] = { "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", "Next Diagnostic" },
+      ["k"] = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>", "Prev Diagnostic" },
+      ["l"] = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
+      ["q"] = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
+      ["r"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+      ["s"] = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
+      ["S"] = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" },
     },
     ["p"] = {
       name = "Packer",
