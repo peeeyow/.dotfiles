@@ -32,6 +32,7 @@ return {
   "tamago324/nlsp-settings.nvim",
   "jose-elias-alvarez/null-ls.nvim",
   "ray-x/lsp_signature.nvim",
+  "b0o/schemastore.nvim",
 
   {
     "nvim-telescope/telescope.nvim",

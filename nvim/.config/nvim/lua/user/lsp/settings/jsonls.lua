@@ -1,5 +1,5 @@
 -- Find more schemas here: https://www.schemastore.org/json/
-local schemas = {
+--[[ local schemas = {
   {
     description = "TypeScript compiler configuration file",
     fileMatch = {
@@ -161,12 +161,12 @@ local schemas = {
     fileMatch = { "resume.json" },
     url = "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
   },
-}
+} ]]
 
 local opts = {
   settings = {
     json = {
-      schemas = schemas,
+      schemas = require("schemastore").json.schemas(),
     },
   },
   setup = {
