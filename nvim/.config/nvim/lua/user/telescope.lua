@@ -91,10 +91,12 @@ telescope.setup {
       filetypes = { "png", "webp", "jpg", "jpeg" },
       find_cmd = "rg",
     },
+    project = {
+      hidden_files = true,
+    },
   },
 }
 
 telescope.load_extension "media_files"
 telescope.load_extension "fzf"
-
-require("telescope").load_extension "fzf"
+telescope.load_extension "project"

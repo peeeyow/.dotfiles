@@ -41,6 +41,7 @@ return {
   },
   "nvim-telescope/telescope-media-files.nvim",
   { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+  "nvim-telescope/telescope-project.nvim",
 
   -- Colorschemes
   "folke/tokyonight.nvim",
