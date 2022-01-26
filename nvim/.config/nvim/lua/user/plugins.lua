@@ -151,4 +151,10 @@ return {
       require "user.which-key"
     end,
   },
+  {
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      require "user.colorizer"
+    end,
+  },
 }
