@@ -188,6 +188,7 @@ local leader = {
       ["R"] = { "<cmd>Telescope registers<cr>", "Registers" },
       ["k"] = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
       ["C"] = { "<cmd>Telescope commands<cr>", "Commands" },
+      ["p"] = { "<cmd>Telescope media_files<cr>", "Commands" },
     },
 
     ["t"] = {
