@@ -139,7 +139,7 @@ local leader = {
     ["g"] = {
       name = "Git",
       ["g"] = { "<CMD>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
-      ["l"] = { '<CMD>lua require"gitsigns".blame_line{full=true}<CR>', "Blame" },
+      ["l"] = { '<CMD>lua require"gitsigns".blame_line{full=false}<CR>', "Blame" },
       ["s"] = { "<CMD>Gitsigns stage_hunk<CR>", "Stage Hunk" },
       ["S"] = { "<CMD>Gitsigns stage_buffer<CR>", "Stage Buffer" },
       ["u"] = { "<CMD>Gitsigns undo_stage_hunk<CR>", "Undo Stage Hunk" },
