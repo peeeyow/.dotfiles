@@ -316,9 +316,9 @@ for_window [app_id="zoom" title="Settings"] floating enable, floating_minimum_si
 # Open Zoom Meeting windows on a new workspace (a bit hacky)
 for_window [app_id="zoom" title="Zoom Meeting(.*)?"] workspace next_on_output --create, move container to workspace current, floating disable, inhibit_idle openoom"] floating enable
 
-for_window [app_id="anki" title="Add"] floating enable
-for_window [app_id="anki" title="Statistics"] floating enable
-for_window [app_id="anki" title="Browse.*"] floating enable
+for_window [class="Anki" title="Add"] floating enable
+for_window [class="Anki" title="Statistics"] floating enable
+for_window [class="Anki" title="Browse.*"] floating enable
 
 # floating enable anything pop-up like
 for_window [window_role="pop-up"] floating enable
