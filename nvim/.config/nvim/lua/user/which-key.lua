@@ -157,8 +157,6 @@ local leader = {
     ["l"] = {
       name = "LSP",
       ["a"] = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-      ["d"] = { "<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics" },
-      ["w"] = { "<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" },
       ["f"] = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
       ["i"] = { "<cmd>LspInfo<cr>", "Info" },
       ["I"] = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
@@ -180,6 +178,7 @@ local leader = {
     },
     ["s"] = {
       name = "Search",
+      ["g"] = { "<cmd>Telescope git_files<cr>", "Checkout branch" },
       ["b"] = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
       ["c"] = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
       ["h"] = { "<cmd>Telescope help_tags<cr>", "Find Help" },
@@ -189,6 +188,8 @@ local leader = {
       ["k"] = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
       ["C"] = { "<cmd>Telescope commands<cr>", "Commands" },
       ["p"] = { "<cmd>Telescope media_files<cr>", "Commands" },
+      ["d"] = { "<cmd>Telescope diagnostics bufnr=0<cr>", "Document Diagnostics" },
+      ["w"] = { "<cmd>Telescope diagnostics<cr>", "Workspace Diagnostics" },
     },
 
     ["t"] = {
