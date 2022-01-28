@@ -1,5 +1,10 @@
-local status_ok, telescope = pcall(require, "telescope")
-if not status_ok then
+local status_ok_te, telescope = pcall(require, "telescope")
+if not status_ok_te then
+  return
+end
+
+local status_ok_tr, trouble = pcall(require, "trouble.providers.telescope")
+if not status_ok_tr then
   return
 end
 
@@ -29,6 +34,7 @@ telescope.setup {
         ["<C-x>"] = actions.select_horizontal,
         ["<C-v>"] = actions.select_vertical,
         ["<C-t>"] = actions.select_tab,
+        ["<C-r>"] = trouble.open_with_trouble,
 
         ["<C-u>"] = actions.preview_scrolling_up,
         ["<C-d>"] = actions.preview_scrolling_down,
@@ -50,6 +56,7 @@ telescope.setup {
         ["<C-x>"] = actions.select_horizontal,
         ["<C-v>"] = actions.select_vertical,
         ["<C-t>"] = actions.select_tab,
+        ["<C-r>"] = trouble.open_with_trouble,
 
         ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
         ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,

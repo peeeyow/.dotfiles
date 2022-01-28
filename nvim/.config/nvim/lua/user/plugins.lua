@@ -1,6 +1,5 @@
 -- TODO: folke/trouble.nvim
 -- TODO: filipdutescu/renamer.nvim
--- TODO: folke/trouble.nvim
 -- TODO: dap plugins
 -- TODO: keymap for quickfixlist
 
@@ -168,6 +167,13 @@ return {
     "norcalli/nvim-colorizer.lua",
     config = function()
       require "user.colorizer"
+    end,
+  },
+
+  {
+    "folke/trouble.nvim",
+    config = function()
+      require "user.trouble"
     end,
   },
 }
