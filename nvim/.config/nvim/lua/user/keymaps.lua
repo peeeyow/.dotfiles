@@ -70,6 +70,10 @@ map("n", "<Leader>c", ":bp<bar>sp<bar>bn<bar>bd<CR>", opts)
 
 -- Plugins --
 
+-- navigate hunks
+map("", "[c", '&diff ? "[c" : "<CMD>Gitsigns prev_hunk<CR>"', { expr = true })
+map("", "]c", '&diff ? "]c" : "<CMD>Gitsigns next_hunk<CR>"', { expr = true })
+
 -- Comment
 -- map("n", "<C-_>", '<CMD>lua require("Comment.api").call("toggle_current_linewise_op")<CR>g@$')
 -- map("x", "<C-_>", '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>')

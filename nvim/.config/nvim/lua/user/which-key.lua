@@ -82,8 +82,8 @@ local normal = {
     ["<leader>"] = { "Leader Options" },
     ["[b"] = { ":BufferLineCyclePrev<CR>", "Prev Buffer" },
     ["]b"] = { ":BufferLineCycleNext<CR>", "Next Buffer" },
-    ["[c"] = { "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", "Prev Hunk" },
-    ["]c"] = { "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", "Next Hunk" },
+    ["[c"] = { "Prev Hunk" },
+    ["]c"] = { "Next Hunk" },
   },
 }
 
