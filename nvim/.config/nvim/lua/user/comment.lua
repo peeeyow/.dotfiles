@@ -35,6 +35,11 @@ comment.setup {
   },
   post_hook = nil,
 }
+
+local ft = require "Comment.ft"
+
+ft.set("python", { "#%s", [["""%s"""]] })
+
 --[[
 This can't be used to comment out top level jsx. It will revert back to js commenting.
 https://github.com/JoosepAlviste/nvim-ts-context-commentstring/issues/29
