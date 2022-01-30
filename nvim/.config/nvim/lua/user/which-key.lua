@@ -104,7 +104,26 @@ local visual = {
   },
 }
 
-local leader = {
+local n_g = {
+  opts = {
+    mode = "n",
+    prefix = "g",
+    buffer = nil,
+    silent = true,
+    noremap = true,
+    nowait = true,
+  },
+  mappings = {
+    ["D"] = { "Goto Declaration" },
+    ["d"] = { "Goto Definition" },
+    ["I"] = { "Goto Implementation" },
+    ["r"] = { "Goto References" },
+    ["l"] = { "Show Diagnostics" },
+    ["s"] = { "Show Signature" },
+  },
+}
+
+local n_leader = {
   opts = {
     mode = "n",
     prefix = "<leader>",
@@ -206,7 +225,7 @@ local leader = {
   },
 }
 
-local keymaps = { normal, visual, leader }
+local keymaps = { normal, visual, n_leader, n_g }
 
 for _, keymap in ipairs(keymaps) do
   which_key.register(keymap.mappings, keymap.opts)
