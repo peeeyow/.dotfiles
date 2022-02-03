@@ -3,6 +3,7 @@
 -- TODO: dap plugins
 -- TODO: keymap for quickfixlist
 -- TODO: ahmedkhalf/project.nvim
+-- TODO: nvim-treesitter-textobjects
 
 return {
   "wbthomason/packer.nvim",
