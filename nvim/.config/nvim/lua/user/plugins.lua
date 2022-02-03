@@ -2,6 +2,7 @@
 -- TODO: filipdutescu/renamer.nvim
 -- TODO: dap plugins
 -- TODO: keymap for quickfixlist
+-- TODO: ahmedkhalf/project.nvim
 
 return {
   "wbthomason/packer.nvim",
