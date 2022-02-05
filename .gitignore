@@ -56,3 +56,7 @@ packer_compiled.lua
 
 # don't show
 gitconfig
+
+# zsh caches
+.zcompdump*
+.zhistory
