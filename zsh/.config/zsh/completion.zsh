@@ -9,7 +9,7 @@ fpath+="$ZDOTDIR/completions"
 
 bindkey -M menuselect 'g' clear-screen
 bindkey -M menuselect 'i' vi-insert
-bindkey -M menuselect 'h' accept-and-hold
+bindkey -M menuselect 'o' accept-and-hold
 bindkey -M menuselect 'n' accept-and-infer-next-history
 bindkey -M menuselect 'u' undo
 
