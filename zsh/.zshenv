@@ -22,8 +22,3 @@ export NPM_CONFIG_PREFIX="$XDG_CONFIG_HOME/node_modules"
 
 # PATH
 export PATH=$HOME/.cargo/bin:$HOME/.scripts:$HOME/.fnm:$HOME/.local/bin:$PATH
-
-# initialize
-eval "`fnm env`"
-eval "`zoxide init zsh`"
-# eval "`pip completion --zsh`"
