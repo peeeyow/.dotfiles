@@ -8,6 +8,9 @@ setopt menu_complete
 setopt auto_list
 setopt complete_in_word
 setopt no_flow_control
+setopt menu_complete
+setopt auto_list
+setopt complete_in_word
 
 unsetopt beep
 
