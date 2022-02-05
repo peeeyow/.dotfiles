@@ -12,6 +12,7 @@ zsh_add_file completion.zsh
 
 # plugins
 zsh_add_plugin "romkatv/powerlevel10k"
+zsh_add_plugin "zsh-users/zsh-completions"
 
 # powerlevel 10k
 zsh_add_file "plugins/powerlevel10k/powerlevel10k.zsh-theme"
@@ -20,4 +21,4 @@ source "$HOME/.p10k.zsh"
 # initialize
 eval "`fnm env`"
 eval "`zoxide init zsh`"
-# eval "`pip completion --zsh`"
+eval "`pip completion --zsh`"
