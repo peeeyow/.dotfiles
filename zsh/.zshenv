@@ -11,7 +11,7 @@ export VISUAL="nvim"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 # History
-export HISTFILE="$XDG_DATA_HOME/zsh/history"
+export HISTFILE="$ZDOTDIR/.zhistory"
 export HISTSIZE=10000
 export SAVEHIST=10000
 
