@@ -19,3 +19,8 @@ alias free="free -h"
 # programs
 alias v="nvim "
 alias r="ranger "
+
+# paths
+alias -g ...="../.."
+alias -g ....="../../.."
+alias -g .....="../../../.."
