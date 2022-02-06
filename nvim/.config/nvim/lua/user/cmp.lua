@@ -114,7 +114,6 @@ cmp.setup {
     { name = "luasnip" },
     { name = "buffer", keyword_length = 4 },
     { name = "path" },
-    { name = "cmdline" },
   },
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
@@ -128,3 +127,9 @@ cmp.setup {
     native_menu = false,
   },
 }
+
+--[[ cmp.setup.cmdline(":", {
+  sources = {
+    { name = "cmdline" },
+  },
+}) ]]
