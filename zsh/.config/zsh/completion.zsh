@@ -1,5 +1,4 @@
 autoload -Uz compinit; compinit
-zstyle ':completion:*' menu select
 
 # allow dot completion
 _comp_options+=(globdots)
@@ -7,11 +6,11 @@ _comp_options+=(globdots)
 fpath+="$ZDOTDIR/plugins/zsh-completions/src"
 fpath+="$ZDOTDIR/completions"
 
-bindkey -M menuselect 'g' clear-screen
-bindkey -M menuselect 'i' vi-insert
-bindkey -M menuselect 'o' accept-and-hold
-bindkey -M menuselect 'n' accept-and-infer-next-history
-bindkey -M menuselect 'u' undo
+bindkey -M menuselect '^g' clear-screen
+bindkey -M menuselect '^i' vi-insert
+bindkey -M menuselect '^o' accept-and-hold
+bindkey -M menuselect '^n' accept-and-infer-next-history
+bindkey -M menuselect '^u' undo
 
 # Define completers
 zstyle ':completion:*' completer _extensions _complete _approximate
