@@ -13,7 +13,7 @@ local tree = {}
 tree.toggle = function()
   if nvim_tree_view.win_open() then
     -- bufferline_state.set_offset(0)
-    nvim_tree.close()
+    nvim_tree_view.close()
   else
     -- bufferline_state.set_offset(nvim_tree_view.View.width + 1, "NvimTree")
     if vim.api.nvim_buf_get_name(0) == "" then
