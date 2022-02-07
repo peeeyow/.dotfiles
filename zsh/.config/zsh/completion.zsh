@@ -6,11 +6,11 @@ _comp_options+=(globdots)
 fpath+="$ZDOTDIR/plugins/zsh-completions/src"
 fpath+="$ZDOTDIR/completions"
 
-bindkey -M menuselect '^g' clear-screen
-bindkey -M menuselect '^i' vi-insert
-bindkey -M menuselect '^o' accept-and-hold
-bindkey -M menuselect '^n' accept-and-infer-next-history
-bindkey -M menuselect '^u' undo
+bindkey -M menuselect '^Xg' clear-screen
+bindkey -M menuselect '^Xi' vi-insert
+bindkey -M menuselect '^Xo' accept-and-hold
+bindkey -M menuselect '^Xn' accept-and-infer-next-history
+bindkey -M menuselect '^Xu' undo
 
 # Define completers
 zstyle ':completion:*' completer _extensions _complete _approximate
