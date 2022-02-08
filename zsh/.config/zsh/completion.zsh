@@ -1,10 +1,10 @@
+fpath+="$ZDOTDIR/plugins/zsh-completions/src"
+fpath+="$ZDOTDIR/completions"
+
 autoload -Uz compinit; compinit
 
 # allow dot completion
 _comp_options+=(globdots)
-
-fpath+="$ZDOTDIR/plugins/zsh-completions/src"
-fpath+="$ZDOTDIR/completions"
 
 bindkey -M menuselect '^Xg' clear-screen
 bindkey -M menuselect '^Xi' vi-insert
