@@ -55,6 +55,7 @@ vim.api.nvim_exec(
 )
 
 vim.opt.shortmess:append "c"
+vim.opt.nrformats:append { "alpha", "octal", "hex" }
 
 -- vim.opt.listchars = { lead = "·" }
 
