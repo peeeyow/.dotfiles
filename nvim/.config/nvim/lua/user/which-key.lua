@@ -134,7 +134,7 @@ local n_leader = {
   },
   mappings = {
     ["c"] = { "Close Buffer" },
-    ["e"] = { [[<CMD>lua require("user.tree-toggle").toggle()<CR>]], "File Explorer" },
+    ["e"] = { [[<CMD>:NvimTreeToggle<CR>]], "File Explorer" },
     -- https://github.com/folke/which-key.nvim/issues/173
     ["<lt>"] = { ":BufferLineMovePrev<CR>", "Move Buffer to Left" },
     [">"] = { ":BufferLineMoveNext<CR>", "Move Buffer to Right" },
