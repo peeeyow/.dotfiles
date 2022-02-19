@@ -35,6 +35,17 @@ function zsh_add_local_completion() {
     fi
 }
 
+function update_plugins() {
+    printf "\n%s\n" "Updating plugins"
+
+    for plugin in $ZDOTDIR/plugins/*; do
+      if [ -d "$plugin/.git" ]; then
+         printf "%s\n" "${plugin%/}"
+         git -C "$plugin" pull
+      fi
+    done
+}
+
 function mach_java_mode() {
     #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
     export SDKMAN_DIR="$HOME/.sdkman"
