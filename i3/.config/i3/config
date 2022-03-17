@@ -15,7 +15,8 @@ set $right l
 set $term kitty
 
 # on the original workspace that the command was run on.
-set $menu rofi -show run
+set $menu rofi -modi drun -show drun -theme $HOME/.config/rofi/onedark.rasi
+# ,drun,window
 
 # background path
 set $background_path ~/.background_images/minimalist_nord_arctic.png

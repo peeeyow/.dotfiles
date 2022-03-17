@@ -8,7 +8,7 @@
  */
 
 configuration {
-  font: "MesloLGL Nerd Font Mono 12";
+  font: "MesloLGL Nerd Font Mono 16";
 
   drun {
     display-name: "";
@@ -86,6 +86,10 @@ element selected {
 }
 
 element-text {
+  padding: 10px;
+}
+
+element-icon {
   padding: 10px;
 }
 
