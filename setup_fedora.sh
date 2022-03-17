@@ -1,4 +1,4 @@
-sudo dnf install tmux zoxide zsh
+sudo dnf install tmux zoxide zsh arc-theme
 
 pip install --user tmuxp
 
