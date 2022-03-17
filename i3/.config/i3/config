@@ -291,6 +291,9 @@ exec_always --no-startup-id picom
 exec_always --no-startup-id $HOME/.scripts/polybar.sh
 exec --no-startup-id $HOME/.scripts/i3_autolock.sh
 
+exec xinput set-prop "SYNA7DB5:01 06CB:CD41 Touchpad" "libinput Tapping Enabled" 1
+exec xinput set-prop "SYNA7DB5:01 06CB:CD41 Touchpad" "libinput Natural Scrolling Enabled" 1
+
 
 # TODO  
 # Change power menu
