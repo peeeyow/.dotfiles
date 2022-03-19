@@ -1,0 +1,47 @@
+[global]
+    monitor = 0
+    follow = keyboard
+    width = 300
+    height = 250
+
+    separator_height = 2
+    padding = 16
+    horizontal_padding = 8
+    corner_radius = 15
+
+    frame_width = 3
+
+    frame_color = "#61afef"
+
+    separator_color = auto
+    sort = yes
+
+    idle_threshold = 120
+
+    font = MesloLGL Nerd Font Mono 12 
+    line_height = 5
+
+    markup = full
+    format = " <b>%s</b>\n%b"
+
+    alignment = left
+    vertical_alignment = center
+
+    show_age_threshold = 60
+
+    max_icon_size = 16
+
+[urgency_low]
+    background = "#282c34"
+    foreground = "#98c379"
+    timeout = 16
+
+[urgency_normal]
+    background = "#282c34"
+    foreground = "#abb2bf"
+    timeout = 16
+
+[urgency_critical]
+    background = "#282c34"
+    foreground = "#e06c75"
+    timeout = 0
