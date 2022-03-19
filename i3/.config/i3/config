@@ -215,8 +215,8 @@ bindsym --release $mod+Print exec scrot -zu -q 100 $screenshot_path
 # screenshot current focused window and copy to clipboard
 bindsym --release Control+$mod+Print exec scrot -zu -q 100 -e 'xclip -selection clipboard -t image/png -i $f'
 # mako controls
-bindsym $mod+x exec makoctl dismiss --all
-bindsym $mod+shift+x exec makoctl restore
+bindsym $mod+x exec dunstctl close-all
+bindsym $mod+shift+x exec dunstctl history-pop
 
 ### resizing containers
 
@@ -288,14 +288,17 @@ for_window [instance="update_installer"] floating enable
 focus_on_window_activation focus
 
 exec_always --no-startup-id feh --bg-fill $background_path
-exec_always --no-startup-id picom
 exec_always --no-startup-id $HOME/.scripts/polybar.sh
-exec --no-startup-id $HOME/.scripts/i3_autolock.sh
 
-exec xinput set-prop "SYNA7DB5:01 06CB:CD41 Touchpad" "libinput Tapping Enabled" 1
-exec xinput set-prop "SYNA7DB5:01 06CB:CD41 Touchpad" "libinput Natural Scrolling Enabled" 1
+exec --no-startup-id dunst
+exec --no-startup-id feh --bg-fill $background_path
+exec --no-startup-id picom
+exec --no-startup-id $HOME/.scripts/i3_autolock.sh
+exec --no-startup-id xinput set-prop "SYNA7DB5:01 06CB:CD41 Touchpad" "libinput Tapping Enabled" 1
+exec --no-startup-id xinput set-prop "SYNA7DB5:01 06CB:CD41 Touchpad" "libinput Natural Scrolling Enabled" 1
 
 
 # TODO  
-# Change power menu
+# autolock
+# lockscreen
 # Change notification daemon
