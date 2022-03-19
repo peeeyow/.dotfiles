@@ -205,15 +205,15 @@ bindsym XF86MonBrightnessDown exec brightnessctl set '5%-'
 # screenshot whole screen and save to ~/Pictures
 bindsym --release Print exec scrot -z -q 100 $screenshot_path
 # screenshot whole screen and copy to clipboard
-bindsym --release Control+Print exec scrot -z -q 100 -e 'xclip -selection clipboard -t image/png -i $f'
+bindsym --release Control+Print exec scrot -z -q 100 -e 'xclip -selection clipboard -t image/png -i $f' -o /tmp/clipboard.png
 # screenshot select region and save to ~/Pictures 
 bindsym --release Shift+Print exec scrot -zfs -q 100 $screenshot_path
 # screenshot select region and copy to clipboard
-bindsym --release Control+Shift+Print exec scrot -zfs -q 100 -e 'xclip -selection clipboard -t image/png -i $f'
+bindsym --release Control+Shift+Print exec scrot -zfs -q 100 -e 'xclip -selection clipboard -t image/png -i $f' -o /tmp/clipboard.png
 # screenshot current focused window and save to ~/Pictures
 bindsym --release $mod+Print exec scrot -zu -q 100 $screenshot_path
 # screenshot current focused window and copy to clipboard
-bindsym --release Control+$mod+Print exec scrot -zu -q 100 -e 'xclip -selection clipboard -t image/png -i $f'
+bindsym --release Control+$mod+Print exec scrot -zuo -q 100 -e 'xclip -selection clipboard -t image/png -i $f' -o /tmp/clipboard.png
 # mako controls
 bindsym $mod+x exec dunstctl close-all
 bindsym $mod+shift+x exec dunstctl history-pop
@@ -287,7 +287,6 @@ for_window [instance="update_installer"] floating enable
 ### urgent workspace (triggered by mako)
 focus_on_window_activation focus
 
-exec_always --no-startup-id feh --bg-fill $background_path
 exec_always --no-startup-id $HOME/.scripts/polybar.sh
 
 exec --no-startup-id dunst
@@ -301,4 +300,4 @@ exec --no-startup-id xinput set-prop "SYNA7DB5:01 06CB:CD41 Touchpad" "libinput 
 # TODO  
 # autolock
 # lockscreen
-# Change notification daemon
+# picom and zoom
