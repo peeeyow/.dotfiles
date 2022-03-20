@@ -1,4 +1,3 @@
 #!/bin/bash
 
-maim -ui "$(xdotool getactivewindow)" | xclip -selection clipboard -t image/png
-
+scrot -zu -q 100 - | xclip -selection clipboard -t image/png
