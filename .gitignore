@@ -60,3 +60,6 @@ gitconfig
 # zsh caches
 .zcompdump*
 .zhistory
+
+# icons
+icons/.icons/default
