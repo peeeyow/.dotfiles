@@ -100,7 +100,7 @@ bindsym $mod+Shift+c restart
 bindsym $mod+Shift+e exec $HOME/.scripts/power_menu.sh
 
 # lockscreen
-bindsym $mod+Control+l exec betterlockscreen -l blur
+bindsym $mod+Control+l exec $HOME/.scripts/i3_lock.sh
 
 ## Movement keys
 
@@ -295,8 +295,3 @@ exec --no-startup-id picom
 exec --no-startup-id $HOME/.scripts/i3_autolock.sh
 exec --no-startup-id xinput set-prop "SYNA7DB5:01 06CB:CD41 Touchpad" "libinput Tapping Enabled" 1
 exec --no-startup-id xinput set-prop "SYNA7DB5:01 06CB:CD41 Touchpad" "libinput Natural Scrolling Enabled" 1
-
-
-# TODO  
-# autolock
-# lockscreen
