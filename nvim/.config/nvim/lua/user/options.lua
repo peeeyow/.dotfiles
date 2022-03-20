@@ -32,6 +32,16 @@ local options = {
   wrap = true,
   scrolloff = 8,
   guifont = "monospace:h17",
+  laststatus = 3,
+  fillchars = {
+    horiz = '━',
+    horizup = '┻',
+    horizdown = '┳',
+    vert = '┃',
+    vertleft  = '┫',
+    vertright = '┣',
+    verthoriz = '╋',
+  },
 }
 
 for option, value in pairs(options) do
