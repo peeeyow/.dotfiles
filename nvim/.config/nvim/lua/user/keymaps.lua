@@ -1,14 +1,14 @@
-local function map(mode, lhs, rhs, opts)
-  local options = { noremap = true, silent = true }
-  -- extend options with opts having higher priority on conflict
-  if opts then
-    options = vim.tbl_extend("force", options, opts)
-  end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
+-- local function map(mode, lhs, rhs, opts)
+--   local options = { noremap = true, silent = true }
+--   -- extend options with opts having higher priority on conflict
+--   if opts then
+--     options = vim.tbl_extend("force", options, opts)
+--   end
+--   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+-- end
 
 -- empty opts
-local opts = {}
+local opts = { noremap = true, silent = true }
 
 -- set leader key
 vim.g.mapleader = " "
@@ -16,6 +16,9 @@ vim.g.maplocalleader = " "
 
 -- Normal Visual Select Operator-Pending Mode
 -- easy window movement
+
+local map = vim.keymap.set
+
 map("", "<C-h>", "<C-w>h", opts)
 map("", "<C-j>", "<C-w>j", opts)
 map("", "<C-k>", "<C-w>k", opts)
@@ -61,15 +64,20 @@ map("n", "<A-k>", ":m .-2<CR>==", opts)
 -- close current buffer
 map("n", "<Leader>c", ":bp<bar>sp<bar>bn<bar>bd<CR>", opts)
 
--- Terminal Mode --
--- better terminal navigation
--- map("t", "<C-h>", [[<C-\><C-n><C-w>h]], opts)
--- map("t", "<C-j>", [[<C-\><C-n><C-w>j]], opts)
--- map("t", "<C-k>", [[<C-\><C-n><C-w>k]], opts)
--- map("t", "<C-l>", [[<C-\><C-n><C-w>l]], opts)
-
 -- Plugins --
 
 -- navigate hunks
-map("", "[c", '&diff ? "[c" : "<CMD>Gitsigns prev_hunk<CR>"', { expr = true })
-map("", "]c", '&diff ? "]c" : "<CMD>Gitsigns next_hunk<CR>"', { expr = true })
+map("", "]c", function()
+  if vim.opt.diff:get() then
+    vim.cmd [[normal! ]c]]
+  else
+    vim.cmd [[Gitsigns next_hunk]]
+  end
+end, opts)
+map("", "[c", function()
+  if vim.opt.diff:get() then
+    vim.cmd [[normal! [c]]
+  else
+    vim.cmd [[Gitsigns prev_hunk]]
+  end
+end, opts)
