@@ -97,7 +97,7 @@ bindsym $mod+Shift+r reload
 bindsym $mod+Shift+c restart
 
 # show powermenu
-bindsym $mod+Shift+e exec $HOME/.scripts/power_menu.sh
+bindsym $mod+Shift+e exec $HOME/.scripts/rofi_power_menu.sh
 
 # lockscreen
 bindsym $mod+Control+l exec $HOME/.scripts/i3_lock.sh
