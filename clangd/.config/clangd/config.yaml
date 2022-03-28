@@ -1,11 +1,6 @@
 CompileFlags:
-  # Treat code as C++, use C++17 standard, enable more warnings.
-  Add: [-xc++, -std=c++20, -Wall, -Wno-missing-prototypes]
-  # Remove extra warnings specified in compile commands.
-  # Single value is also acceptable, same as "Remove: [-mabi]"
-  Remove: -mabi
+  Add: [-xc++, -std=c++20, -Wall, -Wextra, -Werror, -Wsign-conversion, -Weffc++, -pedantic-errors, -Wno-missing-prototypes]
 Diagnostics:
-  # Tweak Clang-Tidy checks.
   ClangTidy:
     Add: [performance*, modernize*, readability*]
     Remove: [modernize-use-trailing-return-type]
