@@ -23,6 +23,9 @@ alias r="ranger "
 # compiling flags
 alias gpp="g++ -Wall -Wextra -Werror -Wsign-conversion -Weffc++ -pedantic-errors"
 
+# nvidia offloading
+alias nv="__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia"
+
 # paths
 alias -g ...="../.."
 alias -g ....="../../.."
