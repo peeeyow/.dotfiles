@@ -99,7 +99,8 @@ return {
   },
   {
     "JoosepAlviste/nvim-ts-context-commentstring",
-    event = "BufReadPost",
+    -- event = "BufReadPost",
+    requires = "numToStr/Comment.nvim",
   },
   {
     "folke/todo-comments.nvim",
