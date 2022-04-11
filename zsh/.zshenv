@@ -30,8 +30,18 @@ export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 export GROFF_NO_SGR=1
 
-# PATH
-export PATH=$HOME/.cargo/bin:$HOME/.scripts:$HOME/.fnm:$HOME/.local/bin:$PATH
+## PATH
+# scripts
+export PATH=$HOME/.scripts:$PATH
+# cargo
+export PATH=$HOME/.cargo/bin:$PATH
+# fnm
+export PATH=$HOME/.fnm:$PATH
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+# local/bin
+export PATH=$HOME/.local/bin:$PATH
 
 # PATH with NVIDIA
 export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
