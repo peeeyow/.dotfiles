@@ -27,7 +27,7 @@ zsh_add_file "plugins/powerlevel10k/powerlevel10k.zsh-theme"
 source "$HOME/.p10k.zsh"
 
 # initialize
-eval "`fnm env`"
+eval "`fnm env --use-on-cd`"
 eval "`zoxide init zsh`"
 eval "`pip completion --zsh`"
 eval "`pyenv init -`"
