@@ -9,6 +9,6 @@ pip install -U wheel ueberzug pynvim
 
 mkdir ~/.config/tmux/plugins/
 
-git clone https://github.com/tmux-plugins/tpm.git
+git clone https://github.com/tmux-plugins/tpm.git ~/.config/tmux/plugins/tpm
 
 
