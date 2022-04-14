@@ -37,7 +37,7 @@ lsp_installer.on_server_ready(function(server)
     opts = vim.tbl_deep_extend("force", pyright_opts, opts)
   end
 
-  if server.anme == "emmet_ls" then
+  if server.name == "emmet_ls" then
     opts.capabilities.textDocument.completion.completionItem.snippetSupport = true
   end
 

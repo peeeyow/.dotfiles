@@ -13,9 +13,8 @@ null_ls.setup {
     formatting.prettierd.with {
       prefer_local = "node_modules/.bin",
     },
-    formatting.black.with { prefer_local = "venv/bin" },
-    formatting.stylua,
-    diagnostics.flake8.with { prefer_local = "venv/bin" },
+    formatting.black,
+    diagnostics.flake8,
     codeactions.gitsigns,
   },
 }
