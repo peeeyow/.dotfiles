@@ -30,3 +30,6 @@ alias nv="__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia"
 alias -g ...="../.."
 alias -g ....="../../.."
 alias -g .....="../../../.."
+
+# fnm installation
+alias fnm_update="curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell"
