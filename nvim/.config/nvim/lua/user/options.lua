@@ -34,10 +34,10 @@ local options = {
   guifont = "monospace:h17",
   laststatus = 3,
   fillchars = {
-    horiz = '━',
-    horizup = '┻',
+    horiz     = '━',
+    horizup   = '┻',
     horizdown = '┳',
-    vert = '┃',
+    vert      = '┃',
     vertleft  = '┫',
     vertright = '┣',
     verthoriz = '╋',
@@ -60,7 +60,7 @@ vim.api.nvim_exec(
       autocmd BufWinLeave *.* if &ft !=# 'help' | mkview | endif
       autocmd BufWinEnter *.* if &ft !=# 'help' | silent! loadview | endif
   augroup END
-]],
+]] ,
   false
 )
 
@@ -78,53 +78,12 @@ vim.api.nvim_exec([[
   augroup END
 ]], false)
 --]=]
-vim.cmd [[au BufEnter * set fo-=c fo-=r fo-=o]]
+
 
 -- highlight when yanking
-vim.api.nvim_exec(
-  [[
-    augroup highlight_yank
-        autocmd!
-        au TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=200 }
-    augroup END
-]],
-  false
-)
 -- -- add node provider
 -- --[=[
 -- vim.api.nvim_exec([[
 -- let g:node_host_prog = expand("~/.config/nvim/provider_nodejs/bin/node")
 -- ]], false)
 -- --]=]
-
--- for option, value in pairs(options) do
---     vim.opt[option] = value
--- end
-
--- -- from nvchad
--- local disabled_built_ins = {
---     "netrw",
---     "netrwPlugin",
---     "netrwSettings",
---     "netrwFileHandlers",
---     "gzip",
---     "zip",
---     "zipPlugin",
---     "tar",
---     "tarPlugin",
---     "getscript",
---     "getscriptPlugin",
---     "vimball",
---     "vimballPlugin",
---     "2html_plugin",
---     "logipat",
---     "rrhelper",
---     "spellfile_plugin",
---     "matchit"
--- }
-
--- for _, plugin in pairs(disabled_built_ins) do
---     vim.g["loaded_" .. plugin] = 1
--- end
-
--- -- others
