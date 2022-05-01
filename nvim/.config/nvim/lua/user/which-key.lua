@@ -66,7 +66,7 @@ local normal = {
     nowait = true,
   },
   mappings = {
-    ["<C-_>"] = { [[<CMD>lua require("Comment.api").call("toggle_current_linewise_op")<CR>g@$]], "Line Comment" },
+    ["<C-/>"] = { [[<CMD>lua require("Comment.api").call("toggle_current_linewise_op")<CR>g@$]], "Line Comment" },
     ["<C-\\>"] = { "Open Last Terminal" },
     ["<C-Left"] = { "Resize Left" },
     ["<C-Down"] = { "Resize Down" },
@@ -184,7 +184,7 @@ local n_leader = {
       ["l"] = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
       ["q"] = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
       ["r"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-      ["t"] = { "<cmd>lua vim.lsp.buf.type_definition()<cr>", "Rename" },
+      ["t"] = { "<cmd>lua vim.lsp.buf.type_definition()<cr>", "Type Definition" },
       ["s"] = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
       ["S"] = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" },
     },
