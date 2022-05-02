@@ -26,8 +26,6 @@ g.nvim_tree_show_icons = {
   folder_arrows = 1,
   tree_width = 30,
 }
-g.nvim_tree_git_hl = 1
-g.nvim_tree_root_folder_modifier = ":t"
 
 local status_ok, nvim_tree = pcall(require, "nvim-tree")
 if not status_ok then
@@ -44,19 +42,11 @@ local tree_cb = nvim_tree_config.nvim_tree_callback
 nvim_tree.setup {
   disable_netrw = true,
   hijack_netrw = true,
-  open_on_setup = false,
   ignore_ft_on_setup = {
     "startify",
     "dashboard",
     "alpha",
   },
-  update_to_buf_dir = {
-    enable = true,
-    auto_open = true,
-  },
-  open_on_tab = false,
-  hijack_cursor = false,
-  update_cwd = false,
   diagnostics = {
     enable = true,
     icons = {
@@ -85,7 +75,6 @@ nvim_tree.setup {
     height = 30,
     hide_root_folder = false,
     side = "left",
-    auto_resize = false,
     mappings = {
       custom_only = false,
       list = {
@@ -105,17 +94,6 @@ nvim_tree.setup {
   trash = {
     cmd = "trash",
     require_confirm = true,
-  },
-  quit_on_open = 0,
-  git_hl = 1,
-  disable_window_picker = 0,
-  root_folder_modifier = ":t",
-  show_icons = {
-    git = 1,
-    folders = 1,
-    files = 1,
-    folder_arrows = 1,
-    tree_width = 30,
   },
 }
 vim.cmd [[autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif]]
