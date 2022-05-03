@@ -33,3 +33,6 @@ alias -g .....="../../../.."
 
 # fnm installation
 alias fnm_update="curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell"
+
+# conda
+alias conda="$HOME/miniconda3/bin/conda"
