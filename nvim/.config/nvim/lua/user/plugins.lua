@@ -37,7 +37,10 @@ return {
   "neovim/nvim-lspconfig",
   "williamboman/nvim-lsp-installer",
   "tamago324/nlsp-settings.nvim",
-  "jose-elias-alvarez/null-ls.nvim",
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    disable = true
+  },
   "ray-x/lsp_signature.nvim",
   "b0o/schemastore.nvim",
   "folke/lua-dev.nvim",
@@ -144,6 +147,7 @@ return {
     config = function()
       require "user.toggleterm"
     end,
+    disable = true
   },
 
   {
