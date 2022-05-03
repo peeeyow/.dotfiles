@@ -44,6 +44,8 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 export PATH="$HOME/.poetry/bin:$PATH"
 # local/bin
 export PATH=$HOME/.local/bin:$PATH
+# anaconda
+export PATH=$HOME/anaconda3/bin:$PATH
 
 
 # PATH with NVIDIA
