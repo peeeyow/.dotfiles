@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 -- change icons
-lsp_installer.settings {
+lsp_installer.setup {
   ui = {
     icons = {
       server_installed = "✓",
@@ -13,49 +13,3 @@ lsp_installer.settings {
     },
   },
 }
-
--- Register a handler that will be called for all installed servers.
--- Alternatively, you may also register handlers on specific server instances instead (see example below).
-lsp_installer.on_server_ready(function(server)
-  local opts = {
-    on_attach = require("user.lsp.handlers").on_attach,
-    capabilities = require("user.lsp.handlers").capabilities,
-  }
-
-  if server.name == "jsonls" then
-    local jsonls_opts = require "user.lsp.settings.jsonls"
-    opts = vim.tbl_deep_extend("keep", jsonls_opts, opts)
-  end
-
-  if server.name == "sumneko_lua" then
-    local sumneko_opts = require "user.lsp.settings.sumneko_lua"
-    opts = vim.tbl_deep_extend("keep", sumneko_opts, opts)
-    local luadev_status_okay, luadev = pcall(require, "lua-dev")
-    if not luadev_status_okay then
-      return
-    end
-    opts = luadev.setup {
-      lspconfig = opts
-    }
-  end
-
-  if server.name == "pyright" then
-    local pyright_opts = require "user.lsp.settings.pyright"
-    opts = vim.tbl_deep_extend("keep", pyright_opts, opts)
-  end
-
-  if server.name == "emmet_ls" then
-    opts.capabilities.textDocument.completion.completionItem.snippetSupport = true
-  end
-
-  if server.name == "clangd" then
-    -- HACK: https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428
-    opts.capabilities.offsetEncoding = { "utf-16" }
-
-    local clangd_opts = require "user.lsp.settings.clangd"
-    opts = vim.tbl_deep_extend("force", clangd_opts, opts)
-  end
-  -- This setup() function is exactly the same as lspconfig's setup function.
-  -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-  server:setup(opts)
-end)
