@@ -37,10 +37,7 @@ return {
   "neovim/nvim-lspconfig",
   "williamboman/nvim-lsp-installer",
   "tamago324/nlsp-settings.nvim",
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    disable = true
-  },
+  "jose-elias-alvarez/null-ls.nvim",
   "ray-x/lsp_signature.nvim",
   "b0o/schemastore.nvim",
   "folke/lua-dev.nvim",
