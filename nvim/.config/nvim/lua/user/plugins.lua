@@ -41,6 +41,12 @@ return {
   "ray-x/lsp_signature.nvim",
   "b0o/schemastore.nvim",
   "folke/lua-dev.nvim",
+  {
+    "j-hui/fidget.nvim",
+    config = function()
+      require("user.fidget")
+    end
+  },
 
   {
     "nvim-telescope/telescope.nvim",
