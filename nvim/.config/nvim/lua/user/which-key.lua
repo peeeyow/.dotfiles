@@ -84,6 +84,8 @@ local normal = {
     ["]b"] = { ":BufferLineCycleNext<CR>", "Next Buffer" },
     ["[c"] = { "Prev Hunk" },
     ["]c"] = { "Next Hunk" },
+    ["[t"] = { "Prev Trouble Item" },
+    ["]t"] = { "Next Trouble Item" }
   },
 }
 
@@ -124,6 +126,7 @@ local n_g = {
     ["r"] = { "Goto References" },
     ["l"] = { "Show Diagnostics" },
     ["s"] = { "Show Signature" },
+    ["R"] = { "<cmd>Trouble lsp_references<cr>", "Show References Trouble" },
   },
 }
 
@@ -216,7 +219,13 @@ local n_leader = {
       ["d"] = { "<cmd>Telescope diagnostics bufnr=0<cr>", "Document Diagnostics" },
       ["w"] = { "<cmd>Telescope diagnostics<cr>", "Workspace Diagnostics" },
     },
-
+    ["t"] = {
+      name = "Trouble",
+      ["r"] = { "<cmd>Trouble<cr>", "Open Trouble" },
+      ["w"] = { "<cmd>Trouble workspace_diagnostics<cr>", "Open Trouble Workspace Diagnostics" },
+      ["d"] = { "<cmd>Trouble document_diagnostics<cr>", "Open Trouble Document Diagnostics" },
+      ["t"] = { "<cmd>Trouble todo<cr>", "Open todo Trouble" },
+    }
   },
 }
 

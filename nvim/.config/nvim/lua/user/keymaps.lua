@@ -81,3 +81,11 @@ map("", "[c", function()
     vim.cmd [[Gitsigns prev_hunk]]
   end
 end, opts)
+
+-- navigate trouble items
+map("", "[t", function()
+  require("trouble").previous({ skip_groups = true, jump = true });
+end, opts)
+map("", "]t", function()
+  require("trouble").next({ skip_groups = true, jump = true });
+end, opts)

@@ -1,7 +1,8 @@
--- TODO: folke/trouble.nvim
+-- TODO: ggandor/lightspeed.nvim
+-- TODO: RRethy/vim-illuminate
+-- TODO: weilbith/nvim-code-action-menu
 -- TODO: filipdutescu/renamer.nvim
 -- TODO: dap plugins
--- TODO: keymap for quickfixlist
 -- TODO: ahmedkhalf/project.nvim
 -- TODO: nvim-treesitter-textobjects
 
@@ -36,7 +37,6 @@ return {
 
   "neovim/nvim-lspconfig",
   "williamboman/nvim-lsp-installer",
-  "tamago324/nlsp-settings.nvim",
   "jose-elias-alvarez/null-ls.nvim",
   "ray-x/lsp_signature.nvim",
   "b0o/schemastore.nvim",
