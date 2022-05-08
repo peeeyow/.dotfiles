@@ -5,7 +5,7 @@ return {
         globals = { "vim" },
         neededFileStatus = {
           ["codestyle-check"] = "Any",
-        }
+        },
       },
       workspace = {
         library = {
@@ -14,16 +14,14 @@ return {
         },
       },
       format = {
-        enable = true,
+        enable = false,
         defaultConfig = {
-          indent_style = "tab",
+          indent_style = "space",
           indent_size = "2",
-          tab_width = "2",
           call_arg_parentheses = "remove",
           quote_style = "double",
-          insert_final_newline = true,
         },
-      }
+      },
     },
   },
 }

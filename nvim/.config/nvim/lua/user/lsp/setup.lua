@@ -5,8 +5,7 @@ end
 
 local opts = {
   on_attach = require("user.lsp.handlers").on_attach,
-  capabilities = require("user.lsp.handlers").capabilities
-
+  capabilities = require("user.lsp.handlers").capabilities,
 }
 local jsonls_opts = require "user.lsp.settings.jsonls"
 jsonls_opts = vim.tbl_deep_extend("keep", jsonls_opts, opts)
@@ -18,7 +17,7 @@ if not luadev_status_okay then
   return
 end
 sumneko_opts = luadev.setup {
-  lspconfig = sumneko_opts
+  lspconfig = sumneko_opts,
 }
 
 local pyright_opts = require "user.lsp.settings.pyright"
@@ -27,7 +26,6 @@ pyright_opts = vim.tbl_deep_extend("keep", pyright_opts, opts)
 local clangd_opts = require "user.lsp.settings.clangd"
 clangd_opts = vim.tbl_deep_extend("keep", clangd_opts, opts)
 clangd_opts.capabilities.offsetEncoding = { "utf-16" }
-
 
 local servers = {
   jsonls = jsonls_opts,
