@@ -25,6 +25,9 @@ zle -C alias-expension complete-word _generic
 bindkey '^Xa' alias-expension
 zstyle ':completion:alias-expension:*' completer _expand_alias
 
+# search with process name
+zstyle ':completion:*:*:*:*:processes' command "ps -u $USERNAME -o pid,user,comm -w -w"
+
 # Use cache for commands which use it
 
 # Allow you to select in a menu
