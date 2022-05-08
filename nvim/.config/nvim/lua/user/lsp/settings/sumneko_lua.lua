@@ -18,7 +18,7 @@ return {
         defaultConfig = {
           indent_style = "space",
           indent_size = "2",
-          call_arg_parentheses = "remove",
+          call_arg_parentheses = "remove_table_only",
           quote_style = "double",
         },
       },
