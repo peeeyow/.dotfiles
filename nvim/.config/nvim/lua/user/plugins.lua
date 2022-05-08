@@ -47,6 +47,12 @@ return {
       require("user.fidget")
     end
   },
+  {
+    "RRethy/vim-illuminate",
+    config = function()
+      require("user.illuminate")
+    end
+  },
 
   {
     "nvim-telescope/telescope.nvim",

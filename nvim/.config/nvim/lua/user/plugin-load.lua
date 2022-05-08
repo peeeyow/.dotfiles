@@ -52,6 +52,6 @@ return packer.startup {
     end
   end,
   config = {
-    -- compile_path = vim.fn.stdpath('config')..'/lua/packer_compiled.lua'
+    compile_path = vim.fn.stdpath('config') .. '/lua/packer_compiled.lua'
   },
 }
