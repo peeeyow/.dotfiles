@@ -1,5 +1,4 @@
 -- TODO: ggandor/lightspeed.nvim
--- TODO: RRethy/vim-illuminate
 -- TODO: weilbith/nvim-code-action-menu
 -- TODO: filipdutescu/renamer.nvim
 -- TODO: dap plugins
