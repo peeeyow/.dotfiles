@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 configs.setup {
-  ensure_installed = "maintained",
+  ensure_installed = "all",
   sync_install = false,
   ignore_install = { "" },
   autopairs = {
@@ -40,7 +40,7 @@ configs.setup {
       show_help = "?",
     },
   },
-  indent = { enable = true, disable = { "yaml", "python" } },
+  indent = { enable = true, disable = { "python" } },
   context_commentstring = {
     enable = true,
     enable_autocmd = false,

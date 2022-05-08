@@ -40,18 +40,6 @@ return {
   "ray-x/lsp_signature.nvim",
   "b0o/schemastore.nvim",
   "folke/lua-dev.nvim",
-  {
-    "j-hui/fidget.nvim",
-    config = function()
-      require("user.fidget")
-    end
-  },
-  {
-    "RRethy/vim-illuminate",
-    config = function()
-      require("user.illuminate")
-    end
-  },
 
   {
     "nvim-telescope/telescope.nvim",
@@ -91,7 +79,6 @@ return {
       require "user.treesitter"
     end,
     run = ":TSUpdate",
-    commit = "d7c4ae886d90471b1839dd601887bdd6e882efd9",
   },
   "p00f/nvim-ts-rainbow",
   "nvim-treesitter/playground",
@@ -155,7 +142,7 @@ return {
     config = function()
       require "user.toggleterm"
     end,
-    disable = true
+    disable = true,
   },
 
   {
@@ -190,6 +177,18 @@ return {
     "folke/trouble.nvim",
     config = function()
       require "user.trouble"
+    end,
+  },
+  {
+    "j-hui/fidget.nvim",
+    config = function()
+      require "user.fidget"
+    end,
+  },
+  {
+    "RRethy/vim-illuminate",
+    config = function()
+      require "user.illuminate"
     end,
   },
 }
