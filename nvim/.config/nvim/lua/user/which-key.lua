@@ -85,7 +85,7 @@ local normal = {
     ["[c"] = { "Prev Hunk" },
     ["]c"] = { "Next Hunk" },
     ["[t"] = { "Prev Trouble Item" },
-    ["]t"] = { "Next Trouble Item" }
+    ["]t"] = { "Next Trouble Item" },
   },
 }
 
@@ -183,7 +183,7 @@ local n_leader = {
     ["l"] = {
       name = "LSP",
       ["a"] = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-      ["f"] = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
+      ["f"] = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format" },
       ["i"] = { "<cmd>LspInfo<cr>", "Info" },
       ["I"] = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
       ["j"] = { "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", "Next Diagnostic" },
@@ -225,7 +225,7 @@ local n_leader = {
       ["w"] = { "<cmd>Trouble workspace_diagnostics<cr>", "Open Trouble Workspace Diagnostics" },
       ["d"] = { "<cmd>Trouble document_diagnostics<cr>", "Open Trouble Document Diagnostics" },
       ["t"] = { "<cmd>Trouble todo<cr>", "Open todo Trouble" },
-    }
+    },
   },
 }
 
