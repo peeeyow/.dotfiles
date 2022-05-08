@@ -5,8 +5,8 @@ au("TextYankPost", {
   group = aug("highlight_yank", { clear = true }),
   desc = "Highlight text on yank.",
   callback = function()
-    vim.highlight.on_yank { higroup = 'IncSearch', timeout = 200 }
-  end
+    vim.highlight.on_yank { higroup = "IncSearch", timeout = 200 }
+  end,
 })
 
 au("BufEnter", {
@@ -14,5 +14,5 @@ au("BufEnter", {
   desc = "No longer comments upon newline",
   callback = function()
     vim.opt_local.formatoptions:remove { "c", "r", "o" }
-  end
+  end,
 })

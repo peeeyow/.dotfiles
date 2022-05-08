@@ -34,13 +34,13 @@ local options = {
   guifont = "monospace:h17",
   laststatus = 3,
   fillchars = {
-    horiz     = '━',
-    horizup   = '┻',
-    horizdown = '┳',
-    vert      = '┃',
-    vertleft  = '┫',
-    vertright = '┣',
-    verthoriz = '╋',
+    horiz = "━",
+    horizup = "┻",
+    horizdown = "┳",
+    vert = "┃",
+    vertleft = "┫",
+    vertright = "┣",
+    verthoriz = "╋",
   },
 }
 
@@ -60,30 +60,9 @@ vim.api.nvim_exec(
       autocmd BufWinLeave *.* if &ft !=# 'help' | mkview | endif
       autocmd BufWinEnter *.* if &ft !=# 'help' | silent! loadview | endif
   augroup END
-]] ,
+]],
   false
 )
 
 vim.opt.shortmess:append "c"
 vim.opt.nrformats:append { "alpha", "octal", "hex" }
-
--- vim.opt.listchars = { lead = "·" }
-
--- don't auto comment new line
---[=[
-vim.api.nvim_exec([[
-  augroup no_auto_comment
-      autocmd!
-      au BufNewFile,BufRead * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-  augroup END
-]], false)
---]=]
-
-
--- highlight when yanking
--- -- add node provider
--- --[=[
--- vim.api.nvim_exec([[
--- let g:node_host_prog = expand("~/.config/nvim/provider_nodejs/bin/node")
--- ]], false)
--- --]=]
