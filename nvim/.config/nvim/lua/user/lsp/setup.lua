@@ -32,6 +32,7 @@ local servers = {
   sumneko_lua = sumneko_opts,
   pyright = pyright_opts,
   clangd = clangd_opts,
+  bashls = opts,
 }
 
 for lsp, lsp_opts in pairs(servers) do
