@@ -33,6 +33,10 @@ local servers = {
   pyright = pyright_opts,
   clangd = clangd_opts,
   bashls = opts,
+  cssls = opts,
+  html = opts,
+  tsserver = opts,
+  emmet_ls = opts,
 }
 
 for lsp, lsp_opts in pairs(servers) do

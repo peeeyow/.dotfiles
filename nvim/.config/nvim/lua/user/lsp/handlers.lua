@@ -72,7 +72,7 @@ end
 local lsp_formatting = function(bufnr)
   vim.lsp.buf.format {
     filter = function(clients)
-      local servers = { "tsserver", "html", "jsonls" }
+      local servers = { "html", "jsonls" }
       return vim.tbl_filter(function(client)
         for _, server in ipairs(servers) do
           if client.name == server then

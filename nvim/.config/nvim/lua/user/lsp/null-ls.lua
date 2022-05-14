@@ -27,8 +27,8 @@ null_ls.setup {
     formatting.prettierd.with {
       prefer_local = "node_modules/.bin",
     },
-    formatting.stylua,
     formatting.black,
+    formatting.stylua,
     diagnostics.flake8,
     codeactions.gitsigns,
   },
