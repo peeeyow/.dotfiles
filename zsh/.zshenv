@@ -37,6 +37,8 @@ export PATH=$HOME/.scripts:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
 # fnm
 export PATH=$HOME/.fnm:$PATH
+# npm globals
+export PATH=$HOME/.config/node_modules/bin:$PATH
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
