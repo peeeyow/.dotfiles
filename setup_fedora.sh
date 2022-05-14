@@ -1,4 +1,4 @@
-sudo dnf install tmux zoxide zsh arc-theme
+sudo dnf install tmux zoxide zsh arc-theme  jetbrains-mono-fonts-all 
 
 pip install --user tmuxp
 
