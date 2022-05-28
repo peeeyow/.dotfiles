@@ -41,6 +41,10 @@ configs.setup {
     },
   },
   indent = { enable = true, disable = { "python" } },
+  autotag = {
+    enable = true,
+    disable = { "xml" },
+  },
   context_commentstring = {
     enable = true,
     enable_autocmd = false,

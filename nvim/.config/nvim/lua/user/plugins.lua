@@ -103,6 +103,7 @@ local plugins = {
   },
   "p00f/nvim-ts-rainbow",
   "nvim-treesitter/playground",
+  "windwp/nvim-ts-autotag",
   {
     "lewis6991/spellsitter.nvim",
     config = function()
