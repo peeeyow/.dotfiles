@@ -1,6 +1,5 @@
 -- TODO: ggandor/lightspeed.nvim
 -- TODO: weilbith/nvim-code-action-menu
--- TODO: filipdutescu/renamer.nvim
 -- TODO: dap plugins
 -- TODO: ahmedkhalf/project.nvim
 -- TODO: nvim-treesitter-textobjects
@@ -199,6 +198,13 @@ local plugins = {
     "folke/trouble.nvim",
     config = function()
       require "user.trouble"
+    end,
+  },
+
+  {
+    "stevearc/dressing.nvim",
+    config = function()
+      require "user.dressing"
     end,
   },
 }
