@@ -35,6 +35,12 @@ return {
   "saadparwaiz1/cmp_luasnip",
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/cmp-nvim-lua",
+  {
+    "David-Kunz/cmp-npm",
+    config = function()
+      require "user.cmp_npm"
+    end,
+  },
 
   "neovim/nvim-lspconfig",
   "williamboman/nvim-lsp-installer",
@@ -55,10 +61,7 @@ return {
     end,
   },
   {
-    "David-Kunz/cmp-npm",
-    config = function()
-      require "user.cmp_npm"
-    end,
+    "jose-elias-alvarez/typescript.nvim",
   },
 
   {

@@ -2,6 +2,10 @@ local status_ok_lspc, lsp_config = pcall(require, "lspconfig")
 if not status_ok_lspc then
   return
 end
+local status_ok_tsserver, tsserver = pcall(require, "typescript")
+if not status_ok_tsserver then
+  return
+end
 
 local opts = {
   on_attach = require("user.lsp.handlers").on_attach,
@@ -35,9 +39,12 @@ local servers = {
   bashls = opts,
   cssls = opts,
   html = opts,
-  tsserver = opts,
   emmet_ls = opts,
   tailwindcss = opts,
+}
+
+tsserver.setup {
+  server = opts,
 }
 
 for lsp, lsp_opts in pairs(servers) do
