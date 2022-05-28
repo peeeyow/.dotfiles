@@ -4,6 +4,7 @@
 -- TODO: dap plugins
 -- TODO: ahmedkhalf/project.nvim
 -- TODO: nvim-treesitter-textobjects
+-- TODO: gps-nvim
 
 return {
   "wbthomason/packer.nvim",
@@ -185,7 +186,7 @@ return {
   },
 
   {
-    "norcalli/nvim-colorizer.lua",
+    "NvChad/nvim-colorizer.lua",
     config = function()
       require "user.colorizer"
     end,
