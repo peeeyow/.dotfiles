@@ -52,6 +52,12 @@ return {
       require "user.illuminate"
     end,
   },
+  {
+    "David-Kunz/cmp-npm",
+    config = function()
+      require "user.cmp_npm"
+    end,
+  },
 
   {
     "nvim-telescope/telescope.nvim",

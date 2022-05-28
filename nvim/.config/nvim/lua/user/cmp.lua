@@ -51,6 +51,7 @@ local source_names = {
   vsnip = "(Snippet)",
   luasnip = "(Snippet)",
   buffer = "(Buffer)",
+  npm = "(NPM)",
 }
 
 cmp.setup {
@@ -110,6 +111,7 @@ cmp.setup {
     end,
   },
   sources = {
+    { name = "npm" },
     { name = "nvim_lsp" },
     { name = "nvim_lua" },
     { name = "luasnip" },
