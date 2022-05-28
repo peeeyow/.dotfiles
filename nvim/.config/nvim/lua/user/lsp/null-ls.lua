@@ -5,8 +5,7 @@ end
 
 local augroup = vim.api.nvim_create_augroup("NullLspFormatting", {})
 local function lsp_format(client, bufnr)
-  local disable_format_on_save = { ["prettierd"] = true }
-  if client.supports_method "textDocument/formatting" and not disable_format_on_save[client] then
+  if client.supports_method "textDocument/formatting" then
     vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
     vim.api.nvim_create_autocmd("BufWritePre", {
       group = augroup,
@@ -25,7 +24,7 @@ local codeactions = null_ls.builtins.code_actions
 null_ls.setup {
   debug = false,
   sources = {
-    formatting.prettierd.with {
+    formatting.prettier.with {
       prefer_local = "node_modules/.bin",
     },
     formatting.black,

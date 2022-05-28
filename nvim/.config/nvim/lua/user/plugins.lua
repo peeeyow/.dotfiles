@@ -5,6 +5,7 @@
 -- TODO: ahmedkhalf/project.nvim
 -- TODO: nvim-treesitter-textobjects
 -- TODO: gps-nvim
+-- TODO: sindrets/diffview.nvim
 
 return {
   "wbthomason/packer.nvim",

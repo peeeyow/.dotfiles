@@ -37,6 +37,7 @@ local servers = {
   html = opts,
   tsserver = opts,
   emmet_ls = opts,
+  tailwindcss = opts,
 }
 
 for lsp, lsp_opts in pairs(servers) do
