@@ -5,6 +5,18 @@ end
 
 -- change icons
 lsp_installer.setup {
+  ensure_installed = {
+    "eslint",
+    "bashls",
+    "cssls",
+    "emmet_ls",
+    "html",
+    "jsonls",
+    "pyright",
+    "sumneko_lua",
+    "tailwindcss",
+    "tsserver",
+  },
   ui = {
     icons = {
       server_installed = "✓",
