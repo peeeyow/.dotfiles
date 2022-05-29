@@ -6,7 +6,6 @@ end
 -- change icons
 lsp_installer.setup {
   ensure_installed = {
-    "eslint",
     "bashls",
     "cssls",
     "emmet_ls",
