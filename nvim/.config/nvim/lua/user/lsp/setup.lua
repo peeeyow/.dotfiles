@@ -41,6 +41,7 @@ local servers = {
   html = opts,
   emmet_ls = opts,
   tailwindcss = opts,
+  eslint = opts,
 }
 
 tsserver.setup {
