@@ -72,7 +72,7 @@ end
 local lsp_formatting = function(bufnr)
   vim.lsp.buf.format {
     filter = function(client)
-      local disabled_servers = { "tsserver" }
+      local disabled_servers = { "jsonls", "tsserver" }
       for _, server in ipairs(disabled_servers) do
         if client.name == server then
           return false
@@ -97,6 +97,8 @@ local function lsp_format(client, bufnr)
     })
   end
 end
+
+M.lsp_format = lsp_format
 
 M.on_attach = function(client, bufnr)
   lsp_format(client, bufnr)
