@@ -69,10 +69,11 @@ local function lsp_keymaps(bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
 end
 
+local disabled_servers = { "html", "cssls", "eslint", "jsonls", "tsserver" }
+
 local lsp_formatting = function(bufnr)
   vim.lsp.buf.format {
     filter = function(client)
-      local disabled_servers = { "html", "cssls", "eslint", "jsonls", "tsserver" }
       for _, server in ipairs(disabled_servers) do
         if client.name == server then
           return false
@@ -85,17 +86,23 @@ local lsp_formatting = function(bufnr)
 end
 
 local function lsp_format(client, bufnr)
-  local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-  if client.supports_method "textDocument/formatting" then
-    vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      group = augroup,
-      buffer = bufnr,
-      callback = function()
-        lsp_formatting(bufnr)
-      end,
-    })
+  for _, server in ipairs(disabled_servers) do
+    if client.name == server then
+      return
+    end
   end
+  if not client.supports_method "textDocument/formatting" then
+    return
+  end
+  local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+  vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    group = augroup,
+    buffer = bufnr,
+    callback = function()
+      lsp_formatting(bufnr)
+    end,
+  })
 end
 
 M.lsp_format = lsp_format
