@@ -72,7 +72,7 @@ end
 local lsp_formatting = function(bufnr)
   vim.lsp.buf.format {
     filter = function(client)
-      local disabled_servers = { "eslint", "jsonls", "tsserver" }
+      local disabled_servers = { "html", "cssls", "eslint", "jsonls", "tsserver" }
       for _, server in ipairs(disabled_servers) do
         if client.name == server then
           return false
