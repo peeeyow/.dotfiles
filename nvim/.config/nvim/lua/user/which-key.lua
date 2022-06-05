@@ -161,6 +161,14 @@ local n_leader = {
         "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
         "Buffers",
       },
+      ["<"] = {
+        "<CMD>BufferLineMovePrev<CR>",
+        "Move buffer to left",
+      },
+      [">"] = {
+        "<CMD>BufferLineMoveNext<CR>",
+        "Move buffer to right",
+      },
     },
     ["g"] = {
       name = "Git",
