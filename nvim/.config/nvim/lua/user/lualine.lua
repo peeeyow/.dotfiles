@@ -1,5 +1,6 @@
-local status_ok, lualine = pcall(require, "lualine")
-if not status_ok then
+local status_ok_lualine, lualine = pcall(require, "lualine")
+local status_ok_gps, gps = pcall(require, "nvim-gps")
+if not (status_ok_lualine and status_ok_gps) then
   return
 end
 
@@ -115,7 +116,7 @@ lualine.setup {
   sections = {
     lualine_a = { "mode" },
     lualine_b = { branch, diff, diagnostics },
-    lualine_c = {},
+    lualine_c = { { gps.get_location, cond = gps.is_available } },
     lualine_x = { python_env, "encoding", filetype },
     lualine_y = { "progress" },
     lualine_z = { location },

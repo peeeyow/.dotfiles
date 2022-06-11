@@ -61,6 +61,13 @@ local plugins = {
   {
     "jose-elias-alvarez/typescript.nvim",
   },
+  {
+    "SmiteshP/nvim-gps",
+    requires = "nvim-treesitter/nvim-treesitter",
+    config = function()
+      require "user.nvim-gps"
+    end,
+  },
 
   {
     "nvim-telescope/telescope.nvim",
