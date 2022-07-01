@@ -43,7 +43,7 @@ map("x", "j", 'v:count ? "j" : "gj"', { expr = true })
 map("x", "k", 'v:count ? "k" : "gk"', { expr = true })
 
 -- don't copy what is being overwritten
-map("x", "p", '"_dP', opts)
+map("x", "p", [[p:let @+=@0<CR>]], opts)
 
 -- Normal Mode --
 -- move through buffers
