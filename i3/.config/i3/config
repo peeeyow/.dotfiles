@@ -1,6 +1,9 @@
 # i3 config
 
 ### variables
+# monitors
+set $primary "HDMI-0"
+set $secondary "eDP-1-1"
 
 # modifier keys - windows key
 set $mod Mod4
@@ -145,12 +148,12 @@ bindsym $mod+Shift+0 move container to workspace $ws0, workspace $ws0, focus
 
 ### focus montors
 bindsym $mod+Control+p focus output primary
-bindsym $mod+Control+s focus output eDP-1
+bindsym $mod+Control+s focus output $secondary
 bindsym $mod+Control+Tab focus output left
 
 ### Move workspaces betweeen monitors
 bindsym $mod+shift+Control+p move workspace to output primary
-bindsym $mod+shift+Control+s move workspace to output eDP-1
+bindsym $mod+shift+Control+s move workspace to output $secondary
 
 # move to previous workspace
 bindsym $mod+Tab workspace back_and_forth
@@ -247,7 +250,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 ### workspace assignment
-workspace $ws0 output eDP-1
+workspace $ws0 output $secondary
 
 ### program assignment
 
@@ -303,7 +306,8 @@ for_window [instance="update_installer"] floating enable
 ### urgent workspace (triggered by mako)
 focus_on_window_activation focus
 
-exec xrandr --dpi 276 --output "HDMI-1-0" --primary --mode 1920x1080 --rate 144.00 --output "eDP-1" --mode 2560x1440 --rate 60.00 --left-of "HDMI-1-0"
+exec xrandr --output $secondary --mode 2560x1440 --rate 60.00 --output $primary --primary --mode 1920x1080 --rate 144.00 --panning 2560x1440+2560+0 --scale 1.3334 --right-of $secondary
+
 
 exec_always --no-startup-id $HOME/.scripts/polybar.sh
 
