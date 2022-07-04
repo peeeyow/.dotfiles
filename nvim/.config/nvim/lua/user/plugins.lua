@@ -3,8 +3,9 @@
 -- TODO: dap plugins
 -- TODO: ahmedkhalf/project.nvim
 -- TODO: nvim-treesitter-textobjects
--- TODO: gps-nvim
 -- TODO: sindrets/diffview.nvim
+-- TODO: kylechui/nvim-surround
+-- TODO: nvim-neotest/neotest
 local plugins = {
   "wbthomason/packer.nvim",
   "nvim-lua/popup.nvim",
@@ -68,6 +69,10 @@ local plugins = {
       require "user.nvim-gps"
     end,
   },
+  --[[ {
+    "weilbith/nvim-code-action-menu",
+    cmd = "CodeActionMenu",
+  }, ]]
 
   {
     "nvim-telescope/telescope.nvim",
