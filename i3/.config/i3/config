@@ -143,6 +143,15 @@ bindsym $mod+Shift+8 move container to workspace $ws8, workspace $ws8, focus
 bindsym $mod+Shift+9 move container to workspace $ws9, workspace $ws9, focus
 bindsym $mod+Shift+0 move container to workspace $ws0, workspace $ws0, focus
 
+### focus montors
+bindsym $mod+Control+p focus output primary
+bindsym $mod+Control+s focus output eDP-1
+bindsym $mod+Control+Tab focus output left
+
+### Move workspaces betweeen monitors
+bindsym $mod+shift+Control+p move workspace to output primary
+bindsym $mod+shift+Control+s move workspace to output eDP-1
+
 # move to previous workspace
 bindsym $mod+Tab workspace back_and_forth
 
@@ -236,6 +245,9 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
+
+### workspace assignment
+workspace $ws0 output eDP-1
 
 ### program assignment
 
