@@ -216,17 +216,17 @@ bindsym XF86MonBrightnessDown exec brightnessctl set '5%-'
 ### screenshot hotkeys
 
 # screenshot whole screen and save to ~/Pictures
-bindsym --release Print exec scrot -z -q 100 $screenshot_path
+bindsym --release Print exec --no-startup-id scrot -z -q 100 $screenshot_path
 # screenshot whole screen and copy to clipboard
-bindsym --release Control+Print exec $HOME/.scripts/i3_screencapture_clipboard.sh
+bindsym --release Control+Print exec --no-startup-id $HOME/.scripts/i3_screencapture_clipboard.sh
 # screenshot select region and save to ~/Pictures 
-bindsym --release Shift+Print exec scrot -zfs -q 100 $screenshot_path
+bindsym --release Shift+Print exec --no-startup-id scrot -zfs -q 100 $screenshot_path
 # screenshot select region and copy to clipboard
-bindsym --release Control+Shift+Print exec $HOME/.scripts/i3_screencapture_snippet_clipboard.sh
+bindsym --release Control+Shift+Print exec --no-startup-id $HOME/.scripts/i3_screencapture_snippet_clipboard.sh
 # screenshot current focused window and save to ~/Pictures
-bindsym --release $mod+Print exec scrot -zu -q 100 $screenshot_path
+bindsym --release $mod+Print exec --no-startup-id scrot -zu -q 100 $screenshot_path
 # screenshot current focused window and copy to clipboard
-bindsym --release Control+$mod+Print exec $HOME/.scripts/i3_screencapture_active_clipboard.sh
+bindsym --release Control+$mod+Print exec --no-startup-id $HOME/.scripts/i3_screencapture_active_clipboard.sh
 # mako controls
 bindsym $mod+x exec dunstctl close-all
 bindsym $mod+shift+x exec dunstctl history-pop
