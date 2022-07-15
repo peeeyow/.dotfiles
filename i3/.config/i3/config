@@ -155,6 +155,8 @@ bindsym $mod+Control+Tab focus output left
 bindsym $mod+shift+Control+p move workspace to output primary
 bindsym $mod+shift+Control+s move workspace to output $secondary
 
+bindsym $mod+shift+s exec $HOME/.scripts/rofi_monitor_menu.sh
+
 # move to previous workspace
 bindsym $mod+Tab workspace back_and_forth
 
