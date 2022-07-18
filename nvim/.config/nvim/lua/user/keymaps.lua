@@ -64,6 +64,17 @@ map("n", "<A-k>", ":m .-2<CR>==", opts)
 -- close current buffer
 map("n", "<Leader>c", ":bp<bar>sp<bar>bn<bar>bd<CR>", opts)
 
+-- don't copy empty lines
+local function delete_empty()
+  if vim.api.nvim_get_current_line():match "^%s*$" then
+    return [["_dd]]
+  else
+    return "dd"
+  end
+end
+
+map("n", "dd", delete_empty, { expr = true })
+
 -- Plugins --
 
 -- navigate hunks
