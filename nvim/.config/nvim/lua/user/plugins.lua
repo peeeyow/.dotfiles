@@ -1,3 +1,4 @@
+-- TODO: mason.nvim
 -- TODO: ggandor/lightspeed.nvim
 -- TODO: weilbith/nvim-code-action-menu
 -- TODO: dap plugins
@@ -6,6 +7,7 @@
 -- TODO: sindrets/diffview.nvim
 -- TODO: kylechui/nvim-surround
 -- TODO: nvim-neotest/neotest
+-- TODO: navic
 local plugins = {
   "wbthomason/packer.nvim",
   "nvim-lua/popup.nvim",
