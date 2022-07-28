@@ -12,4 +12,5 @@ mkdir ~/.config/tmux/plugins/
 
 git clone https://github.com/tmux-plugins/tpm.git ~/.config/tmux/plugins/tpm
 
-
+# setup spanish like compose
+sudo localectl set-x11-keymap us pc105+inet altgr-intl
