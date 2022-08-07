@@ -1,4 +1,3 @@
--- TODO: mason.nvim
 -- TODO: ggandor/lightspeed.nvim
 -- TODO: weilbith/nvim-code-action-menu
 -- TODO: dap plugins
@@ -44,7 +43,17 @@ local plugins = {
   },
 
   "neovim/nvim-lspconfig",
-  "williamboman/nvim-lsp-installer",
+  {
+    "williamboman/mason.nvim",
+
+    config = function()
+      require "user.lsp.mason"
+    end,
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+  },
+
   "jose-elias-alvarez/null-ls.nvim",
   "ray-x/lsp_signature.nvim",
   "b0o/schemastore.nvim",
