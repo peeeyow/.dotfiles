@@ -6,7 +6,6 @@
 -- TODO: sindrets/diffview.nvim
 -- TODO: kylechui/nvim-surround
 -- TODO: nvim-neotest/neotest
--- TODO: navic
 local plugins = {
   "wbthomason/packer.nvim",
   "nvim-lua/popup.nvim",
@@ -43,16 +42,8 @@ local plugins = {
   },
 
   "neovim/nvim-lspconfig",
-  {
-    "williamboman/mason.nvim",
-
-    config = function()
-      require "user.lsp.mason"
-    end,
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-  },
+  "williamboman/mason.nvim",
+  "williamboman/mason-lspconfig.nvim",
 
   "jose-elias-alvarez/null-ls.nvim",
   "ray-x/lsp_signature.nvim",
@@ -74,11 +65,8 @@ local plugins = {
     "jose-elias-alvarez/typescript.nvim",
   },
   {
-    "SmiteshP/nvim-gps",
-    requires = "nvim-treesitter/nvim-treesitter",
-    config = function()
-      require "user.nvim-gps"
-    end,
+    "SmiteshP/nvim-navic",
+    requires = "neovim/nvim-lspconfig",
   },
   --[[ {
     "weilbith/nvim-code-action-menu",
