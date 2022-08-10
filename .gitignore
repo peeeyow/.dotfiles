@@ -54,9 +54,6 @@ gtk-3.0/.config/gtk-3.0/bookmarks
 # compiled packer settings
 packer_compiled.lua
 
-# don't show
-gitconfig
-
 # zsh caches
 .zcompdump*
 .zhistory
