@@ -6,6 +6,20 @@
 -- TODO: sindrets/diffview.nvim
 -- TODO: kylechui/nvim-surround
 -- TODO: nvim-neotest/neotest
+-- TODO: esensar/nvim-dev-container
+-- TODO: hkupty/iron.nvim
+-- TODO: sidebar-nvim/sidebar.nvim
+-- TODO: rcarriga/nvim-notify
+-- TODO: bennypowers/nvim-regexplainer
+-- TODO: nvim-pack/nvim-spectre
+-- TODO: ray-x/navigator.lua
+-- TODO: TimUntersberger/neogit
+-- TODO: simrat39/symbols-outline.nvim
+-- TODO: glepnir/lspsaga.nvim
+-- TODO: ahmedkhalf/project.nvim
+-- TODO: kevinhwang91/nvim-ufo
+-- TODO: Maan2003/lsp_lines.nvim
+-- TODO: AckslD/nvim-FeMaco.lua
 local plugins = {
   "wbthomason/packer.nvim",
   "nvim-lua/popup.nvim",
