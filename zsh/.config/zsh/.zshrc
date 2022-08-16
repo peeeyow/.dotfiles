@@ -17,6 +17,7 @@ zsh_add_plugin "zsh-users/zsh-autosuggestions"
 zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
 zsh_add_plugin "hlissner/zsh-autopair"
 zsh_add_plugin "zsh-users/zsh-history-substring-search"
+zsh_add_plugin "greymd/docker-zsh-completion"
 
 # history-substring keybind
 bindkey -M vicmd 'k' history-substring-search-up
