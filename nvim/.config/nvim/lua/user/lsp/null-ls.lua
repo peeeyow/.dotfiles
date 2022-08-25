@@ -24,9 +24,10 @@ local codeactions = null_ls.builtins.code_actions
 null_ls.setup {
   debug = false,
   sources = {
-    formatting.prettier.with {
-      prefer_local = "node_modules/.bin",
-    },
+    -- formatting.prettier.with {
+    --   prefer_local = "node_modules/.bin",
+    -- },
+    formatting.prettierd,
     formatting.black,
     formatting.stylua,
     diagnostics.flake8,
