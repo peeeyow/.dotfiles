@@ -7,7 +7,10 @@ bufferline.setup {
   options = {
     numbers = "none",
     close_command = "bp<bar>sp<bar>bn<bar>bd",
-    indicator_icon = "▎",
+    indicator = {
+      icon = "▎",
+      style = "icon",
+    },
     buffer_close_icon = "",
     modified_icon = "●",
     close_icon = "",
