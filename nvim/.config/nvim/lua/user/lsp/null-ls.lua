@@ -31,9 +31,10 @@ null_ls.setup {
     formatting.black,
     formatting.stylua,
     diagnostics.flake8,
-    diagnostics.eslint_d.with {
+    diagnostics.eslint_d,
+    --[[ .with {
       diagnostics_format = "[eslint] #{m}\n(#{c})",
-    },
+    }, ]]
     codeactions.gitsigns,
   },
   on_attach = lsp_format,
