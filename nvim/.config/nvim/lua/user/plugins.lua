@@ -9,7 +9,6 @@
 -- TODO: esensar/nvim-dev-container
 -- TODO: hkupty/iron.nvim
 -- TODO: sidebar-nvim/sidebar.nvim
--- TODO: rcarriga/nvim-notify
 -- TODO: bennypowers/nvim-regexplainer
 -- TODO: nvim-pack/nvim-spectre
 -- TODO: ray-x/navigator.lua
@@ -231,6 +230,12 @@ local plugins = {
     "stevearc/dressing.nvim",
     config = function()
       require "user.dressing"
+    end,
+  },
+  {
+    "rcarriga/nvim-notify",
+    config = function()
+      require "user.notify"
     end,
   },
 }
