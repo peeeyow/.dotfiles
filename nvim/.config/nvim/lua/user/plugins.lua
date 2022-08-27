@@ -74,12 +74,16 @@ local plugins = {
       require "user.illuminate"
     end,
   },
-  {
-    "jose-elias-alvarez/typescript.nvim",
-  },
+  "jose-elias-alvarez/typescript.nvim",
   {
     "SmiteshP/nvim-navic",
     requires = "neovim/nvim-lspconfig",
+  },
+  {
+    "MunifTanjim/prettier.nvim",
+    config = function()
+      require "user.prettier"
+    end,
   },
   --[[ {
     "weilbith/nvim-code-action-menu",
