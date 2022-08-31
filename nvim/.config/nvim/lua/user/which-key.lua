@@ -66,8 +66,9 @@ local normal = {
     nowait = true,
   },
   mappings = {
-    ["<C-/>"] = { [[<CMD>lua require("Comment.api").call("toggle_current_linewise_op")<CR>g@$]], "Line Comment" },
-    ["<C-_>"] = { [[<CMD>lua require("Comment.api").call("toggle_current_linewise_op")<CR>g@$]], "Line Comment" },
+    ["<C-/>"] = { "Line Comment" },
+    ["<C-_>"] = { "Line Comment" },
+    ["<C-\\>"] = { "block comment" },
     ["<C-Left"] = { "Resize Left" },
     ["<C-Down"] = { "Resize Down" },
     ["<C-Up"] = { "Resize Up" },
@@ -99,14 +100,9 @@ local visual = {
     nowait = true,
   },
   mappings = {
-    ["<C-/>"] = {
-      [[<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>]],
-      "Line Comment",
-    },
-    ["<C-_>"] = {
-      [[<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>]],
-      "Line Comment",
-    },
+    ["<C-_>"] = { "Line Comment" },
+    ["<C-/>"] = { "Line Comment" },
+    ["<C-\\>"] = { "Block Comment" },
   },
 }
 

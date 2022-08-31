@@ -19,6 +19,7 @@
 -- TODO: kevinhwang91/nvim-ufo
 -- TODO: Maan2003/lsp_lines.nvim
 -- TODO: AckslD/nvim-FeMaco.lua
+-- TODO: lvimuser/lsp-inlayhints.nvim
 local plugins = {
   "wbthomason/packer.nvim",
   "nvim-lua/popup.nvim",
