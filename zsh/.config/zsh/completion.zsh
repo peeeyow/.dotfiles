@@ -1,4 +1,3 @@
-fpath+="$ZDOTDIR/plugins/zsh-completions/src"
 fpath+="$ZDOTDIR/completions"
 
 autoload -Uz compinit; compinit
