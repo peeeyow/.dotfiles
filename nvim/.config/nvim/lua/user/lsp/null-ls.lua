@@ -35,6 +35,7 @@ null_ls.setup {
       diagnostics_format = default_diagnostic_format,
     },
     codeactions.gitsigns,
+    codeactions.eslint_d,
   },
   on_attach = lsp_format,
 }
