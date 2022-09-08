@@ -20,21 +20,20 @@ end
 local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
 local codeactions = null_ls.builtins.code_actions
+local default_diagnostic_format = "#{m}\n(#{c})"
 
 null_ls.setup {
   debug = false,
   sources = {
-    -- formatting.prettier.with {
-    --   prefer_local = "node_modules/.bin",
-    -- },
     formatting.prettierd,
     formatting.black,
     formatting.stylua,
-    diagnostics.flake8,
-    diagnostics.eslint_d,
-    --[[ .with {
-      diagnostics_format = "[eslint] #{m}\n(#{c})",
-    }, ]]
+    diagnostics.flake8.with {
+      diagnostics_format = default_diagnostic_format,
+    },
+    diagnostics.eslint_d.with {
+      diagnostics_format = default_diagnostic_format,
+    },
     codeactions.gitsigns,
   },
   on_attach = lsp_format,
