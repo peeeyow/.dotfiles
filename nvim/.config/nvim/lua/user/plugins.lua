@@ -5,6 +5,7 @@
 -- TODO: nvim-treesitter-textobjects
 -- TODO: sindrets/diffview.nvim
 -- TODO: kylechui/nvim-surround
+-- TODO: nvim-treesitter/nvim-treesitter-context
 -- TODO: nvim-neotest/neotest
 -- TODO: esensar/nvim-dev-container
 -- TODO: hkupty/iron.nvim
