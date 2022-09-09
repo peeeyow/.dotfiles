@@ -42,6 +42,8 @@ local options = {
     vertright = "┣",
     verthoriz = "╋",
   },
+  spelloptions = "camel",
+  spell = true,
 }
 
 for option, value in pairs(options) do
