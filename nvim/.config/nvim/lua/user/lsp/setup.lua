@@ -20,9 +20,7 @@ local luadev_status_okay, luadev = pcall(require, "lua-dev")
 if not luadev_status_okay then
   return
 end
-sumneko_opts = luadev.setup {
-  lspconfig = sumneko_opts,
-}
+luadev.setup {}
 
 local pyright_opts = require "user.lsp.settings.pyright"
 pyright_opts = vim.tbl_deep_extend("keep", pyright_opts, opts)
