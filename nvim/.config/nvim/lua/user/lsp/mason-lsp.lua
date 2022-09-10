@@ -6,10 +6,10 @@ end
 
 mason_lsp.setup {
   ensure_installed = {
-    "eslint",
     "bashls",
     "cssls",
     "emmet_ls",
+    "graphql",
     "html",
     "jsonls",
     "pyright",
