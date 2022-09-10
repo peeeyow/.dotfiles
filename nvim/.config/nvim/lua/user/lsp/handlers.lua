@@ -52,6 +52,8 @@ local function lsp_highlight_document(client)
   illuminate.on_attach(client)
 end
 
+M.lsp_highlight_document = lsp_highlight_document
+
 local function lsp_navic(client, bufnr)
   local status_ok, navic = pcall(require, "nvim-navic")
   if not status_ok then
@@ -59,6 +61,8 @@ local function lsp_navic(client, bufnr)
   end
   navic.attach(client, bufnr)
 end
+
+M.lsp_navic = lsp_navic
 
 local function lsp_keymaps(bufnr)
   local opts = { noremap = true, silent = true }
@@ -76,6 +80,8 @@ local function lsp_keymaps(bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
 end
+
+M.lsp_keymaps = lsp_keymaps
 
 local disabled_servers = { "html", "cssls", "eslint", "jsonls", "tsserver" }
 

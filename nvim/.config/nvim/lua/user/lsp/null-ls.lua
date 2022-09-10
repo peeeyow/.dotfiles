@@ -3,6 +3,8 @@ if not null_ls_status_ok then
   return
 end
 
+local lsp_handlers = require "user.lsp.handlers"
+
 local augroup = vim.api.nvim_create_augroup("NullLspFormatting", {})
 local function lsp_format(client, bufnr)
   if client.supports_method "textDocument/formatting" then
@@ -15,6 +17,11 @@ local function lsp_format(client, bufnr)
       end,
     })
   end
+end
+
+local on_attach = function(client, bufnr)
+  lsp_handlers.lsp_keymaps(bufnr)
+  lsp_format(client, bufnr)
 end
 
 local formatting = null_ls.builtins.formatting
@@ -37,5 +44,5 @@ null_ls.setup {
     codeactions.gitsigns,
     codeactions.eslint_d,
   },
-  on_attach = lsp_format,
+  on_attach = on_attach,
 }
