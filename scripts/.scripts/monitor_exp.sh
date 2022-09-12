@@ -26,12 +26,12 @@ xrandr --fb 6560x2560 --output $builtin_screen --mode 2560x1440 --rate 165.00 --
 # fb_h = max 1920 (vertical 1080p @ 1.33334 scale), 1080 (Horizontal 1080p @ 1.333334)
 #      = 1920
 xrandr --fb 3000x1920\
-  --output $external_secondary --mode 1920x1080 --rate 75.00 --rotation left --pos 0x0\
-  --output $external_primary --primary --mode 1920x1080 --rate 144.00 --pos 1080x420
+  --output $external_secondary --mode 1920x1080 --rate 75.00 --rotation left --scale 1.33334 --pos 0x0\
+  --output $external_primary --primary --mode 1920x1080 --rate 144.00 --scale 1.33334 --pos 1080x420
 # lower dpi for lower zoom
-xrdb << EOF
-Xft.dpi: 100
-EOF
+# xrdb << EOF
+# Xft.dpi: 100
+# EOF
 
 
 
