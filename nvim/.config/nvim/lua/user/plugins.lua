@@ -102,8 +102,8 @@ local plugins = {
   -- Colorschemes
   "folke/tokyonight.nvim",
   "lunarvim/darkplus.nvim",
-  "joshdick/onedark.vim",
   "LunarVim/onedarker.nvim",
+  "navarasu/onedark.nvim",
 
   "kyazdani42/nvim-web-devicons",
   {

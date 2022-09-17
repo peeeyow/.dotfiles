@@ -1,5 +1,7 @@
-require "user.tokyonight"
-local colorscheme = "tokyonight"
+-- require "user.tokyonight"
+-- local colorscheme = "tokyonight"
+require "user.onedark"
+local colorscheme = "onedark"
 
 vim.cmd [[
   " gray
