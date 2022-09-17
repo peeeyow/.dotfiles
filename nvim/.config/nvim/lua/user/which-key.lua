@@ -241,7 +241,7 @@ local n_leader = {
     },
     ["t"] = {
       name = "Trouble",
-      ["r"] = { "<cmd>Trouble<cr>", "Open Trouble" },
+      ["r"] = { "<cmd>TroubleToggle<cr>", "Toggle Trouble" },
       ["w"] = { "<cmd>Trouble workspace_diagnostics<cr>", "Open Trouble Workspace Diagnostics" },
       ["d"] = { "<cmd>Trouble document_diagnostics<cr>", "Open Trouble Document Diagnostics" },
       ["t"] = { "<cmd>Trouble todo<cr>", "Open todo Trouble" },
