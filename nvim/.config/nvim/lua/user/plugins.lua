@@ -2,9 +2,7 @@
 -- TODO: weilbith/nvim-code-action-menu
 -- TODO: dap plugins
 -- TODO: ahmedkhalf/project.nvim
--- TODO: nvim-treesitter-textobjects
 -- TODO: sindrets/diffview.nvim
--- TODO: kylechui/nvim-surround
 -- TODO: nvim-treesitter/nvim-treesitter-context
 -- TODO: nvim-neotest/neotest
 -- TODO: esensar/nvim-dev-container
@@ -16,7 +14,6 @@
 -- TODO: TimUntersberger/neogit
 -- TODO: simrat39/symbols-outline.nvim
 -- TODO: glepnir/lspsaga.nvim
--- TODO: ahmedkhalf/project.nvim
 -- TODO: kevinhwang91/nvim-ufo
 -- TODO: Maan2003/lsp_lines.nvim
 -- TODO: AckslD/nvim-FeMaco.lua
@@ -135,6 +132,13 @@ local plugins = {
   "nvim-treesitter/playground",
   "windwp/nvim-ts-autotag",
   "nvim-treesitter/nvim-treesitter-textobjects",
+
+  {
+    "kylechui/nvim-surround",
+    config = function()
+      require "user.nvim-surround"
+    end,
+  },
 
   {
     "numToStr/Comment.nvim",
