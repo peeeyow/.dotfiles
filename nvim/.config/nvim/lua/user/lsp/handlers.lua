@@ -59,6 +59,13 @@ local function lsp_navic(client, bufnr)
   if not status_ok then
     return
   end
+  local no_document_symbols = {
+    "tailwindcss",
+    "emmet_ls",
+  }
+  if vim.tbl_contains(no_document_symbols, client.name) then
+    return
+  end
   navic.attach(client, bufnr)
 end
 
@@ -82,29 +89,12 @@ local function lsp_keymaps(bufnr)
 end
 
 M.lsp_keymaps = lsp_keymaps
-
-local disabled_servers = { "html", "cssls", "eslint", "jsonls", "tsserver" }
-
-local lsp_formatting = function(bufnr)
-  vim.lsp.buf.format {
-    filter = function(client)
-      for _, server in ipairs(disabled_servers) do
-        if client.name == server then
-          return false
-        end
-      end
-      return true
-    end,
-    bufnr = bufnr,
-  }
-end
-
 local function lsp_format(client, bufnr)
-  for _, server in ipairs(disabled_servers) do
-    if client.name == server then
-      return
-    end
+  local disabled_servers = { "html", "cssls", "eslint", "jsonls", "tsserver" }
+  if vim.tbl_contains(disabled_servers, client.name) then
+    return
   end
+
   if not client.supports_method "textDocument/formatting" then
     return
   end
@@ -114,7 +104,9 @@ local function lsp_format(client, bufnr)
     group = augroup,
     buffer = bufnr,
     callback = function()
-      lsp_formatting(bufnr)
+      vim.lsp.buf.format {
+        bufnr = bufnr,
+      }
     end,
   })
 end
