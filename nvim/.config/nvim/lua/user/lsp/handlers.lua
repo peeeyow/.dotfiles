@@ -62,6 +62,7 @@ local function lsp_navic(client, bufnr)
   local no_document_symbols = {
     "tailwindcss",
     "emmet_ls",
+    "graphql",
   }
   if vim.tbl_contains(no_document_symbols, client.name) then
     return
