@@ -27,4 +27,9 @@ null_ls.setup {
     codeactions.gitsigns,
     codeactions.eslint_d,
   },
+  on_attach = function(client, bufnr)
+    local handlers = require "user.lsp.handlers"
+    handlers.lsp_format(client, bufnr)
+    handlers.lsp_keymaps(bufnr)
+  end,
 }
