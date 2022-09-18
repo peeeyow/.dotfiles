@@ -2,8 +2,12 @@
 
 ### variables
 # monitors
-set $primary "HDMI-0"
-set $secondary "eDP-1-1"
+# 1080p 144hz
+set $external_primary "DP-0"
+# 1080p 75hz
+set $external_secondary "HDMI-0"
+# 2560x1440 165hz
+set $builtin_screen "eDP-1-1"
 
 # modifier keys - windows key
 set $mod Mod4
@@ -147,13 +151,16 @@ bindsym $mod+Shift+9 move container to workspace $ws9, workspace $ws9, focus
 bindsym $mod+Shift+0 move container to workspace $ws0, workspace $ws0, focus
 
 ### focus montors
-bindsym $mod+Control+p focus output primary
-bindsym $mod+Control+s focus output $secondary
-bindsym $mod+Control+Tab focus output left
+bindsym $mod+Control+p focus output $external_primary
+bindsym $mod+Control+s focus output $external_secondary
+bindsym $mod+Control+b focus output $builtin_screen
+bindsym $mod+Control+Tab focus output right
+bindsym $mod+Control+shift+Tab focus output left
 
 ### Move workspaces betweeen monitors
-bindsym $mod+shift+Control+p move workspace to output primary
-bindsym $mod+shift+Control+s move workspace to output $secondary
+bindsym $mod+shift+Control+p move workspace to output $external_primary
+bindsym $mod+shift+Control+s move workspace to output $external_secondary
+bindsym $mod+shift+Control+b move workspace to output $builtin_screen
 
 bindsym $mod+shift+s exec $HOME/.scripts/rofi_monitor_menu.sh
 
@@ -308,7 +315,10 @@ for_window [instance="update_installer"] floating enable
 ### urgent workspace (triggered by mako)
 focus_on_window_activation focus
 
-exec --no-startup-id xrandr --output $secondary --primary --mode 2560x1440 --rate 60.00 --output $primary --off
+exec --no-startup-id xrandr --output $builtin_screen --primary --mode 2560x1440 --rate 165.00\
+    --output $external_primary --off\
+    --output $external_secondary --off
+
 
 
 
