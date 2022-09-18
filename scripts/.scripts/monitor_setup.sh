@@ -34,30 +34,47 @@ if [ $mode == "dual_external" ]; then
     --output $external_primary --primary --mode 1920x1080 --rate 144.00 --scale 1.33334 --pos 1440x560\
     --output $builtin_screen --off
 
+  feh --bg-fill ~/.background_images/minimalist_nord_arctic.png ~/.background_images/fedora_nord.png
+
 elif [ $mode == "dual_with_horizontal" ]; then
   xrandr --output $builtin_screen --mode 2560x1440 --rate 165.00\
     --output $external_primary --primary --mode 1920x1080 --rate 144.00 --scale 1.33334 --right-of $builtin_screen\
     --output $external_secondary --off
+
+  feh --bg-fill ~/.background_images/minimalist_nord_arctic.png
+
 elif [ $mode == "dual_with_vertical" ]; then
   xrandr --fb 4000x2560\
     --output $builtin_screen --primary --mode 2560x1440 --rate 165.00 --pos 0x0\
     --output $external_secondary --mode 1920x1080 --rate 75.00 --rotation left --scale 1.33334 --pos 2560x-560\
     --output $external_primary --off
+
+  feh --bg-fill ~/.background_images/minimalist_nord_arctic.png ~/.background_images/fedora_nord.png
+
 elif [ $mode == "triple_full" ]; then
   xrandr --fb 6560x2560 --output $builtin_screen --mode 2560x1440 --rate 165.00 --pos 0x0\
     --output $external_secondary --mode 1920x1080 --rate 75.00 --rotation left --scale 1.33334 --pos 2560x-560\
     --output $external_primary --primary --mode 1920x1080 --rate 144.00 --scale 1.33334 --pos 4000x0
+
+  feh --bg-fill ~/.background_images/minimalist_nord_arctic.png ~/.background_images/fedora_nord.png ~/.background_images/minimalist_nord_arctic.png
+
 elif [ $mode == "single_external" ]; then
   xrandr --output $external_primary --primary --mode 1920x1080 --rate 144.00 --scale 1.33334\
     --output $external_secondary --off\
     --output $builtin_screen --off
+
+  feh --bg-fill ~/.background_images/minimalist_nord_arctic.png
+
 elif [ $mode == "single_builtin" ]; then
   xrandr --output $builtin_screen --primary --mode 2560x1440 --rate 165.00\
     --output $external_primary --off\
     --output $external_secondary --off
+  
+  feh --bg-fill ~/.background_images/minimalist_nord_arctic.png
+
 else
   echo 'Error: mode
-  modes:
+  modes
     - dual_external
     - dual_with_vertical
     - dual_with_horizontal
@@ -68,13 +85,11 @@ else
   exit 1
 fi
 
+# wait for monitors to load before applying polybar
+sleep 2
 
-# if [ $mode == "external" ]; then
-#   xrandr --output $primary --primary --mode 1920x1080 --rate 144.00 --scale 1.33334 --output $secondary --off
-# elif [ $mode == "builtin" ]; then
-#   xrandr --output $secondary --primary --mode 2560x1440 --rate 60.00 --output $primary --off
-# elif [ $mode == "dual" ]; then
-#   xrandr --output $secondary --mode 2560x1440 --rate 60.00 --output $primary --primary --mode 1920x1080 --rate 144.00 --panning 2560x1440+2560+0 --scale 1.3334 --right-of $secondary
+polybar.sh
+
 
 exit 0
 
