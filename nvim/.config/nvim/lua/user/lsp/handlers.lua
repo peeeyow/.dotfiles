@@ -91,11 +91,6 @@ end
 
 M.lsp_keymaps = lsp_keymaps
 local function lsp_format(client, bufnr)
-  local disabled_servers = { "html", "cssls", "eslint", "jsonls", "tsserver" }
-  if vim.tbl_contains(disabled_servers, client.name) then
-    return
-  end
-
   if not client.supports_method "textDocument/formatting" then
     return
   end
@@ -105,8 +100,12 @@ local function lsp_format(client, bufnr)
     group = augroup,
     buffer = bufnr,
     callback = function()
+      local disabled_formatters = { "html", "cssls", "eslint", "jsonls", "tsserver" }
       vim.lsp.buf.format {
         bufnr = bufnr,
+        filter = function(client)
+          return not vim.tbl_contains(disabled_formatters, client.name)
+        end,
       }
     end,
   })
