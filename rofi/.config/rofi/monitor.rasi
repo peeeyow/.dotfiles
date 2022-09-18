@@ -53,7 +53,7 @@ entry {
 }
 
 listview {
-	lines: 3;
+	lines: 6;
 }
 
 element {

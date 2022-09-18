@@ -2,7 +2,7 @@
 
 options="Dual_External\nDual_with_Vertical\nDual_with_Horizontal\nTriple_Full\nSingle_External\nSingle_Builtin"
 
-chosen=$(printf $options | rofi -dmenu -i -theme-str '@import "power.rasi"')
+chosen=$(printf $options | rofi -dmenu -i -theme-str '@import "monitor.rasi"')
 
 case "$chosen" in
   "Dual_External")        monitor_setup.sh dual_external ;;
