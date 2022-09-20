@@ -89,12 +89,13 @@ local function lsp_keymaps(bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
 end
 
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
 M.lsp_keymaps = lsp_keymaps
 local function lsp_format(client, bufnr)
   if not client.supports_method "textDocument/formatting" then
     return
   end
-  local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
   vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
   vim.api.nvim_create_autocmd("BufWritePre", {
     group = augroup,
@@ -103,8 +104,8 @@ local function lsp_format(client, bufnr)
       local disabled_formatters = { "html", "cssls", "eslint", "jsonls", "tsserver" }
       vim.lsp.buf.format {
         bufnr = bufnr,
-        filter = function(client)
-          return not vim.tbl_contains(disabled_formatters, client.name)
+        filter = function(client_)
+          return not vim.tbl_contains(disabled_formatters, client_.name)
         end,
       }
     end,
