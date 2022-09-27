@@ -14,3 +14,8 @@ git clone https://github.com/tmux-plugins/tpm.git ~/.config/tmux/plugins/tpm
 
 # setup spanish like compose
 sudo localectl set-x11-keymap us pc105+inet altgr-intl
+
+# pldt sucks
+nmcli conn modify "<connection-name>" ipv4.ignore-auto-dns yes
+nmcli conn modify "<connection-name>" ipv4.dns "8.8.8.8 8.8.4.4"
+systemctl restart NetworkManager
