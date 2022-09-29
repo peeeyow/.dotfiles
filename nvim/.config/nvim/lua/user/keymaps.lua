@@ -20,6 +20,15 @@ map("", "<C-Down>", ":resize +2<CR>", opts)
 map("", "<C-Left>", ":vertical resize -2<CR>", opts)
 map("", "<C-Right>", ":vertical resize +2<CR>", opts)
 
+-- Normal Mode --
+-- center line when navigating
+map("n", "<C-d>", "<C-d>zz", opts)
+map("n", "<C-u>", "<C-u>zz", opts)
+map("n", "n", "nzzzv", opts)
+map("n", "N", "Nzzzv", opts)
+-- bring back cursor to original when joining line
+map("n", "J", "mzJ`z", opts)
+
 -- Visual Select Mode --
 -- better indentation
 map("v", "<", "<gv", opts)
