@@ -1,23 +1,3 @@
--- TODO: ggandor/lightspeed.nvim
--- TODO: weilbith/nvim-code-action-menu
--- TODO: dap plugins
--- TODO: ahmedkhalf/project.nvim
--- TODO: sindrets/diffview.nvim
--- TODO: nvim-treesitter/nvim-treesitter-context
--- TODO: nvim-neotest/neotest
--- TODO: esensar/nvim-dev-container
--- TODO: hkupty/iron.nvim
--- TODO: sidebar-nvim/sidebar.nvim
--- TODO: bennypowers/nvim-regexplainer
--- TODO: nvim-pack/nvim-spectre
--- TODO: ray-x/navigator.lua
--- TODO: TimUntersberger/neogit
--- TODO: simrat39/symbols-outline.nvim
--- TODO: glepnir/lspsaga.nvim
--- TODO: kevinhwang91/nvim-ufo
--- TODO: Maan2003/lsp_lines.nvim
--- TODO: AckslD/nvim-FeMaco.lua
--- TODO: lvimuser/lsp-inlayhints.nvim
 local plugins = {
   "wbthomason/packer.nvim",
   "nvim-lua/popup.nvim",
