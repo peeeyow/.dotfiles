@@ -7,6 +7,9 @@ noice.setup {
   notify = {
     enabled = true,
   },
+  messages = {
+    enabled = false,
+  },
   routes = {
     {
       view = "notify",
