@@ -210,15 +210,19 @@ local plugins = {
   },
 
   {
+    "folke/noice.nvim",
+    config = function()
+      require "user.noice"
+    end,
+    requires = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
+  },
+  {
     "stevearc/dressing.nvim",
     config = function()
       require "user.dressing"
-    end,
-  },
-  {
-    "rcarriga/nvim-notify",
-    config = function()
-      require "user.notify"
     end,
   },
 }

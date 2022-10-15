@@ -238,6 +238,7 @@ local n_leader = {
       ["m"] = { "<cmd>Telescope media_files<cr>", "Media Files" },
       ["d"] = { "<cmd>Telescope diagnostics bufnr=0<cr>", "Document Diagnostics" },
       ["w"] = { "<cmd>Telescope diagnostics<cr>", "Workspace Diagnostics" },
+      ["n"] = { "<cmd>Telescope Noice<cr>", "Noice" },
     },
     ["t"] = {
       name = "Trouble",

@@ -1,6 +1,7 @@
 # To Do
 
 ## Plugins to check
+
 - ggandor/lightspeed.nvim
 - weilbith/nvim-code-action-menu
 - dap plugins
@@ -21,10 +22,10 @@
 - Maan2003/lsp_lines.nvim
 - AckslD/nvim-FeMaco.lua
 - lvimuser/lsp-inlayhints.nvim
-- folke/noice.nvim
 - neorg
 - uga-rosa/ccc.nvim
 
 ## neovim 0.9.0
+
 - splitkeep
 - spell / spellsitter
