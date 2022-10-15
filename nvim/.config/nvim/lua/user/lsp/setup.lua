@@ -16,7 +16,7 @@ jsonls_opts = vim.tbl_deep_extend("keep", jsonls_opts, opts)
 
 local sumneko_opts = require "user.lsp.settings.sumneko_lua"
 sumneko_opts = vim.tbl_deep_extend("keep", sumneko_opts, opts)
-local luadev_status_okay, luadev = pcall(require, "lua-dev")
+local luadev_status_okay, luadev = pcall(require, "neodev")
 if not luadev_status_okay then
   return
 end
