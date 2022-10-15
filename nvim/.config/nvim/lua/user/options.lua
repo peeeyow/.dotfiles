@@ -53,18 +53,18 @@ end
 -- wrap lines movement (move back/forward oneline using h/l)
 vim.opt.whichwrap:append "<>[]hl"
 
--- remember folding
-vim.opt.viewoptions:remove "options"
-vim.api.nvim_exec(
-  [[
-  augroup remember_folds
-      autocmd!
-      autocmd BufWinLeave *.* if &ft !=# 'help' | mkview | endif
-      autocmd BufWinEnter *.* if &ft !=# 'help' | silent! loadview | endif
-  augroup END
-]],
-  false
-)
+-- -- remember folding
+-- vim.opt.viewoptions:remove "options"
+-- vim.api.nvim_exec(
+--   [[
+--   augroup remember_folds
+--       autocmd!
+--       autocmd BufWinLeave *.* if &ft !=# 'help' | mkview | endif
+--       autocmd BufWinEnter *.* if &ft !=# 'help' | silent! loadview | endif
+--   augroup END
+-- ]],
+--   false
+-- )
 
 vim.opt.shortmess:append "c"
 vim.opt.nrformats:append { "alpha", "octal", "hex" }
