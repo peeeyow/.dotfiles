@@ -8,39 +8,15 @@ if not snip_status_ok then
   return
 end
 
+local lspkind_status_ok, lspkind = pcall(require, "lspkind")
+if not lspkind_status_ok then
+  return
+end
+
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
 end
-
---   פּ ﯟ   some other good icons
-local kind_icons = {
-  Text = "  ",
-  Method = "  ",
-  Function = "  ",
-  Constructor = "  ",
-  Field = "  ",
-  Variable = "  ",
-  Class = "  ",
-  Interface = "  ",
-  Module = "  ",
-  Property = "  ",
-  Unit = "  ",
-  Value = "  ",
-  Enum = "  ",
-  Keyword = "  ",
-  Snippet = "  ",
-  Color = "  ",
-  File = "  ",
-  Reference = "  ",
-  Folder = "  ",
-  EnumMember = "  ",
-  Constant = "  ",
-  Struct = "  ",
-  Event = "  ",
-  Operator = "  ",
-  TypeParameter = "  ",
-}
 
 local source_names = {
   nvim_lsp = "(LSP)",
@@ -95,12 +71,16 @@ cmp.setup {
   },
   formatting = {
     fields = { "kind", "abbr", "menu" },
-    format = function(entry, vim_item)
-      -- This concatonates the icons with the name of the item kind
-      vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
-      vim_item.menu = source_names[entry.source.name]
-      return vim_item
-    end,
+    format = lspkind.cmp_format {
+      mode = "symbol_text",
+      maxwidth = 40,
+      ellipsis_char = "...",
+      before = function(entry, vim_item)
+        vim_item.kind = string.format("%s", vim_item.kind)
+        vim_item.menu = source_names[entry.source.name]
+        return vim_item
+      end,
+    },
   },
   sources = {
     { name = "npm" },

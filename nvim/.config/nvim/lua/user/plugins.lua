@@ -209,6 +209,7 @@ local plugins = {
     end,
   },
 
+  "onsails/lspkind.nvim",
   {
     "folke/noice.nvim",
     config = function()
