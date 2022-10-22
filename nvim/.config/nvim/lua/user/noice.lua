@@ -10,6 +10,9 @@ noice.setup {
   messages = {
     enabled = false,
   },
+  lsp_progress = {
+    enabled = false,
+  },
   views = {
     cmdline_popup = {
       position = {
