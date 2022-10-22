@@ -12,18 +12,22 @@ null_ls.setup {
   debug = false,
   sources = {
     formatting.black,
+    formatting.djlint.with {
+      extra_args = { "--indent", "2" },
+    },
     formatting.isort,
     formatting.prettierd,
     formatting.stylua,
+    diagnostics.djlint,
     diagnostics.eslint_d.with {
       diagnostics_format = default_diagnostic_format,
     },
     diagnostics.flake8.with {
       diagnostics_format = default_diagnostic_format,
     },
-    diagnostics.mypy.with {
-      diagnostics_format = default_diagnostic_format,
-    },
+    -- diagnostics.mypy.with {
+    --   diagnostics_format = default_diagnostic_format,
+    -- },
     codeactions.gitsigns,
     codeactions.eslint_d,
   },
