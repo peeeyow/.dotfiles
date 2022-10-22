@@ -16,3 +16,17 @@ au("BufEnter", {
     vim.opt_local.formatoptions:remove { "c", "r", "o" }
   end,
 })
+
+au("ModeChanged", {
+  group = aug("exit_luasnip_on_mode_change", { clear = true }),
+  desc = "Avoids weird jumping fiasco of luasnip",
+  callback = function()
+    if
+      ((vim.v.event.old_mode == "s" and vim.v.event.new_mode == "n") or vim.v.event.old_mode == "i")
+      and require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
+      and not require("luasnip").session.jump_active
+    then
+      require("luasnip").unlink_current()
+    end
+  end,
+})
