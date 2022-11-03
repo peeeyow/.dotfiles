@@ -6,4 +6,7 @@ end
 onedark.setup {
   style = "darker",
   transparent = false,
+  highlights = {
+    rainbowcol1 = { fg = "#abb2bf" },
+  },
 }
