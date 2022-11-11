@@ -10,8 +10,16 @@ noice.setup {
   messages = {
     enabled = false,
   },
-  lsp_progress = {
-    enabled = false,
+  lsp = {
+    progress = {
+      enabled = false,
+    },
+    hover = {
+      enabled = false,
+    },
+    signature = {
+      enabled = false,
+    },
   },
   views = {
     cmdline_popup = {
