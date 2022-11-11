@@ -40,6 +40,7 @@ local servers = {
   emmet_ls = opts,
   tailwindcss = opts,
   graphql = opts,
+  prismals = opts,
 }
 
 tsserver.setup {
