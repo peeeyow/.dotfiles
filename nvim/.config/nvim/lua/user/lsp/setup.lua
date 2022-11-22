@@ -41,6 +41,7 @@ local servers = {
   tailwindcss = opts,
   graphql = opts,
   prismals = opts,
+  dockerls = opts,
 }
 
 tsserver.setup {
