@@ -3,12 +3,14 @@ if not status_ok then
   return
 end
 
+local format = require("user.lsp.handlers").format
+
 which_key.setup {
   plugins = {
     marks = true,
     registers = true,
     spelling = {
-      enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+      enabled = true,
       suggestions = 20,
     },
     presets = {
@@ -203,7 +205,12 @@ local n_leader = {
     ["l"] = {
       name = "LSP",
       ["a"] = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-      ["f"] = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format" },
+      ["f"] = {
+        function()
+          format(0)
+        end,
+        "Format",
+      },
       ["i"] = { "<cmd>LspInfo<cr>", "Info" },
       ["I"] = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
       ["j"] = { "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", "Next Diagnostic" },

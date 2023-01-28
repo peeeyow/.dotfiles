@@ -1,5 +1,7 @@
 local M = {}
 
+local disabled_formatters = { "html", "cssls", "eslint", "jsonls", "tsserver" }
+
 M.setup = function()
   local signs = {
     { name = "DiagnosticSignError", text = "" },
@@ -79,10 +81,7 @@ local function lsp_keymaps(bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gl", '<cmd>lua vim.diagnostic.open_float({ border = "rounded" })<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
@@ -91,23 +90,31 @@ end
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
+M.format = function(bufnr)
+  vim.lsp.buf.format {
+    bufnr = bufnr,
+    filter = function(client)
+      return not vim.tbl_contains(disabled_formatters, client.name)
+    end,
+  }
+end
+
 M.lsp_keymaps = lsp_keymaps
 local function lsp_format(client, bufnr)
   if not client.supports_method "textDocument/formatting" then
     return
   end
+
+  if vim.tbl_contains(disabled_formatters, client.name) then
+    return
+  end
+
   vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
   vim.api.nvim_create_autocmd("BufWritePre", {
     group = augroup,
     buffer = bufnr,
     callback = function()
-      local disabled_formatters = { "html", "cssls", "eslint", "jsonls", "tsserver" }
-      vim.lsp.buf.format {
-        bufnr = bufnr,
-        filter = function(client_)
-          return not vim.tbl_contains(disabled_formatters, client_.name)
-        end,
-      }
+      M.format(bufnr)
     end,
   })
 end
