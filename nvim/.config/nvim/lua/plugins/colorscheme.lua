@@ -10,8 +10,10 @@ return {
         rainbowcol1 = { fg = "#abb2bf" },
       },
     },
-    config = function()
-      vim.cmd [[colorscheme onedark]]
+    config = function(_, opts)
+      local onedark = require "onedark"
+      onedark.setup(opts)
+      require("onedark").load()
     end,
   },
 }
