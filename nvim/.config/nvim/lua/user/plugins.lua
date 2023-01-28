@@ -228,51 +228,76 @@ local plugins = {
   },
 }
 local fn = vim.fn
+local opt = vim.opt
 
--- Automatically install packer
-local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-  PACKER_BOOTSTRAP = fn.system {
+-- #############################################
+
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system {
     "git",
     "clone",
-    "--depth",
-    "1",
-    "https://github.com/wbthomason/packer.nvim",
-    install_path,
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
   }
-  print "Installing packer close and reopen Neovim..."
-  vim.cmd [[packadd packer.nvim]]
 end
+vim.opt.rtp:prepend(lazypath)
 
--- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.cmd [[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]]
-
-local packer_status_ok, packer = pcall(require, "packer")
-if not packer_status_ok then
+local lazy_status_ok, lazy = pcall(require, "lazy")
+if not lazy_status_ok then
   return
 end
 
--- Have packer use a popup window
-packer.init {
-  display = {
-    open_fn = function()
-      return require("packer.util").float { border = "rounded" }
-    end,
-  },
-}
+lazy.setup(plugins)
 
-return packer.startup {
-  function(use)
-    for _, plugin in ipairs(plugins) do
-      use(plugin)
-    end
-    if PACKER_BOOTSTRAP then
-      require("packer").sync()
-    end
-  end,
-}
+-- #############################################
+
+-- -- Automatically install packer
+-- local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+-- if fn.empty(fn.glob(install_path)) > 0 then
+--   PACKER_BOOTSTRAP = fn.system {
+--     "git",
+--     "clone",
+--     "--depth",
+--     "1",
+--     "https://github.com/wbthomason/packer.nvim",
+--     install_path,
+--   }
+--   print "Installing packer close and reopen Neovim..."
+--   vim.cmd [[packadd packer.nvim]]
+-- end
+
+-- -- Autocommand that reloads neovim whenever you save the plugins.lua file
+-- -- vim.cmd [[
+-- --   augroup packer_user_config
+-- --     autocmd!
+-- --     autocmd BufWritePost plugins.lua source <afile> | PackerSync
+-- --   augroup end
+-- -- ]]
+
+-- local packer_status_ok, packer = pcall(require, "packer")
+-- if not packer_status_ok then
+--   return
+-- end
+
+-- -- Have packer use a popup window
+-- packer.init {
+--   display = {
+--     open_fn = function()
+--       return require("packer.util").float { border = "rounded" }
+--     end,
+--   },
+-- }
+
+-- return packer.startup {
+--   function(use)
+--     for _, plugin in ipairs(plugins) do
+--       use(plugin)
+--     end
+--     if PACKER_BOOTSTRAP then
+--       require("packer").sync()
+--     end
+--   end,
+-- }
