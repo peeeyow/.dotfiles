@@ -4,7 +4,7 @@ return {
   {
     "kyazdani42/nvim-tree.lua",
     keys = {
-      { "<leader>e", "<cmd>:NvimTreeToggle<cr>" },
+      { "<leader>e", "<cmd>NvimTreeToggle<cr>" },
     },
     opts = {
       auto_reload_on_write = true,

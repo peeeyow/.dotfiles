@@ -3,9 +3,7 @@ local merge = function(...)
   return vim.tbl_deep_extend("force", ...)
 end
 local describe_keymap = function(desc)
-  local z = merge(opts, { desc = desc })
-  print(vim.inspect(z))
-  return z
+  return merge(opts, { desc = desc })
 end
 local map = vim.keymap.set
 
