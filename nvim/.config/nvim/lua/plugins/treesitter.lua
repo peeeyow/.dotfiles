@@ -83,6 +83,7 @@ return {
       "nvim-treesitter/playground",
       "windwp/nvim-ts-autotag",
       "nvim-treesitter/nvim-treesitter-textobjects",
+      "JoosepAlviste/nvim-ts-context-commentstring",
     },
     opts = {
       ensure_installed = "all",
@@ -110,6 +111,9 @@ return {
       context_commentstring = {
         enable = true,
         enable_autocmd = false,
+        config = {
+          python = { __default = "# %s", __multiline = [[""" %s """]] },
+        },
       },
       textobjects = textobjects,
     },
