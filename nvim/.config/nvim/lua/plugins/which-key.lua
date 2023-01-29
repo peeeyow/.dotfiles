@@ -17,7 +17,7 @@
 --       "Find files",
 --     },
 --     ["F"] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
---     ["P"] = { "<cmd>lua require'telescope'.extensions.project.project{}<cr>", "Projects" },
+--     ["p"] = { "<cmd>lua require'telescope'.extensions.project.project{}<cr>", "Projects" },
 -- ["L"] = { "<cmd>Lazy<cr>" , "Lazy"}
 --     ["s"] = {
 --       name = "Search",
@@ -43,13 +43,6 @@
 --       ["w"] = { "<cmd>Trouble workspace_diagnostics<cr>", "Open Trouble Workspace Diagnostics" },
 --       ["d"] = { "<cmd>Trouble document_diagnostics<cr>", "Open Trouble Document Diagnostics" },
 --       ["t"] = { "<cmd>Trouble todo<cr>", "Open todo Trouble" },
---     },
---     ["x"] = {
---       name = "Treesitter Objects Swap",
---       ["p"] = { "Swap current Parameter with next" },
---       ["P"] = { "Swap current Parameter with previous" },
---       ["a"] = { "Swap current Attribute with previous" },
---       ["A"] = { "Swap current Attribute with previous" },
 --     },
 --   },
 -- }

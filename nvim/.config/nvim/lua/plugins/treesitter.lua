@@ -35,12 +35,12 @@ local textobjects = {
   swap = {
     enable = true,
     swap_next = {
-      ["<leader>xp"] = { query = "@parameter.inner", desc = "" },
-      ["<leader>xa"] = { query = "@attribute.outer", desc = "" },
+      ["<leader>xp"] = { query = "@parameter.inner", desc = "Swap current Parameter with next" },
+      ["<leader>xa"] = { query = "@attribute.outer", desc = "Swap current Attribute with previous" },
     },
     swap_previous = {
-      ["<leader>xP"] = { query = "@parameter.inner", desc = "" },
-      ["<leader>xA"] = { query = "@attribute.outer", desc = "" },
+      ["<leader>xP"] = { query = "@parameter.inner", desc = "Swap current Parameter with previous" },
+      ["<leader>xA"] = { query = "@attribute.outer", desc = "Swap current Attribute with previous" },
     },
   },
   move = {
