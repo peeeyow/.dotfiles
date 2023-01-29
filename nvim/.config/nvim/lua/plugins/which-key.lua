@@ -1,14 +1,5 @@
 -- local format = require("user.lsp.handlers").format
 
--- local normal = {
---   mappings = {
---     ["[c"] = { "Prev Hunk" },
---     ["]c"] = { "Next Hunk" },
---     ["[t"] = { "Prev Trouble Item" },
---     ["]t"] = { "Next Trouble Item" },
---   },
--- }
-
 -- local n_leader = {
 --   opts = {
 --     mode = "n",
@@ -30,25 +21,6 @@
 --     },
 --     ["F"] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
 --     ["P"] = { "<cmd>lua require'telescope'.extensions.project.project{}<cr>", "Projects" },
---     ["b"] = {
---       name = "Buffer",
---       ["p"] = { ":BufferLinePick<CR>", "Pick Buffer" },
---       ["t"] = { ":BufferLineSortByTabs<CR>", "Sort buffers by Tab" },
---       ["d"] = { ":BufferLineSortByDirectory<CR>", "Sort buffers by Directory" },
---       ["e"] = { ":BufferLineSortByExtension<CR>", "Sort buffers by Extension" },
---       ["b"] = {
---         "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
---         "Buffers",
---       },
---       ["<"] = {
---         "<CMD>BufferLineMovePrev<CR>",
---         "Move buffer to left",
---       },
---       [">"] = {
---         "<CMD>BufferLineMoveNext<CR>",
---         "Move buffer to right",
---       },
---     },
 --     ["g"] = {
 --       name = "Git",
 --       ["g"] = { "<CMD>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
@@ -130,12 +102,6 @@
 --   },
 -- }
 
--- local keymaps = { normal, visual, n_leader, n_g }
-
--- for _, keymap in ipairs(keymaps) do
---   which_key.register(keymap.mappings, keymap.opts)
--- end
-
 return {
   {
     "folke/which-key.nvim",
@@ -198,6 +164,7 @@ return {
       wk.setup(opts)
       wk.register({
         ["<leader>"] = { "Leader Options" },
+        ["<leader>b"] = { name = "Buffer" },
       }, {
         mode = "n",
         prefix = nil,

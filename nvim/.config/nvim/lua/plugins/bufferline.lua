@@ -1,10 +1,25 @@
 return {
-  "akinsho/bufferline.nvim",
   {
-
     "akinsho/bufferline.nvim",
-    -- event = "VeryLazy",
     lazy = false,
+    keys = {
+      { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
+      { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
+      { "<leader><lt>", "<cmd>BufferLineMovePrev<cr>", desc = "Move Buffer to Left" },
+      { "<leader>>", "<cmd>BufferLineMoveNext<cr>", desc = "Move Buffer to Right" },
+
+      { "<leader>bp", "<cmd>BufferLinePick<cr>", desc = "Pick Buffer" },
+      { "<leader>bt", "<cmd>BufferLineSortByTabs<cr>", desc = "Sort buffers by Tab" },
+      { "<leader>bd", "<cmd>BufferLineSortByDirectory<cr>", desc = "Sort buffers by Directory" },
+      { "<leader>be", "<cmd>BufferLineSortByExtension<cr>", desc = "Sort buffers by Extension" },
+      {
+        "<leader>bb",
+        function()
+          require("telescope.builtin").buffers(require("telescope.themes").get_dropdown { previewer = false })
+        end,
+        desc = "Choose from buffers",
+      },
+    },
     opts = {
       options = {
         numbers = "none",

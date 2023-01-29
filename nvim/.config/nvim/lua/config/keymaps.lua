@@ -69,7 +69,7 @@ map("n", "<M-j>", ":m .+1<CR>==", describe_keymap "Move line one step below")
 map("n", "<M-k>", ":m .-2<CR>==", describe_keymap "Move line one step above")
 
 -- close current buffer
-map("n", "<Leader>c", ":bp<bar>sp<bar>bn<bar>bd<CR>", describe_keymap "Close buffer")
+map("n", "<leader>c", ":bp<bar>sp<bar>bn<bar>bd<CR>", describe_keymap "Close buffer")
 
 -- don't copy empty lines
 local function delete_empty()
