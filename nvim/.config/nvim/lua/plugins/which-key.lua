@@ -84,6 +84,8 @@ return {
         ["<leader>s"] = { name = "Search" },
         ["<leader>t"] = { name = "Trouble" },
         ["<leader>x"] = { name = "Swap" },
+        ["<leader>L"] = { "<cmd>Lazy<cr>", "Lazy" },
+        ["<leader>m"] = { "<cmd>Mason<cr>", "Mason" },
       }, {
         mode = "n",
         prefix = nil,
