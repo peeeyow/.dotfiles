@@ -1,126 +1,12 @@
--- local status_ok, which_key = pcall(require, "which-key")
--- if not status_ok then
---   return
--- end
-
 -- local format = require("user.lsp.handlers").format
 
--- which_key.setup {
---   plugins = {
---     marks = true,
---     registers = true,
---     spelling = {
---       enabled = true,
---       suggestions = 20,
---     },
---     presets = {
---       operators = true,
---       windows = true,
---       nav = true,
---       z = true,
---       g = true,
---     },
---   },
---   key_labels = {
---     ["<space>"] = "SPC",
---     ["<cr>"] = "↩",
---     ["<tab>"] = "TAB",
---   },
---   icons = {
---     breadcrumb = "»",
---     separator = "➜",
---     group = "+",
---   },
---   popup_mappings = {
---     scroll_down = "<c-d>",
---     scroll_up = "<c-u>",
---   },
---   window = {
---     border = "rounded",
---     position = "bottom",
---     margin = { 1, 0, 1, 0 },
---     padding = { 2, 2, 2, 2 },
---     winblend = 0,
---   },
---   layout = {
---     height = { min = 4, max = 25 },
---     width = { min = 20, max = 50 },
---     spacing = 3,
---     align = "left",
---   },
---   ignore_missing = false,
---   hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " },
---   show_help = true,
---   triggers = "auto",
---   triggers_blacklist = {
---     i = { "j", "k" },
---     v = { "j", "k" },
---   },
--- }
-
 -- local normal = {
---   opts = {
---     mode = "n",
---     prefix = nil,
---     buffer = nil,
---     silent = true,
---     noremap = true,
---     nowait = true,
---   },
 --   mappings = {
---     ["<C-/>"] = { "Line Comment" },
---     ["<C-_>"] = { "Line Comment" },
---     ["<C-\\>"] = { "block comment" },
---     ["<C-Left"] = { "Resize Left" },
---     ["<C-Down"] = { "Resize Down" },
---     ["<C-Up"] = { "Resize Up" },
---     ["<C-Right"] = { "Resize Right" },
---     ["<C-h>"] = { "Move to Left Window" },
---     ["<C-j>"] = { "Move to Down Window" },
---     ["<C-k>"] = { "Move to Up Window" },
---     ["<C-l>"] = { "Move to Right Window" },
---     ["<M-j>"] = { "Move Line One Step Below" },
---     ["<M-k>"] = { "Move Line One Step Above" },
 --     ["K"] = { "Show Hover (LSP) " },
---     ["<leader>"] = { "Leader Options" },
---     ["[b"] = { ":BufferLineCyclePrev<CR>", "Prev Buffer" },
---     ["]b"] = { ":BufferLineCycleNext<CR>", "Next Buffer" },
 --     ["[c"] = { "Prev Hunk" },
 --     ["]c"] = { "Next Hunk" },
 --     ["[t"] = { "Prev Trouble Item" },
 --     ["]t"] = { "Next Trouble Item" },
---     ["]f"] = { "Next Function Start" },
---     ["[f"] = { "Previous Function Start" },
---     ["]F"] = { "Next Function End" },
---     ["[F"] = { "Previous Function End" },
---     ["]x"] = { "Next Class Start" },
---     ["[x"] = { "Previous Class Start" },
---     ["]X"] = { "Next Class End" },
---     ["[X"] = { "Previous Class End" },
---     ["]a"] = { "Next Attribute Start" },
---     ["[a"] = { "Previous Attribute Start" },
---     ["]A"] = { "Next Attribute End" },
---     ["[A"] = { "Previous Attribute End" },
---     ["]p"] = { "Next Parameter Start" },
---     ["[p"] = { "Previous Parameter Start" },
---     ["]P"] = { "Next Parameter End" },
---     ["[P"] = { "Previous Parameter End" },
---   },
--- }
-
--- local visual = {
---   opts = {
---     mode = "x",
---     prefix = nil,
---     buffer = nil,
---     silent = true,
---     noremap = true,
---     nowait = true,
---   },
---   mappings = {
---     ["<C-_>"] = { "Line Comment" },
---     ["<C-/>"] = { "Line Comment" },
---     ["<C-\\>"] = { "Block Comment" },
 --   },
 -- }
 
@@ -293,6 +179,7 @@ return {
       },
       key_labels = {
         ["<space>"] = "SPC",
+        ["<leader>"] = "SPC",
         ["<cr>"] = "↩",
         ["<tab>"] = "TAB",
       },
@@ -327,5 +214,19 @@ return {
         v = { "j", "k" },
       },
     },
+    config = function(_, opts)
+      local wk = require "which-key"
+      wk.setup(opts)
+      wk.register({
+        ["<leader>"] = { "Leader Options" },
+      }, {
+        mode = "n",
+        prefix = nil,
+        buffer = nil,
+        silent = true,
+        noremap = true,
+        nowait = true,
+      })
+    end,
   },
 }
