@@ -1,6 +1,30 @@
 return {
   {
     "lewis6991/gitsigns.nvim",
+    keys = {
+      {
+        "[c",
+        function()
+          if vim.opt.diff:get() then
+            vim.cmd [[normal! [c]]
+          else
+            vim.cmd [[Gitsigns prev_hunk]]
+          end
+        end,
+        desc = "Prev Hunk",
+      },
+      {
+        "]c",
+        function()
+          if vim.opt.diff:get() then
+            vim.cmd [[normal! ]c]]
+          else
+            vim.cmd [[Gitsigns next_hunk]]
+          end
+        end,
+        desc = "Next Hunk",
+      },
+    },
     event = "BufReadPre",
     opts = {
       signs = {

@@ -82,22 +82,4 @@ end
 
 map("n", "dd", delete_empty, { expr = true })
 
--- Plugins --
-
--- navigate hunks
-map("", "]c", function()
-  if vim.opt.diff:get() then
-    vim.cmd [[normal! ]c]]
-  else
-    vim.cmd [[Gitsigns next_hunk]]
-  end
-end, opts)
-map("", "[c", function()
-  if vim.opt.diff:get() then
-    vim.cmd [[normal! [c]]
-  else
-    vim.cmd [[Gitsigns prev_hunk]]
-  end
-end, opts)
-
 return M
