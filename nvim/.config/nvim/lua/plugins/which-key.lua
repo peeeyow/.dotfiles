@@ -10,35 +10,14 @@
 --     nowait = true,
 --   },
 --   mappings = {
---     ["c"] = { "Close Buffer" },
 --     ["e"] = { [[<CMD>:NvimTreeToggle<CR>]], "File Explorer" },
 --     -- https://github.com/folke/which-key.nvim/issues/173
---     ["<lt>"] = { ":BufferLineMovePrev<CR>", "Move Buffer to Left" },
---     [">"] = { ":BufferLineMoveNext<CR>", "Move Buffer to Right" },
 --     ["f"] = {
 --       "<cmd>lua require('telescope.builtin').find_files()<cr>",
 --       "Find files",
 --     },
 --     ["F"] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
 --     ["P"] = { "<cmd>lua require'telescope'.extensions.project.project{}<cr>", "Projects" },
---     ["g"] = {
---       name = "Git",
---       ["g"] = { "<CMD>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
---       ["l"] = { '<CMD>lua require"gitsigns".blame_line{full=false}<CR>', "Blame" },
---       ["s"] = { "<CMD>Gitsigns stage_hunk<CR>", "Stage Hunk" },
---       ["S"] = { "<CMD>Gitsigns stage_buffer<CR>", "Stage Buffer" },
---       ["u"] = { "<CMD>Gitsigns undo_stage_hunk<CR>", "Undo Stage Hunk" },
---       ["r"] = { "<CMD>Gitsigns reset_hunk<CR>", "Reset Hunk" },
---       ["R"] = { "<CMD>Gitsigns reset_buffer<CR>", "Reset Buffer" },
---       ["p"] = { "<CMD>Gitsigns preview_hunk<CR>", "Preview Hunk" },
---       ["o"] = { "<cmd>Telescope git_status<cr>", "Open changed file" },
---       ["b"] = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
---       ["c"] = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
---       ["d"] = {
---         "<cmd>Gitsigns diffthis HEAD<cr>",
---         "Diff",
---       },
---     },
 --     ["l"] = {
 --       name = "LSP",
 --       ["a"] = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
@@ -163,8 +142,10 @@ return {
       local wk = require "which-key"
       wk.setup(opts)
       wk.register({
-        ["<leader>"] = { "Leader Options" },
+        ["<leader>"] = { "Leader options" },
         ["<leader>b"] = { name = "Buffer" },
+        ["<leader>g"] = { name = "Git" },
+        ["<leader>x"] = { name = "Swap" },
       }, {
         mode = "n",
         prefix = nil,
