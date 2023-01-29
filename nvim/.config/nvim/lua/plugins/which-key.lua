@@ -18,34 +18,7 @@
 --     },
 --     ["F"] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
 --     ["P"] = { "<cmd>lua require'telescope'.extensions.project.project{}<cr>", "Projects" },
---     ["l"] = {
---       name = "LSP",
---       ["a"] = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
---       ["f"] = {
---         function()
---           format(0)
---         end,
---         "Format",
---       },
---       ["i"] = { "<cmd>LspInfo<cr>", "Info" },
---       ["I"] = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
---       ["j"] = { "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", "Next Diagnostic" },
---       ["k"] = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>", "Prev Diagnostic" },
---       ["l"] = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
---       ["q"] = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
---       ["r"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
---       ["t"] = { "<cmd>lua vim.lsp.buf.type_definition()<cr>", "Type Definition" },
---       ["s"] = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
---       ["S"] = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" },
---     },
---     ["p"] = {
---       name = "Packer",
---       ["c"] = { "<cmd>PackerCompile<cr>", "Compile" },
---       ["i"] = { "<cmd>PackerInstall<cr>", "Install" },
---       ["s"] = { "<cmd>PackerSync<cr>", "Sync" },
---       ["S"] = { "<cmd>PackerStatus<cr>", "Status" },
---       ["u"] = { "<cmd>PackerUpdate<cr>", "Update" },
---     },
+-- ["L"] = { "<cmd>Lazy<cr>" , "Lazy"}
 --     ["s"] = {
 --       name = "Search",
 --       ["g"] = { "<cmd>Telescope git_files<cr>", "Checkout branch" },
@@ -145,6 +118,7 @@ return {
         ["<leader>"] = { "Leader options" },
         ["<leader>b"] = { name = "Buffer" },
         ["<leader>g"] = { name = "Git" },
+        ["<leader>l"] = { name = "LSP" },
         ["<leader>x"] = { name = "Swap" },
       }, {
         mode = "n",
