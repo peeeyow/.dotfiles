@@ -99,25 +99,3 @@ end, opts)
 map("", "]t", function()
   require("trouble").next { skip_groups = true, jump = true }
 end, opts)
-
--- commenting
-local status_ok, api = pcall(require, "Comment.api")
-if not status_ok then
-  return
-end
-local esc = vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
-map("n", "<C-_>", api.toggle.linewise.current, opts)
-map("n", "<C-/>", api.toggle.linewise.current, opts)
-map("n", "<C-\\>", api.toggle.blockwise.current, opts)
-map("x", "<C-_>", function()
-  vim.api.nvim_feedkeys(esc, "nx", false)
-  api.toggle.linewise(vim.fn.visualmode())
-end, opts)
-map("x", "<C-/>", function()
-  vim.api.nvim_feedkeys(esc, "nx", false)
-  api.toggle.linewise(vim.fn.visualmode())
-end, opts)
-map("x", "<C-\\>", function()
-  vim.api.nvim_feedkeys(esc, "nx", false)
-  api.toggle.blockwise(vim.fn.visualmode())
-end, opts)
