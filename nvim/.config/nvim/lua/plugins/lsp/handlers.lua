@@ -75,17 +75,38 @@ end
 M.lsp_navic = lsp_navic
 
 local function lsp_keymaps(bufnr)
-  local opts = { noremap = true, silent = true }
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gl", '<cmd>lua vim.diagnostic.open_float({ border = "rounded" })<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+  local km = require "config.keymaps"
+  local map = km.map
+  local describe_keymap = km.describe_keymap
+
+  map("n", "K", function()
+    vim.lsp.buf.hover()
+  end, describe_keymap "Show Hover (LSP)")
+  map("n", "gD", function()
+    vim.lsp.buf.declaration()
+  end, describe_keymap "Goto declaration")
+  map("n", "gd", function()
+    vim.lsp.buf.definition()
+  end, describe_keymap "Goto definition")
+  map("n", "gI", function()
+    vim.lsp.buf.implementation()
+  end, describe_keymap "Goto implementation")
+  map("n", "gs", function()
+    vim.lsp.buf.signature_help()
+  end, describe_keymap "Show signature")
+  map("n", "gr", function()
+    vim.lsp.buf.references()
+  end, describe_keymap "Goto references")
+  map("n", "[d", function()
+    vim.diagnostic.goto_prev { border = "rounded" }
+  end, describe_keymap "Goto prev diagnostics")
+  map("n", "]d", function()
+    vim.diagnostic.goto_next { border = "rounded" }
+  end, describe_keymap "Goto next diagnostics")
+  map("n", "gl", function()
+    vim.diagnostic.open_float { border = "rounded" }
+  end, describe_keymap "Show diagnostics")
+  map("n", "gR", "<cmd>Trouble lsp_references<cr>", describe_keymap "Show references trouble")
 end
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})

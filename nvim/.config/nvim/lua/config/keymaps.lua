@@ -7,6 +7,13 @@ local describe_keymap = function(desc)
   print(vim.inspect(z))
   return z
 end
+local map = vim.keymap.set
+
+local M = {}
+M.opts = opts
+M.merge = merge
+M.describe_keymap = describe_keymap
+M.map = map
 
 -- set leader key
 vim.g.mapleader = " "
@@ -14,8 +21,6 @@ vim.g.maplocalleader = " "
 
 -- Normal Visual Select Operator-Pending Mode
 -- easy window movement
-
-local map = vim.keymap.set
 
 map("", "<C-h>", "<C-w>h", describe_keymap "Move to left window")
 map("", "<C-j>", "<C-w>j", describe_keymap "Move to down window")
@@ -102,3 +107,5 @@ end, opts)
 map("", "]t", function()
   require("trouble").next { skip_groups = true, jump = true }
 end, opts)
+
+return M
