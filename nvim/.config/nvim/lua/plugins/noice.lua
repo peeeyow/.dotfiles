@@ -30,6 +30,10 @@ return {
           opts = { skip = true },
         },
         {
+          filter = { find = "diagnostics" },
+          opts = { skip = true },
+        },
+        {
           filter = {
             event = "msg_show",
             find = "%d+L, %d+B",
@@ -49,6 +53,13 @@ return {
           view = "split",
           opts = { enter = true, format = "details" },
           filter = {},
+        },
+      },
+      views = {
+        hover = {
+          size = {
+            max_width = 60,
+          },
         },
       },
       format = {
