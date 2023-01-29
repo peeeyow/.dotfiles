@@ -12,16 +12,7 @@
 --   mappings = {
 --     ["e"] = { [[<CMD>:NvimTreeToggle<CR>]], "File Explorer" },
 --     -- https://github.com/folke/which-key.nvim/issues/173
---     ["F"] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
---     ["p"] = { "<cmd>lua require'telescope'.extensions.project.project{}<cr>", "Projects" },
 -- ["L"] = { "<cmd>Lazy<cr>" , "Lazy"}
---     ["t"] = {
---       name = "Trouble",
---       ["r"] = { "<cmd>TroubleToggle<cr>", "Toggle Trouble" },
---       ["w"] = { "<cmd>Trouble workspace_diagnostics<cr>", "Open Trouble Workspace Diagnostics" },
---       ["d"] = { "<cmd>Trouble document_diagnostics<cr>", "Open Trouble Document Diagnostics" },
---       ["t"] = { "<cmd>Trouble todo<cr>", "Open todo Trouble" },
---     },
 --   },
 -- }
 
@@ -91,6 +82,7 @@ return {
         ["<leader>g"] = { name = "Git" },
         ["<leader>l"] = { name = "LSP" },
         ["<leader>s"] = { name = "Search" },
+        ["<leader>t"] = { name = "Trouble" },
         ["<leader>x"] = { name = "Swap" },
       }, {
         mode = "n",

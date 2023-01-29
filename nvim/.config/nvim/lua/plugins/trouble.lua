@@ -16,6 +16,10 @@ return {
         end,
         desc = "Next Trouble Item",
       },
+      { "<leader>tr", "<cmd>TroubleToggle<cr>", desc = "Toggle Trouble" },
+      { "<leader>tw", "<cmd>Trouble workspace_diagnostics<cr>", desc = "Open Trouble Workspace Diagnostics" },
+      { "<leader>td", "<cmd>Trouble document_diagnostics<cr>", desc = "Open Trouble Document Diagnostics" },
+      { "<leader>tt", "<cmd>Trouble todo<cr>", desc = "Open todo Trouble" },
     },
     opts = {
       position = "bottom",
