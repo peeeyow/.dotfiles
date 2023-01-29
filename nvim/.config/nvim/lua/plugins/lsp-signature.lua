@@ -17,5 +17,6 @@ return {
       hint_prefix = "",
       max_width = 50,
     },
+    enabled = false,
   },
 }
