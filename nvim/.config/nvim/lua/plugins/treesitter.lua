@@ -85,6 +85,7 @@ return {
       "nvim-treesitter/nvim-treesitter-textobjects",
       "JoosepAlviste/nvim-ts-context-commentstring",
       "windwp/nvim-autopairs",
+      "andymass/vim-matchup",
     },
     opts = {
       ensure_installed = "all",
@@ -115,6 +116,10 @@ return {
         config = {
           python = { __default = "# %s", __multiline = [[""" %s """]] },
         },
+      },
+      matchup = {
+        enable = true,
+        disable_virtual_text = true,
       },
       textobjects = textobjects,
     },

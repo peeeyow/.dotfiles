@@ -50,5 +50,6 @@
   "trouble.nvim": { "branch": "main", "commit": "83ec606e7065adf134d17f4af6bae510e3c491c1" },
   "typescript.nvim": { "branch": "main", "commit": "f66d4472606cb24615dfb7dbc6557e779d177624" },
   "vim-illuminate": { "branch": "master", "commit": "4e1d43cdc39e35f495c7b39a78a349b4d5badad0" },
+  "vim-matchup": { "branch": "master", "commit": "959e0e79ea240cdee29efbdd0d2e2e718931ccec" },
   "which-key.nvim": { "branch": "main", "commit": "16ed12a8493628c377606da2ebac50d80736ed37" }
 }
