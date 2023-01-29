@@ -12,31 +12,9 @@
 --   mappings = {
 --     ["e"] = { [[<CMD>:NvimTreeToggle<CR>]], "File Explorer" },
 --     -- https://github.com/folke/which-key.nvim/issues/173
---     ["f"] = {
---       "<cmd>lua require('telescope.builtin').find_files()<cr>",
---       "Find files",
---     },
 --     ["F"] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
 --     ["p"] = { "<cmd>lua require'telescope'.extensions.project.project{}<cr>", "Projects" },
 -- ["L"] = { "<cmd>Lazy<cr>" , "Lazy"}
---     ["s"] = {
---       name = "Search",
---       ["g"] = { "<cmd>Telescope git_files<cr>", "Checkout branch" },
---       ["b"] = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
---       ["c"] = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
---       ["h"] = { "<cmd>Telescope help_tags<cr>", "Find Help" },
---       ["M"] = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
---       ["r"] = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
---       ["R"] = { "<cmd>Telescope registers<cr>", "Registers" },
---       ["k"] = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
---       ["C"] = { "<cmd>Telescope commands<cr>", "Commands" },
---       ["p"] = { "<cmd>Telescope project<cr>", "Projects" },
---       ["m"] = { "<cmd>Telescope media_files<cr>", "Media Files" },
---       ["d"] = { "<cmd>Telescope diagnostics bufnr=0<cr>", "Document Diagnostics" },
---       ["w"] = { "<cmd>Telescope diagnostics<cr>", "Workspace Diagnostics" },
---       ["n"] = { "<cmd>Telescope noice<cr>", "Noice" },
---       ["f"] = { "<cmd>Telescope filetypes<cr>", "Noice" },
---     },
 --     ["t"] = {
 --       name = "Trouble",
 --       ["r"] = { "<cmd>TroubleToggle<cr>", "Toggle Trouble" },
@@ -112,6 +90,7 @@ return {
         ["<leader>b"] = { name = "Buffer" },
         ["<leader>g"] = { name = "Git" },
         ["<leader>l"] = { name = "LSP" },
+        ["<leader>s"] = { name = "Search" },
         ["<leader>x"] = { name = "Swap" },
       }, {
         mode = "n",
