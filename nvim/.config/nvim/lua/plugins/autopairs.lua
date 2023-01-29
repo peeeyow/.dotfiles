@@ -1,6 +1,8 @@
 return {
   {
     "windwp/nvim-autopairs",
+    --  https://github.com/windwp/nvim-autopairs/issues/319
+    commit = "f00eb3b766c370cb34fdabc29c760338ba9e4c6c",
     dependencies = {
       "hrsh7th/nvim-cmp",
     },

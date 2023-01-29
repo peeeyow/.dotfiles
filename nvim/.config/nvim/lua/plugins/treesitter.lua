@@ -77,13 +77,14 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    -- event = "BufReadPost",
+    event = "BufReadPost",
     dependencies = {
       "p00f/nvim-ts-rainbow",
       "nvim-treesitter/playground",
       "windwp/nvim-ts-autotag",
       "nvim-treesitter/nvim-treesitter-textobjects",
       "JoosepAlviste/nvim-ts-context-commentstring",
+      "windwp/nvim-autopairs",
     },
     opts = {
       ensure_installed = "all",
