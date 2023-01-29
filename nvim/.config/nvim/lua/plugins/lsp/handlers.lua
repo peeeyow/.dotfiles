@@ -1,7 +1,5 @@
 local M = {}
 
-local disabled_formatters = { "html", "cssls", "eslint", "jsonls", "tsserver" }
-
 M.setup = function()
   local signs = {
     { name = "DiagnosticSignError", text = "" },
@@ -54,8 +52,6 @@ local function lsp_highlight_document(client)
   illuminate.on_attach(client)
 end
 
-M.lsp_highlight_document = lsp_highlight_document
-
 local function lsp_navic(client, bufnr)
   local status_ok, navic = pcall(require, "nvim-navic")
   if not status_ok then
@@ -71,8 +67,6 @@ local function lsp_navic(client, bufnr)
   end
   navic.attach(client, bufnr)
 end
-
-M.lsp_navic = lsp_navic
 
 local function lsp_keymaps(bufnr)
   local km = require "config.keymaps"
@@ -112,21 +106,22 @@ end
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 M.format = function(bufnr)
+  local ft = vim.bo[bufnr].filetype
+  local have_nls = #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
+
   vim.lsp.buf.format {
     bufnr = bufnr,
     filter = function(client)
-      return not vim.tbl_contains(disabled_formatters, client.name)
+      if have_nls then
+        return client.name == "null-ls"
+      end
+      return client.name ~= "null-ls"
     end,
   }
 end
 
-M.lsp_keymaps = lsp_keymaps
 local function lsp_format(client, bufnr)
   if not client.supports_method "textDocument/formatting" then
-    return
-  end
-
-  if vim.tbl_contains(disabled_formatters, client.name) then
     return
   end
 
@@ -140,6 +135,9 @@ local function lsp_format(client, bufnr)
   })
 end
 
+M.lsp_highlight_document = lsp_highlight_document
+M.lsp_navic = lsp_navic
+M.lsp_keymaps = lsp_keymaps
 M.lsp_format = lsp_format
 
 M.on_attach = function(client, bufnr)
