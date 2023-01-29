@@ -1,21 +1,3 @@
--- local format = require("user.lsp.handlers").format
-
--- local n_leader = {
---   opts = {
---     mode = "n",
---     prefix = "<leader>",
---     buffer = nil,
---     silent = true,
---     noremap = true,
---     nowait = true,
---   },
---   mappings = {
---     ["e"] = { [[<CMD>:NvimTreeToggle<CR>]], "File Explorer" },
---     -- https://github.com/folke/which-key.nvim/issues/173
--- ["L"] = { "<cmd>Lazy<cr>" , "Lazy"}
---   },
--- }
-
 return {
   {
     "folke/which-key.nvim",
