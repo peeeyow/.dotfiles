@@ -100,7 +100,8 @@ local python_env = {
 return {
   {
     "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
+    -- event = "VeryLazy",
+    lazy = false,
     dependencies = {
       "SmiteshP/nvim-navic",
     },
