@@ -1,6 +1,22 @@
 return {
   {
     "folke/trouble.nvim",
+    keys = {
+      {
+        "[t",
+        function()
+          require("trouble").previous { skip_groups = true, jump = true }
+        end,
+        desc = "Prev Trouble Item",
+      },
+      {
+        "]t",
+        function()
+          require("trouble").next { skip_groups = true, jump = true }
+        end,
+        desc = "Next Trouble Item",
+      },
+    },
     opts = {
       position = "bottom",
       height = 10,
