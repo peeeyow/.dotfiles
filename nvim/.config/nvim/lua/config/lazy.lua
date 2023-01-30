@@ -17,7 +17,10 @@ require("lazy").setup {
     { import = "plugins" },
   },
   install = { colorscheme = { "onedark" } },
-  defaults = { lazy = true, version = "*" },
+  defaults = {
+    lazy = true,
+    -- version = "*",
+  },
   ui = {
     border = "rounded",
   },
