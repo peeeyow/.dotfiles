@@ -10,11 +10,6 @@ return {
       auto_reload_on_write = true,
       disable_netrw = true,
       hijack_netrw = true,
-      ignore_ft_on_setup = {
-        "startify",
-        "dashboard",
-        "alpha",
-      },
       diagnostics = {
         enable = true,
         show_on_dirs = true,
