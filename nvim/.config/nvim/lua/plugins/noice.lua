@@ -60,6 +60,16 @@ return {
           filter = { find = "diagnostics" },
           opts = { skip = true },
         },
+        -- shortmess "s" causes to print search pattern
+        -- work around
+        {
+          filter = { find = "search hit TOP, continuing at BOTTOM" },
+          opts = { skip = true },
+        },
+        {
+          filter = { find = "search hit BOTTOM, continuing at TOP" },
+          opts = { skip = true },
+        },
         {
           filter = {
             event = "msg_show",
@@ -72,7 +82,6 @@ return {
         command_palette = true,
         long_message_to_split = true,
         inc_rename = true,
-        cmdline_output_to_split = false,
       },
       commands = {
         all = {
