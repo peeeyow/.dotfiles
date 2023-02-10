@@ -14,6 +14,9 @@ local opts = {
 local jsonls_opts = require "plugins.lsp.settings.jsonls"
 jsonls_opts = vim.tbl_deep_extend("keep", jsonls_opts, opts)
 
+local yaml_opts = require("yaml-companion").setup {}
+yaml_opts = vim.tbl_deep_extend("keep", yaml_opts, opts)
+
 local sumneko_opts = require "plugins.lsp.settings.sumneko_lua"
 sumneko_opts = vim.tbl_deep_extend("keep", sumneko_opts, opts)
 local luadev_status_okay, luadev = pcall(require, "neodev")
@@ -42,6 +45,7 @@ local servers = {
   graphql = opts,
   prismals = opts,
   dockerls = opts,
+  yamlls = yaml_opts,
 }
 
 tsserver.setup {

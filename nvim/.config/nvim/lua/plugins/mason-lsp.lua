@@ -15,6 +15,7 @@ return {
         "sumneko_lua",
         "tailwindcss",
         "tsserver",
+        "yamlls",
       },
     },
   },

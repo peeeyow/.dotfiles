@@ -50,6 +50,7 @@ return {
       "b0o/schemastore.nvim",
       "folke/neodev.nvim",
       "jose-elias-alvarez/typescript.nvim",
+      "someone-stole-my-name/yaml-companion.nvim",
     },
     config = function()
       require("plugins.lsp.handlers").setup()
