@@ -2,12 +2,10 @@
 
 ## Plugins to check
 
-- ggandor/lightspeed.nvim
 - weilbith/nvim-code-action-menu
 - dap plugins
 - ahmedkhalf/project.nvim
 - sindrets/diffview.nvim
-- nvim-treesitter/nvim-treesitter-context
 - nvim-neotest/neotest
 - esensar/nvim-dev-container
 - hkupty/iron.nvim
