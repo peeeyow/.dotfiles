@@ -22,8 +22,8 @@ alias r="ranger "
 
 # compiling flags
 alias gpp="clang++ -Wall -Wextra -Werror -Wsign-conversion -Weffc++ -pedantic-errors"
-alias gpp17="clang++ -Wall -Wextra -Werror -Wsign-conversion -Weffc++ -pedantic-errors --std=c++1z"
-alias gpp20="clang++ -Wall -Wextra -Werror -Wsign-conversion -Weffc++ -pedantic-errors --std=c++2a"
+alias gpp17="clang++ -Wall -Wextra -Werror -Wsign-conversion -Weffc++ -pedantic-errors --std=c++17"
+alias gpp20="clang++ -Wall -Wextra -Werror -Wsign-conversion -Weffc++ -pedantic-errors --std=c++20"
 
 # nvidia offloading
 alias nv="__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia"
