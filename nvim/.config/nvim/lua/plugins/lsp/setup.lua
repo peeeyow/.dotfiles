@@ -17,8 +17,8 @@ jsonls_opts = vim.tbl_deep_extend("keep", jsonls_opts, opts)
 local yaml_opts = require("yaml-companion").setup {}
 yaml_opts = vim.tbl_deep_extend("keep", yaml_opts, opts)
 
-local sumneko_opts = require "plugins.lsp.settings.sumneko_lua"
-sumneko_opts = vim.tbl_deep_extend("keep", sumneko_opts, opts)
+local lua_ls_opts = require "plugins.lsp.settings.sumneko_lua"
+lua_ls_opts = vim.tbl_deep_extend("keep", lua_ls_opts, opts)
 local luadev_status_okay, luadev = pcall(require, "neodev")
 if not luadev_status_okay then
   return
@@ -34,7 +34,7 @@ clangd_opts.capabilities.offsetEncoding = { "utf-16" }
 
 local servers = {
   jsonls = jsonls_opts,
-  sumneko_lua = sumneko_opts,
+  lua_ls = lua_ls_opts,
   pyright = pyright_opts,
   clangd = clangd_opts,
   bashls = opts,
