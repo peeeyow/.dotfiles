@@ -3,7 +3,7 @@ return {
     "jose-elias-alvarez/null-ls.nvim",
     lazy = false,
     dependencies = {
-      "nvim-lua/plenary.nvim"
+      "nvim-lua/plenary.nvim",
     },
     opts = function()
       local null_ls = require "null-ls"
@@ -28,9 +28,9 @@ return {
           diagnostics.flake8.with {
             diagnostics_format = default_diagnostic_format,
           },
-          -- diagnostics.mypy.with {
-          --   diagnostics_format = default_diagnostic_format,
-          -- },
+          diagnostics.mypy.with {
+            diagnostics_format = default_diagnostic_format,
+          },
           codeactions.gitsigns,
           codeactions.eslint_d,
         },
