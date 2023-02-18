@@ -69,6 +69,17 @@ map("n", "<M-k>", ":m .-2<CR>==", describe_keymap "Move line one step above")
 -- close current buffer
 map("n", "<leader>c", ":bp<bar>sp<bar>bn<bar>bd<CR>", describe_keymap "Close buffer")
 
+-- reload current file
+map("", "<F5>", "<CMD>checktime<CR>", describe_keymap "Reload file")
+
+-- c++ stuff
+map("", "<F9>", "<CMD>!./main<CR>")
+map(
+  "",
+  "<F10>",
+  "<CMD>w<CR> <CMD>!g++ -fsanitize=address -Wall -Wextra -Wshadow -pedantic-errors -std=c++20 -DONPC -O2 -o main % && ./main <CR>"
+)
+
 -- don't copy empty lines
 local function delete_empty()
   if vim.api.nvim_get_current_line():match "^%s*$" then
