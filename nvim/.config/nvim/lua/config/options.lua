@@ -44,6 +44,7 @@ local options = {
   },
   spelloptions = "camel",
   -- spell = true,
+  autoread = true,
 }
 
 for option, value in pairs(options) do

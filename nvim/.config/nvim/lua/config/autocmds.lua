@@ -30,3 +30,9 @@ au("ModeChanged", {
     end
   end,
 })
+
+au("FocusGained", {
+  group = aug("auto_file_reload", { clear = true }),
+  desc = "Reloads file when change is detected",
+  command = "checktime",
+})
