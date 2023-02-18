@@ -12,7 +12,7 @@ return {
         "jsonls",
         "prismals",
         "pyright",
-        "sumneko_lua",
+        "lua_ls",
         "tailwindcss",
         "tsserver",
         "yamlls",
