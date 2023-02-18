@@ -73,11 +73,13 @@ map("n", "<leader>c", ":bp<bar>sp<bar>bn<bar>bd<CR>", describe_keymap "Close buf
 map("", "<F5>", "<CMD>checktime<CR>", describe_keymap "Reload file")
 
 -- c++ stuff
-map("", "<F9>", "<CMD>!./main<CR>")
+map("", "<F8>", "<CMD>vs | e in.txt | sp | e out.txt<CR>", describe_keymap "Set working space")
+map("", "<F9>", "<CMD>!./main<CR>", describe_keymap "run compiled solution")
 map(
   "",
   "<F10>",
-  "<CMD>w<CR> <CMD>!g++ -fsanitize=address -Wall -Wextra -Wshadow -pedantic-errors -std=c++20 -DONPC -O2 -o main % && ./main <CR>"
+  "<CMD>w<CR> <CMD>!g++ -fsanitize=address -Wall -Wextra -Wshadow -pedantic-errors -std=c++20 -DONPC -O2 -o main % && ./main <CR>",
+  describe_keymap "Compile and run"
 )
 
 -- don't copy empty lines
