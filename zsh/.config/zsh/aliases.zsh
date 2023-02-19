@@ -21,9 +21,10 @@ alias v="nvim "
 alias r="ranger "
 
 # compiling flags
-alias gpp="g++ -Wall -Wextra -Werror -Wsign-conversion -Weffc++ -pedantic-errors -DONPC"
-alias gpp17="g++ -Wall -Wextra -Werror -Wsign-conversion -Weffc++ -pedantic-errors -std=c++17 -DONPC"
-alias gpp20="g++ -Wall -Wextra -Werror -Wsign-conversion -Weffc++ -pedantic-errors -std=c++20 -DONPC"
+alias gpp-debug="g++ -Wall -Wextra -Werror -Wsign-conversion -Weffc++ -pedantic-errors -ggdb"
+alias gpp-release="g++ -Wall -Wextra -Werror -Wsign-conversion -Weffc++ -pedantic-errors -O2 -DNDEBUG"
+alias gpp17="g++ -Wall -Wextra -Werror -Wsign-conversion -Weffc++ -pedantic-errors -std=c++17 -O2 -DNDEBUG -DONPC"
+alias gpp20="g++ -Wall -Wextra -Werror -Wsign-conversion -Weffc++ -pedantic-errors -std=c++20 -O2 -DNDEBUG -DONPC"
 
 # nvidia offloading
 alias nv="__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia"
