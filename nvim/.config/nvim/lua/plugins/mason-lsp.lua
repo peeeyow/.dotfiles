@@ -17,6 +17,7 @@ return {
         "tsserver",
         "yamlls",
       },
+      automatic_installation = true,
     },
   },
 }

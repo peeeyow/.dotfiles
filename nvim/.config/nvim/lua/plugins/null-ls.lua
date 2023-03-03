@@ -31,6 +31,7 @@ return {
           diagnostics.mypy.with {
             diagnostics_format = default_diagnostic_format,
           },
+          diagnostics.yamllint,
           codeactions.gitsigns,
           codeactions.eslint_d,
         },

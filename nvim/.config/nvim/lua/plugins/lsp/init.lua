@@ -43,7 +43,9 @@ return {
     },
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
+      "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
+      "jay-babu/mason-null-ls.nvim",
       "RRethy/vim-illuminate",
       "SmiteshP/nvim-navic",
 
