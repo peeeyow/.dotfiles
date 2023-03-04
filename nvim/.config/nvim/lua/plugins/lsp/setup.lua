@@ -46,6 +46,7 @@ local servers = {
   prismals = opts,
   dockerls = opts,
   yamlls = yaml_opts,
+  taplo = opts,
 }
 
 tsserver.setup {
