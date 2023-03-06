@@ -18,6 +18,7 @@ zsh_add_plugin "zsh-users/zsh-history-substring-search"
 
 zsh_add_plugin "zsh-users/zsh-completions"
 zsh_add_plugin "greymd/docker-zsh-completion"
+zsh_add_plugin "g-plane/pnpm-shell-completion"
 zsh_add_file completion.zsh
 
 # history-substring keybind
