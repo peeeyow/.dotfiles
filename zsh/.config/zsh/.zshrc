@@ -35,6 +35,10 @@ eval "`zoxide init zsh`"
 eval "`pip completion --zsh`"
 eval "`pyenv init -`"
 
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
+
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!

@@ -19,6 +19,7 @@ alias free="free -h"
 # programs
 alias v="nvim "
 alias r="ranger "
+alias pn="pnpm "
 
 # compiling flags
 alias gpp-debug="g++ -Wall -Wextra -Werror -Wsign-conversion -Weffc++ -pedantic-errors -ggdb"
