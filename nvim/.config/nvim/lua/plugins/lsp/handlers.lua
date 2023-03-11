@@ -149,6 +149,15 @@ end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
+-- WARN: highly experimental
+-- NOTE: https://github.com/neovim/neovim/pull/22405
+local workspace = {
+  didChangeWatchedFiles = {
+    dynamicRegistration = true,
+  },
+}
+capabilities = vim.tbl_deep_extend("force", capabilities, { workspace = workspace })
+
 local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not status_ok then
   return
