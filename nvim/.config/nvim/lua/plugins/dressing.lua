@@ -17,8 +17,10 @@ return {
         max_width = { 140, 0.9 },
         min_width = { 20, 0.2 },
 
-        winblend = 20,
-        winhighlight = "",
+        win_options = {
+          winblend = 20,
+          winhighlight = "",
+        },
 
         override = function(conf)
           return conf
