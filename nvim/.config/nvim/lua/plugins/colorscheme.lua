@@ -6,9 +6,6 @@ return {
     opts = {
       style = "darker",
       transparent = false,
-      highlights = {
-        rainbowcol1 = { fg = "#abb2bf" },
-      },
     },
     config = function(_, opts)
       local onedark = require "onedark"
