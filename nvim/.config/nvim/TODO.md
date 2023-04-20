@@ -2,10 +2,11 @@
 
 ## Plugins to check
 
+- kevinhwang91/nvim-ufo
+- uga-rosa/ccc.nvim
 - weilbith/nvim-code-action-menu
 - dap plugins
 - ahmedkhalf/project.nvim
-- sindrets/diffview.nvim
 - nvim-neotest/neotest
 - esensar/nvim-dev-container
 - hkupty/iron.nvim
@@ -16,14 +17,7 @@
 - TimUntersberger/neogit
 - simrat39/symbols-outline.nvim
 - glepnir/lspsaga.nvim
-- kevinhwang91/nvim-ufo
 - Maan2003/lsp_lines.nvim
 - AckslD/nvim-FeMaco.lua
 - lvimuser/lsp-inlayhints.nvim
 - neorg
-- uga-rosa/ccc.nvim
-
-## neovim 0.9.0
-
-- splitkeep
-- spell / spellsitter
