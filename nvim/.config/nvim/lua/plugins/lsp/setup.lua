@@ -36,6 +36,7 @@ local servers = {
   jsonls = jsonls_opts,
   lua_ls = lua_ls_opts,
   pyright = pyright_opts,
+  eslint = opts,
   clangd = clangd_opts,
   bashls = opts,
   cssls = opts,

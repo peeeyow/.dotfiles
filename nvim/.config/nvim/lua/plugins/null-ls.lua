@@ -22,9 +22,6 @@ return {
           formatting.prettierd,
           formatting.stylua,
           diagnostics.djlint,
-          diagnostics.eslint_d.with {
-            diagnostics_format = default_diagnostic_format,
-          },
           diagnostics.flake8.with {
             diagnostics_format = default_diagnostic_format,
           },
@@ -33,7 +30,6 @@ return {
           },
           diagnostics.yamllint,
           codeactions.gitsigns,
-          codeactions.eslint_d,
         },
         on_attach = function(client, bufnr)
           local handlers = require "plugins.lsp.handlers"

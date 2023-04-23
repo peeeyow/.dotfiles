@@ -6,7 +6,6 @@ return {
         "black",
         "flake8",
         "prettierd",
-        "eslint_d",
       },
       automatic_installation = true,
     },

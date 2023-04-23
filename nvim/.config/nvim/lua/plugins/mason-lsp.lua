@@ -5,6 +5,7 @@ return {
       ensure_installed = {
         "bashls",
         "cssls",
+        "eslint",
         "dockerls",
         "emmet_ls",
         "graphql",
