@@ -120,7 +120,11 @@ return {
         sections = {
           lualine_a = { "mode" },
           lualine_b = { branch, diff, diagnostics },
-          lualine_c = { { navic.get_location, cond = navic.is_available } },
+          lualine_c = {
+            "navic",
+            color_correction = nil,
+            navic_opts = nil,
+          },
           lualine_x = { python_env, "encoding", filetype },
           lualine_y = { "progress" },
           lualine_z = { location },

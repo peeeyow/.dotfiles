@@ -57,16 +57,10 @@ local function lsp_navic(client, bufnr)
   if not status_ok then
     return
   end
-  local no_document_symbols = {
-    "tailwindcss",
-    "emmet_ls",
-    "graphql",
-    "eslint",
-  }
-  if vim.tbl_contains(no_document_symbols, client.name) then
-    return
+
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
   end
-  navic.attach(client, bufnr)
 end
 
 local function lsp_keymaps(bufnr)
