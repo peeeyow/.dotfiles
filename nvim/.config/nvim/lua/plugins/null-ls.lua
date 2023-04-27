@@ -14,19 +14,27 @@ return {
       return {
         debug = false,
         sources = {
-          formatting.black,
+          formatting.black.with {
+            prefer_local = true,
+          },
           formatting.djlint.with {
             extra_args = { "--indent", "2" },
+            prefer_local = true,
           },
-          formatting.isort,
+          formatting.isort.with {
+            prefer_local = true,
+          },
           formatting.prettierd,
           formatting.stylua,
-          diagnostics.djlint,
+          diagnostics.djlint.with {
+            prefer_local = true,
+          },
           diagnostics.flake8.with {
             diagnostics_format = default_diagnostic_format,
           },
           diagnostics.mypy.with {
             diagnostics_format = default_diagnostic_format,
+            prefer_local = true,
           },
           diagnostics.yamllint,
           codeactions.gitsigns,
