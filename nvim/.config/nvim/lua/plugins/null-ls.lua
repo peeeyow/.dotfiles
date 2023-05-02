@@ -37,6 +37,7 @@ return {
             prefer_local = true,
           },
           diagnostics.yamllint,
+          diagnostics.commitlint,
           codeactions.gitsigns,
         },
         on_attach = function(client, bufnr)
