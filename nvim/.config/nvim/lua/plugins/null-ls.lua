@@ -32,6 +32,9 @@ return {
           diagnostics.flake8.with {
             diagnostics_format = default_diagnostic_format,
           },
+          diagnostics.hadolint.with {
+            diagnostics_format = default_diagnostic_format,
+          },
           diagnostics.mypy.with {
             diagnostics_format = default_diagnostic_format,
             prefer_local = true,
