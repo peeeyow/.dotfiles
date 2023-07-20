@@ -48,6 +48,7 @@ local servers = {
   dockerls = opts,
   yamlls = yaml_opts,
   taplo = opts,
+  terraformls = opts,
 }
 
 tsserver.setup {
