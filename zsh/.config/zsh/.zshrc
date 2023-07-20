@@ -41,3 +41,6 @@ eval "`pyenv init -`"
 
 # conda
 source /opt/conda/etc/profile.d/conda.sh
+
+# aws
+complete -C `which aws_completer` aws

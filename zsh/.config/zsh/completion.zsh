@@ -1,5 +1,6 @@
 fpath+="$ZDOTDIR/completions"
 
+autoload bashcompinit && bashcompinit 
 autoload -Uz compinit; compinit
 
 # allow dot completion
