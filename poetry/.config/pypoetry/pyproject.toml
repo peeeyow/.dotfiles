@@ -6,6 +6,6 @@ authors = []
 license = ""
 
 [tool.poetry.dependencies]
-python = "3.10.11"
-poetry = "^1.4.2"
+python = "3.10.12"
+poetry = "^1.5.1"
 
