@@ -7,7 +7,7 @@ return {
         "flake8",
         "prettierd",
       },
-      automatic_installation = true,
+      automatic_installation = { exclude = { "mypy" } },
     },
   },
 }
