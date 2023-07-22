@@ -44,3 +44,6 @@ source /opt/conda/etc/profile.d/conda.sh
 
 # aws
 complete -C `which aws_completer` aws
+
+# terraform
+complete -C `which terraform` terraform
