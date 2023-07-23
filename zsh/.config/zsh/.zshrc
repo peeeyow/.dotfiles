@@ -34,6 +34,7 @@ eval "`fnm env --use-on-cd`"
 eval "`zoxide init zsh`"
 eval "`pip completion --zsh`"
 eval "`pyenv init -`"
+eval "`terraspace completion_script`"
 
 # tabtab source for packages
 # uninstall by removing these lines
