@@ -32,6 +32,9 @@ local clangd_opts = require "plugins.lsp.settings.clangd"
 clangd_opts = vim.tbl_deep_extend("keep", clangd_opts, opts)
 clangd_opts.capabilities.offsetEncoding = { "utf-16" }
 
+local terraformls_opts = require "plugins.lsp.settings.terraformls"
+terraformls_opts = vim.tbl_deep_extend("keep", terraformls_opts, opts)
+
 local servers = {
   jsonls = jsonls_opts,
   lua_ls = lua_ls_opts,
@@ -48,7 +51,7 @@ local servers = {
   dockerls = opts,
   yamlls = yaml_opts,
   taplo = opts,
-  terraformls = opts,
+  terraformls = terraformls_opts,
 }
 
 tsserver.setup {

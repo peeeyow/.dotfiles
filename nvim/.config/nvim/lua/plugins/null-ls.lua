@@ -41,6 +41,7 @@ return {
           },
           diagnostics.yamllint,
           diagnostics.commitlint,
+          diagnostics.tfsec,
           codeactions.gitsigns,
         },
         on_attach = function(client, bufnr)
