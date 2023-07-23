@@ -46,6 +46,8 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 export PATH="$HOME/.poetry/bin:$PATH"
 # local/bin
 export PATH=$HOME/.local/bin:$PATH
+# bin (ruby gems)
+export PATH=$HOME/bin:$PATH
 # android studio
 export ANDROID_SDK_ROOT=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
