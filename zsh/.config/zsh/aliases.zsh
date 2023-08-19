@@ -22,6 +22,7 @@ alias r="ranger "
 alias pn="pnpm "
 alias tf="terraform "
 alias ts="terraspace "
+alias lg="lazygit"
 
 # compiling flags
 alias gpp-debug="g++ -Wall -Wextra -Werror -Wsign-conversion -Weffc++ -pedantic-errors -ggdb"
