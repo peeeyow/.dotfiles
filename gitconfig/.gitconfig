@@ -26,3 +26,5 @@
 	prompt = false
 [index]
 	skipHash = false
+[credential]
+	helper = libsecret
