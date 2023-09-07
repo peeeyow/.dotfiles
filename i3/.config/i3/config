@@ -263,7 +263,7 @@ workspace $ws0 output $secondary
 
 ### program assignment
 
-assign [class="Brave" window_type="normal"] $ws1
+# assign [class="Brave" window_type="normal"] $ws1
 for_window [class="Brave"] focus
 assign [class="discord"] $ws0
 for_window [class="discord"] focus
