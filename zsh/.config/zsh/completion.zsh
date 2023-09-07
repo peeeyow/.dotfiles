@@ -6,12 +6,6 @@ autoload -Uz compinit; compinit
 # allow dot completion
 _comp_options+=(globdots)
 
-bindkey -M menuselect '^Xg' clear-screen
-bindkey -M menuselect '^Xi' vi-insert
-bindkey -M menuselect '^Xo' accept-and-hold
-bindkey -M menuselect '^Xn' accept-and-infer-next-history
-bindkey -M menuselect '^Xu' undo
-
 # Define completers
 zstyle ':completion:*' completer _extensions _complete _approximate
 

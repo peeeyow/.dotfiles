@@ -20,10 +20,6 @@ zsh_add_plugin "zsh-users/zsh-completions"
 zsh_add_plugin "greymd/docker-zsh-completion"
 zsh_add_file completion.zsh
 
-# history-substring keybind
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
-
 # powerlevel 10k
 zsh_add_file "plugins/powerlevel10k/powerlevel10k.zsh-theme"
 source "$HOME/.p10k.zsh"
