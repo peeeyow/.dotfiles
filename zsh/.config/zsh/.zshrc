@@ -20,6 +20,8 @@ zsh_add_plugin "zsh-users/zsh-completions"
 zsh_add_plugin "greymd/docker-zsh-completion"
 zsh_add_file completion.zsh
 
+zsh_add_plugin "unixorn/fzf-zsh-plugin"
+
 # powerlevel 10k
 zsh_add_file "plugins/powerlevel10k/powerlevel10k.zsh-theme"
 source "$HOME/.p10k.zsh"
@@ -34,7 +36,7 @@ eval "`terraspace completion_script`"
 
 # tabtab source for packages
 # uninstall by removing these lines
-[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
+[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && source ~/.config/tabtab/zsh/__tabtab.zsh || true
 
 # conda
 source /opt/conda/etc/profile.d/conda.sh
