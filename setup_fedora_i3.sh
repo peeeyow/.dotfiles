@@ -15,6 +15,22 @@ git clone https://github.com/tmux-plugins/tpm.git ~/.config/tmux/plugins/tpm
 # setup spanish like compose
 sudo localectl set-x11-keymap us pc105+inet altgr-intl
 
+# lazygit
+sudo dnf copr enable atim/lazygit -y
+sudo dnf install lazygit
+
+# lazydocker
+sudo dnf copr enable atim/lazydocker
+sudo dnf install lazydocker
+
+# onefetch
+sudo dnf copr enable varlad/onefetch
+sudo dnf install onefetch
+
+# nvautoinstall
+sudo dnf copr enable t0xic0der/nvidia-auto-installer-for-fedora
+sudo dnf install nvautoinstall
+
 # pldt sucks
 nmcli conn modify "<connection-name>" ipv4.ignore-auto-dns yes
 nmcli conn modify "<connection-name>" ipv4.dns "8.8.8.8 8.8.4.4"
