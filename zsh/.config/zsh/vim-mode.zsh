@@ -1,5 +1,6 @@
 function zvm_config () {
     ZVM_INIT_MODE=sourcing
+    ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
 }
 
 function zvm_after_init ()
