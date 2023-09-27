@@ -25,6 +25,7 @@ alias ts="terraspace "
 alias lg="lazygit"
 alias dk="docker "
 alias dkc="docker-compose "
+alias ipy="ipython "
 
 # compiling flags
 alias gpp-debug="g++ -Wall -Wextra -Werror -Wsign-conversion -Weffc++ -pedantic-errors -ggdb"
