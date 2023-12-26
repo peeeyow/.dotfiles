@@ -373,3 +373,5 @@ exec_always --no-startup-id $HOME/.scripts/waybar.sh
 # exec autotiling
 exec qbittorrent --profile=$HOME/.config/qBittorrent
 # exec discord
+workspace $ws1 output $external_primary
+focus output $external_primary
