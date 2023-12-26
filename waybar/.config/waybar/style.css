@@ -1,21 +1,22 @@
-@define-color black            #282c34;
-@define-color white            #abb2bf;
-@define-color light_red        #e06c75;
-@define-color dark_red         #be5046;
-@define-color green            #98c379;
-@define-color light_yellow     #e5c07b;
-@define-color dark_yellow      #d19a66;
-@define-color blue             #61afef;
-@define-color light_blue       #8fc4ef;
-@define-color magenta          #c678dd;
-@define-color cyan             #56b6c2;
-@define-color gutter_grey      #4b5263;
-@define-color comment_grey     #5c6370;
+@define-color black #282c34;
+@define-color white #abb2bf;
+@define-color light_red #e06c75;
+@define-color dark_red #be5046;
+@define-color green #98c379;
+@define-color light_yellow #e5c07b;
+@define-color dark_yellow #d19a66;
+@define-color blue #61afef;
+@define-color light_blue #8fc4ef;
+@define-color magenta #c678dd;
+@define-color cyan #56b6c2;
+@define-color gutter_grey #4b5263;
+@define-color comment_grey #5c6370;
 
 * {
     border: none;
     border-radius: 0;
-    font-family: "Fira Mono", "Font Awesome 5 Free", "Font Awesome 5 Brands";
+    font-family: "JetBrains Mono", "Fira Mono", "Font Awesome 6 Free",
+        "Font Awesome 6 Brands";
     font-size: 1rem;
     font-weight: bold;
     min-height: 0;
@@ -64,7 +65,17 @@ window#waybar {
     color: @magenta;
 }
 
-#window, #mode, #network, #custom-playerctl, #tray, #idle_inhibitor, #pulseaudio, #temperature, #clock, #battery, #custom-shutdown {
+#window,
+#mode,
+#network,
+#custom-playerctl,
+#tray,
+#idle_inhibitor,
+#pulseaudio,
+#temperature,
+#clock,
+#battery,
+#custom-shutdown {
     padding: 0 3px;
     margin: 0 2px;
 }
@@ -92,19 +103,17 @@ window#waybar {
     color: @green;
 }
 
-#pulseaudio.muted {
-}
+#pulseaudio.muted {}
 
 #battery {
-  color: @light_yellow;
+    color: @light_yellow;
 }
 
 #battery icon {
     color: @dark_red;
 }
 
-#battery.charging {
-}
+#battery.charging {}
 
 #battery.warning:not(.charging) {
     color: @dark_yellow;
@@ -137,7 +146,6 @@ window#waybar {
 #custom-separator {
     color: @gutter_grey;
 }
-
 
 @keyframes blink-warn {
     to {
