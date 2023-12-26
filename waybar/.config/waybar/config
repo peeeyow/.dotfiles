@@ -3,34 +3,31 @@
     "position": "top",
     "height": 34,
     "modules-left": [
-                      "sway/workspaces",
-                      "sway/window",
-                      "sway/mode"
-                    ],
-    "modules-right": ["tray",
-                      "custom/separator",
-                      "custom/playerctl",
-                      "custom/separator",
-                      "idle_inhibitor",
-                      "custom/separator",
-                      "network",
-                      "custom/separator",
-                      "battery#0",
-                      "battery#1",
-                      "custom/separator",
-                      "pulseaudio",
-                      "custom/separator",
-                      "temperature",
-                      "custom/separator",
-                      "clock",
-                      "custom/separator",
-                      "custom/shutdown"
-                      ],
-
-    // modules
+        "sway/workspaces",
+        "sway/window",
+        "sway/mode"
+    ],
+    "modules-right": [
+        "tray",
+        "custom/separator",
+        "custom/playerctl",
+        "custom/separator",
+        "idle_inhibitor",
+        "custom/separator",
+        "network",
+        "custom/separator",
+        "battery#0",
+        "battery#1",
+        "custom/separator",
+        "pulseaudio",
+        "custom/separator",
+        "temperature",
+        "custom/separator",
+        "clock",
+        "custom/separator",
+        "custom/shutdown"
+    ],
     "sway/workspaces": {
-        "disable-scroll": true,
-        "all-outputs": true,
         "format": "{icon}",
         "format-icons": {
             "1:web": "",
@@ -45,7 +42,8 @@
             "10:discord": "",
             "urgent": "",
             "default": ""
-        }
+        },
+        "sort-by-number": true
     },
     "sway/mode": {
         "format": "Mode: {}",
@@ -87,7 +85,13 @@
         },
         "format-charging": "{capacity}% {icon}",
         "format": "{capacity}% {icon}",
-        "format-icons": ["", "", "", "", ""],
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
     },
     "battery#1": {
         "interval": 15,
@@ -98,7 +102,13 @@
         },
         "format-charging": "{capacity}% {icon}",
         "format": "{capacity}% {icon}",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
     },
     "pulseaudio": {
         "format": "{icon} {volume}% {format_source}",
@@ -124,9 +134,7 @@
     },
     "temperature": {
         "interval": 1,
-        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "thermal-zone": 3,
-        // "thermal-zone": 2,
         "critical-threshold": 75,
         "format": "{icon}{temperatureC}°C",
         "format-icons": [
@@ -139,7 +147,7 @@
         "tooltip-format": " CPU Temp: {temperatureC}°C"
     },
     "clock": {
-        "format": "{: %H:%M  %Y-%m-%d}",
+        "format": "{: %H:%M  %Y-%m-%d}"
     },
     "custom/shutdown": {
         "format": "",
@@ -148,22 +156,22 @@
         "tooltip": false
     },
     "custom/playerctl": {
-      "interval": 1,
-      "tooltip": true,
-      "return-type": "json",
-      "format" : "{icon}",
-      "format-icons": {
-        "Playing": "",
-        "Paused": ""
+        "interval": 1,
+        "tooltip": true,
+        "return-type": "json",
+        "format": "{icon}",
+        "format-icons": {
+            "Playing": "",
+            "Paused": ""
         },
-      "exec": "status=$(playerctl status) && title=$(playerctl metadata title) && artist=$(playerctl metadata artist) && echo {'\"alt\"':'\"'$status'\"', '\"tooltip\"':'\"'$title - $artist'\"'}",
-      "on-click": "playerctl play-pause",
-      "on-click-right": "playerctl next",
-      "on-scroll-up": "playerctl position 10+", 
-      "on-scroll-down": "playerctl position 10-", 
+        "exec": "status=$(playerctl status) && title=$(playerctl metadata title) && artist=$(playerctl metadata artist) && echo {'\"alt\"':'\"'$status'\"', '\"tooltip\"':'\"'$title - $artist'\"'}",
+        "on-click": "playerctl play-pause",
+        "on-click-right": "playerctl next",
+        "on-scroll-up": "playerctl position 10+",
+        "on-scroll-down": "playerctl position 10-"
     },
     "custom/separator": {
         "format": "|",
         "tooltip": false
-		},
+    }
 }
