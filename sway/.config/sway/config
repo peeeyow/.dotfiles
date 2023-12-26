@@ -5,6 +5,10 @@ include ./colors
 
 ### variables
 
+## screens
+set $external_primary "HDMI-A-2"
+set $builtin_screen "eDP-1"
+
 # modifier keys - windows key
 set $mod Mod4
 
@@ -18,7 +22,7 @@ set $right l
 set $term kitty
 
 # on the original workspace that the command was run on.
-set $menu wofi -i --show run
+set $menu rofi -modi drun -show drun -theme $HOME/.config/rofi/onedark.rasi
 
 # background path
 set $background_path ~/.background_images/minimalist_nord_arctic.png
@@ -113,7 +117,7 @@ floating_modifier $mod normal
 bindsym $mod+Shift+r reload
 
 # Exit sway (logs you out of your Wayland session)
-bindsym $mod+Shift+e exec $HOME/.scripts/sway_power_menu.sh
+bindsym $mod+Shift+e exec $HOME/.scripts/rofi_power_menu_thinkpad.sh
 # -b '🌚️Suspend' 'systemctl suspend' \
 #     -b '⚡️Shutdown' 'systemctl -i poweroff' \
 #     -b '🌀️Reboot' 'systemctl -i reboot' \
@@ -122,6 +126,9 @@ bindsym $mod+Shift+e exec $HOME/.scripts/sway_power_menu.sh
 
 # lockscreen
 bindsym $mod+Control+l exec $HOME/.scripts/sway_screenlock.sh
+
+# switch screen
+bindsym $mod+Shift+s exec $HOME/.scripts/rofi_monitor_menu_thinkpad.sh
 
 ## Movement keys
 
@@ -162,6 +169,12 @@ bindsym $mod+Shift+7 move container to workspace $ws7, workspace $ws7, focus
 bindsym $mod+Shift+8 move container to workspace $ws8, workspace $ws8, focus
 bindsym $mod+Shift+9 move container to workspace $ws9, workspace $ws9, focus
 bindsym $mod+Shift+0 move container to workspace $ws0, workspace $ws0, focus
+
+# screen control
+bindsym $mod+Control+s focus output $builtin_screen
+bindsym $mod+Control+p focus output $external_primary
+bindsym $mod+Control+Shift+s move workspace to output $builtin_screen
+bindsym $mod+Control+Shift+p move workspace to output $external_primary
 
 # move to previous workspace
 bindsym $mod+Tab workspace back_and_forth
@@ -246,7 +259,7 @@ bindsym Control+Mod1+Print exec --no-startup-id $HOME/.scripts/sway_screencaptur
 
 # mako controls
 bindsym $mod+x exec makoctl dismiss --all
-bindsym $mod+shift+x exec makoctl restore
+bindsym $mod+Shift+x exec makoctl restore
 
 ### resizing containers
 
