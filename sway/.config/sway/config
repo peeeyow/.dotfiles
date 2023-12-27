@@ -99,6 +99,10 @@ output * bg $background_path fill
 # enable adaptive sync
 output * adaptive_sync on 
 
+# disable all ouput except for internal
+output * disable
+output $builtin_screen enable pos 0 0 res 1920x1080@60Hz
+
 ### Key bindings
 
 # Start a terminal
