@@ -302,8 +302,8 @@ exec swayidle -w \
 
 ### program assignment
 
-assign [class="Brave" window_type="normal"] $ws1
-for_window [class="Brave"] focus
+# assign [class="Brave" window_type="normal"] $ws1
+# for_window [class="Brave"] focus
 assign [class="discord"] $ws0
 for_window [class="discord"] focus
 assign [class="Code" window_type="normal"] $ws2
