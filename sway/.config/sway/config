@@ -81,6 +81,9 @@ input type:touchpad {
 
 input type:keyboard {
     xkb_numlock enabled
+    xkb_layout us
+    # xkb_options pc105+inet
+    xkb_variant altgr-intl
 }
 
 input 2:10:TPPS/2_IBM_TrackPoint {
