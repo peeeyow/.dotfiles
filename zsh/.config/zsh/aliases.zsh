@@ -44,3 +44,6 @@ alias -g .....="../../../.."
 
 # fnm installation
 alias fnm_update="curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell"
+
+# python venv sourcing
+alias venv="source .venv/bin/activate"
