@@ -1,11 +1,11 @@
-sudo dnf -y install i3-gaps xinput arc-theme zsh polybar stow ranger arc-theme ripgrep zoxide cargo kitty dunst picom rofi feh chsh tlp tlp-rdw brightnessctl python-devel @development-tools scrot util-linux-user lsd mozilla-fira-mono-font fontawesome5-fonts-all jetbrains-mono-fonts-all starship pam-u2f pamu2fcfg pcsc-lite libasan wl-clipboard tldr git-credential-libsecret pulseaudio-utils zathura zathura-plugins-all
+sudo dnf -y install i3-gaps xinput arc-theme zsh polybar stow ranger arc-theme ripgrep zoxide cargo kitty dunst picom rofi feh chsh tlp tlp-rdw brightnessctl python-devel @development-tools scrot util-linux-user lsd mozilla-fira-mono-font fontawesome5-fonts-all jetbrains-mono-fonts-all starship pam-u2f pamu2fcfg pcsc-lite libasan wl-clipboard tldr git-credential-libsecret pulseaudio-utils zathura zathura-plugins-all btop
 
 
 sudo dnf -y groupinstall "X Software Development" "Development Tools" "Development Libraries"
 
 chsh -s `which zsh`
 
-cargo install fnm stylua
+cargo install fnm du-dust
 pip install -U wheel ueberzug pynvim
 
 mkdir ~/.config/tmux/plugins/
