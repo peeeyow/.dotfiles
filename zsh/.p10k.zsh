@@ -50,31 +50,31 @@
     status                  # exit code of the last command
     command_execution_time  # duration of the last command
     background_jobs         # presence of background jobs
-    direnv                  # direnv status (https://direnv.net/)
-    asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
-    virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
+    # direnv                  # direnv status (https://direnv.net/)
+    # asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
     anaconda                # conda environment (https://conda.io/)
     pyenv                   # python environment (https://github.com/pyenv/pyenv)
+    virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
     goenv                   # go environment (https://github.com/syndbg/goenv)
-    nodenv                  # node.js version from nodenv (https://github.com/nodenv/nodenv)
-    nvm                     # node.js version from nvm (https://github.com/nvm-sh/nvm)
-    nodeenv                 # node.js environment (https://github.com/ekalinin/nodeenv)
-    # node_version          # node.js version
-    # go_version            # go version (https://golang.org)
-    # rust_version          # rustc version (https://www.rust-lang.org)
+    # nodenv                  # node.js version from nodenv (https://github.com/nodenv/nodenv)
+    # nvm                     # node.js version from nvm (https://github.com/nvm-sh/nvm)
+    # nodeenv                 # node.js environment (https://github.com/ekalinin/nodeenv)
+    node_version          # node.js version
+    go_version            # go version (https://golang.org)
+    rust_version          # rustc version (https://www.rust-lang.org)
     # dotnet_version        # .NET version (https://dotnet.microsoft.com)
     # php_version           # php version (https://www.php.net/)
     # laravel_version       # laravel php framework version (https://laravel.com/)
     # java_version          # java version (https://www.java.com/)
-    # package               # name@version from package.json (https://docs.npmjs.com/files/package.json)
-    rbenv                   # ruby version from rbenv (https://github.com/rbenv/rbenv)
-    rvm                     # ruby version from rvm (https://rvm.io)
-    fvm                     # flutter version management (https://github.com/leoafarias/fvm)
+    package               # name@version from package.json (https://docs.npmjs.com/files/package.json)
+    # rbenv                   # ruby version from rbenv (https://github.com/rbenv/rbenv)
+    # rvm                     # ruby version from rvm (https://rvm.io)
+    # fvm                     # flutter version management (https://github.com/leoafarias/fvm)
     luaenv                  # lua version from luaenv (https://github.com/cehoffman/luaenv)
-    jenv                    # java version from jenv (https://github.com/jenv/jenv)
-    plenv                   # perl version from plenv (https://github.com/tokuhirom/plenv)
-    phpenv                  # php version from phpenv (https://github.com/phpenv/phpenv)
-    scalaenv                # scala version from scalaenv (https://github.com/scalaenv/scalaenv)
+    # jenv                    # java version from jenv (https://github.com/jenv/jenv)
+    # plenv                   # perl version from plenv (https://github.com/tokuhirom/plenv)
+    # phpenv                  # php version from phpenv (https://github.com/phpenv/phpenv)
+    # scalaenv                # scala version from scalaenv (https://github.com/scalaenv/scalaenv)
     haskell_stack           # haskell version from stack (https://haskellstack.org/)
     kubecontext             # current kubernetes context (https://kubernetes.io/)
     terraform               # terraform workspace (https://www.terraform.io)
@@ -89,17 +89,17 @@
     nnn                     # nnn shell (https://github.com/jarun/nnn)
     xplr                    # xplr shell (https://github.com/sayanarijit/xplr)
     vim_shell               # vim shell indicator (:sh)
-    midnight_commander      # midnight commander shell (https://midnight-commander.org/)
-    nix_shell               # nix shell (https://nixos.org/nixos/nix-pills/developing-with-nix-shell.html)
+    # midnight_commander      # midnight commander shell (https://midnight-commander.org/)
+    # nix_shell               # nix shell (https://nixos.org/nixos/nix-pills/developing-with-nix-shell.html)
     vi_mode                 # vi mode (you don't need this if you've enabled prompt_char)
     # vpn_ip                # virtual private network indicator
     # load                  # CPU load
     # disk_usage            # disk usage
     # ram                   # free RAM
     # swap                  # used swap
-    todo                    # todo items (https://github.com/todotxt/todo.txt-cli)
-    timewarrior             # timewarrior tracking status (https://timewarrior.net/)
-    taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
+    # todo                    # todo items (https://github.com/todotxt/todo.txt-cli)
+    # timewarrior             # timewarrior tracking status (https://timewarrior.net/)
+    # taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
     # time                  # current time
     # =========================[ Line #2 ]=========================
     newline
@@ -935,7 +935,7 @@
   typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=false
   # If set to "false", won't show virtualenv if pyenv is already shown.
   # If set to "if-different", won't show virtualenv if it's the same as pyenv.
-  typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_WITH_PYENV=false
+  typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_WITH_PYENV="if-different"
   # Separate environment name from Python version only with a space.
   typeset -g POWERLEVEL9K_VIRTUALENV_{LEFT,RIGHT}_DELIMITER=
   # Custom icon.
@@ -1050,7 +1050,7 @@
 
   ##############################[ node_version: node.js version ]###############################
   # Node version color.
-  typeset -g POWERLEVEL9K_NODE_VERSION_FOREGROUND=7
+  typeset -g POWERLEVEL9K_NODE_VERSION_FOREGROUND=8
   typeset -g POWERLEVEL9K_NODE_VERSION_BACKGROUND=2
   # Show node version only when in a directory tree containing package.json.
   typeset -g POWERLEVEL9K_NODE_VERSION_PROJECT_ONLY=true
