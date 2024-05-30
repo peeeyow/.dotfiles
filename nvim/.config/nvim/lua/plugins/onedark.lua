@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   "navarasu/onedark.nvim",
   opts = {

@@ -1,0 +1,12 @@
+{
+  "Inline Math": {
+    "prefix": "im",
+    "body": ["$${0}$"],
+    "description": "Add inline math"
+  },
+  "Displayed Math": {
+    "prefix": "dm",
+    "body": ["$$${0}$$"],
+    "description": "Add displayed math"
+  }
+}
