@@ -8,6 +8,7 @@ return {
   opts = function(_, opts)
     return require("astrocore").extend_tbl(opts, {
       ensure_installed = "all",
+      ignore_install = { "wing" },
       matchup = {
         enable = true,
       },
