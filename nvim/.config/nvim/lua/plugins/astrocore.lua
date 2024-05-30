@@ -1,9 +1,9 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
--- AstroCore provides a central place to modify mappings, vim options, autocommands, and more!
--- Configuration documentation can be found with `:h astrocore`
--- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
---       as this provides autocomplete and documentation while editing
+local signs = {
+  { name = "DiagnosticSignError", text = "" },
+  { name = "DiagnosticSignWarn", text = "" },
+  { name = "DiagnosticSignHint", text = "" },
+  { name = "DiagnosticSignInfo", text = "" },
+}
 
 ---@type LazySpec
 return {
@@ -21,8 +21,19 @@ return {
     },
     -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
     diagnostics = {
-      virtual_text = true,
-      underline = true,
+      virtual_text = false,
+      update_in_insert = true,
+      signs = {
+        active = signs,
+      },
+      float = {
+        focusable = true,
+        style = "minimal",
+        border = "rounded",
+        source = "always",
+        header = "",
+        prefix = "",
+      },
     },
     -- vim options can be configured here
     options = {
@@ -42,30 +53,48 @@ return {
     -- Mappings can be configured through AstroCore as well.
     -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
     mappings = {
-      -- first key is the mode
       n = {
-        -- second key is the lefthand side of the map
-
-        -- navigate buffer tabs
-        ["]b"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
-        ["[b"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
-
-        -- mappings seen under group name "Buffer"
-        ["<Leader>bd"] = {
+        ["<C-d>"] = { "<C-d>zz" },
+        ["<C-u>"] = { "<C-u>zz" },
+        ["n"] = { "nzzzv" },
+        ["N"] = { "Nzzzv" },
+        ["J"] = { "mzJ`z" },
+        ["<M-j>"] = { ":m .+1<cr>==", desc = "Move line one step below" },
+        ["<M-k>"] = { ":m .-2<cr>==", desc = "Move line one step above" },
+        ["dd"] = {
           function()
-            require("astroui.status.heirline").buffer_picker(
-              function(bufnr) require("astrocore.buffer").close(bufnr) end
-            )
+            if vim.api.nvim_get_current_line():match "^%s*$" then
+              return [["_dd]]
+            else
+              return "dd"
+            end
           end,
-          desc = "Close buffer from tabline",
+          expr = true,
         },
-
-        -- tables with just a `desc` key will be registered with which-key if it's installed
-        -- this is useful for naming menus
-        -- ["<Leader>b"] = { desc = "Buffers" },
-
-        -- setting a mapping to false will disable it
-        -- ["<C-S>"] = false,
+        ["<leader>gr"] = { function() require("gitsigns").reset_hunk() end, desc = "Reset Git hunk" },
+        ["<leader>gR"] = { function() require("gitsigns").reset_buffer() end, desc = "Reset Git buffer" },
+        ["<leader>h"] = { "<cmd>noh<cr>", desc = "Remove search highlight" },
+        ["<leader>L"] = {
+          function() require("notify").dismiss { pending = true, silent = true } end,
+          desc = "Dismiss all notifictions",
+        },
+        ["<leader>o"] = { name = "Obsidian", desc = "󱞁 Obsidian" },
+        ["<leader>/"] = false,
+        ["|"] = false,
+        ["\\"] = false,
+      },
+      v = {
+        ["<"] = { "<gv" },
+        [">"] = { ">gv" },
+        ["<M-j>"] = { ":m '>+1<cr>gv-gv", desc = "Move line one step below" },
+        ["<M-k>"] = { ":m '<-2<cr>gv-gv", desc = "Move line one step above" },
+        ["<leader>/"] = false,
+        ["<Tab>"] = false,
+        ["<S-Tab>"] = false,
+        ["<leader>o"] = { name = "Obsidian", desc = "󱞁 Obsidian" },
+      },
+      x = {
+        ["p"] = { "p:let @+=@0<cr>" },
       },
     },
   },
