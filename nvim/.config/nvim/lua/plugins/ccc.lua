@@ -3,8 +3,6 @@ return {
   { "NvChad/nvim-colorizer.lua", enabled = false },
   {
     "uga-rosa/ccc.nvim",
-    version = "*",
-    enabled = false,
     event = { "User AstroFile", "InsertEnter" },
     cmd = { "CccPick", "CccConvert", "CccHighlighterEnable", "CccHighlighterDisable", "CccHighlighterToggle" },
     keys = {
