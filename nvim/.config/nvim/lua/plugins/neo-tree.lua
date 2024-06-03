@@ -18,7 +18,7 @@ return {
   "nvim-neo-tree/neo-tree.nvim",
   opts = function(_, opts)
     local events = require "neo-tree.events"
-    return require("astronvim.utils").extend_tbl(opts, {
+    return require("astrocore").extend_tbl(opts, {
       window = {
         mappings = {
           ["<C-v>"] = "open_vsplit",
