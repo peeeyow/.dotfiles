@@ -8,5 +8,10 @@
     "prefix": "dm",
     "body": ["$$${0}$$"],
     "description": "Add displayed math"
+  },
+  "[Anki] Basic Card": {
+    "prefix": "basic",
+    "body": ["START", "Basic", "Front: ${1}", "Back: ${2}", "END"],
+    "description": "Setup basic anki card"
   }
 }
