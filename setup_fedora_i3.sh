@@ -35,3 +35,5 @@ sudo dnf install nvautoinstall
 nmcli conn modify "<connection-name>" ipv4.ignore-auto-dns yes
 nmcli conn modify "<connection-name>" ipv4.dns "8.8.8.8 8.8.4.4"
 systemctl restart NetworkManager
+
+flatpak install flathub net.ankiweb.Anki org.freedesktop.Sdk.Extension.texlive
