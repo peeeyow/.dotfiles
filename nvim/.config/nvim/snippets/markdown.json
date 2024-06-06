@@ -1,17 +1,46 @@
 {
   "Inline Math": {
     "prefix": "im",
-    "body": ["$${0}$"],
+    "body": [
+      "$${0}$"
+    ],
     "description": "Add inline math"
   },
   "Displayed Math": {
     "prefix": "dm",
-    "body": ["$$${0}$$"],
+    "body": [
+      "$$${0}$$"
+    ],
     "description": "Add displayed math"
   },
   "[Anki] Basic Card": {
     "prefix": "basic",
-    "body": ["START", "Basic", "Front: ${1}", "Back: ${2}", "END"],
+    "body": [
+      "START",
+      "Basic",
+      "Front: ${1}",
+      "Back: ${2}",
+      "Tags: ${3}",
+      "END"
+    ],
     "description": "Setup basic anki card"
+  },
+  "[Anki] Cloze Card": {
+    "prefix": "cloze",
+    "body": [
+      "START",
+      "Cloze",
+      "${1}",
+      "Tags: ${2}",
+      "END"
+    ],
+    "description": "Setup cloze anki card"
+  },
+  "[Anki] Cloze": {
+    "prefix": "cl",
+    "body": [
+      "{{c1::${0:${TM_SELECTED_TEXT}}}}"
+    ],
+    "description": "Setup cloze mark"
   }
 }
