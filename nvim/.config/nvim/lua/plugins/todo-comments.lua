@@ -4,7 +4,7 @@ return {
   opts = {},
   event = "User AstroFile",
   keys = {
-    { "<leader>t", desc = "Todo Comments" },
+    { "<Leader>t", desc = "Todo Comments" },
     {
       "[t",
       function() require("trouble").previous { skip_groups = true, jump = true } end,
@@ -15,10 +15,10 @@ return {
       function() require("trouble").next { skip_groups = true, jump = true } end,
       desc = "Next Trouble Item",
     },
-    { "<leader>tr", "<cmd>TroubleToggle<cr>", desc = "Toggle Trouble" },
-    { "<leader>tw", "<cmd>Trouble workspace_diagnostics<cr>", desc = "Open Trouble Workspace Diagnostics" },
-    { "<leader>td", "<cmd>Trouble document_diagnostics<cr>", desc = "Open Trouble Document Diagnostics" },
-    { "<leader>tt", "<cmd>Trouble todo<cr>", desc = "Open todo Trouble" },
+    { "<Leader>tr", "<Cmd>TroubleToggle<CR>", desc = "Toggle Trouble" },
+    { "<Leader>tw", "<Cmd>Trouble workspace_diagnostics<CR>", desc = "Open Trouble Workspace Diagnostics" },
+    { "<Leader>td", "<Cmd>Trouble document_diagnostics<CR>", desc = "Open Trouble Document Diagnostics" },
+    { "<Leader>tt", "<Cmd>Trouble todo<CR>", desc = "Open todo Trouble" },
   },
   cmd = { "TodoTrouble", "TodoTelescope", "TodoLocList", "TodoQuickFix" },
 }

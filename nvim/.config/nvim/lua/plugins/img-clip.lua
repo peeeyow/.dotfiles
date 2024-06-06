@@ -3,7 +3,7 @@ return {
   "HakonHarnes/img-clip.nvim",
   event = "BufEnter",
   keys = {
-    { "<leader>P", "<cmd>PasteImage<cr>", desc = "Paste clipboard image" },
+    { "<Leader>P", "<Cmd>PasteImage<CR>", desc = "Paste clipboard image" },
   },
   opts = {
     default = {

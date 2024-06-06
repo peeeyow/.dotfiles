@@ -20,7 +20,7 @@ return {
     {
       "<C-_>",
       function()
-        local esc = vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
+        local esc = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
         vim.api.nvim_feedkeys(esc, "nx", false)
         require("Comment.api").toggle.linewise(vim.fn.visualmode())
       end,
@@ -30,7 +30,7 @@ return {
     {
       "<C-/>",
       function()
-        local esc = vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
+        local esc = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
         vim.api.nvim_feedkeys(esc, "nx", false)
         require("Comment.api").toggle.linewise(vim.fn.visualmode())
       end,
@@ -40,7 +40,7 @@ return {
     {
       [[<C-\>]],
       function()
-        local esc = vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
+        local esc = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
         vim.api.nvim_feedkeys(esc, "nx", false)
         require("Comment.api").toggle.blockwise(vim.fn.visualmode())
       end,

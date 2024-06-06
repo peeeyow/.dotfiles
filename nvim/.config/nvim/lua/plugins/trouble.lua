@@ -1,4 +1,4 @@
-local prefix = "<leader>x"
+local prefix = "<Leader>x"
 
 ---@type LazySpec
 return {
@@ -14,8 +14,8 @@ return {
       function() require("trouble").next { skip_groups = true, jump = true } end,
       desc = "Next Trouble Item",
     },
-    { prefix .. "z", "<cmd>TroubleToggle<cr>", desc = "Trouble toggle" },
-    { prefix .. "t", "<cmd>TroubleToggle todo<cr>", desc = "Todo (Trouble)" },
-    { prefix .. "r", "<cmd>TroubleToggle lsp_references<cr>", desc = "LSP References (Trouble)" },
+    { prefix .. "z", "<Cmd>TroubleToggle<CR>", desc = "Trouble toggle" },
+    { prefix .. "t", "<Cmd>TroubleToggle todo<CR>", desc = "Todo (Trouble)" },
+    { prefix .. "r", "<Cmd>TroubleToggle lsp_references<CR>", desc = "LSP References (Trouble)" },
   },
 }
