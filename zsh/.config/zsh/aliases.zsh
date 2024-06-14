@@ -2,7 +2,7 @@
 alias sudo="sudo "
 
 # interactive
-alias rm="rm -I"
+alias rm="rm -i"
 alias cp="cp -i"
 alias mv="mv -i"
 
