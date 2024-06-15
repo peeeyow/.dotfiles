@@ -27,6 +27,7 @@ alias g="git "
 alias dk="docker "
 alias dkc="docker-compose "
 alias ipy="ipython "
+alias cat="bat "
 
 # compiling flags
 alias gpp-debug="g++ -Wall -Wextra -Werror -Wsign-conversion -Weffc++ -pedantic-errors -ggdb"
