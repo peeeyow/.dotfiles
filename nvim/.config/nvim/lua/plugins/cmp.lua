@@ -8,7 +8,7 @@ return {
     if not snip_status_ok then return end
 
     opts.experimental = {
-      ghost_text = true,
+      ghost_text = false,
     }
     local mapping = {
       ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),

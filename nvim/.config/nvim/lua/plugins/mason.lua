@@ -4,6 +4,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     opts = function(_, opts)
       opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
+        "basedpyright",
         "bashls",
         "clangd",
         "cssls",
@@ -15,7 +16,6 @@ return {
         "jsonls",
         "lua_ls",
         "prismals",
-        "pyright",
         "tailwindcss",
         "taplo",
         "terraformls",
