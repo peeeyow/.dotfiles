@@ -1,16 +1,12 @@
 {
   "Inline Math": {
     "prefix": "im",
-    "body": [
-      "$${0}$"
-    ],
+    "body": ["$${1}$${0}"],
     "description": "Add inline math"
   },
   "Displayed Math": {
     "prefix": "dm",
-    "body": [
-      "$$${0}$$"
-    ],
+    "body": ["$$${1}$$${0}"],
     "description": "Add displayed math"
   },
   "[Anki] Basic Card": {
@@ -21,26 +17,31 @@
       "Front: ${1}",
       "Back: ${2}",
       "Tags: ${3}",
-      "END"
+      "END$0"
     ],
     "description": "Setup basic anki card"
   },
   "[Anki] Cloze Card": {
     "prefix": "cloze",
-    "body": [
-      "START",
-      "Cloze",
-      "${1}",
-      "Tags: ${2}",
-      "END"
-    ],
+    "body": ["START", "Cloze", "${1}", "Tags: ${2}", "END${0}"],
     "description": "Setup cloze anki card"
   },
   "[Anki] Cloze": {
     "prefix": "cl",
-    "body": [
-      "{{c1::${0:${TM_SELECTED_TEXT}}}}"
-    ],
+    "body": ["{{c1::${1:${TM_SELECTED_TEXT}}}}${0}"],
     "description": "Setup cloze mark"
+  },
+  "[Anki] Cloze Overlapper": {
+    "prefix": "clozo",
+    "body": [
+      "START",
+      "Cloze Overlapper",
+      "${1}",
+      "{{c99::ask-all}}",
+      "Before|After|OnlyContext|RevealAll|InactiveHints: ${2}",
+      "Tags: ${3}",
+      "END${0}"
+    ],
+    "description": "Setup cloze overlapper anki card"
   }
 }
