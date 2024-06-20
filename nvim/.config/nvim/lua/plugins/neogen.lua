@@ -9,6 +9,11 @@ return {
             annotation_convention = "numpydoc",
           },
         },
+        lua = {
+          template = {
+            annotation_convention = "emmylua",
+          },
+        },
       },
     },
   },

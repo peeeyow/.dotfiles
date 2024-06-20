@@ -19,6 +19,7 @@ return {
         "tailwindcss",
         "taplo",
         "terraformls",
+        "texlab",
         "tflint",
         "tsserver",
         "yamlls",
@@ -31,10 +32,15 @@ return {
       opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
         "bibtex-tidy",
         "black",
+        "commitlint",
+        "djlint",
         "flake8",
+        "hadolint",
         "isort",
         "latexindent",
         "prettierd",
+        "tfsec",
+        "yamllint",
       })
       opts.automatic_installation = { exclude = { "mypy" } }
     end,
