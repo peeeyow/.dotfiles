@@ -13,6 +13,7 @@ return {
   { import = "astrocommunity.editing-support.treesj" },
   { import = "astrocommunity.git.diffview-nvim" },
   { import = "astrocommunity.lsp.lsp-signature-nvim" },
+  { import = "astrocommunity.lsp.nvim-lint" },
   { import = "astrocommunity.motion.nvim-surround" },
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.markdown" },

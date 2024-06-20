@@ -11,6 +11,7 @@ return {
   "stevearc/conform.nvim",
   opts = {
     formatters_by_ft = {
+      bib = { "bibtex-tidy" },
       django = { "djlint" },
       htmldjango = { "djlint" },
       ["jinja.html"] = { "djlint" },

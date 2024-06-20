@@ -69,6 +69,16 @@ return {
           },
         },
       },
+      yamlls = {
+        capabilities = {
+          textDocument = {
+            foldingRange = {
+              dynamicRegistration = false,
+              lineFoldingOnly = true,
+            },
+          },
+        },
+      },
     },
     autocmds = {
       lsp_codelens_refresh = {
@@ -86,6 +96,9 @@ return {
       n = {
         ["gs"] = { function() vim.lsp.buf.signature_help() end, desc = "Show signature help" },
       },
+    },
+    handlers = {
+      yamlls = false,
     },
   },
 }
