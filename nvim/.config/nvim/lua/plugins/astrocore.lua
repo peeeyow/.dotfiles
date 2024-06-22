@@ -133,5 +133,16 @@ return {
     -- Mappings can be configured through AstroCore as well.
     -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
     mappings = mappings,
+    autocmds = {
+      autodisableformatting = {
+        {
+          desc = "Disable auto formatting for anki markdowns.",
+          event = "BufReadPre",
+          pattern = vim.fn.expand "~" .. "/obsidian/main-vault/anki/*.md",
+          group = "autodisableformatting",
+          callback = function() vim.b.autoformat = false end,
+        },
+      },
+    },
   },
 }
