@@ -329,3 +329,5 @@ exec --no-startup-id feh --bg-fill $background_path
 exec --no-startup-id picom
 exec --no-startup-id xinput set-prop "SYNA7DB5:01 06CB:CD41 Touchpad" "libinput Tapping Enabled" 1
 exec --no-startup-id xinput set-prop "SYNA7DB5:01 06CB:CD41 Touchpad" "libinput Natural Scrolling Enabled" 1
+exec --no-startup-id xinput set-prop "Synaptics TM3276-022" "libinput Tapping Enabled" 1
+exec --no-startup-id xinput set-prop "Synaptics TM3276-022" "libinput Natural Scrolling Enabled" 1
