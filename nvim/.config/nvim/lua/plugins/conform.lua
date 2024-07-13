@@ -10,7 +10,12 @@ end
 return {
   "stevearc/conform.nvim",
   opts = {
-    format_on_save = { timeout_ms = 1000 },
+    format_on_save = function(bufnr)
+      if vim.g.autoformat == nil then vim.g.autoformat = true end
+      local autoformat = vim.b[bufnr].autoformat
+      if autoformat == nil then autoformat = vim.g.autoformat end
+      if autoformat then return { timeout_ms = 1000, lsp_format = "fallback" } end
+    end,
     formatters_by_ft = {
       bib = { "bibtex-tidy" },
       django = { "djlint" },
