@@ -15,6 +15,7 @@ return {
   { import = "astrocommunity.lsp.lsp-signature-nvim" },
   { import = "astrocommunity.lsp.nvim-lint" },
   { import = "astrocommunity.motion.nvim-surround" },
+  { import = "astrocommunity.note-taking.venn-nvim" },
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.markdown" },
   { import = "astrocommunity.recipes.astrolsp-no-insert-inlay-hints" },
