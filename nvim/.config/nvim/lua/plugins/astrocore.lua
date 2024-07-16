@@ -124,6 +124,7 @@ return {
         whichwrap = vim.opt.whichwrap + "<>[]hl",
         foldlevel = 99,
         foldlevelstart = -1,
+        scrolloff = 8,
       },
       g = {
         resession_enabled = true,
