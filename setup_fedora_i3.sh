@@ -42,3 +42,6 @@ dnf install -y throttled
 systemctl enable --now throttled
 
 flatpak install flathub net.ankiweb.Anki org.freedesktop.Sdk.Extension.texlive
+
+# ipython before stowing
+mkdir -p ~/.ipython/profile_default
