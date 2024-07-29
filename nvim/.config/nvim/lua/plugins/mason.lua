@@ -38,6 +38,7 @@ return {
         "hadolint",
         "isort",
         "latexindent",
+        "markdownlint-cli2",
         "prettierd",
         "tfsec",
         "yamllint",

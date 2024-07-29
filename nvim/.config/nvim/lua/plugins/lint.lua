@@ -8,6 +8,7 @@ return {
       gitcommit = { "commitlint" },
       htmldjango = { "djlint" },
       ["jinja.html"] = { "djlint" },
+      markdown = { "markdownlint-cli2" },
       python = { "flake8", "mypy", "pylint" },
       tf = { "tfsec" },
       terraform = { "tfsec" },
