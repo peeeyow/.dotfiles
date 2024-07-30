@@ -40,6 +40,7 @@ return {
         "latexindent",
         "markdownlint-cli2",
         "prettierd",
+        "r-languageserver",
         "tfsec",
         "yamllint",
       })
