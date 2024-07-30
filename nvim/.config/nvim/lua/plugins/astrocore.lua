@@ -34,6 +34,8 @@ local mappings = {
       desc = "Dismiss all notifictions",
     },
     ["<Leader>o"] = { desc = "󱞁 Obsidian" },
+    ["<Leader>m"] = { desc = "Node Actions" },
+    ["<Leader>M"] = { desc = "Molten" },
     ["<Leader>/"] = false,
     ["|"] = false,
     ["\\"] = false,
