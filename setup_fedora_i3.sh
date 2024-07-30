@@ -1,4 +1,4 @@
-sudo dnf -y install i3-gaps xinput arc-theme zsh polybar stow ranger arc-theme ripgrep zoxide cargo kitty dunst picom rofi feh util-linux-user tlp tlp-rdw brightnessctl python-devel @development-tools scrot util-linux-user lsd mozilla-fira-mono-fonts fontawesome5-fonts-all jetbrains-mono-fonts-all pam-u2f pamu2fcfg pcsc-lite libasan wl-clipboard tldr git-credential-libsecret pulseaudio-utils zathura zathura-plugins-all btop bat sqlite-devel sqlite-tcl tk-devel ImageMagick-devel
+sudo dnf -y install i3-gaps xinput arc-theme zsh polybar stow ranger arc-theme ripgrep zoxide cargo kitty dunst picom rofi feh util-linux-user tlp tlp-rdw brightnessctl python-devel @development-tools scrot util-linux-user lsd mozilla-fira-mono-fonts fontawesome5-fonts-all jetbrains-mono-fonts-all pam-u2f pamu2fcfg pcsc-lite libasan wl-clipboard tldr git-credential-libsecret pulseaudio-utils zathura zathura-plugins-all btop bat sqlite-devel sqlite-tcl tk-devel ImageMagick-devel poppler-utils netpbm-progs
 
 
 sudo dnf -y groupinstall "X Software Development" "Development Tools" "Development Libraries"
@@ -45,3 +45,11 @@ flatpak install flathub net.ankiweb.Anki org.freedesktop.Sdk.Extension.texlive
 
 # ipython before stowing
 mkdir -p ~/.ipython/profile_default
+
+# molten nvim
+nvim_env="$HOME/workfiles/virtualenvs"
+mkdir -p $nvim_env
+python -m venv $nvim_env/neovim
+source $nvim_env/neovim/bin/activate
+pip install ipykernel jupytext pynvim jupyter_client cairosvg plotly kaleido pyperclip nbformat pillow
+deactivate
