@@ -1,12 +1,22 @@
 ---@type LazySpec
 return {
   "hrsh7th/nvim-cmp",
+  dependencies = {
+    "jmbuhr/otter.nvim",
+  },
   opts = function(_, opts)
     local cmp = require "cmp"
     local snip_status_ok, luasnip = pcall(require, "luasnip")
 
     if not snip_status_ok then return end
 
+    opts.sources = cmp.config.sources {
+      { name = "nvim_lsp", priority = 1000 },
+      { name = "luasnip", priority = 750 },
+      { name = "buffer", priority = 500 },
+      { name = "path", priority = 250 },
+      { name = "otter", priority = 700 },
+    }
     opts.experimental = {
       ghost_text = false,
     }
