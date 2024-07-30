@@ -33,7 +33,7 @@ local mappings = {
       function() require("notify").dismiss { pending = true, silent = true } end,
       desc = "Dismiss all notifictions",
     },
-    ["<Leader>o"] = { name = "Obsidian", desc = "󱞁 Obsidian" },
+    ["<Leader>o"] = { desc = "󱞁 Obsidian" },
     ["<Leader>/"] = false,
     ["|"] = false,
     ["\\"] = false,
