@@ -23,9 +23,9 @@ return {
       clangd = { cmd = { "clangd", "--enable-config" }, capabilities = { offsetEncoding = "utf-16" } },
       basedpyright = {
         settings = {
-          python = {
+          basedpyright = {
             analysis = {
-              typeCheckingMode = "basic",
+              typeCheckingMode = "standard",
             },
           },
         },
