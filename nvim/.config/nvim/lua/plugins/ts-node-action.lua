@@ -3,7 +3,7 @@ return {
   "CKolkey/ts-node-action",
   keys = {
     {
-      "<Leader>ma",
+      "<Leader>Ma",
       function(...) require("ts-node-action").node_action(...) end,
       desc = "Trigger TS Node Action",
     },
