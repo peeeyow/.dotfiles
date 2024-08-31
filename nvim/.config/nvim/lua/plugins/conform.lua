@@ -22,7 +22,7 @@ return {
       htmldjango = { "djlint" },
       ["jinja.html"] = { "djlint" },
       lua = { "stylua" },
-      markdown = { "injected" },
+      markdown = { "injected", "prettierd" },
       python = { "isort", "black" },
       quarto = { "injected" },
       tex = { "latexindent" },

@@ -6,8 +6,8 @@ return {
     features = {
       autoformat = true,
       codelens = true,
-      inlay_hints = true,
       semantic_tokens = true,
+      signature_help = true,
     },
     formatting = {
       format_on_save = {
