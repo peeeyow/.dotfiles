@@ -22,9 +22,10 @@ return {
       htmldjango = { "djlint" },
       ["jinja.html"] = { "djlint" },
       lua = { "stylua" },
-      markdown = { "injected", "prettierd" },
+      markdown = { "prettier", "injected" },
       python = { "isort", "black" },
-      quarto = { "injected" },
+      quarto = { "prettier", "injected" },
+      r = { "styler", lsp_format = "fallback" },
       tex = { "latexindent" },
     },
     formatters = {
@@ -34,6 +35,29 @@ return {
       isort = {
         command = get_python_path_or_command "isort",
       },
+      styler = {
+        command = "R",
+        args = { "-s", "-e", "styler::style_file(commandArgs(TRUE))", "--args", "$FILENAME" },
+        stdin = false,
+      },
     },
   },
+  config = function(_, opts)
+    local conform_ok, conform = pcall(require, "conform")
+    if not conform_ok then return end
+
+    conform.setup(opts)
+    conform.formatters.prettier = {
+      options = {
+        ext_parsers = {
+          qmd = "markdown",
+        },
+      },
+    }
+    conform.formatters.prettierd = {
+      options = {
+        ext_parsers = { qmd = "markdown" },
+      },
+    }
+  end,
 }

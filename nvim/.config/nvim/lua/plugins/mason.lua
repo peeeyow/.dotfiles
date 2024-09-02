@@ -39,7 +39,7 @@ return {
         "isort",
         "latexindent",
         "markdownlint-cli2",
-        "prettierd",
+        "prettier",
         "r-languageserver",
         "tfsec",
         "yamllint",
