@@ -40,24 +40,13 @@ return {
         args = { "-s", "-e", "styler::style_file(commandArgs(TRUE))", "--args", "$FILENAME" },
         stdin = false,
       },
-    },
-  },
-  config = function(_, opts)
-    local conform_ok, conform = pcall(require, "conform")
-    if not conform_ok then return end
-
-    conform.setup(opts)
-    conform.formatters.prettier = {
-      options = {
-        ext_parsers = {
-          qmd = "markdown",
+      prettier = {
+        options = {
+          ext_parsers = {
+            qmd = "markdown",
+          },
         },
       },
-    }
-    conform.formatters.prettierd = {
-      options = {
-        ext_parsers = { qmd = "markdown" },
-      },
-    }
-  end,
+    },
+  },
 }
