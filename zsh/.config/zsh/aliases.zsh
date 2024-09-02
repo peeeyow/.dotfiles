@@ -48,3 +48,6 @@ alias fnm_update="curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-
 
 # python venv sourcing
 alias venv="source .venv/bin/activate"
+
+# serving directories
+alias serve="python -m http.server 42069"
