@@ -51,3 +51,11 @@ alias venv="source .venv/bin/activate"
 
 # serving directories
 alias serve="python -m http.server 42069"
+
+# R related alias
+alias rinit='R -e "renv::init()"'
+alias rinstall='R -e "renv::install()"'
+alias rrestore='R -e "renv::restore()"'
+alias rsnap='R -e "renv::snap()"'
+alias rstatus='R -e "renv::status()"'
+alias rupdate='R -e "renv::update()"'
