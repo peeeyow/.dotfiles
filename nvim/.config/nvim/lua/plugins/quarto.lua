@@ -8,6 +8,10 @@ return {
     },
     opts = {
       debug = true,
+      codeRunner = {
+        enabled = true,
+        default_method = "molten",
+      },
     },
   },
 }
