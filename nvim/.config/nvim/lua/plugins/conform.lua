@@ -36,7 +36,7 @@ return {
         command = get_python_path_or_command "isort",
       },
       styler = {
-        command = "R",
+        command = "/usr/local/bin/R",
         args = { "-s", "-e", "styler::style_file(commandArgs(TRUE))", "--args", "$FILENAME" },
         stdin = false,
       },
