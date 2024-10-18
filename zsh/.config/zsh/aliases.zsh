@@ -56,6 +56,6 @@ alias serve="python -m http.server 42069"
 alias rinit='R -e "renv::init()"'
 alias rinstall='R -e "renv::install()"'
 alias rrestore='R -e "renv::restore()"'
-alias rsnap='R -e "renv::snap()"'
+alias rsnap='R -e "renv::snapshot()"'
 alias rstatus='R -e "renv::status()"'
 alias rupdate='R -e "renv::update()"'
