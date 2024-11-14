@@ -16,6 +16,7 @@ return {
         "jsonls",
         "lua_ls",
         "prismals",
+        "r_language_server",
         "tailwindcss",
         "taplo",
         "terraformls",
@@ -40,7 +41,6 @@ return {
         "latexindent",
         "markdownlint-cli2",
         "prettier",
-        "r-languageserver",
         "tfsec",
         "yamllint",
       })
