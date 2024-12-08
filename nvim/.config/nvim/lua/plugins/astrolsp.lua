@@ -14,7 +14,7 @@ return {
         enabled = true,
       },
       disabled = { -- disable formatting capabilities for the listed language servers
-        "tsserver",
+        "ts_ls",
         "json",
       },
     },
@@ -40,7 +40,7 @@ return {
       terraformls = {
         filetypes = { "terraform", "terraform-vars", "tf" },
       },
-      tsserver = {
+      ts_ls = {
         settings = {
           javascript = {
             inlayHints = {

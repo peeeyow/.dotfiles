@@ -22,7 +22,7 @@ return {
         "terraformls",
         "texlab",
         "tflint",
-        "tsserver",
+        "ts_ls",
         "yamlls",
       })
     end,

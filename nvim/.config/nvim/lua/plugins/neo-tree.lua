@@ -1,5 +1,5 @@
 local function on_file_remove(args)
-  local ts_clients = vim.lsp.get_active_clients { name = "tsserver" }
+  local ts_clients = vim.lsp.get_clients { name = "ts_ls" }
   for _, ts_client in ipairs(ts_clients) do
     ts_client.request("workspace/executeCommand", {
       command = "_typescript.applyRenameFile",
