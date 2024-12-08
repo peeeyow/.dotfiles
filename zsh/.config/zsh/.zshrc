@@ -49,3 +49,6 @@ complete -C `which terraform` terraform
 
 # ghcup-env
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" 
+
+# rust
+[ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"

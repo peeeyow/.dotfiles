@@ -17,6 +17,7 @@ return {
         "lua_ls",
         "prismals",
         "r_language_server",
+        "rust_analyzer",
         "tailwindcss",
         "taplo",
         "terraformls",

@@ -17,5 +17,6 @@ return {
   { import = "astrocommunity.note-taking.venn-nvim" },
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.markdown" },
+  { import = "astrocommunity.pack.rust" },
   { import = "astrocommunity.recipes.astrolsp-no-insert-inlay-hints" },
 }
