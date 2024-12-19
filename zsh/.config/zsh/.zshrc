@@ -33,6 +33,8 @@ eval "$(zoxide init zsh)"
 eval "$(pip completion --zsh)"
 eval "$(pyenv init -)"
 eval "$(terraspace completion_script)"
+eval "$(uv generate-shell-completion zsh)"
+eval "$(uvx --generate-shell-completion zsh)"
 
 # tabtab source for packages
 # uninstall by removing these lines
@@ -52,3 +54,5 @@ complete -C `which terraform` terraform
 
 # rust
 [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
+
+. "$HOME/.local/share/../bin/env"
