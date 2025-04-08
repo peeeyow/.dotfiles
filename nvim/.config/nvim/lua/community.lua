@@ -18,5 +18,6 @@ return {
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.markdown" },
   { import = "astrocommunity.pack.rust" },
+  { import = "astrocommunity.pack.typst" },
   { import = "astrocommunity.recipes.astrolsp-no-insert-inlay-hints" },
 }

@@ -43,6 +43,7 @@ return {
         "markdownlint-cli2",
         "prettier",
         "tfsec",
+        "typstyle",
         "yamllint",
       })
       opts.automatic_installation = { exclude = { "mypy" } }

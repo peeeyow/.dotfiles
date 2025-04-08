@@ -27,6 +27,7 @@ return {
       quarto = { "prettier", "injected" },
       r = { "styler", lsp_format = "fallback" },
       tex = { "latexindent" },
+      typst = { "typstyle" },
     },
     formatters = {
       black = {
