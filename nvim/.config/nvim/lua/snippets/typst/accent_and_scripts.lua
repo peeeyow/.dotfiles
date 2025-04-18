@@ -9,11 +9,11 @@ local pf = require("luasnip.extras.postfix").postfix
 
 return {
   -- scripts
-  s({ trig = "__", condition = in_math, snippetType = "autosnippet" }, t "_()"),
-  s({ trig = "td", condition = in_math, snippetType = "autosnippet" }, t "^()"),
+  s({ trig = "__", condition = in_math, wordTrig = false, snippetType = "autosnippet" }, t "_()"),
+  s({ trig = "td", condition = in_math, wordTrig = false, snippetType = "autosnippet" }, t "^()"),
   -- roots and exponents
-  s({ trig = "sr", condition = in_math, snippetType = "autosnippet" }, t "^(2)"),
-  s({ trig = "cb", condition = in_math, snippetType = "autosnippet" }, t "^(3)"),
+  s({ trig = "sr", condition = in_math, wordTrig = false, snippetType = "autosnippet" }, t "^(2)"),
+  s({ trig = "cb", condition = in_math, wordTrig = false, snippetType = "autosnippet" }, t "^(3)"),
   pf(
     { trig = "sq", condition = in_math, snippetType = "autosnippet" },
     f(function(_, parent) return "sqrt(" .. parent.snippet.env.POSTFIX_MATCH .. ")" end)
