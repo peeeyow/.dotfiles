@@ -10,6 +10,9 @@ return {
       markdown = {
         filetypes = { "markdown", "quarto" },
       },
+      typst = {
+        enabled = false,
+      },
     },
     max_width = 100,
     max_height = 12,

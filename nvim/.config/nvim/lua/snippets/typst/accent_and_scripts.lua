@@ -9,8 +9,8 @@ local pf = require("luasnip.extras.postfix").postfix
 
 return {
   -- scripts
-  s({ trig = "__", condition = in_math, wordTrig = false, snippetType = "autosnippet" }, t "_()"),
-  s({ trig = "td", condition = in_math, wordTrig = false, snippetType = "autosnippet" }, t "^()"),
+  s({ trig = "_", condition = in_math, wordTrig = false, snippetType = "autosnippet" }, fmt("_({})", i(1))),
+  s({ trig = "td", condition = in_math, wordTrig = false, snippetType = "autosnippet" }, fmt("^({})", i(1))),
   -- roots and exponents
   s({ trig = "sr", condition = in_math, wordTrig = false, snippetType = "autosnippet" }, t "^(2)"),
   s({ trig = "cb", condition = in_math, wordTrig = false, snippetType = "autosnippet" }, t "^(3)"),
