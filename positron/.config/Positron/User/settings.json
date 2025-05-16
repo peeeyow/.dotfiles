@@ -131,5 +131,11 @@
     "editor.wordWrapColumn": 100,
     "editor.wordWrap": "wordWrapColumn",
     "terminal.integrated.defaultProfile.linux": "zsh (2)",
-    "application.experimental.positronPlotsInEditorTab": true
+    "application.experimental.positronPlotsInEditorTab": true,
+    "[r]": {
+        "editor.defaultFormatter": "Posit.air-vscode"
+    },
+    "[quarto]": {
+        "editor.defaultFormatter": "quarto.quarto"
+    },
 }
