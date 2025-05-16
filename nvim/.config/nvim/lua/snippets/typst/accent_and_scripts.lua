@@ -48,4 +48,9 @@ return {
     { trig = "cc", condition = in_math, snippetType = "autosnippet" },
     f(function(_, parent) return "cancel(" .. parent.snippet.env.POSTFIX_MATCH .. ")" end)
   ),
+  -- font weight
+  pf(
+    { trig = "bold", condition = in_math, snippetType = "autosnippet" },
+    f(function(_, parent) return "bold(" .. parent.snippet.env.POSTFIX_MATCH .. ")" end)
+  ),
 }
