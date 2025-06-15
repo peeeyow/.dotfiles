@@ -31,7 +31,6 @@ return {
         "bibtex-tidy",
         "commitlint",
         "djlint",
-        "flake8",
         "hadolint",
         "latexindent",
         "markdownlint-cli2",

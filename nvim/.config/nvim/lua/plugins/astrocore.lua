@@ -85,7 +85,7 @@ return {
       large_buf = { size = 1024 * 256, lines = 10000 },
       autopairs = true,
       cmp = true,
-      diagnostics = { virtual_text = true, virtual_lines = false },
+      diagnostics = { virtual_text = false, virtual_lines = false },
       highlighturl = true,
       notifications = true,
     },

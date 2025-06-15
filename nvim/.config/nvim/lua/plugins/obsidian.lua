@@ -1,6 +1,3 @@
-local Input = require "nui.input"
-local event = require("nui.utils.autocmd").event
-
 local check_passthrough = function()
   if require("obsidian").util.cursor_on_markdown_link() then
     return "<Cmd>ObsidianFollowLink<CR>"
@@ -9,42 +6,11 @@ local check_passthrough = function()
   end
 end
 
-local open_new_window = function(command)
-  return function()
-    local input = Input({
-      position = "50%",
-      size = {
-        width = 20,
-      },
-      border = {
-        style = "single",
-        text = {
-          top = "Enter filename",
-          top_align = "center",
-        },
-      },
-      win_options = {
-        winhighlight = "Normal:Normal,FloatBorder:Normal",
-      },
-    }, {
-      prompt = "> ",
-      default_value = "",
-      on_submit = function(value) vim.cmd(command .. value) end,
-    })
-    input:on(event.BufLeave, function() input:unmount() end)
-    input:map("i", "<Esc>", function() input:unmount() end, { noremap = true })
-    input:mount()
-  end
-end
-
-local create_new_note = open_new_window "ObsidianNew "
-local paste_image = open_new_window "ObsidianPasteImg "
-
 local prefix = "<Leader>o"
 
 ---@type LazySpec
 return {
-  "epwalsh/obsidian.nvim",
+  "obsidian-nvim/obsidian.nvim",
   event = {
     "BufReadPre " .. vim.fn.expand "~" .. "/obsidian/main-vault/**.md",
     "BufNewFile " .. vim.fn.expand "~" .. "/obsidian/main-vault/**.md",
@@ -71,14 +37,14 @@ return {
     },
     {
       prefix .. "n",
-      create_new_note,
+      "ObsidianNew ",
       desc = "Create new Obsidian Note",
     },
     { prefix .. "p", "<Cmd>ObsidianPasteImg<CR>", desc = "Paste image from clipboard" },
     { prefix .. "o", "<Cmd>ObsidianOpen<CR>", desc = "Open current buffer in Obsidian" },
     { prefix .. "f", "<Cmd>ObsidianQuickSwitch<CR>", desc = "Switch notes" },
     { prefix .. "b", "<Cmd>ObsidianBacklinks<CR>", desc = "Open Backlinks" },
-    { prefix .. "T", "<Cmd>ObsidianToday<CR>", desc = "Create a new daily  note" },
+    { prefix .. "T", "<cmd>ObsidianToday<CR>", desc = "Create a new daily  note" },
     { prefix .. "Y", "<Cmd>ObsidianYesterday<CR>", desc = "Open yesterday's daily note" },
     { prefix .. "t", "<Cmd>ObsidianTemplate<CR>", desc = "Search for note template" },
     { prefix .. "w", "<Cmd>ObsidianSearch<CR>", desc = "Search for notes in vault" },
@@ -87,9 +53,8 @@ return {
   },
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "hrsh7th/nvim-cmp",
-    "nvim-telescope/telescope.nvim",
-    "MunifTanjim/nui.nvim",
+    "folke/snacks.nvim",
+    "Saghen/blink.cmp",
   },
   opts = {
     workspaces = {
@@ -103,6 +68,11 @@ return {
 
     daily_notes = {
       folder = "dailies",
+    },
+
+    completion = {
+      nvim_cmp = false,
+      blink = true,
     },
 
     templates = {
@@ -155,10 +125,8 @@ return {
     end,
 
     preferred_link_style = "markdown",
-
-    follow_url_func = vim.ui.open or require("astrocore").system_open,
-
+    follow_url_func = vim.ui.open,
     use_advanced_uri = true,
-    finder = "telescope.nvim",
+    picker = { "snack" },
   },
 }
