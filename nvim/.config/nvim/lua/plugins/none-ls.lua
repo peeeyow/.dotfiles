@@ -1,13 +1,12 @@
 ---@type LazySpec
 return {
   "nvimtools/none-ls.nvim",
-  opts = function(_, config)
+  opts = function(_, opts)
     local null_ls = require "null-ls"
     local codeactions = null_ls.builtins.code_actions
 
-    config.sources = {
+    opts.sources = require("astrocore").list_insert_unique(opts.sources, {
       codeactions.gitsigns,
-    }
-    return config
+    })
   end,
 }

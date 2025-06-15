@@ -1,11 +1,3 @@
---- Sets Local python module path or command
----@param name string
-local get_python_path_or_command = function(name)
-  return require("conform.util").find_executable({
-    "./.venv/bin/" .. name,
-  }, name)
-end
-
 ---@type LazySpec
 return {
   "stevearc/conform.nvim",
@@ -23,19 +15,17 @@ return {
       ["jinja.html"] = { "djlint" },
       lua = { "stylua" },
       markdown = { "prettier", "injected" },
-      python = { "isort", "black" },
+      python = {
+          -- "ruff_fix", --too aggresive
+          "ruff_format",
+          "ruff_organize_imports",
+      },
       quarto = { "prettier", "injected" },
       r = { "styler", lsp_format = "fallback" },
       tex = { "latexindent" },
       typst = { "typstyle" },
     },
     formatters = {
-      black = {
-        command = get_python_path_or_command "black",
-      },
-      isort = {
-        command = get_python_path_or_command "isort",
-      },
       styler = {
         command = "/usr/local/bin/R",
         args = { "-s", "-e", "styler::style_file(commandArgs(TRUE))", "--args", "$FILENAME" },

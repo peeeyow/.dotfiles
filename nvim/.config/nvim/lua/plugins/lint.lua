@@ -9,7 +9,7 @@ return {
       htmldjango = { "djlint" },
       ["jinja.html"] = { "djlint" },
       markdown = { "markdownlint-cli2" },
-      python = { "flake8", "mypy", "pylint" },
+      python = { "mypy", "pylint" }, --"ruff" # not needed
       tf = { "tfsec" },
       terraform = { "tfsec" },
       ["terraform-vars"] = { "tfsec" },

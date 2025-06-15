@@ -36,6 +36,12 @@ local mappings = {
     ["<Leader>o"] = { desc = "󱞁 Obsidian" },
     ["<Leader>m"] = { desc = "Node Actions" },
     ["<Leader>M"] = { desc = "Molten" },
+    ["<C-/>"] = { "gcc", remap = true, desc = "Line Comment" },
+    ["<C-_>"] = { "gcc", remap = true, desc = "Line Comment" },
+
+    ["<Leader>r"] = {
+      function() require("snacks").image.hover() end,
+    },
     ["<Leader>/"] = false,
     ["|"] = false,
     ["\\"] = false,
@@ -52,21 +58,10 @@ local mappings = {
   },
   x = {
     ["p"] = { "p:let @+=@0<CR>" },
+    ["<C-/>"] = { "gc", remap = true, desc = "Visual Line Comment" },
+    ["<C-_>"] = { "gc", remap = true, desc = "Visual Line Comment" },
   },
 }
-
-if is_available "alpha-nvim" then
-  mappings.n["<Leader>H"] = {
-    function()
-      local wins = vim.api.nvim_tabpage_list_wins(0)
-      if #wins > 1 and vim.api.nvim_get_option_value("filetype", { win = wins[1] }) == "neo-tree" then
-        vim.fn.win_gotoid(wins[2]) -- go to non-neo-tree window to toggle alpha
-      end
-      require("alpha").start(false, require("alpha").default_config)
-    end,
-    desc = "Home Screen",
-  }
-end
 
 if is_available "neo-tree.nvim" then
   mappings.n["<Leader>O"] = {
@@ -87,16 +82,16 @@ return {
   ---@type AstroCoreOpts
   opts = {
     features = {
-      large_buf = { size = 1024 * 500, lines = 10000 },
+      large_buf = { size = 1024 * 256, lines = 10000 },
       autopairs = true,
       cmp = true,
-      diagnostics_mode = 3,
+      diagnostics = { virtual_text = true, virtual_lines = false },
       highlighturl = true,
       notifications = true,
     },
     diagnostics = {
       virtual_text = false,
-      update_in_insert = true,
+      underline = true,
       signs = {
         active = signs,
       },
@@ -133,8 +128,6 @@ return {
         markdown_recommended_style = false,
       },
     },
-    -- Mappings can be configured through AstroCore as well.
-    -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
     mappings = mappings,
     autocmds = {
       autodisableformatting = {

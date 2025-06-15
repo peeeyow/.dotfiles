@@ -44,7 +44,7 @@ return {
       },
     },
     config = function(_, opts)
-      local path = require("mason-registry").get_package("debugpy"):get_install_path() .. "/venv/bin/python"
+      local path = vim.fn.expand "$MASON/packages/debugpy" .. "/venv/bin/python"
       require("dap-python").setup(path, opts)
 
       table.insert(require("dap").configurations.python, {

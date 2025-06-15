@@ -1,62 +1,51 @@
 ---@type LazySpec
 return {
   {
-    "williamboman/mason-lspconfig.nvim",
-    opts = function(_, opts)
-      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    opts = {
+      -- Make sure to use the names found in `:Mason`
+      ensure_installed = {
+        -- LSPs
         "basedpyright",
-        "bashls",
+        "bash-language-server",
         "clangd",
-        "cssls",
-        "dockerls",
-        "emmet_ls",
-        "eslint",
-        "graphql",
-        "html",
-        "jsonls",
-        "lua_ls",
-        "prismals",
-        "r_language_server",
-        "rust_analyzer",
-        "tailwindcss",
+        "css-lsp",
+        "docker-compose-language-service",
+        "dockerfile-language-server",
+        "emmet-ls",
+        "eslint-lsp",
+        "html-lsp",
+        "json-lsp",
+        "lua-language-server",
+        "r-languageserver",
+        "ruff",
+        "rust-analyzer",
+        "tailwindcss-language-server",
         "taplo",
-        "terraformls",
+        "terraform-ls",
         "texlab",
         "tflint",
-        "ts_ls",
-        "yamlls",
-      })
-    end,
-  },
-  {
-    "jay-babu/mason-null-ls.nvim",
-    opts = function(_, opts)
-      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
+        "yaml-language-server",
+
+        -- Linters and formatters
         "bibtex-tidy",
-        "black",
         "commitlint",
         "djlint",
         "flake8",
         "hadolint",
-        "isort",
         "latexindent",
         "markdownlint-cli2",
         "prettier",
         "tfsec",
         "typstyle",
         "yamllint",
-      })
-      opts.automatic_installation = { exclude = { "mypy" } }
-    end,
-  },
-  {
-    "jay-babu/mason-nvim-dap.nvim",
-    opts = function(_, opts)
-      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
-        "python",
-      })
-      if not opts.handlers then opts.handlers = {} end
-      opts.handlers.python = function() end
-    end,
+
+        -- install debuggers
+        "debugpy",
+
+        -- install any other package
+        "tree-sitter-cli",
+      },
+    },
   },
 }
