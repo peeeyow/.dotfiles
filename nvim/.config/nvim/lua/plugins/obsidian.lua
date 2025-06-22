@@ -37,7 +37,7 @@ return {
     },
     {
       prefix .. "n",
-      "ObsidianNew ",
+      ":ObsidianNew ",
       desc = "Create new Obsidian Note",
     },
     { prefix .. "p", "<Cmd>ObsidianPasteImg<CR>", desc = "Paste image from clipboard" },
