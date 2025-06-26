@@ -33,4 +33,24 @@ return {
     { prefix .. "r", "<Cmd>Trouble lsp_references toggle<CR>", desc = "LSP References (Trouble)" },
     { prefix .. "d", "<Cmd>Trouble lsp_references toggle<CR>", desc = "LSP References (Trouble)" },
   },
+  specs = {
+    "folke/snacks.nvim",
+    opts = function(_, opts)
+      return vim.tbl_deep_extend("force", opts or {}, {
+        picker = {
+          actions = require("trouble.sources.snacks").actions,
+          win = {
+            input = {
+              keys = {
+                ["<c-t>"] = {
+                  "trouble_open",
+                  mode = { "n", "i" },
+                },
+              },
+            },
+          },
+        },
+      })
+    end,
+  },
 }
