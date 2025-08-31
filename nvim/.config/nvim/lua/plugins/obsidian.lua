@@ -16,17 +16,15 @@ return {
     "BufNewFile " .. vim.fn.expand "~" .. "/obsidian/main-vault/**.md",
   },
   cmd = {
-    "ObsidianOpen",
-    "ObsidianNew",
-    "ObsidianQuickSwitch",
-    "ObsidianFollowLink",
-    "ObsidianBacklinks",
-    "ObsidianToday",
-    "ObsidianYesterday",
-    "ObsidianTemplate",
-    "ObsidianSearch",
-    "ObsidianLink",
-    "ObsidianLinkNew",
+    "Obsidian open",
+    "Obsidian new",
+    "Obsidian quickSwitch",
+    "Obsidian followLink",
+    "Obsidian backlinks",
+    "Obsidian template",
+    "Obsidian search",
+    "Obsidian link",
+    "Obsidian linkNew",
   },
   keys = {
     {
@@ -40,14 +38,14 @@ return {
       ":ObsidianNew ",
       desc = "Create new Obsidian Note",
     },
-    { prefix .. "p", "<Cmd>ObsidianPasteImg<CR>", desc = "Paste image from clipboard" },
-    { prefix .. "o", "<Cmd>ObsidianOpen<CR>", desc = "Open current buffer in Obsidian" },
-    { prefix .. "f", "<Cmd>ObsidianQuickSwitch<CR>", desc = "Switch notes" },
-    { prefix .. "b", "<Cmd>ObsidianBacklinks<CR>", desc = "Open Backlinks" },
-    { prefix .. "T", "<cmd>ObsidianToday<CR>", desc = "Create a new daily  note" },
-    { prefix .. "Y", "<Cmd>ObsidianYesterday<CR>", desc = "Open yesterday's daily note" },
-    { prefix .. "t", "<Cmd>ObsidianTemplate<CR>", desc = "Search for note template" },
-    { prefix .. "w", "<Cmd>ObsidianSearch<CR>", desc = "Search for notes in vault" },
+    { prefix .. "p", "<Cmd>Obsidian paste_img<CR>", desc = "Paste image from clipboard" },
+    { prefix .. "o", "<Cmd>Obsidian open<CR>", desc = "Open current buffer in Obsidian" },
+    { prefix .. "f", "<Cmd>Obsidian quickSwitch<CR>", desc = "Switch notes" },
+    { prefix .. "b", "<Cmd>Obsidian backlinks<CR>", desc = "Open Backlinks" },
+    { prefix .. "T", "<cmd>Obsidian today<CR>", desc = "Create a new daily  note" },
+    { prefix .. "Y", "<Cmd>Obsidian yesterday<CR>", desc = "Open yesterday's daily note" },
+    { prefix .. "t", "<Cmd>Obsidian template<CR>", desc = "Search for note template" },
+    { prefix .. "w", "<Cmd>Obsidian search<CR>", desc = "Search for notes in vault" },
     { prefix .. "l", ":ObsidianLink<CR>", mode = { "v" }, desc = "Link selection to existing note" },
     { prefix .. "L", ":ObsidianLinkNew<CR>", mode = { "v" }, desc = "Create new link for current selection" },
   },
@@ -101,8 +99,6 @@ return {
 
     image_name_func = function() return tostring(os.date "%Y%m%d%H%M%S") end,
 
-    mappings = {},
-
     disable_frontmatter = false,
 
     note_frontmatter_func = function(note)
@@ -126,7 +122,9 @@ return {
 
     preferred_link_style = "markdown",
     follow_url_func = vim.ui.open,
-    use_advanced_uri = true,
+    open = {
+      use_advanced_uri = true,
+    },
     picker = { "snack" },
   },
 }

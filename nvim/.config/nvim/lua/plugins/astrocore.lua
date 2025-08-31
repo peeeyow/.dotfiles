@@ -34,8 +34,8 @@ local mappings = {
       desc = "Dismiss all notifictions",
     },
     ["<Leader>o"] = { desc = "󱞁 Obsidian" },
-    ["<Leader>m"] = { desc = "Node Actions" },
-    ["<Leader>M"] = { desc = "Molten" },
+    ["<Leader>m"] = { desc = "Molten" },
+    ["<Leader>M"] = { desc = "Node Actions" },
     ["<C-/>"] = { "gcc", remap = true, desc = "Line Comment" },
     ["<C-_>"] = { "gcc", remap = true, desc = "Line Comment" },
 
