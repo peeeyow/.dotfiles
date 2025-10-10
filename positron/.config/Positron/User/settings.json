@@ -138,4 +138,7 @@
     "[quarto]": {
         "editor.defaultFormatter": "quarto.quarto"
     },
+    "files.associations": {
+        "renv.lock": "json"
+    },
 }
