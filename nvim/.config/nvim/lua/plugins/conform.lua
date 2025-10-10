@@ -16,9 +16,9 @@ return {
       lua = { "stylua" },
       markdown = { "prettier", "injected" },
       python = {
-          -- "ruff_fix", --too aggresive
-          "ruff_format",
-          "ruff_organize_imports",
+        -- "ruff_fix", --too aggresive
+        "ruff_format",
+        "ruff_organize_imports",
       },
       quarto = { "prettier", "injected" },
       r = { "styler", lsp_format = "fallback" },
@@ -35,6 +35,8 @@ return {
         options = {
           ext_parsers = {
             qmd = "markdown",
+            -- CHANGELOG
+            [""] = "markdown",
           },
         },
       },
