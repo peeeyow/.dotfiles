@@ -2,3 +2,47 @@ set selection-clipboard clipboard
 
 map d scroll half-down
 map u scroll half-up
+
+############################ One Dark Theme ################################
+# Background and Foreground
+set default-bg "#282c34" # One Dark Background
+set default-fg "#abb2bf" # One Dark Foreground
+
+# Statusbar
+set statusbar-fg "#abb2bf" # One Dark Foreground
+set statusbar-bg "#21252b" # One Dark Dark Grey
+
+# Input Bar
+set inputbar-bg "#282c34" # One Dark Background
+set inputbar-fg "#abb2bf" # One Dark Foreground
+
+# Notification Error
+set notification-error-bg "#e06c75" # One Dark Red
+set notification-error-fg "#282c34" # One Dark Background
+
+# Notification Warning
+set notification-warning-bg "#e5c07b" # One Dark Yellow
+set notification-warning-fg "#282c34" # One Dark Background
+
+# Highlighting
+set highlight-color "rgba(128, 203, 196, 0.5)" # One Dark Teal with 50% transparency
+set highlight-active-color "rgba(191, 250, 232, 0.5)" # One Dark Light Green with 50% transparency
+
+# Completion
+set completion-highlight-fg "#282c34" # One Dark Background
+set completion-highlight-bg "#98c379" # One Dark Green
+
+set completion-bg "#21252b" # One Dark Dark Grey
+set completion-fg "#abb2bf" # One Dark Foreground
+
+# Notifications
+set notification-bg "#98c379" # One Dark Green
+set notification-fg "#282c34" # One Dark Background
+
+# Recolor
+set recolor "true"
+set recolor-lightcolor "#282c34" # One Dark Background
+set recolor-darkcolor "#abb2bf" # One Dark Foreground
+set recolor-reverse-video "true"
+set recolor-keephue "true"
+############################ One Dark Theme ################################
