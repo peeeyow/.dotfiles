@@ -32,7 +32,7 @@ eval "$(fnm env --use-on-cd)"
 eval "$(zoxide init zsh)"
 eval "$(pip completion --zsh)"
 eval "$(pyenv init -)"
-eval "$(terraspace completion_script)"
+# eval "$(terraspace completion_script)"
 eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
 
@@ -41,10 +41,10 @@ eval "$(uvx --generate-shell-completion zsh)"
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && source ~/.config/tabtab/zsh/__tabtab.zsh || true
 
 # conda
-source /opt/conda/etc/profile.d/conda.sh
+[ -f /opt/conda/etc/profile.d/conda.sh ] && source /opt/conda/etc/profile.d/conda.sh
 
 # aws
-complete -C `which aws_completer` aws
+# complete -C `which aws_completer` aws
 
 # terraform
 complete -C `which terraform` terraform

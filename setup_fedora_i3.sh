@@ -1,7 +1,4 @@
-sudo dnf -y install i3-gaps xinput arc-theme zsh polybar stow ranger arc-theme ripgrep zoxide cargo kitty dunst picom rofi feh util-linux-user tlp tlp-rdw brightnessctl python-devel @development-tools scrot util-linux-user lsd mozilla-fira-mono-fonts fontawesome5-fonts-all jetbrains-mono-fonts-all pam-u2f pamu2fcfg pcsc-lite libasan wl-clipboard tldr git-credential-libsecret pulseaudio-utils zathura zathura-plugins-all btop bat sqlite-devel sqlite-tcl tk-devel ImageMagick-devel poppler-utils netpbm-progs inotify vnstat
-
-
-sudo dnf -y groupinstall "X Software Development" "Development Tools" "Development Libraries"
+sudo dnf -y install i3-gaps xinput arc-theme zsh polybar stow ranger arc-theme ripgrep zoxide cargo kitty dunst picom rofi feh util-linux-user tlp tlp-rdw brightnessctl python-devel @development-tools scrot util-linux-user lsd fontawesome5-fonts-all jetbrains-mono-fonts-all pam-u2f pamu2fcfg pcsc-lite libasan wl-clipboard tldr git-credential-libsecret pulseaudio-utils zathura zathura-plugins-all btop bat sqlite-devel sqlite-tcl tk-devel ImageMagick-devel poppler-utils netpbm-progs inotify-tools vnstat xfce-polkit fira-code-fonts fuse-libs @development-tools @development-libs @base-x @x-software-development fastfetch
 
 chsh -s `which zsh`
 
@@ -20,16 +17,12 @@ sudo dnf copr enable atim/lazygit -y
 sudo dnf install lazygit
 
 # lazydocker
-sudo dnf copr enable atim/lazydocker
+sudo dnf copr enable atim/lazydocker -y
 sudo dnf install lazydocker
 
 # onefetch
 sudo dnf copr enable varlad/onefetch
 sudo dnf install onefetch
-
-# nvautoinstall
-sudo dnf copr enable t0xic0der/nvidia-auto-installer-for-fedora
-sudo dnf install nvautoinstall
 
 # pldt sucks
 nmcli conn modify "<connection-name>" ipv4.ignore-auto-dns yes
