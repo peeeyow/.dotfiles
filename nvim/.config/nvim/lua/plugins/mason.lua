@@ -17,7 +17,6 @@ return {
         "html-lsp",
         "json-lsp",
         "lua-language-server",
-        "r-languageserver",
         "ruff",
         "rust-analyzer",
         "tailwindcss-language-server",

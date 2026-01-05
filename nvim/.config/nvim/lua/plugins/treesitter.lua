@@ -1,11 +1,11 @@
 ---@type LazySpec
 return {
   "nvim-treesitter/nvim-treesitter",
-  ---@type 
-  opts = function (_, opts)
+  ---@type
+  opts = function(_, opts)
     return require("astrocore").extend_tbl(opts, {
       ensure_installed = "all",
-      ignore_install = { "wing", "ipkg" },
+      ignore_install = { "wing", "ipkg", "latex", "scfg", "teal", "swift", "ocmallex", "unison", "mlir" },
       matchup = {
         enable = true,
       },
