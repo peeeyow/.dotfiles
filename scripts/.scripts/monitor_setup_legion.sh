@@ -35,8 +35,6 @@ elif [ $mode == "single_external" ]; then
 elif [ $mode == "single_builtin" ]; then
   xrandr --output $builtin_screen --primary --mode 1920x1200 --rate 144.00\
     --output $external_primary --off
-
-  
 else
   echo 'Error: mode
   modes
@@ -46,9 +44,9 @@ else
   '
   exit 1
 fi
+
 picom &
 feh --bg-fill ~/.background_images/minimalist_nord_arctic.png
-
 
 # wait for monitors to load before applying polybar
 sleep 2
