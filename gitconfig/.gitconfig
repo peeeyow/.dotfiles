@@ -3,6 +3,7 @@
 	email = 69317890+peeeyow@users.noreply.github.com
 [core]
 	editor = nvim
+	pager = delta
 [init]
 	defaultBranch = main
 [pull]
@@ -28,3 +29,9 @@
 	skipHash = false
 [credential]
 	helper = libsecret
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+[merge]
+	conflictStyle = zdiff3
