@@ -35,7 +35,7 @@ return {
     },
     {
       prefix .. "n",
-      ":ObsidianNew ",
+      ":Obsidian new ",
       desc = "Create new Obsidian Note",
     },
     { prefix .. "p", "<Cmd>Obsidian paste_img<CR>", desc = "Paste image from clipboard" },
@@ -46,8 +46,8 @@ return {
     { prefix .. "Y", "<Cmd>Obsidian yesterday<CR>", desc = "Open yesterday's daily note" },
     { prefix .. "t", "<Cmd>Obsidian template<CR>", desc = "Search for note template" },
     { prefix .. "w", "<Cmd>Obsidian search<CR>", desc = "Search for notes in vault" },
-    { prefix .. "l", ":ObsidianLink<CR>", mode = { "v" }, desc = "Link selection to existing note" },
-    { prefix .. "L", ":ObsidianLinkNew<CR>", mode = { "v" }, desc = "Create new link for current selection" },
+    { prefix .. "l", ":Obsidian link<CR>", mode = { "v" }, desc = "Link selection to existing note" },
+    { prefix .. "L", ":Obsidian link_new<CR>", mode = { "v" }, desc = "Create new link for current selection" },
   },
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -99,18 +99,21 @@ return {
 
     image_name_func = function() return tostring(os.date "%Y%m%d%H%M%S") end,
 
-    disable_frontmatter = false,
-
-    note_frontmatter_func = function(note)
-      if note.title then note:add_alias(note.title) end
-      local out = { id = note.id, aliases = note.aliases, tags = note.tags }
-      if note.metadata ~= nil and vim.tbl_isempty(note.metadata) then
-        for k, v in pairs(note.metadata) do
-          out[k] = v
+    frontmatter = {
+      enabled = true,
+      func = function(note)
+        if note.title then note:add_alias(note.title) end
+        local out = { id = note.id, aliases = note.aliases, tags = note.tags }
+        if note.metadata ~= nil and vim.tbl_isempty(note.metadata) then
+          for k, v in pairs(note.metadata) do
+            out[k] = v
+          end
         end
-      end
-      return out
-    end,
+        return out
+      end,
+    },
+
+    legacy_commands = false,
 
     markdown_link_func = function(opts)
       local util = require("obsidian").util
