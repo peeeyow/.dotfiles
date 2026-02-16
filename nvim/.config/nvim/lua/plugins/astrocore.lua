@@ -130,13 +130,22 @@ return {
     },
     mappings = mappings,
     autocmds = {
-      autodisableformatting = {
+      auto_disable_formatting = {
         {
           desc = "Disable auto formatting for anki markdowns.",
           event = "BufReadPre",
           pattern = vim.fn.expand "~" .. "/obsidian/main-vault/anki/*.md",
-          group = "autodisableformatting",
-          callback = function() vim.b.autoformat = false end,
+          group = "auto_disable_formatting",
+          callback = function(args) vim.b[args.buf].autoformat = false end,
+        },
+      },
+      auto_set_conceal = {
+        {
+          desc = "Set conceal on obsidian files.",
+          event = "BufReadPost",
+          pattern = vim.fn.expand "~" .. "/obsidian/main-vault/*/*.md",
+          group = "auto_set_conceal",
+          callback = function() vim.wo.conceallevel = 2 end,
         },
       },
     },
