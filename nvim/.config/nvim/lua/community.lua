@@ -8,6 +8,7 @@ return {
   { import = "astrocommunity.editing-support.conform-nvim" },
   { import = "astrocommunity.editing-support.dial-nvim" },
   { import = "astrocommunity.editing-support.neogen" },
+  { import = "astrocommunity.editing-support.nvim-treesitter-context" },
   { import = "astrocommunity.editing-support.rainbow-delimiters-nvim" },
   { import = "astrocommunity.editing-support.telescope-undo-nvim" },
   { import = "astrocommunity.git.diffview-nvim" },
