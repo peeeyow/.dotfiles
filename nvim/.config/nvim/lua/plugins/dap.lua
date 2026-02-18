@@ -4,7 +4,6 @@ local prefix = "<Leader>d"
 return {
   {
     "mfussenegger/nvim-dap",
-    config = function() require("dap.ext.vscode").load_launchjs() end,
   },
   {
     "rcarriga/nvim-dap-ui",
@@ -44,7 +43,8 @@ return {
       },
     },
     config = function(_, opts)
-      local path = vim.fn.expand "$MASON/packages/debugpy" .. "/venv/bin/python"
+      local path = vim.fn.exepath "debugpy-adapter"
+      if path == "" then path = vim.fn.exepath "python" end
       require("dap-python").setup(path, opts)
 
       table.insert(require("dap").configurations.python, {
