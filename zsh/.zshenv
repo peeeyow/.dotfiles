@@ -36,6 +36,8 @@ export GROFF_NO_SGR=1
 ## PATH
 # scripts
 export PATH=$HOME/.scripts:$PATH
+# go
+export PATH=$HOME/go/bin:$PATH
 # cargo
 export PATH=$HOME/.cargo/bin:$PATH
 # fnm
