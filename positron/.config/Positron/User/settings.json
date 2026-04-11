@@ -133,7 +133,8 @@
     "terminal.integrated.defaultProfile.linux": "zsh (2)",
     "application.experimental.positronPlotsInEditorTab": true,
     "[r]": {
-        "editor.defaultFormatter": "Posit.air-vscode"
+        "editor.defaultFormatter": "Posit.air-vscode",
+        "editor.formatOnSave": true
     },
     "[quarto]": {
         "editor.defaultFormatter": "quarto.quarto"
@@ -141,4 +142,10 @@
     "files.associations": {
         "renv.lock": "json"
     },
+    "workbench.editorAssociations": {
+        "*.copilotmd": "vscode.markdown.preview.editor",
+        "*.docx": "default"
+    },
+    "plots.freezeSlowPlots": false,
+    "positron.viewer.interactivePlotsInViewer": true,
 }
