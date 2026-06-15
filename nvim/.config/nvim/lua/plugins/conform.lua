@@ -23,6 +23,7 @@ return {
       quarto = { "prettier", "injected" },
       r = { "styler", lsp_format = "fallback" },
       tex = { "latexindent" },
+      toml = { "tombi" },
       typst = { "typstyle" },
     },
     formatters = {

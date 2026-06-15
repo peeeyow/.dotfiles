@@ -20,9 +20,9 @@ return {
         "ruff",
         "rust-analyzer",
         "tailwindcss-language-server",
-        "taplo",
         "terraform-ls",
         "texlab",
+        "tombi",
         "tflint",
         "yaml-language-server",
 
