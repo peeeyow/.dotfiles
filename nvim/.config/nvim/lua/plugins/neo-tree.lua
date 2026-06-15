@@ -19,6 +19,11 @@ return {
   opts = function(_, opts)
     local events = require "neo-tree.events"
     return require("astrocore").extend_tbl(opts, {
+      filesystem = {
+        filtered_items = {
+          hide_dotfiles = false,
+        },
+      },
       window = {
         mappings = {
           ["<C-v>"] = "open_vsplit",
