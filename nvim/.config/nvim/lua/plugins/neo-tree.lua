@@ -22,6 +22,11 @@ return {
       filesystem = {
         filtered_items = {
           hide_dotfiles = false,
+          hide_by_name = {
+            ".git",
+            "node_modules",
+            ".venv",
+          },
         },
       },
       window = {
