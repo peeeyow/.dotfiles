@@ -1,6 +1,11 @@
 return {
   "Saghen/blink.cmp",
   opts = {
+    sources = {
+      per_filetype = {
+        html = { "snippets", "lsp", "buffer", "path" },
+      },
+    },
     keymap = {
       ["<Tab>"] = {},
       ["<S-Tab>"] = {},

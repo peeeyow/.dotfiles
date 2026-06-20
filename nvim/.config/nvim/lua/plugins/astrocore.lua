@@ -1,10 +1,26 @@
-local is_available = require("astrocore").is_available
-
-local signs = {
-  { name = "DiagnosticSignError", text = "" },
-  { name = "DiagnosticSignWarn", text = "" },
-  { name = "DiagnosticSignHint", text = "" },
-  { name = "DiagnosticSignInfo", text = "" },
+local options = {
+  opt = {
+    fillchars = {
+      horiz = "━",
+      horizup = "┻",
+      horizdown = "┳",
+      vert = "┃",
+      vertleft = "┫",
+      vertright = "┣",
+      verthoriz = "╋",
+    },
+    wrap = true,
+    shortmess = vim.tbl_deep_extend("force", vim.opt.shortmess:get(), { c = true }),
+    nrformats = vim.opt.nrformats + { "alpha", "octal", "hex" },
+    whichwrap = vim.opt.whichwrap + "<>[]hl",
+    foldlevel = 99,
+    foldlevelstart = -1,
+    scrolloff = 8,
+  },
+  g = {
+    resession_enabled = true,
+    markdown_recommended_style = false,
+  },
 }
 
 local mappings = {
@@ -63,7 +79,34 @@ local mappings = {
   },
 }
 
-if is_available "neo-tree.nvim" then
+local autocmds = {
+  auto_disable_formatting = {
+    {
+      desc = "Disable auto formatting for anki markdowns.",
+      event = "BufReadPre",
+      pattern = vim.fn.expand "~" .. "/obsidian/main-vault/anki/*.md",
+      group = "auto_disable_formatting",
+      callback = function(args) vim.b[args.buf].autoformat = false end,
+    },
+  },
+  auto_set_conceal = {
+    {
+      desc = "Set conceal on obsidian files.",
+      event = "BufReadPost",
+      pattern = vim.fn.expand "~" .. "/obsidian/main-vault/*/*.md",
+      group = "auto_set_conceal",
+      callback = function() vim.wo.conceallevel = 2 end,
+    },
+  },
+  no_comment_on_enter = {
+    event = "BufEnter",
+    desc = "No longer comments upon newline",
+    group = "no_comment_on_enter",
+    callback = function() vim.opt_local.formatoptions:remove { "c", "r", "o" } end,
+  },
+}
+
+if require("astrocore").is_available "neo-tree.nvim" then
   mappings.n["<Leader>O"] = {
     function()
       if vim.bo.filetype == "neo-tree" then
@@ -92,9 +135,6 @@ return {
     diagnostics = {
       virtual_text = false,
       underline = true,
-      signs = {
-        active = signs,
-      },
       float = {
         focusable = true,
         style = "minimal",
@@ -104,50 +144,13 @@ return {
         prefix = "",
       },
     },
-    options = {
-      opt = {
-        fillchars = {
-          horiz = "━",
-          horizup = "┻",
-          horizdown = "┳",
-          vert = "┃",
-          vertleft = "┫",
-          vertright = "┣",
-          verthoriz = "╋",
-        },
-        wrap = true,
-        shortmess = vim.tbl_deep_extend("force", vim.opt.shortmess:get(), { c = true }),
-        nrformats = vim.opt.nrformats + { "alpha", "octal", "hex" },
-        whichwrap = vim.opt.whichwrap + "<>[]hl",
-        foldlevel = 99,
-        foldlevelstart = -1,
-        scrolloff = 8,
-      },
-      g = {
-        resession_enabled = true,
-        markdown_recommended_style = false,
+    filetypes = {
+      filename = {
+        ["CHANGELOG"] = "markdown",
       },
     },
+    options = options,
     mappings = mappings,
-    autocmds = {
-      auto_disable_formatting = {
-        {
-          desc = "Disable auto formatting for anki markdowns.",
-          event = "BufReadPre",
-          pattern = vim.fn.expand "~" .. "/obsidian/main-vault/anki/*.md",
-          group = "auto_disable_formatting",
-          callback = function(args) vim.b[args.buf].autoformat = false end,
-        },
-      },
-      auto_set_conceal = {
-        {
-          desc = "Set conceal on obsidian files.",
-          event = "BufReadPost",
-          pattern = vim.fn.expand "~" .. "/obsidian/main-vault/*/*.md",
-          group = "auto_set_conceal",
-          callback = function() vim.wo.conceallevel = 2 end,
-        },
-      },
-    },
+    autocmds = autocmds,
   },
 }

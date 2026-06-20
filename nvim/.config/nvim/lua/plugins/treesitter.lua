@@ -1,21 +1,22 @@
 ---@type LazySpec
 return {
   {
-    "nvim-treesitter/nvim-treesitter",
-    ---@type
-    opts = function(_, opts)
-      return require("astrocore").extend_tbl(opts, {
+    "AstroNvim/astrocore",
+    opts = {
+      treesitter = {
+        highlight = {
+          additional_vim_regex_highlighting = { "markdown" },
+          disable = { "latex" },
+        },
+        indent = true,
+        auto_install = true,
         ensure_installed = "all",
         ignore_install = { "wing", "ipkg", "latex", "scfg", "teal", "swift", "ocamllex", "unison", "mlir" },
         matchup = {
           enable = true,
         },
-        highlight = {
-          additional_vim_regex_highlighting = { "markdown" },
-          disable = { "latex" },
-        },
-      })
-    end,
+      },
+    },
   },
   {
     "nvim-treesitter/nvim-treesitter-context",

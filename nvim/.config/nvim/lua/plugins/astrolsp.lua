@@ -17,8 +17,8 @@ return {
         "ts_ls",
         "json",
       },
+      timeout_ms = 1000,
     },
-    ---@diagnostic disable: missing-fields
     config = {
       clangd = { cmd = { "clangd", "--enable-config" }, capabilities = { offsetEncoding = "utf-16" } },
       basedpyright = {
@@ -38,9 +38,7 @@ return {
         },
       },
       ruff = {
-        on_attach = function (client)
-          client.server_capabilities.hoverProvider = false
-        end
+        on_attach = function(client) client.server_capabilities.hoverProvider = false end,
       },
       terraformls = {
         filetypes = { "terraform", "terraform-vars", "tf" },
@@ -95,6 +93,9 @@ return {
         },
       },
     },
+    handlers = {
+      yamlls = false,
+    },
     autocmds = {
       lsp_codelens_refresh = {
         cond = "textDocument/codeLens",
@@ -111,9 +112,6 @@ return {
       n = {
         ["gs"] = { function() vim.lsp.buf.signature_help() end, desc = "Show signature help" },
       },
-    },
-    handlers = {
-      yamlls = false,
     },
   },
 }
