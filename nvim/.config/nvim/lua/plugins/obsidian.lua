@@ -68,11 +68,6 @@ return {
       folder = "dailies",
     },
 
-    completion = {
-      nvim_cmp = false,
-      blink = true,
-    },
-
     templates = {
       subdir = "templates",
       date_format = "%Y-%m-%d",
@@ -82,7 +77,7 @@ return {
     new_notes_location = "current_dir",
 
     attachments = {
-      img_folder = "attachments/images",
+      folder = "attachments/images",
     },
 
     note_id_func = function(title)
@@ -115,16 +110,15 @@ return {
 
     legacy_commands = false,
 
-    markdown_link_func = function(opts)
-      local util = require("obsidian").util
-      local anchor = opts.anchor and opts.anchor.anchor or ""
-      local header = opts.anchor and util.format_anchor_label(opts.anchor) or ""
-      local path = util.urlencode(opts.path, { keep_path_sep = true })
-      return string.format("[%s%s](/%s%s)", opts.label, header, path, anchor)
-    end,
-
-    preferred_link_style = "markdown",
-    follow_url_func = vim.ui.open,
+    link = {
+      style = function(opts)
+        local util = require("obsidian").util
+        local anchor = opts.anchor and opts.anchor.anchor or ""
+        local header = opts.anchor and util.format_anchor_label(opts.anchor) or ""
+        local path = util.urlencode(opts.path, { keep_path_sep = true })
+        return string.format("[%s%s](/%s%s)", opts.label, header, path, anchor)
+      end,
+    },
     open = {
       use_advanced_uri = true,
     },
