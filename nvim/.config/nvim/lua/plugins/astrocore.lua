@@ -145,6 +145,9 @@ return {
       },
     },
     filetypes = {
+      extension = {
+        tf = "terraform",
+      },
       filename = {
         ["CHANGELOG"] = "markdown",
       },

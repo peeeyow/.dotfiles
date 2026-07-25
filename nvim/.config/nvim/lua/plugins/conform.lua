@@ -22,6 +22,8 @@ return {
       },
       quarto = { "prettier", "injected" },
       r = { "styler", lsp_format = "fallback" },
+      terraform = { "terraform_fmt" },
+      ["terraform-vars"] = { "terraform_fmt" },
       tex = { "latexindent" },
       toml = { "tombi" },
       typst = { "typstyle" },

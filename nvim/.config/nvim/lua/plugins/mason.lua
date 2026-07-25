@@ -21,6 +21,7 @@ return {
         "rust-analyzer",
         "tailwindcss-language-server",
         "terraform-ls",
+        "terragrunt-ls",
         "texlab",
         "tombi",
         "tflint",

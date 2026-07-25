@@ -10,9 +10,8 @@ return {
       ["jinja.html"] = { "djlint" },
       markdown = { "markdownlint-cli2" },
       python = { "mypy", "pylint" }, --"ruff" # not needed
-      tf = { "tfsec" },
-      terraform = { "tfsec" },
-      ["terraform-vars"] = { "tfsec" },
+      terraform = { "tflint", "tfsec" },
+      ["terraform-vars"] = { "tflint", "tfsec" },
       yaml = { "yamllint" },
     },
   },
