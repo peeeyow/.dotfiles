@@ -20,7 +20,7 @@ alias free="free -h"
 alias v="nvim "
 alias r="ranger "
 alias pn="pnpm "
-alias tf="terraform "
+alias tf="tofu "
 alias ts="terraspace "
 alias lg="lazygit"
 alias g="git "
@@ -59,3 +59,5 @@ alias rrestore='R -e "renv::restore()"'
 alias rsnap='R -e "renv::snapshot()"'
 alias rstatus='R -e "renv::status()"'
 alias rupdate='R -e "renv::update()"'
+
+alias con='nmcli device wifi rescan; nmcli device wifi list; nmcli device wifi connect "Galaxy A54 5G 75E1"'

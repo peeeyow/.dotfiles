@@ -43,12 +43,6 @@ eval "$(uvx --generate-shell-completion zsh)"
 # conda
 [ -f /opt/conda/etc/profile.d/conda.sh ] && source /opt/conda/etc/profile.d/conda.sh
 
-# aws
-# complete -C `which aws_completer` aws
-
-# terraform
-complete -C `which terraform` terraform
-
 # ghcup-env
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" 
 
