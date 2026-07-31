@@ -1,11 +1,3 @@
-local check_passthrough = function()
-  if require("obsidian").util.cursor_on_markdown_link() then
-    return "<Cmd>ObsidianFollowLink<CR>"
-  else
-    return "gf"
-  end
-end
-
 local prefix = "<Leader>o"
 
 ---@type LazySpec
@@ -15,24 +7,7 @@ return {
     "BufReadPre " .. vim.fn.expand "~" .. "/obsidian/main-vault/**.md",
     "BufNewFile " .. vim.fn.expand "~" .. "/obsidian/main-vault/**.md",
   },
-  cmd = {
-    "Obsidian open",
-    "Obsidian new",
-    "Obsidian quickSwitch",
-    "Obsidian followLink",
-    "Obsidian backlinks",
-    "Obsidian template",
-    "Obsidian search",
-    "Obsidian link",
-    "Obsidian linkNew",
-  },
   keys = {
-    {
-      "gf",
-      check_passthrough,
-      noremap = false,
-      expr = true,
-    },
     {
       prefix .. "n",
       ":Obsidian new ",
@@ -40,12 +15,13 @@ return {
     },
     { prefix .. "p", "<Cmd>Obsidian paste_img<CR>", desc = "Paste image from clipboard" },
     { prefix .. "o", "<Cmd>Obsidian open<CR>", desc = "Open current buffer in Obsidian" },
-    { prefix .. "f", "<Cmd>Obsidian quickSwitch<CR>", desc = "Switch notes" },
+    { prefix .. "q", "<Cmd>Obsidian quick_switch<CR>", desc = "Switch notes" },
+    { prefix .. "f", "<Cmd>Obsidian follow_link<CR>", desc = "Switch notes" },
     { prefix .. "b", "<Cmd>Obsidian backlinks<CR>", desc = "Open Backlinks" },
     { prefix .. "T", "<cmd>Obsidian today<CR>", desc = "Create a new daily  note" },
-    { prefix .. "Y", "<Cmd>Obsidian yesterday<CR>", desc = "Open yesterday's daily note" },
     { prefix .. "t", "<Cmd>Obsidian template<CR>", desc = "Search for note template" },
     { prefix .. "w", "<Cmd>Obsidian search<CR>", desc = "Search for notes in vault" },
+    { prefix .. "e", ":Obsidian extract_note<CR>", mode = { "v" }, desc = "Extract selection into new note" },
     { prefix .. "l", ":Obsidian link<CR>", mode = { "v" }, desc = "Link selection to existing note" },
     { prefix .. "L", ":Obsidian link_new<CR>", mode = { "v" }, desc = "Create new link for current selection" },
   },
@@ -54,6 +30,8 @@ return {
     "folke/snacks.nvim",
     "Saghen/blink.cmp",
   },
+  ---@module 'obsidian'
+  ---@type obsidian.config
   opts = {
     workspaces = {
       {
@@ -63,21 +41,19 @@ return {
     },
 
     notes_subdir = "fleeting",
-
-    daily_notes = {
-      folder = "dailies",
-    },
-
-    templates = {
-      subdir = "templates",
-      date_format = "%Y-%m-%d",
-      time_format = "%H:%M:%S",
-    },
-
     new_notes_location = "current_dir",
 
-    attachments = {
-      folder = "attachments/images",
+    link = {
+      -- style = "markdown",
+      style = function(opts)
+        local util = require("obsidian").util
+        local anchor = opts.anchor and opts.anchor.anchor or ""
+        local header = opts.anchor and util.format_anchor_label(opts.anchor) or ""
+        local path = util.urlencode(opts.path, { keep_path_sep = true })
+        return string.format("[%s%s](/%s%s)", opts.label, header, path, anchor)
+      end,
+      format = "absolute",
+      auto_update = true,
     },
 
     note_id_func = function(title)
@@ -91,8 +67,6 @@ return {
       end
       return tostring(os.date "%Y%m%d%H%M%S") .. "-" .. suffix
     end,
-
-    image_name_func = function() return tostring(os.date "%Y%m%d%H%M%S") end,
 
     frontmatter = {
       enabled = true,
@@ -108,20 +82,29 @@ return {
       end,
     },
 
-    legacy_commands = false,
-
-    link = {
-      style = function(opts)
-        local util = require("obsidian").util
-        local anchor = opts.anchor and opts.anchor.anchor or ""
-        local header = opts.anchor and util.format_anchor_label(opts.anchor) or ""
-        local path = util.urlencode(opts.path, { keep_path_sep = true })
-        return string.format("[%s%s](/%s%s)", opts.label, header, path, anchor)
-      end,
+    templates = {
+      folder = "templates",
+      date_format = "%Y-%m-%d-%a",
+      time_format = "%H:%M:%s",
     },
+
+    picker = { "snack" },
+
+    daily_notes = {
+      folder = "dailies",
+    },
+
+    attachments = {
+      folder = "attachments/images",
+      img_text_func = function(path)
+        local name = vim.fs.basename(tostring(path))
+        return string.format("![%s](/%s)", name, path:vault_relative_path())
+      end,
+      img_name_func = function() return tostring(os.date "%Y%m%d%H%M%S") end,
+    },
+
     open = {
       use_advanced_uri = true,
     },
-    picker = { "snack" },
   },
 }
