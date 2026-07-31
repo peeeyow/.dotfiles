@@ -75,5 +75,6 @@
   "vim-matchup": { "branch": "master", "commit": "055881643e1b37038a572c883de7b1969716db77" },
   "vimtex": { "branch": "master", "commit": "853eb587873a7061a083655578be56dd8027b834" },
   "which-key.nvim": { "branch": "main", "commit": "fcbf4eea17cb299c02557d576f0d568878e354a4" },
-  "yaml-companion.nvim": { "branch": "main", "commit": "93a5f121a78d535b9451609d1c54fdde6ce3c8b6" }
+  "yaml-companion.nvim": { "branch": "main", "commit": "93a5f121a78d535b9451609d1c54fdde6ce3c8b6" },
+  "zotcite": { "branch": "master", "commit": "2f55d9a0eba87144bfb9211f17342490cd28bcd5" }
 }
