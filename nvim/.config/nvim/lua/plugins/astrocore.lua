@@ -95,7 +95,11 @@ local autocmds = {
       event = "BufReadPost",
       pattern = vim.fn.expand "~" .. "/obsidian/main-vault/*/*.md",
       group = "auto_set_conceal",
-      callback = function() vim.wo.conceallevel = 2 end,
+      callback = function(args)
+        local path = vim.fs.normalize(vim.api.nvim_buf_get_name(args.buf))
+        local anki = vim.fs.normalize(vim.fn.expand "~" .. "/obsidian/main-vault/anki/")
+        if not vim.startswith(path, anki) then vim.wo.conceallevel = 2 end
+      end,
     },
   },
   no_comment_on_enter = {
