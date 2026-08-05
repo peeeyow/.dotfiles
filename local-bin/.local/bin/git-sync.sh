@@ -16,10 +16,21 @@ LOCAL=$(git rev-parse HEAD)
 REMOTE=$(git rev-parse "origin/$BRANCH")
 BASE=$(git merge-base HEAD "origin/$BRANCH")
 
+# Stash only if there are uncommitted changes
+if ! git diff --quiet || ! git diff --cached --quiet; then
+    git stash push -u -m "Auto stash before sync"
+    STASHED=1
+fi
+
 # Pull only if we're behind
 if [ "$LOCAL" = "$BASE" ] && [ "$LOCAL" != "$REMOTE" ]; then
     echo "Pulling remote updates..."
     git pull --ff-only
+fi
+
+# Restore stashed changes
+if [ "$STASHED" -eq 1 ]; then
+    git stash pop
 fi
 
 # Stage local changes
