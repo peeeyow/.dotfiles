@@ -1,0 +1,9 @@
+[Unit]
+Description=Synchronize Git repository %i
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/git-sync.sh %h/%i
+
+[Install]
+WantedBy=default.target
