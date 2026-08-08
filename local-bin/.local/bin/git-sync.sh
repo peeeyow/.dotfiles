@@ -16,6 +16,7 @@ LOCAL=$(git rev-parse HEAD)
 REMOTE=$(git rev-parse "origin/$BRANCH")
 BASE=$(git merge-base HEAD "origin/$BRANCH")
 
+STASHED=0
 # Stash only if there are uncommitted changes
 if ! git diff --quiet || ! git diff --cached --quiet; then
     git stash push -u -m "Auto stash before sync"
