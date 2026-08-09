@@ -52,5 +52,12 @@
       "END${0}"
     ],
     "description": "Setup cloze overlapper anki card"
+  },
+  "yaml-header-bibliography": {
+    "prefix": "tb",
+    "body": [
+      "bibliography: ./references.bib${0}"
+    ],
+    "description": "Add zotcite compatible bibliography yaml header"
   }
 }
