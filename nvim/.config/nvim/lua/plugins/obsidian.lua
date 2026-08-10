@@ -9,9 +9,14 @@ return {
   },
   keys = {
     {
-      prefix .. "n",
-      ":Obsidian new ",
-      desc = "Create new Obsidian Note",
+      prefix .. "nl",
+      ":Obsidian new /literature/",
+      desc = "Create new Literature Obsidian Note",
+    },
+    {
+      prefix .. "np",
+      ":Obsidian new /permanent/",
+      desc = "Create new Permanent Obsidian Note",
     },
     { prefix .. "p", "<Cmd>Obsidian paste_img<CR>", desc = "Paste image from clipboard" },
     { prefix .. "o", "<Cmd>Obsidian open<CR>", desc = "Open current buffer in Obsidian" },
