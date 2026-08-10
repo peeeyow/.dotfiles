@@ -59,6 +59,15 @@
       "pluginName": "academic-research-skills",
       "installedAt": "2026-08-10T07:57:14.365Z",
       "updatedAt": "2026-08-10T07:57:14.365Z"
+    },
+    "opensrc": {
+      "source": "vercel-labs/opensrc",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/opensrc.git",
+      "skillPath": "skills/opensrc/SKILL.md",
+      "skillFolderHash": "0584838f454836cf26b7170348df5e266a7c2a79",
+      "installedAt": "2026-08-10T12:39:22.881Z",
+      "updatedAt": "2026-08-10T12:39:22.881Z"
     }
   },
   "dismissed": {
