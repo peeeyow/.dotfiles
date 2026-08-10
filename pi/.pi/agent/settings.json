@@ -1,0 +1,14 @@
+{
+  "lastChangelogVersion": "0.84.1",
+  "theme": "one-dark",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.6-terra",
+  "defaultThinkingLevel": "medium",
+  "packages": [
+    "npm:pi-web-access",
+    "npm:@gotgenes/pi-permission-system",
+    "npm:@narumitw/pi-statusline",
+    "npm:pi-usage-bar-focus",
+    "git:github.com/DietrichGebert/ponytail"
+  ]
+}

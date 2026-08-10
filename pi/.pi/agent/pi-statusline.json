@@ -1,0 +1,115 @@
+{
+	"palettePreset": "custom",
+	"palette": {
+		"model": {
+			"fg": "#282c34",
+			"bg": "#61afef"
+		},
+		"thinking": {
+			"fg": "#abb2bf",
+			"bg": "#3e4451"
+		},
+		"cwd": {
+			"fg": "#282c34",
+			"bg": "#56b6c2"
+		},
+		"branch": {
+			"fg": "#c678dd",
+			"bg": "#2c313c"
+		},
+		"tools": {
+			"fg": "#e5c07b",
+			"bg": "#3c3728"
+		},
+		"context": {
+			"fg": "#98c379",
+			"bg": "#293b32"
+		},
+		"time": {
+			"fg": "#abb2bf",
+			"bg": "#282c34"
+		}
+	},
+	"density": "compact",
+	"separator": "none",
+	"segments": [
+		"model",
+		"thinking",
+		"cwd",
+		"branch",
+		"tools",
+		"context"
+	],
+	"segmentText": {
+		"brand": {
+			"prefix": "",
+			"suffix": ""
+		},
+		"provider": {
+			"prefix": "🔌 ",
+			"suffix": ""
+		},
+		"model": {
+			"prefix": "🤖 ",
+			"suffix": "",
+			"truncationLength": 36,
+			"truncationSymbol": "…",
+			"truncationDirection": "start"
+		},
+		"thinking": {
+			"prefix": "🧠 ",
+			"suffix": ""
+		},
+		"cwd": {
+			"prefix": "📁 ",
+			"suffix": ""
+		},
+		"branch": {
+			"prefix": "🌿 ",
+			"suffix": ""
+		},
+		"tools": {
+			"prefix": "",
+			"suffix": ""
+		},
+		"context": {
+			"prefix": "🪟 ctx ",
+			"suffix": ""
+		},
+		"tokens": {
+			"prefix": "🔢 ",
+			"suffix": ""
+		},
+		"cache": {
+			"prefix": "📦 ",
+			"suffix": ""
+		},
+		"cost": {
+			"prefix": "💸 $",
+			"suffix": ""
+		},
+		"time": {
+			"prefix": "🕒 ",
+			"suffix": ""
+		},
+		"turn": {
+			"prefix": "🔁 #",
+			"suffix": ""
+		}
+	},
+	"extensionStatusIcons": {
+		"accounts": "👤",
+		"caffeinate": "💊",
+		"chrome-devtools": "🌐",
+		"firecrawl": "🔥",
+		"github-pr": "🔎",
+		"goal": "🎯",
+		"google-genai": "✨",
+		"lsp": "🧰",
+		"plan-mode": "📝",
+		"retry": "🔁",
+		"subagents": "🧑‍🤝‍🧑",
+		"sync": "🔄",
+		"usage": "📊"
+	}
+}
