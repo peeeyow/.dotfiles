@@ -50,3 +50,12 @@ eval "$(uvx --generate-shell-completion zsh)"
 [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
 
 . "$HOME/.local/share/../bin/env"
+
+
+# pnpm
+export PNPM_HOME="$HOME/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end
