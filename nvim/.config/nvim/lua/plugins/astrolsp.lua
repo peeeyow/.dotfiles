@@ -94,6 +94,7 @@ return {
       },
     },
     handlers = {
+      taplo = false,
       yamlls = false,
     },
     autocmds = {
