@@ -4,6 +4,7 @@
   "vars": {
     "bg": "#282c34",
     "bgLight": "#2c313c",
+    "bgLighter": "#4b5263",
     "bgSelection": "#3e4451",
     "fg": "#abb2bf",
     "comment": "#5c6370",
@@ -28,8 +29,8 @@
     "thinkingText": "fg",
     "selectedBg": "bgSelection",
     "scrollbarThumb": "bgSelection",
-    "userMessageBg": "bgLight",
-    "userMessageText": "fg",
+    "userMessageBg": "bgLighter",
+    "userMessageText": "#d7dae0",
     "customMessageBg": "bgLight",
     "customMessageText": "fg",
     "customMessageLabel": "purple",
