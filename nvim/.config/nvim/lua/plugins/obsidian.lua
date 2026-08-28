@@ -38,6 +38,12 @@ return {
   ---@module 'obsidian'
   ---@type obsidian.config
   opts = {
+    file = {
+      ignore_filters = {
+        "AGENTS.md",
+      },
+    },
+
     workspaces = {
       {
         name = "main",
@@ -114,6 +120,9 @@ return {
 
     open = {
       use_advanced_uri = true,
+    },
+    ui = {
+      enable = false,
     },
   },
 }

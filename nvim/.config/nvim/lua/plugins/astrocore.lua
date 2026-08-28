@@ -89,6 +89,7 @@ local autocmds = {
       callback = function(args) vim.b[args.buf].autoformat = false end,
     },
   },
+  --[[ NOTE: not necessary for now
   auto_set_conceal = {
     {
       desc = "Set conceal on obsidian files.",
@@ -102,6 +103,7 @@ local autocmds = {
       end,
     },
   },
+   ]]
   no_comment_on_enter = {
     event = "BufEnter",
     desc = "No longer comments upon newline",
