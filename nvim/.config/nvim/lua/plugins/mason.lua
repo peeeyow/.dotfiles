@@ -16,6 +16,7 @@ return {
         "eslint-lsp",
         "html-lsp",
         "json-lsp",
+        "just-lsp",
         "lua-language-server",
         "ruff",
         "rust-analyzer",
