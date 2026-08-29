@@ -35,6 +35,10 @@ Determine the entry point from the user's first message. Use the following keywo
 - User attaches a file --> determine type (paper draft, review report, research notes)
 - User mentions no materials --> assume starting from scratch
 
+**Run identity (#673):** initialize the state tracker once with an explicit,
+stable `run_id`. Reuse that value for every action-time activity receipt; never
+derive or refresh it from a clock, path, artifact contents, or transcript.
+
 **Important: mid-entry routing rules**
 - User brings a paper and requests "review" -> go to Stage 2.5 (INTEGRITY) first, then Stage 3 (REVIEW) after passing
 - Cannot jump directly to Stage 3 (unless user can provide a previous integrity verification report)
@@ -47,7 +51,7 @@ Determine the entry point from the user's first message. Use the following keywo
 **Contract:** full spec in [`../references/passport_as_reset_boundary.md`](../references/passport_as_reset_boundary.md) §"`resume_from_passport` mode contract".
 
 **Orchestrator obligations:**
-1. **Acquire passport lock.** Before reading the ledger or checking for a prior consuming entry, acquire an exclusive advisory lock on the passport file (see `references/passport_as_reset_boundary.md` §"Concurrency model"). Hold the lock across the read, the no-prior-resume check, and the append. Release after the append is durable on disk. Do NOT release between steps.
+1. **Acquire passport lock.** Before reading the ledger or checking for a prior consuming entry, acquire an exclusive advisory lock on the adjacent stable `.<passport-basename>.lock` sidecar (see `references/passport_as_reset_boundary.md` §"Concurrency model"). Every passport writer uses this same sidecar; never lock the replaceable passport inode. Hold the lock across the read, the no-prior-resume check, and the append. Release after the append is durable on disk. Do NOT release between steps.
 2. Parse `<hash>` from user input. Validate `^[0-9a-f]{12}$`.
 3. Locate passport file: prefer explicit path in user input; else look in `./passports/` or `./material_passport*.yaml` relative to CWD; else ask the user for the path.
 4. Load `reset_boundary[]`. Find the entry with `kind: boundary` and matching `hash`. No match → hard error: "Passport hash `<hash>` not found in `<path>`. Cannot resume."
@@ -205,9 +209,63 @@ SLIM checkpoints never reset. MANDATORY checkpoints co-occur with reset when app
 6. A `boundary` is consumed only by appending a `kind: resume` entry with matching `consumes_hash`. Double-resume (second resume of an already-consumed boundary) is a hard error.
 7. MANDATORY checkpoints (Stage 2.5 / 4.5, review decisions, the Stage 5 entry gate) remain MANDATORY even when reset co-occurs. Integrity gates are never diluted. If the boundary carries `pending_decision`, resume must re-prompt the user; `next` is advisory. Actual routing comes from the matched option's `next_stage`/`next_mode`, not from the boundary `next` field.
 8. `collaboration_depth_agent` observer fires on FULL checkpoints as before; its output is included in the checkpoint notification regardless of reset state. Observer state does NOT cross reset boundaries.
-9. Resume consumption MUST hold an exclusive advisory lock on the passport file for the entire read-check-append sequence (acquire the lock on the "Acquire passport lock" obligation, hold across the read-ledger, no-prior-resume check, and resume-entry append steps, release only after the append is durable). Releasing the lock between the no-prior-resume check and the resume-entry append reopens the double-resume race this rule exists to prevent. Non-POSIX implementations that cannot provide OS-level exclusion MUST refuse to resume rather than degrade silently (fail with an explicit error surfaced to the user). See §"Concurrency model" in the protocol doc.
+9. Resume consumption MUST hold an exclusive advisory lock on the adjacent
+   stable `.<passport-basename>.lock` sidecar for the entire
+   read-check-append sequence. Acquire it at the "Acquire passport lock"
+   obligation, hold it across the read-ledger, no-prior-resume check, and
+   resume-entry append, and release only after the append is durable. Every
+   other passport read-modify-write uses the same sidecar; locking the
+   replaceable passport inode is non-conforming. Releasing the sidecar lock
+   between the check and append reopens the double-resume race. A non-POSIX
+   implementation without OS-level exclusion MUST refuse to resume and
+   surface an explicit error. See §"Concurrency model" in the protocol doc.
 
 Full protocol: [`../references/passport_as_reset_boundary.md`](../references/passport_as_reset_boundary.md).
+
+#### Inquiry Branch Ledger (#743, opt-in alpha)
+
+**Flag:** `ARS_INQUIRY_LEDGER=1`. Unset or `0` means the entire sequence below
+is omitted: no ledger read/write, no pointer, no summary, and no user-facing
+branch interaction. With the flag on, an in-memory first branch still follows
+the linear path; do not publish a ledger or `inquiry_ledger_ref` until a second
+branch has been explicitly recorded.
+
+**Authority and replay:** use `scripts/inquiry_branch_ledger.py` for every
+load, append, replay, summary, and ledger/passport commit. Supply the explicit
+workspace root, expected `project_ref`, and the exact canonical profile files
+matching the initial binding and every `profile_rebound`. An unresolved profile
+binding, invalid event chain, over-budget post-state, missing stale event, or
+broken pointer is a visible hard error. Never infer a profile or repair ledger
+bytes in the model context. The runtime's stable sidecar lock (the same
+`.<passport-basename>.lock` required by the reset-boundary protocol) and
+recovery journal are the only authorized two-file publication path.
+
+**Author/AI boundary:** an AI-surfaced facet is appended with actor `ai`, enters
+`parked`, and is never rendered as the author's position. Activation requires
+an explicit author adoption receipt retaining its source event and original
+text. Park, reject, reopen, merge, archive, profile correction, and stale-cause
+resolution are likewise explicit author actions. A reopen-condition signal
+records only that evidence may match a stored condition; it never reopens a
+branch without the author.
+
+**Summary moments:** ask the runtime for a compact summary at exactly:
+
+1. the Stage 1 design-freeze checkpoint;
+2. the Stage 2.5 MANDATORY checkpoint;
+3. the Stage 4.5 MANDATORY checkpoint; or
+4. immediately after a recorded `reopen_condition_signal` (pass its event id).
+
+If the runtime emits an empty string (flag off or no more than one introduced
+branch), insert nothing and ask nothing. Otherwise place its complete
+`### Inquiry Branch Summary` block after ordinary checkpoint state and before
+the checkpoint response prompt. Do not add a graph, ranking, recommendation,
+or extra branch question. The block's `skip`, `off`, and reset-to-simple-path
+choices affect future display only and never delete scholar-owned events.
+
+The ledger is a memory surface, not a gate: it cannot change an integrity
+PASS/FAIL, satisfy a mandatory checkpoint, establish novelty/correctness/value,
+or silently regenerate a stale artifact. Author-recorded first-degree stale
+causes remain visible until individually reconfirmed or superseded.
 
 #### FULL Checkpoint Template (with Decision Dashboard)
 
@@ -218,7 +276,7 @@ Metrics:
 - Word count: [N] (target: [T] +/-10%)    [OK/OVER/UNDER]
 - References: [N] (min: [M])              [OK/LOW]
 - Coverage: [N]/[T] sections drafted       [COMPLETE/PARTIAL]
-- Quality indicators: [score if available]
+- Criterion status: [named criterion + evidence-anchored categorical judgement, or `NOT_COMPARABLE`]
 
 Deliverables:
 - [Material 1]
@@ -293,7 +351,8 @@ Verification result: [PASS / PASS WITH NOTES / FAIL]
 - Data verification: [X/X] passed
 - Originality check: [PASS/ISSUES]
 - Claim verification: [X/X] verified [PASS/ISSUES]
-- Advisory rows (#547/#548/#541, non-gating): [none / N rows, listed below]
+- Ordinary advisory rows (#547/#548/#541/#570, non-gating): [none / N rows, listed below]
+- E6 claim-strength drift rows (checkpoint-closing): [none / N rows; disposition sidecar absent/valid]
 
 [Phase E evidence: insert only the requested deterministic page rendered from
 the persisted `phases.E_claims.evidence_rows[]` array, plus previous/next and
@@ -304,7 +363,9 @@ present claim counts as excerpts or successful evidence.]
 
 [If FAIL: list correction items with severity]
 
-[If advisory rows exist: list every `ADV-*-<n>` row (any advisory family — E4 scope, E5 novelty, E6 claim-strength drift, REV token-conservation, CACHE staleness, and any later-added family) with its ID and content, then ask the user per row — proceed open (default) or the family's second option (E4 accept-with-justification / E5 confirm-absolute / E6 accept-the-change / REV accept-the-token-change or (if a genuine content error) send back as a revision instruction / CACHE note the invalidate option) — and record each response in this checkpoint dialogue. Advisory rows never block continuation.]
+[If ordinary non-E6 advisory rows exist: list every row with its ID and content, then apply that family's existing choices/defaults. Do not apply an ordinary-advisory default to an `ADV-E6-*` row.]
+
+[If E6 rows exist: render the exact ordered `claim-strength-drift-findings/1.0` companion named by the Integrity Report. For every row require one explicit choice: `restore`, `authorize_with_reason` (show and retain the required reason), or `pause`, plus one explicitly named run-local raw session-event artifact outside the repository. Put its absolute transient path and declared raw SHA-256 in the input. Build and validate `claim-strength-drift-disposition/1.0`; both operations must reopen exact regular non-symlink event files and recompute their digests. Validation receives one repeatable `--event-artifact EVENT_ID=/absolute/path` mapping per row. There is no default, no `proceed open`, and generic `continue` or an arbitrary 64-hex digest does not answer an E6 row. A missing/duplicate/extra choice or event mapping, a free-form acceptance outside the sidecar, or an invalid byte binding leaves this checkpoint unresolved. The durable sidecar retains no path or raw message. Byte binding does not authenticate source, content meaning, or actor identity. `paused` saves PAUSED state; `restore_required` routes back for restoration and a fresh integrity/E6 run; only `authorized_to_continue` permits the ordinary next-stage confirmation.]
 
 Flagged: [issues requiring attention]
 
@@ -314,6 +375,8 @@ This checkpoint requires your explicit confirmation.
 Continue?
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
+
+E6 is checkpoint-closing, not a verdict: open only the named finding-set, author-input, and per-disposition raw event files; run `scripts/claim_strength_drift_disposition.py build`, then replay `validate` with the closed event mapping before retaining the sidecar. Never infer a choice from silence, a generic confirmation, or a prior run. Changed finding-set, final-draft, Revision-Evidence Bundle, or event bytes require rebuilding and fail closed; route by `paused` > `restore_required` > `authorized_to_continue`. The sidecar proves only disposition coverage and byte bindings—semantic/model-mediated detection, including an empty finding set, does not prove absence of drift.
 
 ##### Phase E Evidence-Row Rendering (#656)
 
@@ -369,7 +432,7 @@ Users respond to checkpoint prompts with one of these commands. The orchestrator
 
 | User Input | Action | State Change |
 |------------|--------|-------------|
-| `continue` / `yes` | Proceed to next stage | `pipeline_state` -> next stage's `in_progress` |
+| `continue` / `yes` | Proceed only after every checkpoint-closing precondition is satisfied; this command is not an E6 disposition | `pipeline_state` -> next stage's `in_progress` only when no E6 row lacks a valid `authorized_to_continue` sidecar outcome |
 | `pause` / `stop here` | Pause pipeline; can resume later | `pipeline_state` = `paused`; all materials preserved |
 | `adjust` / `change settings` | Allow user to modify next stage's mode or parameters | Prompt user for adjustments; apply before proceeding |
 | `view progress` | Display the pipeline Dashboard, then re-prompt the same checkpoint | No state change |
@@ -380,6 +443,31 @@ Users respond to checkpoint prompts with one of these commands. The orchestrator
 **Skippable vs Non-Skippable Stages**:
 - Skippable: Stage 1 (deep-research, if user provides own bibliography), Stage 3' (re-review, if only minor revisions), Stage 4' (re-revise, if accepted), Stage 6 (process summary — declined at the Stage 5 completion checkpoint; marked `skipped`, pipeline still terminates `completed`)
 - Non-Skippable: Stage 2 (writing), Stage 2.5 (pre-review integrity), Stage 3 (initial review), Stage 4.5 (final integrity), Stage 5 (finalize)
+
+#### Adjudication-activity action-time hook (#673)
+
+The state tracker section "Adjudication-activity metadata" is the single
+producer/state authority. Every author choice, qualifying compliance override,
+structured explicit justify/redo request, and MANDATORY-checkpoint response
+first completes and durably applies its existing routing/state behavior. Only
+then may its structured handler best-effort request the closed receipt binding;
+it must never parse conversation history to backfill one. Receipt failure is an
+advisory diagnostic and cannot change routing, state, the compliance outcome,
+or any checkpoint result.
+
+For an attempted `skip` at a MANDATORY checkpoint, refuse the skip and leave
+pipeline state unchanged first. Only afterward may the handler record the
+source `skip` as stored disposition `skip_refused`. MANDATORY receipt stages use
+the complete closed Stage 1-through-6 enum listed by the state tracker (including
+half/prime stages); there is no Stage 0. Author groups use
+`artifact_group_stage` and preserve both Stage 3 and Stage 3-prime groups when
+both occurred. Interaction identity is a run-scoped occurrence id, never a
+content hash.
+
+Activity metadata is always advisory-only. It is not a gate, verdict,
+checkpoint input, dispatch input, model/judge/eval request, passport/handoff
+field, or Process Record source, and its production performs no network/API,
+clock, or ambient filesystem scan.
 
 ### Mode Switching Rules
 
@@ -558,20 +646,61 @@ The OR preserves any lineage signal already persisted on a resumed or mid-entry 
 
 Reference helper: `scripts/slr_lineage.py` `emit(stages, incoming_slr_lineage)`. Pre-v3.7.4 passports lack the field and the renderer treats absence as `false` (cold-start fallback identical to pre-v3.7.4 behavior). See `shared/handoff_schemas.md` §"Run-level lineage signal (v3.7.4)" for the field contract, and `docs/design/2026-05-15-issue-111-slr-lineage-emission-design.md` for the design.
 
-**Handoff material transfer rules:**
+## Review-target criteria binding lifecycle (#684)
+
+When the author confirms a review target, use the #683 resolver and then
+`scripts/review_criteria_binding.py init` with explicit context, registry,
+portable refs, caller-supplied `target_review_id`, and prior manifest when one
+exists. Store only the manifest pointer index through `state_tracker`; the
+manifest is the sole authority. Do not scan for a context, infer target
+metadata from manuscript quality, copy registry prose into prompts, or accept
+caller-reported artifact hashes.
+
+Consumer sequencing:
+
+1. During Stage 2 `academic-paper` full/plan work, render the `FORMATIVE`
+   marker for `structure_architect_agent`, record its completed outline, and
+   pass that same receipt/context pointer through argument and drafting. In a
+   full run, Phase 6a remains paper-blind under the same authority and its
+   pre-commitment artifact is recorded as `INTERNAL` before Phase 6b receives
+   the draft. Phase 6b repeats the continuity marker and the orchestrator
+   validates any Critical/Major constructive sidecar.
+2. At Stage 3, render five markers from the same manifest for EIC/R1/R2/R3/DA.
+   Inject the manifest pointer and Target Criteria Brief into each paper-blind
+   Phase 1 call. After all five artifacts exist, record the single
+   `external_panel` receipt. Phase 2 receives each unchanged Phase 1 artifact
+   plus the manuscript and may then assess applicability.
+3. Before criteria-aware synthesis, validate the manifest against the explicit
+   context and registry. A full-pipeline run uses `--require-complete`; a
+   mid-entry run validates only consumers actually dispatched and clearly
+   reports that its coverage is not the all-three-consumer claim. Never create
+   retrospective formative/internal receipts for skipped stages.
+4. Validate every Critical/Major companion with `validate-findings` before it
+   is described as contract-conforming. Re-review carries the same manifest by
+   pointer. A substantive target change requires a new, non-comparable target
+   review id.
+
+If no resolved context is available, every relevant dispatch carries
+`criteria_binding_unavailable` and makes no venue-alignment claim. Binding
+failure stops only the criteria-aware handoff; it is not a manuscript gate,
+score, severity, verdict, checkpoint input, or author choice. The CLI is local,
+deterministic, explicit-path-only, and is never a model/judge/network/clock
+consumer.
+
+## Handoff material transfer rules
 
 | Transition | Transferred Materials | Schema Reference | Transfer Method |
 |-----------|----------------------|-----------------|----------------|
-| Stage 1 -> 2 | RQ Brief, Methodology Blueprint, Annotated Bibliography, Synthesis Report | Schema 1 (RQ Brief), Schema 2 (Bibliography), Schema 3 (Synthesis) | deep-research handoff protocol |
-| Stage 2 -> 2.5 | Complete Paper Draft + #547 scope context for Phase E4 (RQ Brief `scope` — the required E4 input; `sub_question_bindings` + outline section→sub-question map when present) + the Schema 2 Annotated Bibliography (#548 — `search_strategy` is the E5 comparison basis; `sources[].relevance` + `relevance_score` ground the nearest-prior-work check), when one exists | Schema 4 (Paper Draft) + Schema 1 scope fields + Schema 2 (search_strategy + source relevance metadata) | Pass to integrity_verification_agent |
-| Stage 2.5 -> 3 | Verified Paper Draft + Integrity Report | Schema 4 + Schema 5 (Integrity Report) | Pass to reviewer (with verification report attached). Carry forward `experiment_provenance[]` + `experiment_alignment_results[]` + `experiment_intake_declaration` (#260) |
-| Stage 3 -> **coaching** -> 4 | Editorial Decision, immutable Revision Roadmap, exact claim surfaces, 5 Review Reports; coaching adds the complete explicit author sidecar without mutating the Roadmap | Schema 6 + `revision-roadmap/1.0` + `claim-surface-manifest/1.0` + `author-adjudication/1.0` | Source-ordered dialogue records one explicit author choice per item, exact targets, and any exact claim/collateral authority -> revision mode |
-| Stage 4 -> 3' | Revised Draft, hard-required Original (pre-revision) Draft (the #576 1.1 §3.1 Phase 2A input; the required bundle already carries the exact matched round's pre draft, so declaring it absent is `manifest_incomplete`, never a `first_link_not_run` degradation), Response to Reviewers + Editorial Decision Letter (its Review Panel Provenance block feeds the #539 Judge Record) + the Round-1 review findings (the Schema 6 review reports the roadmap items trace to — the #576 §4 level-3 criterion layer; absent → transported Schema 7 fields alone, `[ROUND1-FINDINGS-ABSENT]`) + the Round-1 Revision Roadmap being verified + every ordered apply report and paired revision patch/diff file (`<output>.apply-report.json`, the sidecar beside each revised draft, #390; the manifest pair list must exactly equal the fully replayed bundle's ordered write-round projection, the FIRST report's `base_draft_hash` must equal the Original Draft hash prefix, every inner link must join, and only the LAST output hash may equal the Revised Draft hash prefix; any omission, substitution, reorder, or broken link → `manifest_hash_mismatch`) + the Round-1 Reviewer Configuration Cards (yardstick continuity — field_analyst is NOT re-run at Stage 3'; `re_review_mode_protocol.md` § Yardstick Continuity) | Schema 4 (revised + original) + Schema 8 (Response to Reviewers) + Schema 6 (letter + Round-1 review reports) + Schema 7 (Roadmap, machine-form JSON — § Stage 3' Re-Review Contract Dispatch producer obligations) + apply-report sidecar JSON + revision patch JSON + configuration cards (no numbered schema) | Pass to reviewer (marked as verification round) under § Stage 3' Re-Review Contract Dispatch. This row is the re-review-mode transfer — the default Stage 3'. When the user explicitly requests a fresh full review at 3' instead (mid-entry quick→full path: no Schema 7 Roadmap or Round-1 cards exist), transfer the Revised Draft + available context only, dispatch full mode (field_analyst runs by definition), and do NOT mark it a verification round |
+| Stage 1 -> 2 | RQ Brief, Methodology Blueprint, Annotated Bibliography, Synthesis Report | Schema 1 (RQ Brief), Schema 2 (Bibliography), Schema 3 (Synthesis) | deep-research handoff protocol; when active, separately carry the #683 context/#684 binding pointer named by the preceding lifecycle |
+| Stage 2 -> 2.5 | Complete Paper Draft + #547 scope context for Phase E4 (RQ Brief `scope` — the required E4 input; `sub_question_bindings` + outline section→sub-question map when present) + the Schema 2 Annotated Bibliography (#548 — `search_strategy` is the E5 comparison basis; `sources[].relevance` + `relevance_score` ground the nearest-prior-work check), when one exists + unchanged #684 binding pointer/receipts when active | Schema 4 (Paper Draft) + Schema 1 scope fields + Schema 2 (search_strategy + source relevance metadata) + review-target contracts | Pass to integrity_verification_agent; integrity does not consume criteria as a verdict input |
+| Stage 2.5 -> 3 | Stage 2.5 Paper Draft (verified, or carrying the recorded Integrity Check FAIL Loop partially-unverified warning) + Integrity Report + E6 finding-set companion and, when findings exist, `authorized_to_continue` disposition sidecar + unchanged #684 manifest/context/brief when active | Schema 4 + Schema 5 + `claim-strength-drift-findings/1.0` + conditional `claim-strength-drift-disposition/1.0` + review-target contracts | Pass only after E6 has no findings or every reported row has explicit authorization; restoration/pause does not transfer the current draft. Carry forward `experiment_provenance[]` + `experiment_alignment_results[]` + `experiment_intake_declaration` (#260); the integrity verdict never consumes criteria binding |
+| Stage 3 -> **coaching** -> 4 | Editorial Decision, immutable Revision Roadmap, exact claim surfaces, 5 Review Reports, and the Schema 6 closed `review_panel_provenance` carrier; coaching adds the complete explicit author sidecar without mutating the Roadmap | Schema 6 + `revision-roadmap/1.0` + `claim-surface-manifest/1.0` + `author-adjudication/1.0` | For `reviewer_full`, verify the provenance artifact raw digest and deterministic replay before transfer; preserve its valid/invalid carrier byte-for-byte. Source-ordered dialogue records one explicit author choice per item, exact targets, and any exact claim/collateral authority -> revision mode |
+| Stage 4 -> 3' | Revised Draft, hard-required Original (pre-revision) Draft (the #576 1.1 §3.1 Phase 2A input; the required bundle already carries the exact matched round's pre draft, so declaring it absent is `manifest_incomplete`, never a `first_link_not_run` degradation), Response to Reviewers + Editorial Decision Letter (display only) + the Round-1 Schema 6 `review_panel_provenance` carrier and exact artifact bytes + the Round-1 review findings (the Schema 6 review reports the roadmap items trace to — the #576 §4 level-3 criterion layer; absent → transported Schema 7 fields alone, `[ROUND1-FINDINGS-ABSENT]`) + the Round-1 Revision Roadmap being verified + every ordered apply report and paired revision patch/diff file (`<output>.apply-report.json`, the sidecar beside each revised draft, #390; the manifest pair list must exactly equal the fully replayed bundle's ordered write-round projection, the FIRST report's `base_draft_hash` must equal the Original Draft hash prefix, every inner link must join, and only the LAST output hash may equal the Revised Draft hash prefix; any omission, substitution, reorder, or broken link → `manifest_hash_mismatch`) + the Round-1 Reviewer Configuration Cards (yardstick continuity — field_analyst is NOT re-run at Stage 3'; `re_review_mode_protocol.md` § Yardstick Continuity) + unchanged #684 target-review authority when active | Schema 4 (revised + original) + Schema 8 (Response to Reviewers) + Schema 6 (letter + Round-1 review reports + provenance carrier) + raw provenance artifact + Schema 7 (Roadmap, machine-form JSON — § Stage 3' Re-Review Contract Dispatch producer obligations) + apply-report sidecar JSON + revision patch JSON + configuration cards (no numbered schema) + review-target contracts | Before re-review, verify the carrier's raw artifact digest and deterministic replay; on any absent/unreachable/digest/schema/replay failure use the closed invalid state with six unknown axes, never letter reconstruction. Pass to reviewer (marked as verification round) under § Stage 3' Re-Review Contract Dispatch. This row is the re-review-mode transfer — the default Stage 3'. When the user explicitly requests a fresh full review at 3' instead (mid-entry quick→full path: no Schema 7 Roadmap or Round-1 cards exist), transfer the Revised Draft + available context only, dispatch full mode (field_analyst runs by definition), and do NOT mark it a verification round. A changed target requires a new non-comparable target review id |
 | Stage 3' -> **coaching** -> 4' | New Revision Roadmap (if Major) | #670 authority family + `shared/contracts/re_review/traceability.schema.json` | Pass the immutable roadmap, exact claim surfaces, traceability sidecar, and new complete author sidecar to revision mode; coaching uses a source-ordered explicit author checkpoint, and prior-round choices are never inferred or carried forward |
 | Stage 3' -> 4.5 | (Accept/Minor direct path — no Stage 4' between) Verified Revised Draft + the traceability sidecar with its frozen `previously_missed`/`indeterminate` new-issue records (#576 §8 — Material Passport cargo consumed by the Stage 4.5 gate) | Schema 4 (revised) + traceability sidecar | Pass to integrity_verification_agent (final verification); the frozen records are gate INPUT, not just cargo |
 | Stage 4/4' -> 4.5 | Revised/Re-Revised Draft + #547/#548 context + complete validated `revision-evidence-bundle/1.0` from exact integrity PASS through every review write/no-op/integrity round + (Major-via-4' path) the Stage 3' traceability sidecar with its frozen `previously_missed`/`indeterminate` new-issue records | Schema 4 + #670 bundle + traceability sidecar | Pass to integrity_verification_agent; registered surfaces are replayed, while the explicit unregistered-claim boundary remains mandatory E6 review input |
-| Stage 4.5 -> 5 | Final Verified Draft + Final Integrity Report + exact preregistration sidecar/companion + independent #660/#672 results | Schema 4 + Schema 5 + `preregistration-artifact/1.0`; independent advisory schemas | At the one mandatory entry checkpoint run #660 then #672 on identical accepted-draft ID/SHA and surface both without changing routing. On confirmation: Produce MD -> DOCX via Pandoc when available (otherwise instructions) -> ask about LaTeX -> confirm -> PDF. Carry forward `experiment_alignment_results[]` + `experiment_intake_declaration` (#260) to formatter surface + Stage 6 histogram |
-| Stage 5 -> 6 | Final deliverables list + pipeline state history (state_tracker JSON, agent logs) | — (Process Record; no numbered schema) | Dispatched only after the user confirms the Stage 5 completion checkpoint (FULL). User may decline Stage 6 there: mark it `skipped`, set pipeline state `completed`. Protocol: `../references/process_summary_protocol.md`; terminal semantics: `../references/pipeline_state_machine.md` § Stage 6 terminal semantics |
+| Stage 4.5 -> 5 | Final Accepted Draft (verified, or carrying the recorded Integrity Check FAIL Loop partially-unverified warning) + Final Integrity Report + E6 finding-set companion and, when findings exist, `authorized_to_continue` disposition sidecar + exact preregistration sidecar/companion + independent #660/#672 results | Schema 4 + Schema 5 + E6 finding/disposition contracts + `preregistration-artifact/1.0`; independent advisory schemas | Refuse transfer while E6 derives `restore_required` or `paused`. After E6 closure, at the one mandatory entry checkpoint run #660 then #672 on identical accepted-draft ID/SHA and surface both without changing routing. On confirmation: Produce MD -> DOCX via Pandoc when available (otherwise instructions) -> ask about LaTeX -> confirm -> PDF. Carry forward `experiment_alignment_results[]` + `experiment_intake_declaration` (#260) to formatter surface + Stage 6 histogram |
+| Stage 5 -> 6 | Final deliverables list + Process-Summary projection of pipeline state history and agent logs, explicitly omitting the #673 activity projection of terminal root `run_id`, pending/sealed activity fields, selected-store data, renderer output, and diagnostics | — (Process Record; no numbered schema) | Dispatched only after the user confirms the Stage 5 completion checkpoint (FULL). User may decline Stage 6 there: mark it `skipped`, set pipeline state `completed`. Protocol: `../references/process_summary_protocol.md`; terminal semantics: `../references/pipeline_state_machine.md` § Stage 6 terminal semantics |
 
 **#672 sidecar continuity:** At Stage 1, this shell-capable orchestrator alone
 invokes `scripts/build_cross_document_consistency_advisory.py
@@ -642,9 +771,30 @@ Notify state_tracker_agent to update state whenever a stage begins or completes:
 - Checkpoint passed: `update_pipeline_state("running")`
 - Material produced: `update_material(material_name, true)`
 - Integrity check result: `update_integrity(stage_id, verdict, details)`
-- Pipeline terminal transition: on the Stage 6 terminal acknowledgement (`finish` / `end` / `done` / `confirm`, or an unambiguous natural-language equivalent) — `update_stage("6", "completed", outputs)` + `update_pipeline_state("completed")`; if the user declined Stage 6 at the Stage 5 completion checkpoint — `update_stage("6", "skipped", {reason: "user declined Stage 6"})` + `update_pipeline_state("completed")`
+- Pipeline terminal transition: on the Stage 6 terminal acknowledgement (`finish` / `end` / `done` / `confirm`, or an unambiguous natural-language equivalent) — `update_stage("6", "completed", outputs)` + `update_pipeline_state("completed")`; if the user declined Stage 6 at the Stage 5 completion checkpoint — `update_stage("6", "skipped", {reason: "user declined Stage 6"})` + `update_pipeline_state("completed")`. Persist this transition first, without consulting activity metadata.
 
 Request state_tracker_agent to produce the Progress Dashboard when needed.
+
+### Post-terminal adjudication-activity sequence (#673)
+
+After the existing terminal transition above is durable, and only when the user
+selected an explicit local activity store, perform this best-effort sequence:
+
+1. pass the explicit state path, artifact-root path, and the state tracker's
+   explicit five-row `pending_adjudication_activity_bindings[]` value to
+   `seal_terminal_inventory(state_path, artifact_root, pending_bindings)`;
+2. let that deterministic helper calculate raw artifact hashes and atomically
+   seal the root `adjudication_activity_sources` inventory without changing the
+   already-terminal state/stage/status;
+3. run `build-input` using only that sealed inventory, then idempotent
+   `append-run`, and optionally `render`.
+
+The helper may not discover the pending field itself, accept caller-reported
+hashes, infer paths, scan/glob a directory, or use a clock/network/model. Any
+seal/build/append/render failure is surfaced only as an advisory diagnostic and
+does not roll back, delay, or rewrite the terminal outcome. The terminal state
+file's root `run_id` plus sealed root `adjudication_activity_sources` are exact
+source/run authority; the pending rows are not.
 
 ---
 
@@ -781,7 +931,7 @@ AI/author origin, paper-mill production, misconduct, contextual validity,
 precision/recall, false-positive/false-negative rate, list coverage, or
 publisher acceptance.
 
-This advisory does not alter Stage 4.5 PASS, the mandatory Stage-5 checkpoint,
+This advisory does not alter the Stage 4.5 verdict, the mandatory Stage-5 checkpoint,
 or any terminal-policy state. It never edits the draft or suggests replacement
 text. Surface the validated report and let the user preserve, revise, or
 proceed. A revision changes the input bytes, invalidates the current advisory,
@@ -805,7 +955,8 @@ and never authorizes this read-only orchestrator to mutate a passport in place.
 ## Cross-Document Consistency Advisory Dispatch (#672)
 
 At the same single mandatory Stage-5 entry checkpoint, after the same exact
-Stage 4.5 PASS, run #660 first and #672 second. Both use the identical designated
+Stage 4.5 terminal resolution (PASS, or a recorded Integrity Check FAIL Loop
+continuation), run #660 first and #672 second. Both use the identical designated
 accepted draft. Enforce this exact machine join before either carrier is shown:
 
 ```text
@@ -845,8 +996,9 @@ redacted `ADVISORY_UNAVAILABLE:<CODE>` diagnostic. Neither result blocks or
 delays the checkpoint or requires remediation before Stage 5.
 
 Any manuscript revision stales both carriers. Return through existing integrity
-review to a fresh exact Stage 4.5 PASS, then rerun #660 followed by #672 on the
-new accepted bytes. Reusing either old carrier or rerunning only one is invalid
+review to a fresh exact Stage 4.5 terminal resolution (PASS, or a recorded
+FAIL-loop continuation), then rerun #660 followed by #672 on the new accepted
+bytes. Reusing either old carrier or rerunning only one is invalid
 handoff cargo. Rendering is replay-first, one explicit page of at most 25, with
 no `--all`. See
 `shared/references/cross_document_consistency_advisory_protocol.md`.
@@ -863,13 +1015,13 @@ When `academic-pipeline` mode is active, the orchestrator runs the **Cite-Time P
 
 - The current draft markdown containing `<!--ref:slug-->` HTML-comment markers (one per emitted citation, per Step 3a's two-layer form).
 - The Material Passport `literature_corpus[]` entries (each carries `citation_key`, `source_acquired`, `source_verified_against_original`).
-- The peer-file `<session>_human_read_log.yaml` (path computed as `<passport-path-parent>/<passport-stem>_human_read_log.yaml` per §3.6 round-5 R5-003 amend) — provides `human_read_source: true` for every `citation_key` the user has explicitly marked via `/ars-mark-read`.
+- The peer-file `<session>_human_read_log.yaml` (path computed as `<passport-path-parent>/<passport-stem>_human_read_log.yaml` per §3.6 round-5 R5-003 amend) — records `USER_ATTESTED_READ` declarations. It is user attestation, not independent proof of reading or comprehension.
 
-**Join semantics:** for each `<!--ref:slug-->` marker, the finalizer dereferences `slug` against `literature_corpus[]` to obtain `(source_acquired, source_verified_against_original)`, then joins on `citation_key` against the read-log to derive `human_read_source`. The `literature_corpus[]` schema is NOT mutated (per §3.6 firm rule #1: derived keys are not stored).
+**Join semantics:** for each `<!--ref:slug-->` marker, apply the v3.7.3 anchor precedence before consulting reading state: a missing marker, `kind=none`, an out-of-enum kind, or an empty value routes to MED-WARN-NO-LOCATOR and never reaches the read matrix. For a valid `{quote,page,section,paragraph}` anchor, dereference `slug` against `literature_corpus[]` to obtain `(source_acquired, source_verified_against_original)`, then pass the read-log, `citation_key`, and that exact anchor to `scripts/human_read_attestation_resolver.py`. The resolver strictly validates the current closed ledger, `USER_ATTESTED_READ` type/scope pairing, RFC3339-UTC event order, and anchor enum before returning a closed state, `ok_eligible`, and `finalizer_disposition`; only `state=covered` is eligible for `ok`. Its JSON is a transient routing decision, not an audit receipt: never persist or replay it, and recompute it from the current ledger and anchor on every pass. The `literature_corpus[]` schema is NOT mutated (per §3.6 firm rule #1: derived keys are not stored).
 
 **4-cell resolution matrix (from spec §3.3 lines 174-179):**
 
-| `source_acquired` | `source_verified_against_original` | `human_read_source` | Resolution |
+| `source_acquired` | `source_verified_against_original` | `user_attested_read_covered` | Resolution |
 |-------------------|-----------------------------------|---------------------|------------|
 | false             | —                                  | —                   | **HIGH WARN**: cite has no original source on file. Replace `<!--ref:slug-->` with `[UNVERIFIED CITATION — NO ORIGINAL]<!--ref:slug-->` |
 | true              | false                             | —                   | **MED WARN**: PDF in repo but AI has not cross-checked (regardless of whether the user has read it; AI verification is the gating condition). Replace with `[UNVERIFIED CITATION — AI HAS NOT CROSS-CHECKED]<!--ref:slug-->` |
@@ -878,18 +1030,18 @@ When `academic-pipeline` mode is active, the orchestrator runs the **Cite-Time P
 
 **Idempotency:** the finalizer pass is idempotent on the join of `(literature_corpus[]` row, read-log row`)` for each slug — re-running on a resolved marker with byte-identical input evidence yields byte-identical output. The matrix is re-applied to every `<!--ref:slug ...-->` on every pass; resolution tracks the current evidence, not a sticky historical state. Concretely:
 
-- When the joined evidence (`source_acquired`, `source_verified_against_original`, derived `human_read_source`, and — #513 — the governing mark's `read_scope` attestation together with the citation's own `<!--anchor:<kind>:<value>-->`, since scope-aware promotion is a function of the anchor too: a revision that moves an anchor from a covered to an uncovered locator re-resolves the marker even when corpus and ledger are unchanged) is unchanged between passes, the marker's resolved form is byte-identical to the prior pass.
-- When the joined evidence changes between passes (user acquires / verifies the source, runs `/ars-mark-read <refcode>`, or runs `/ars-unmark-read <refcode>` to rescind a prior mark), the next finalizer pass re-applies the matrix from the new triple and re-emits the resolved form. Promotion (e.g. `LOW-WARN` → `ok` after `/ars-mark-read`) and demotion (e.g. `ok` → `LOW-WARN` after `/ars-unmark-read`, since spec §3.6 line 325/340 makes the most recent timestamped event win) are both possible.
+- When the joined evidence (`source_acquired`, `source_verified_against_original`, the deterministic `USER_ATTESTED_READ` resolution, and the citation's own `<!--anchor:<kind>:<value>-->`) is unchanged between passes, the marker's resolved form is byte-identical to the prior pass. A revision that moves an anchor from a covered to an uncovered locator re-resolves the marker even when corpus and ledger are unchanged.
+- When the joined evidence changes between passes (user acquires / verifies the source, runs `/ars-mark-read <refcode> --scope <level>`, or runs `/ars-unmark-read <refcode>` to rescind a prior mark), the next finalizer pass re-applies the matrix from the new triple and re-emits the resolved form. Promotion (e.g. `LOW-WARN` → `ok` after a deterministically covered `/ars-mark-read` declaration) and demotion (e.g. `ok` → `LOW-WARN` after `/ars-unmark-read`, since spec §3.6 line 325/340 makes the most recent timestamped event win) are both possible.
 
-In other words: the resolved status is a pure function of the current input triple; user-facing remediation and rescind affordances both round-trip through the matrix.
+In other words: the resolved status is a pure function of the corpus row, exact anchor, and deterministic attestation resolution; user-facing remediation and rescind affordances both round-trip through the matrix.
 
 **Revision loops:** on revision loops (Stage 4 → reviewer → Stage 4 revise; or `academic-paper` Phase 6 → Phase 4 loops), the finalizer re-runs against the current draft, resolves any newly-emitted bare `<!--ref:slug-->` comments introduced in the revision pass, and re-applies the matrix to existing resolved markers per the idempotency rule above. Resolved markers **do not invalidate** in the sense that nothing about the revision-loop mechanism itself perturbs them — only a change in the joined evidence (acquire / verify / `/ars-mark-read` / `/ars-unmark-read`, or — #513 — a revision editing the citation's anchor under a partial-coverage attestation) can move a marker. When evidence is unchanged across a revision pass, every marker is preserved byte-identical.
 
-**LOW-WARN promotion:** when the user runs `/ars-mark-read <refcode>` between finalizer passes, the next pass observes `human_read_source: true` for that slug via the read-log join and resolves the marker to row 4 (`<!--ref:slug ok-->`). The finalizer does not delete the LOW-WARN entry from the per-section checklist artifact; that artifact is informational and the user clears it manually (or it falls out at the next checklist regeneration).
+**LOW-WARN promotion:** when the user runs `/ars-mark-read <refcode> --scope ...` between finalizer passes, the next pass resolves the exact attestation/anchor pair. It reaches row 4 (`<!--ref:slug ok-->`) only when the resolver returns `state=covered` and `ok_eligible: true`. A declaration alone is not enough. The finalizer does not delete the LOW-WARN entry from the per-section checklist artifact; that artifact is informational and the user clears it manually (or it falls out at the next checklist regeneration).
 
-**Read-scope-aware promotion (#513).** The mark consumed by the row-3 → row-4 promotion may carry an optional `read_scope` attestation (`{level, locators[], note}`, schema `shared/contracts/passport/human_read_log.schema.json`). The governing signal follows the SAME latest-timestamped-event-wins rule as the binary case (spec §3.6): promotion is considered only when the slug's latest event overall is a mark — a latest rescind keeps row 3 regardless of any older non-rescinded marks — and the `read_scope` consulted is the one carried by that latest mark. Promotion then consults the attestation against the citation's own `<!--anchor:<kind>:<value>-->`: `level` absent or `unknown` promotes exactly as before (legacy marks impose no migration); `full_text` promotes; `abstract_only` / `toc_only` does NOT promote — the marker resolves to `<!--ref:slug LOW-WARN-PARTIAL-COVERAGE-->` (a draft-visible acknowledged-partial state, distinguishable from an unacknowledged `LOW-WARN`) and the per-section checklist entry gains an explicit coverage note (e.g. `read_scope abstract_only does not cover anchor page:12`); `sections` promotes ONLY when a `page` / `section` / `paragraph` anchor value falls unambiguously within a declared locator (locators are free text — promote on a clear containment match only; any ambiguity or no match resolves to `LOW-WARN-PARTIAL-COVERAGE` + coverage note), and `quote` anchors promote only under `full_text` or `unknown` (with partial coverage the finalizer cannot vouch that the quoted passage lies in a read section). `LOW-WARN-PARTIAL-COVERAGE` behaves as `LOW-WARN` for every downstream mechanism that keys on the base status (contamination suffixes attach the same way; severity tier unchanged; never a hard gate) — the formatter treats it as an acknowledged LOW-WARN variant and passes it with the coverage advisory surfaced. The degradation is always this retained LOW-WARN-tier state with a note — never a new severity, never below the pre-mark state. This paragraph refines WHEN row 3 promotes to row 4; the matrix rows and the join are unchanged, and the idempotency rule's evidence enumeration above explicitly includes the governing mark's attestation — a `read_scope` change between passes is an evidence change and re-resolves the marker.
+**Read-scope-aware promotion (#513 as superseded by #738).** Every new mark carries explicit `read_scope` (`{level, locators[], note}`, schema `shared/contracts/passport/human_read_log.schema.json`) and `attestation_type: USER_ATTESTED_READ`; scope-less legacy rows remain parseable but do not gain inferred coverage. Run `scripts/human_read_attestation_resolver.py` rather than interpreting free text in the prompt. Its state mapping is closed: `covered` → `eligible_for_ok` (row 4 only when the source matrix also permits); `partial_coverage` or `coverage_unknown` on an active mark → `acknowledged_partial` and `<!--ref:slug LOW-WARN-PARTIAL-COVERAGE-->`; `not_attested` or `rescinded` → `unacknowledged_low_warn` and plain `<!--ref:slug LOW-WARN-->`, never the partial marker; `ledger_invalid` → `block_invalid_ledger`, emit `<!--ref:slug READ-LEDGER-INVALID-->` plus the bounded validation reason and stop the transition; `anchor_unresolved` → the precedence-zero MED-WARN-NO-LOCATOR route, never a read-state acknowledgment. `full_text` covers a valid resolved anchor; `sections` uses only explicit `page`/`p.`/`pp.` ranges or exact normalized `section`/`paragraph` locators—bare numbers and cross-kind strings never cover; `abstract_only`, `toc_only`, nonmatching sections, and quote-without-full-text remain partial; legacy missing or explicit `unknown` scope remains unknown. Any ledger, scope, event, or anchor change requires recomputation.
 
-**Hard-gate handoff:** the finalizer never blocks pipeline progress on its own. It mutates the draft in place, then the orchestrator advances to Stage 5 where `formatter_agent` carries the hard-gate refusal rule (any `[UNVERIFIED CITATION ...]` literal or any unresolved `<!--ref:slug-->` whose status is neither `ok`, LOW-WARN-acknowledged, nor `LOW-WARN-PARTIAL-COVERAGE` (#513 acknowledged-partial — passes, never refused) forces a refusal at format time per spec §3.3 line 185).
+**Hard-gate handoff:** except for the closed `ledger_invalid` branch above—which stops the transition immediately—the finalizer mutates the draft in place, then the orchestrator advances to Stage 5 where `formatter_agent` carries the hard-gate refusal rule. Any `[UNVERIFIED CITATION ...]` literal or any unresolved `<!--ref:slug-->` whose status is neither `ok`, explicitly acknowledged plain `LOW-WARN`, nor `LOW-WARN-PARTIAL-COVERAGE` forces refusal; `READ-LEDGER-INVALID` is intentionally outside the allowed status set and therefore refuses as defense in depth.
 
 **Audit trail:** the finalizer's per-pass resolution counts (HIGH WARN / MED WARN / LOW WARN / OK / unresolved) are logged via `state_tracker` for the pipeline audit trail and surface in the Stage 4.5 integrity-check report.
 
@@ -899,7 +1051,7 @@ Extends the v3.7.1 4-cell matrix above with two additive checks. External motiva
 
 ### Precedence-zero check: locator presence (L3-1)
 
-Before applying the 4-cell matrix on `(source_acquired, source_verified_against_original, human_read_source)`, the finalizer inspects the trailing `<!--anchor:<kind>:<value>-->` comment that follows each ref marker. **The ref marker matches all 0/1/2-token shapes** — the bare pre-resolution form `<!--ref:slug-->`, the v3.7.1 finalizer-resolved forms `<!--ref:slug ok-->` / `<!--ref:slug LOW-WARN-->`, AND the v3.7.3 contamination-annotated forms `<!--ref:slug ok CONTAMINATED-PREPRINT-->` / `<!--ref:slug LOW-WARN CONTAMINATED-PREPRINT+UNMATCHED-->`. The finalizer must NOT match only the bare pre-resolution shape, because revision-loop reruns re-apply the matrix to already-resolved markers (per the v3.7.1 idempotency clause above); a re-run that only recognizes the bare shape would miss the anchor pairing on previously-resolved citations and treat them as locator-less. v3.7.3 codex round-7 F16 closure.
+Before applying the 4-cell matrix on `(source_acquired, source_verified_against_original, user_attested_read_covered)`, the finalizer inspects the trailing `<!--anchor:<kind>:<value>-->` comment that follows each ref marker. **The ref marker matches all 0/1/2-token shapes** — the bare pre-resolution form `<!--ref:slug-->`, the v3.7.1 finalizer-resolved forms `<!--ref:slug ok-->` / `<!--ref:slug LOW-WARN-->`, AND the v3.7.3 contamination-annotated forms `<!--ref:slug ok CONTAMINATED-PREPRINT-->` / `<!--ref:slug LOW-WARN CONTAMINATED-PREPRINT+UNMATCHED-->`. The finalizer must NOT match only the bare pre-resolution shape, because revision-loop reruns re-apply the matrix to already-resolved markers (per the v3.7.1 idempotency clause above); a re-run that only recognizes the bare shape would miss the anchor pairing on previously-resolved citations and treat them as locator-less. v3.7.3 codex round-7 F16 closure.
 
 **Optional whitespace and newlines between the ref marker and the anchor marker are allowed and consumed** — the finalizer regex matches `<!--ref:slug [0-2 status tokens]-->\s*<!--anchor:...-->` (where `\s` covers space, tab, and newline). An LLM that emits the two markers across lines must not be treated as having no anchor; the finalizer pairs them by adjacency-modulo-whitespace, not strict adjacency. v3.7.3 gemini review F2 closure.
 
@@ -909,7 +1061,7 @@ Before applying the 4-cell matrix on `(source_acquired, source_verified_against_
 
 NO-LOCATOR is MED severity (not HIGH) because the citation may still point at a real verified source — only the claim-anchor is missing. Treating it as HIGH would conflate two distinct defects (no source vs no anchor). The fix is locator emission by re-running the upstream agent or manual editing, not source acquisition.
 
-**`/ars-mark-read` does NOT clear NO-LOCATOR.** The precedence-zero rule stops BEFORE applying the trust-state matrix on `(source_acquired, source_verified_against_original, human_read_source)`. Acknowledgment via `/ars-mark-read` only affects `human_read_source`, which is part of the 4-cell matrix that NO-LOCATOR bypasses. The only remediation is re-emitting the citation with a valid (`<kind>` ≠ `none`) anchor. This asymmetry is intentional: a locator is a structural property of the prose, not an evidence-state property of the source. v3.7.3 codex review P2-2 closure.
+**`/ars-mark-read` does NOT clear NO-LOCATOR.** The precedence-zero rule stops BEFORE applying the trust-state matrix on `(source_acquired, source_verified_against_original, user_attested_read_covered)`. Acknowledgment can affect only the deterministic attestation state, which is part of the 4-cell matrix that NO-LOCATOR bypasses. The only remediation is re-emitting the citation with a valid (`<kind>` ≠ `none`) anchor. This asymmetry is intentional: a locator is a structural property of the prose, not an evidence-state property of the source. v3.7.3 codex review P2-2 closure.
 
 ### Contamination annotation (L3-2)
 
@@ -924,7 +1076,7 @@ After the 4-cell matrix resolves a citation to `ok` or `LOW-WARN`, the finalizer
 
 Example: `<!--ref:smith2024 LOW-WARN CONTAMINATED-PREPRINT-->` or `<!--ref:smith2024 ok CONTAMINATED-PREPRINT+UNMATCHED-->`.
 
-**Advisory by default.** The contamination annotation SUFFIX does not change the gate decision: `ok CONTAMINATED-...` passes the formatter hard-gate and `LOW-WARN CONTAMINATED-...` is acknowledgeable via `/ars-mark-read <slug>` exactly like plain LOW-WARN. The suffix surfaces the signal so the user can verify the source or remove the citation. (v3.10 adds an OPT-IN terminal channel: when the passport's `terminal_policies.contamination_triangulation` is `strict` / `strict_articles_only`, a k=3 signal additionally co-emits a `TERMINAL-BLOCK` token that the formatter refuses on — see § Cite-Time Provenance Finalizer — v3.10 extension. The advisory suffix itself stays advisory; the terminal block is a separate, additional token.)
+**Advisory by default.** The contamination annotation SUFFIX does not change the gate decision: `ok CONTAMINATED-...` passes the formatter hard-gate and `LOW-WARN CONTAMINATED-...` is eligible for user attestation via `/ars-mark-read <slug> --scope <level>` exactly like plain LOW-WARN; promotion still requires deterministic anchor coverage. The suffix surfaces the signal so the user can verify the source or remove the citation. (v3.10 adds an OPT-IN terminal channel: when the passport's `terminal_policies.contamination_triangulation` is `strict` / `strict_articles_only`, a k=3 signal additionally co-emits a `TERMINAL-BLOCK` token that the formatter refuses on — see § Cite-Time Provenance Finalizer — v3.10 extension. The advisory suffix itself stays advisory; the terminal block is a separate, additional token.)
 
 The contamination annotation does NOT apply to HIGH-WARN / MED-WARN / MED-WARN-NO-LOCATOR rows — those already block at the gate and the user must address the higher-severity problem before contamination becomes relevant.
 
@@ -940,7 +1092,7 @@ Any `finding: unresolved` or `not_checked`/`unknown`/`degraded` status is unreso
 For each `<!--ref:slug--><!--anchor:<kind>:<value>-->` marker pair:
 
 1. **Precedence-zero (L3-1):** if `<kind>` = `none`, resolve to MED-WARN-NO-LOCATOR. Stop.
-2. **4-cell matrix (v3.7.1):** apply the existing trust-state matrix on `(source_acquired, source_verified_against_original, human_read_source)`. Get base resolution: HIGH-WARN / MED-WARN-NOT-CROSS-CHECKED / LOW-WARN / OK.
+2. **4-cell matrix (v3.7.1 + #738 resolution):** apply the trust-state matrix on `(source_acquired, source_verified_against_original, user_attested_read_covered)`. Get base resolution: HIGH-WARN / MED-WARN-NOT-CROSS-CHECKED / LOW-WARN / OK.
 3. **Contamination annotation (L3-2):** if base resolution is `ok` or `LOW-WARN`, look up `contamination_signals` on the entry; append `CONTAMINATED-...` suffix if any field is true.
 
 ### Audit trail (v3.7.3 update)

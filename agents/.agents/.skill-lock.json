@@ -25,40 +25,36 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper/SKILL.md",
-      "skillFolderHash": "4837b5b1d5811f86906d0e488bc3a25bfc18825a",
-      "pluginName": "academic-research-skills",
+      "skillFolderHash": "99e7fa64b302180951bb9266bbad256aae31ae8d",
       "installedAt": "2026-08-10T07:57:14.363Z",
-      "updatedAt": "2026-08-10T07:57:14.363Z"
+      "updatedAt": "2026-08-29T14:00:52.963Z"
     },
     "academic-paper-reviewer": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper-reviewer/SKILL.md",
-      "skillFolderHash": "82b3fd3bce2da1108f06e657dff4b9ece3d5b1a8",
-      "pluginName": "academic-research-skills",
+      "skillFolderHash": "b003b9ac0caf892964cc0dbeca37bcadfc8862f7",
       "installedAt": "2026-08-10T07:57:14.365Z",
-      "updatedAt": "2026-08-10T07:57:14.365Z"
+      "updatedAt": "2026-08-29T14:01:17.508Z"
     },
     "academic-pipeline": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-pipeline/SKILL.md",
-      "skillFolderHash": "a43e9d6232d9dd8ec81eb541875c007fed5b9acf",
-      "pluginName": "academic-research-skills",
+      "skillFolderHash": "752cad4393c1df2de268facbd51668873cb133c9",
       "installedAt": "2026-08-10T07:57:14.365Z",
-      "updatedAt": "2026-08-10T07:57:14.365Z"
+      "updatedAt": "2026-08-29T14:01:35.297Z"
     },
     "deep-research": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "deep-research/SKILL.md",
-      "skillFolderHash": "c97c51072ede383eddb87a86806bb67e0c80371d",
-      "pluginName": "academic-research-skills",
+      "skillFolderHash": "70811854e012a31f311237d8feddd75ca73a5fc6",
       "installedAt": "2026-08-10T07:57:14.365Z",
-      "updatedAt": "2026-08-10T07:57:14.365Z"
+      "updatedAt": "2026-08-29T14:02:02.802Z"
     },
     "opensrc": {
       "source": "vercel-labs/opensrc",
