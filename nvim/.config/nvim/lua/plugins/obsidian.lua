@@ -38,16 +38,18 @@ return {
   ---@module 'obsidian'
   ---@type obsidian.config
   opts = {
-    file = {
-      ignore_filters = {
-        "AGENTS.md",
-      },
-    },
 
     workspaces = {
       {
         name = "main",
         path = vim.env.HOME .. "/obsidian/main-vault",
+        overrides = {
+          file = {
+            ignore_filters = {
+              "AGENTS.md",
+            },
+          },
+        },
       },
     },
 
@@ -102,6 +104,7 @@ return {
       date_format = "%Y-%m-%d-%a",
       time_format = "%H:%M:%s",
     },
+    note = { template = "permanent.md" },
 
     picker = { "snack" },
 
