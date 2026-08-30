@@ -1,0 +1,23 @@
+{
+  "skill_name": "note-source-alignment",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Compare my study notes with the attached article. Flag any claim that overstates the article's findings and cite the relevant passage.",
+      "expected_output": "A claim-level alignment table with source evidence, status labels, and concise repairs.",
+      "files": ["article.pdf", "study-notes.md"]
+    },
+    {
+      "id": 2,
+      "prompt": "Does this meeting summary accurately reflect the original transcript at ./transcript.txt? I need every omitted qualification called out.",
+      "expected_output": "A source-bounded review that identifies faithful, qualified, unsupported, and contradicted claims.",
+      "files": ["transcript.txt"]
+    },
+    {
+      "id": 3,
+      "prompt": "Check these bullet notes against https://example.org/report. Do not fact-check the report itself—only tell me whether the notes match it.",
+      "expected_output": "A URL-based source comparison, explicitly avoiding external research.",
+      "files": []
+    }
+  ]
+}
