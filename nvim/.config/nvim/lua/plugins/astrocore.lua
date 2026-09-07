@@ -110,6 +110,44 @@ local autocmds = {
     group = "no_comment_on_enter",
     callback = function() vim.opt_local.formatoptions:remove { "c", "r", "o" } end,
   },
+  luasnip_math_autotag = {
+    {
+      event = "User",
+      pattern = "AstroFile",
+      desc = "Let LuaSnip handle math triggers ending in >",
+      callback = function(event)
+        if vim.bo[event.buf].filetype ~= "markdown" then return end
+        vim.schedule(function()
+          if not vim.api.nvim_buf_is_valid(event.buf) or vim.b[event.buf].luasnip_math_autotag then return end
+
+          vim.b[event.buf].luasnip_math_autotag = true
+          vim.keymap.set("i", ">", function()
+            local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+            local is_math = require("luasnip-latex-snippets.util.utils").is_math(true)
+            if not is_math then
+              local delimiters = 0
+              for _, line in ipairs(vim.api.nvim_buf_get_lines(event.buf, 0, row - 1, false)) do
+                if line:match "^%s*%$%$%s*$" then delimiters = delimiters + 1 end
+              end
+              is_math = delimiters % 2 == 1
+            end
+            vim.api.nvim_buf_set_text(event.buf, row - 1, col, row - 1, col, { ">" })
+
+            if is_math then
+              vim.defer_fn(function()
+                if vim.api.nvim_get_current_buf() ~= event.buf then return end
+                vim.api.nvim_win_set_cursor(0, { row, col + 1 })
+                require("luasnip").expand_auto()
+              end, 10)
+            else
+              require("nvim-ts-autotag.internal").close_tag()
+              vim.api.nvim_win_set_cursor(0, { row, col + 1 })
+            end
+          end, { buffer = event.buf, noremap = true, silent = true })
+        end)
+      end,
+    },
+  },
 }
 
 if require("astrocore").is_available "neo-tree.nvim" then
