@@ -8,7 +8,7 @@ return {
   opts = {
     integrations = {
       markdown = {
-        filetypes = { "markdown", "quarto" },
+        filetypes = { "quarto" },
       },
       typst = {
         enabled = false,
