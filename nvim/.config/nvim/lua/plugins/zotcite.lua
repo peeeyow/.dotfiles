@@ -6,6 +6,12 @@ return {
   },
   opts = {
     key_type = "better-bibtex",
+    hook = {
+      bib_ref = function(e)
+        e.zotero_added = e.added
+        return e
+      end,
+    },
   },
   config = function(_, opts)
     require("zotcite").setup(opts)
