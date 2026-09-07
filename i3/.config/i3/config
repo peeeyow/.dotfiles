@@ -2,12 +2,8 @@
 
 ### variables
 # monitors
-# 1080p 144hz
-set $external_primary "DP-0"
-# 1080p 75hz
-set $external_secondary "HDMI-0"
-# 2560x1440 165hz
-set $builtin_screen "eDP-1-1"
+set $external_primary "HDMI-0"
+set $builtin_screen "eDP-1-0"
 
 # modifier keys - windows key
 set $mod Mod4
@@ -162,7 +158,7 @@ bindsym $mod+shift+Control+p move workspace to output $external_primary
 bindsym $mod+shift+Control+s move workspace to output $external_secondary
 bindsym $mod+shift+Control+b move workspace to output $builtin_screen
 
-bindsym $mod+shift+s exec $HOME/.scripts/rofi_monitor_menu.sh
+bindsym $mod+shift+s exec $HOME/.scripts/rofi_monitor_menu_legion.sh
 
 # move to previous workspace
 bindsym $mod+Tab workspace back_and_forth
@@ -174,10 +170,6 @@ bindsym $mod+b splith
 # vertical split
 bindsym $mod+v splitv
 
-# stacking mode
-bindsym $mod+s layout stacking
-# tabbed mode
-bindsym $mod+w layout tabbed
 # split vertical/horizontal mode
 bindsym $mod+e layout toggle split
 
@@ -315,12 +307,8 @@ for_window [instance="update_installer"] floating enable
 ### urgent workspace (triggered by mako)
 focus_on_window_activation focus
 
-exec --no-startup-id xrandr --output $builtin_screen --primary --mode 2560x1440 --rate 165.00\
-    --output $external_primary --off\
-    --output $external_secondary --off
-
-
-
+exec --no-startup-id xrandr --output $builtin_screen --primary --mode 1920x1200 --rate 144.00\
+    --output $external_primary --off
 
 exec_always --no-startup-id $HOME/.scripts/polybar.sh
 
@@ -329,7 +317,10 @@ exec --no-startup-id feh --bg-fill $background_path
 exec --no-startup-id picom
 exec --no-startup-id /usr/libexec/xfce-polkit
 exec --no-startup-id copyq
+exec --no-startup-id vocalinux
 exec --no-startup-id xinput set-prop "SYNA7DB5:01 06CB:CD41 Touchpad" "libinput Tapping Enabled" 1
 exec --no-startup-id xinput set-prop "SYNA7DB5:01 06CB:CD41 Touchpad" "libinput Natural Scrolling Enabled" 1
 exec --no-startup-id xinput set-prop "Synaptics TM3276-022" "libinput Tapping Enabled" 1
 exec --no-startup-id xinput set-prop "Synaptics TM3276-022" "libinput Natural Scrolling Enabled" 1
+exec --no-startup-id xinput set-prop  'FOCA0001:00 2808:0106 Touchpad' 'libinput Tapping Enabled' 1
+exec --no-startup-id xinput set-prop  'FOCA0001:00 2808:0106 Touchpad' 'libinput Natural Scrolling Enabled' 1
