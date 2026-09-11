@@ -127,5 +127,9 @@ return {
     ui = {
       enable = false,
     },
+
+    callbacks = {
+      enter_note = function() vim.keymap.del("n", "<CR>", { buffer = true }) end,
+    },
   },
 }
