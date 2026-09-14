@@ -37,10 +37,32 @@ fi
 # Stage local changes
 git add -A
 
-# Commit and push if anything changed
+CHANGED=0
 if ! git diff --cached --quiet; then
     TIMESTAMP=$(date --iso-8601=seconds)
 
     git commit -m "Automatic update: $TIMESTAMP"
+    CHANGED=1
+fi
+
+# Keep only the five newest snapshots. Rebuild their commit chain from the
+# existing trees, so SQLite and other binary changes do not need to rebase.
+trim_history() {
+    local oldest parent commit
+
+    [ "$(git rev-list --count "$BRANCH")" -gt 5 ] || return 1
+    oldest=$(git rev-parse "$BRANCH~4")
+    parent=$(git commit-tree "$oldest^{tree}" -F <(git log -1 --format=%B "$oldest"))
+
+    while read -r commit; do
+        parent=$(git commit-tree "$commit^{tree}" -p "$parent" -F <(git log -1 --format=%B "$commit"))
+    done < <(git rev-list --reverse "$oldest..$BRANCH")
+
+    git update-ref "refs/heads/$BRANCH" "$parent"
+}
+
+if trim_history; then
+    git push --force-with-lease origin "$BRANCH"
+elif [ "$CHANGED" -eq 1 ]; then
     git push origin "$BRANCH"
 fi
