@@ -45,18 +45,17 @@ if ! git diff --cached --quiet; then
     CHANGED=1
 fi
 
-# Keep only the five newest snapshots. Rebuild their commit chain from the
-# existing trees, so SQLite and other binary changes do not need to rebase.
+# Keep the original root and four newest snapshots.
 trim_history() {
-    local oldest parent commit
+    local root parent commit
 
     [ "$(git rev-list --count "$BRANCH")" -gt 5 ] || return 1
-    oldest=$(git rev-parse "$BRANCH~4")
-    parent=$(git commit-tree "$oldest^{tree}" -F <(git log -1 --format=%B "$oldest"))
+    root=$(git rev-list --max-parents=0 "$BRANCH")
+    parent=$root
 
     while read -r commit; do
         parent=$(git commit-tree "$commit^{tree}" -p "$parent" -F <(git log -1 --format=%B "$commit"))
-    done < <(git rev-list --reverse "$oldest..$BRANCH")
+    done < <(git rev-list --reverse "$BRANCH~4..$BRANCH")
 
     git update-ref "refs/heads/$BRANCH" "$parent"
 }
