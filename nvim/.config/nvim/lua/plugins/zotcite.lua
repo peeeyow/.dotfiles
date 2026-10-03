@@ -30,5 +30,7 @@ return {
       end
       return yaml_field(field, bufnr)
     end
+
+    require("zotero_annotations").setup()
   end,
 }
