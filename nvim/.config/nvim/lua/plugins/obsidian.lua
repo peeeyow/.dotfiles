@@ -48,6 +48,7 @@ return {
           file = {
             ignore_filters = {
               "AGENTS.md",
+              ".agents/**/*.md",
             },
           },
         },
