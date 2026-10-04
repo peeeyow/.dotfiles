@@ -60,3 +60,6 @@ packer_compiled.lua
 
 # icons
 icons/.icons/default
+
+# Python cache files
+__pycache__/
