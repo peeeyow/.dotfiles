@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "1.0.0",
+  "lastChangelogVersion": "1.0.1",
   "theme": "one-dark",
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-6.1-sol",
@@ -10,5 +10,6 @@
     "npm:@narumitw/pi-statusline",
     "npm:pi-usage-bar-focus",
     "git:github.com/DietrichGebert/ponytail"
-  ]
+  ],
+  "hideThinkingBlock": false
 }
