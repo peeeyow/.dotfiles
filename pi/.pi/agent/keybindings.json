@@ -1,0 +1,4 @@
+{
+  "tui.altScreen.top": "ctrl+home",
+  "tui.altScreen.bottom": "ctrl+end"
+}
