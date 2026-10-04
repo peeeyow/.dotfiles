@@ -60,13 +60,9 @@ return {
     new_notes_location = "current_dir",
 
     link = {
-      -- style = "markdown",
       style = function(opts)
-        local util = require("obsidian").util
-        local anchor = opts.anchor and opts.anchor.anchor or ""
-        local header = opts.anchor and util.format_anchor_label(opts.anchor) or ""
-        local path = util.urlencode(opts.path, { keep_path_sep = true })
-        return string.format("[%s%s](/%s%s)", opts.label, header, path, anchor)
+        local path = opts.path and opts.path ~= "" and "/" .. opts.path or ""
+        return require("obsidian.builtin").markdown_link(vim.tbl_extend("force", opts, { path = path }))
       end,
       format = "absolute",
       auto_update = true,
