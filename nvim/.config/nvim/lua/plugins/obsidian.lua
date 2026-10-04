@@ -3,6 +3,7 @@ local prefix = "<Leader>o"
 ---@type LazySpec
 return {
   "obsidian-nvim/obsidian.nvim",
+  init = function() vim.g.obsidian_default_keymap = false end,
   event = {
     "BufReadPre " .. vim.fn.expand "~" .. "/obsidian/main-vault/**.md",
     "BufNewFile " .. vim.fn.expand "~" .. "/obsidian/main-vault/**.md",
@@ -72,19 +73,18 @@ return {
     },
 
     note_id_func = function(title)
-      local suffix = ""
-      if title ~= nil and #title:gsub("%s+", "") > 0 then
-        suffix = title:gsub("[^A-Za-z0-9%s'\"]", ""):gsub("%s+", "-"):lower()
-      else
+      local suffix = vim.trim((title or ""):gsub("[^A-Za-z0-9%s_-]", "")):gsub("%s+", "_"):lower()
+      if suffix == "" then
         for _ = 1, 4 do
-          suffix = suffix .. string.char(math.random(65, 90))
+          suffix = suffix .. string.char(math.random(97, 122))
         end
       end
       return tostring(os.date "%Y%m%d%H%M%S") .. "-" .. suffix
     end,
 
     frontmatter = {
-      enabled = true,
+      -- Reference frontmatter is owned by scripts/zotcite_to_notes.py.
+      enabled = function(path) return not vim.startswith(tostring(path), "references/") end,
       func = function(note)
         if note.title then note:add_alias(note.title) end
         local out = {
@@ -120,7 +120,7 @@ return {
         local name = vim.fs.basename(tostring(path))
         return string.format("![%s](/%s)", name, path:vault_relative_path())
       end,
-      img_name_func = function() return tostring(os.date "%Y%m%d%H%M%S") end,
+      img_name_func = function() return "" end,
     },
 
     open = {
@@ -131,7 +131,38 @@ return {
     },
 
     callbacks = {
-      enter_note = function() vim.keymap.del("n", "<CR>", { buffer = true }) end,
+      post_setup = function()
+        -- img_name_func only sets the prompt default; normalize the final filename before saving.
+        local img = require "obsidian.img_paste"
+        local Path = require "obsidian.path"
+        local api = require "obsidian.api"
+        local paste = img.paste
+        img.paste = function(path, img_type)
+          path = Path.new(path)
+          if path == Path.new(api.resolve_attachment_path "") then
+            return paste(path / Obsidian.opts.note_id_func(), img_type)
+          end
+          local name = Obsidian.opts.note_id_func(path.stem) .. (path.suffix or ""):lower()
+          return paste((path:parent() or Path.new ".") / name, img_type)
+        end
+      end,
+      enter_note = function(note)
+        if vim.bo[note.bufnr].filetype == "neo-tree" then return end
+        local actions = require "obsidian.actions"
+        vim.keymap.set("n", "<CR>", actions.smart_action, {
+          expr = true,
+          buffer = note.bufnr,
+          desc = "Obsidian Smart Action",
+        })
+        vim.keymap.set("n", "]o", function() actions.nav_link "next" end, {
+          buffer = note.bufnr,
+          desc = "Obsidian Next Link",
+        })
+        vim.keymap.set("n", "[o", function() actions.nav_link "prev" end, {
+          buffer = note.bufnr,
+          desc = "Obsidian Previous Link",
+        })
+      end,
     },
   },
 }

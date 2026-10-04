@@ -1,33 +1,36 @@
 -- Run: nvim --headless -u NONE -l ~/.config/nvim/lua/zotero_annotations/tests/import_zotero_annotations.lua
 local config_dir = vim.fn.fnamemodify(debug.getinfo(1, "S").source:sub(2), ":p:h:h:h:h")
 vim.opt.rtp:prepend(config_dir)
-vim.opt.rtp:append(vim.fn.stdpath "data" .. "/lazy/zotcite")
 
-local annotations, selected_callback
-local warnings = {}
+local selected_callback, completed
+local warnings, commands = {}, {}
 vim.notify = function(message) table.insert(warnings, message) end
 local refs = function(key, callback)
-  assert(key == "", "The paper selector should open without a search filter")
-  selected_callback = callback -- Selection happens after the command returns.
+  assert(key == "", "The reference picker should open without a search filter")
+  selected_callback = callback
 end
-package.loaded["zotcite"] = { setup = function() end, zwarn = vim.notify }
-package.loaded["zotcite.config"] = { get_config = function() return {} end }
+package.loaded["zotcite"] = { setup = function() end }
 package.loaded["zotcite.seek"] = { refs = refs }
+package.loaded["zotcite.get"] = { yaml_field = function() end }
 package.loaded["zotcite.zotero"] = {
-  get_annotations = function(key, offset)
-    assert(key == "paper" and offset == 0)
-    return annotations
-  end,
+  get_annotations = function() error "Zotcite must not retrieve annotations" end,
 }
-package.loaded["zotcite.hl"] = { citations = function() end }
--- Exercise the installed Zannotations implementation, not a replacement importer.
-vim.api.nvim_create_user_command(
-  "Zannotations",
-  function(opts) require("zotcite.get").annotations(opts.args, false) end,
-  { nargs = "?" }
-)
+vim.api.nvim_create_user_command("Zseek", function() end, {})
+vim.api.nvim_create_user_command("Zannotations", function() error "Zannotations must not be called" end, {})
 local spec = dofile(config_dir .. "/lua/plugins/zotcite.lua")
 spec.config(nil, spec.opts)
+
+local system = vim.system
+vim.system = function(argv, opts, callback)
+  assert(#argv == 4 and vim.fn.executable(argv[1]) == 1)
+  assert(type(argv[4]) == "string")
+  assert(argv[2] == vim.fn.expand "~/obsidian/main-vault/scripts/import_zotero_annotations.py")
+  assert(opts.cwd == vim.fn.expand "~/obsidian/main-vault")
+  assert(opts.text and opts.timeout == 35000)
+  table.insert(commands, argv)
+  completed = callback
+  return {}
+end
 
 local function lines(buf) return vim.api.nvim_buf_get_lines(buf, 0, -1, true) end
 local function equal(actual, expected)
@@ -39,196 +42,165 @@ local function fresh(initial)
   vim.bo[buf].filetype = "markdown"
   vim.api.nvim_buf_set_lines(buf, 0, -1, true, initial or { "# Paper" })
   vim.api.nvim_win_set_cursor(0, { 1, 0 })
-  selected_callback = nil
+  selected_callback, completed = nil, nil
   return buf
 end
-local function start(data)
-  annotations = data
+local function start()
+  local before = require("zotcite.seek").refs
   vim.cmd "ImportZoteroAnnotations"
-  assert(require("zotcite.seek").refs == refs, "The temporary picker wrapper must be restored")
+  assert(require("zotcite.seek").refs == before, "The picker must not be monkey-patched")
 end
-local function select_paper() selected_callback { value = { key = "paper" } } end
-
-local data = {
-  "First comment with [my brackets]. [comment on @paper, p. 3]",
+local function select_paper(citekey)
+  selected_callback { value = { key = "ZOT12345", cite = citekey or "paper", title = "Paper title" } }
+end
+local function finish(result)
+  completed(result)
+  vim.wait(20, function() return false end, 1)
+end
+local snippet = {
+  "## Annotations",
   "",
-  "> Highlight first line",
-  "unprefixed continuation",
+  "> [!quote]+ Highlight ([Page. 1](<zotero://open-pdf/library/items/PDF12345?annotation=TEXT1234&page=1>))",
+  "> Selected text.",
+  ">",
+  "> - My $x$ comment.",
   "",
-  "highlight last paragraph [@paper, p. 3]",
-  "",
-  "A multiline comment",
-  "",
-  "with another paragraph. [comment on @paper, p3]",
-  "",
-  "> My own quoted comment. [comment on @paper, p. 4]",
-  "",
-  "> Highlight without a comment. [@paper, p. 5]",
-  "",
-  " [comment on @paper, p. 6]", -- An empty Zotero comment.
-  "",
-}
-local expected = { "# Paper", "", "## Annotations" }
-vim.list_extend(expected, data)
-vim.list_extend(expected, {
   "## Notes",
   "",
-  "- First comment with [my brackets].",
+  "- My $x$ comment. ([Page. 1](<zotero://open-pdf/library/items/PDF12345?annotation=TEXT1234&page=1>))",
   "",
-  "- A multiline comment",
+  "## Reference",
   "",
-  "- with another paragraph.",
+  "Zotero: @paper",
+  "[Paper title](</references/paper.md>)",
   "",
-  "- > My own quoted comment.",
-  "",
-  "## Later section",
-  "Keep this text.",
-})
+}
+local result = { code = 0, stdout = table.concat(snippet, "\n") .. "\n", stderr = "" }
+
 local buf = fresh { "# Paper", "## Later section", "Keep this text." }
-start(data)
-equal(lines(buf), { "# Paper", "", "## Annotations", "## Later section", "Keep this text." })
--- A different current buffer must never receive the selected annotations.
+start()
+equal(lines(buf), { "# Paper", "## Later section", "Keep this text." })
+assert(completed == nil, "Opening the picker must not start retrieval")
 local pending = selected_callback
 local other = fresh { "Other buffer" }
-pending { value = { key = "paper" } }
+pending { value = { key = "ZOT12345", cite = "paper", title = "Paper title" } }
+assert(commands[#commands][3] == "paper", "Use the citation key, not Zotero's item key")
+assert(commands[#commands][4] == "Paper title", "Pass the selected reference's title")
+finish(result)
+local expected = { "# Paper", "" }
+vim.list_extend(expected, snippet)
+vim.list_extend(expected, { "## Later section", "Keep this text." })
 equal(lines(buf), expected)
 equal(lines(other), { "Other buffer" })
 assert(vim.api.nvim_get_current_buf() == other)
 
 vim.api.nvim_set_current_buf(buf)
-start(data) -- Refuse to duplicate existing sections or overwrite edited Notes.
-assert(selected_callback == nil) -- No new selector was opened.
+start()
+assert(selected_callback == nil)
 equal(lines(buf), expected)
-
-for _, heading in ipairs { "## Notes", "## Annotations" } do
+for _, heading in ipairs { "## Notes", "## Annotations", "## Reference" } do
   buf = fresh { "# Paper", heading, "Existing work" }
-  start(data)
-  assert(selected_callback == nil)
+  start()
+  assert(selected_callback == nil and completed == nil)
   equal(lines(buf), { "# Paper", heading, "Existing work" })
 end
 
 buf = fresh()
-start(data)
-selected_callback(nil) -- Cancelled selection leaves only the requested heading.
-equal(lines(buf), { "# Paper", "", "## Annotations" })
-
-for _, empty in ipairs { false, {} } do
-  buf = fresh()
-  start(empty or nil)
-  select_paper()
-  equal(lines(buf), { "# Paper", "", "## Annotations" })
-end
-
-buf = fresh()
-start { "> Highlight only. [@paper, p. 1]", "" }
+start()
+selected_callback(nil)
+equal(lines(buf), { "# Paper" })
+start() -- Cancellation does not leave a heading that prevents a retry.
 select_paper()
-equal(lines(buf), { "# Paper", "", "## Annotations", "> Highlight only. [@paper, p. 1]", "", "## Notes", "", "" })
+finish { code = 0, stdout = "", stderr = "" }
+equal(lines(buf), { "# Paper" })
+assert(warnings[#warnings]:find "No annotations")
 
--- Headings stay headings; lists inside prose notes gain one indentation level.
-local formatted_data = {
-  "### Topic [comment on @paper, p. 1]",
-  "",
-  "Parent note",
-  "wrapped continuation",
-  "",
-  "- Existing item",
-  "  - Nested item",
-  "    continuation of nested item",
-  "",
-  "+ Another item",
-  "",
-  "Next paragraph",
-  "1. Ordered child",
-  "   1) Nested ordered child",
-  "",
-  "#### New heading",
-  "After heading [comment on @paper, p. 2]",
-  "",
-  "- Standalone existing list",
-  "  - Preserve its nesting",
-  "    wrapped continuation",
-  "- [ ] Task [comment on @paper, p. 3]",
-  "",
-  "1. Standalone ordered list",
-  "   continued text",
-  "2. Second item [comment on @paper, p. 4]",
-  "",
-  "# Top heading [comment on @paper, p. 5]",
-  "",
-}
-local formatted_expected = { "# Paper", "", "## Annotations" }
-vim.list_extend(formatted_expected, formatted_data)
-vim.list_extend(formatted_expected, {
-  "## Notes",
-  "",
-  "### Topic",
-  "",
-  "- Parent note",
-  "  wrapped continuation",
-  "",
-  "  - Existing item",
-  "    - Nested item",
-  "      continuation of nested item",
-  "",
-  "  + Another item",
-  "",
-  "- Next paragraph",
-  "  1. Ordered child",
-  "     1) Nested ordered child",
-  "",
-  "#### New heading",
-  "- After heading",
-  "",
-  "- Standalone existing list",
-  "  - Preserve its nesting",
-  "    wrapped continuation",
-  "- [ ] Task",
-  "",
-  "1. Standalone ordered list",
-  "   continued text",
-  "2. Second item",
-  "",
-  "# Top heading",
-  "",
-})
 buf = fresh()
-start(formatted_data)
+start()
 select_paper()
-equal(lines(buf), formatted_expected)
+finish { code = 1, stdout = "Partial output must not be inserted", stderr = "Image is not cached" }
+equal(lines(buf), { "# Paper" })
+assert(warnings[#warnings] == "Image is not cached")
 
 buf = fresh()
-start(data)
+start()
 vim.api.nvim_buf_set_lines(buf, -1, -1, true, { "Edited during selection" })
 local edited = lines(buf)
 select_paper()
+assert(completed == nil)
 equal(lines(buf), edited)
-assert(warnings[#warnings]:find "changed during selection")
+assert(warnings[#warnings]:find "changed during selection or retrieval")
 
 buf = fresh()
-start(data)
-vim.api.nvim_buf_delete(buf, { force = true })
-select_paper() -- A closed note is safe to ignore.
+start()
+select_paper()
+vim.api.nvim_buf_set_lines(buf, -1, -1, true, { "Edited during retrieval" })
+edited = lines(buf)
+finish(result)
+equal(lines(buf), edited)
 
+for _, during_retrieval in ipairs { false, true } do
+  buf = fresh()
+  start()
+  if during_retrieval then select_paper() end
+  vim.api.nvim_buf_delete(buf, { force = true })
+  if during_retrieval then
+    finish(result)
+  else
+    select_paper()
+  end
+end
+
+for _, option in ipairs { "modifiable", "filetype" } do
+  buf = fresh()
+  if option == "modifiable" then
+    vim.bo[buf].modifiable = false
+  else
+    vim.bo[buf].filetype = "tex"
+  end
+  start()
+  assert(selected_callback == nil and completed == nil)
+  equal(lines(buf), { "# Paper" })
+end
 buf = fresh()
+start()
+select_paper()
 vim.bo[buf].modifiable = false
-start(data)
-assert(selected_callback == nil)
+finish(result)
 equal(lines(buf), { "# Paper" })
 
 buf = fresh()
-vim.bo[buf].filetype = "tex"
-start(data)
-assert(selected_callback == nil)
+start()
+selected_callback { value = { key = "ZOT12345" } }
+assert(completed == nil)
 equal(lines(buf), { "# Paper" })
+assert(warnings[#warnings]:find "no Better BibTeX citation key")
 
 buf = fresh()
-vim.api.nvim_del_user_command "Zannotations"
-start(data)
-assert(selected_callback == nil)
+start()
+select_paper "paper with spaces; literal argument"
+assert(commands[#commands][3] == "paper with spaces; literal argument")
+finish(result)
+assert(lines(buf)[3] == "## Annotations")
+
+buf = fresh()
+package.loaded["zotcite.seek"].refs = function() error "Selector failed" end
+start()
 equal(lines(buf), { "# Paper" })
-vim.api.nvim_create_user_command("Zannotations", function() error "Selector failed" end, {})
-start(data)
 assert(warnings[#warnings]:find "Selector failed")
+package.loaded["zotcite.seek"].refs = refs
+start()
+vim.system = function() error "Process could not start" end
+select_paper()
+equal(lines(buf), { "# Paper" })
+assert(warnings[#warnings]:find "Process could not start")
+vim.system = system
 
+buf = fresh()
+vim.api.nvim_del_user_command "Zseek"
+start()
+assert(selected_callback == nil)
+equal(lines(buf), { "# Paper" })
+assert(warnings[#warnings]:find "picker is unavailable")
 assert(vim.fn.exists ":ImportZoteroAnnotations" == 2)
 print "ImportZoteroAnnotations: all checks passed"

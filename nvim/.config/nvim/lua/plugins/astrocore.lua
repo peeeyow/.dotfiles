@@ -82,9 +82,12 @@ local mappings = {
 local autocmds = {
   auto_disable_formatting = {
     {
-      desc = "Disable auto formatting for anki markdowns.",
-      event = "BufReadPre",
-      pattern = vim.fn.expand "~" .. "/obsidian/main-vault/anki/*.md",
+      desc = "Preserve Anki formatting and script-managed reference notes.",
+      event = { "BufReadPre", "BufNewFile" },
+      pattern = {
+        vim.fn.expand "~" .. "/obsidian/main-vault/anki/*.md",
+        vim.fn.expand "~" .. "/obsidian/main-vault/references/*.md",
+      },
       group = "auto_disable_formatting",
       callback = function(args) vim.b[args.buf].autoformat = false end,
     },
