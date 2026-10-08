@@ -3,7 +3,7 @@
 if [[ "$#" == 3 ]]; then
   mode=$1
   builtin_screen=$2
-  $external_primary=$3
+  external_primary=$3
 elif [[ "$#" == 1 ]]; then
   mode=$1
   # 1920x1080 144hz
