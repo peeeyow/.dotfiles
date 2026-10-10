@@ -309,7 +309,7 @@ for_window [instance="update_installer"] floating enable
 ### urgent workspace (triggered by mako)
 focus_on_window_activation focus
 
-# exec --no-startup-id xrandr --output $builtin_screen --primary --mode 1920x1200 --rate 144.00 --output $external_primary --off
+exec --no-startup-id xrandr --output $builtin_screen --primary --mode 1920x1200 --rate 144.00 --output $external_primary --off
 
 exec_always --no-startup-id $HOME/.scripts/polybar.sh
 
