@@ -6,7 +6,7 @@ if [[ "$#" == 3 ]]; then
   external_primary=$3
 elif [[ "$#" == 1 ]]; then
   mode=$1
-  # 1920x1080 144hz
+  # 1920x1080 75hz
   external_primary="HDMI-0"
   # 1920x1200 144hz
   builtin_screen="eDP-1-0"
@@ -25,15 +25,15 @@ fi
 pkill picom
 
 if [ $mode == "dual" ]; then
-  xrandr --output $builtin_screen --mode 1920x1200 --rate 144.0\
-    --output $external_primary --mode 1920x1080 --rate 144.0 --left-of $builtin_screen
+  xrandr --output $builtin_screen --mode 1920x1200 --rate 144.0 \
+    --output $external_primary --mode 1920x1080 --rate 75 --left-of $builtin_screen
 
 elif [ $mode == "single_external" ]; then
-  xrandr --output $builtin_screen --off\
-    --output $external_primary --mode 1920x1080 --rate 144.0 --left-of $builtin_screen
+  xrandr --output $builtin_screen --off \
+    --output $external_primary --mode 1920x1080 --rate 75 --left-of $builtin_screen
 
 elif [ $mode == "single_builtin" ]; then
-  xrandr --output $builtin_screen --primary --mode 1920x1200 --rate 144.00\
+  xrandr --output $builtin_screen --primary --mode 1920x1200 --rate 75 \
     --output $external_primary --off
 else
   echo 'Error: mode
