@@ -20,42 +20,6 @@
       "installedAt": "2026-08-10T06:39:43.741Z",
       "updatedAt": "2026-08-10T06:39:43.741Z"
     },
-    "academic-paper": {
-      "source": "Imbad0202/academic-research-skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
-      "skillPath": "academic-paper/SKILL.md",
-      "skillFolderHash": "c7bf0ffb76635546920e397f6300c5095f47f9bd",
-      "installedAt": "2026-08-10T07:57:14.363Z",
-      "updatedAt": "2026-09-11T09:05:20.212Z"
-    },
-    "academic-paper-reviewer": {
-      "source": "Imbad0202/academic-research-skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
-      "skillPath": "academic-paper-reviewer/SKILL.md",
-      "skillFolderHash": "b003b9ac0caf892964cc0dbeca37bcadfc8862f7",
-      "installedAt": "2026-08-10T07:57:14.365Z",
-      "updatedAt": "2026-08-29T14:01:17.508Z"
-    },
-    "academic-pipeline": {
-      "source": "Imbad0202/academic-research-skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
-      "skillPath": "academic-pipeline/SKILL.md",
-      "skillFolderHash": "2c3c2fb41ac4a9817a8a330bd15d1a8c1b0e5444",
-      "installedAt": "2026-08-10T07:57:14.365Z",
-      "updatedAt": "2026-09-11T09:05:33.421Z"
-    },
-    "deep-research": {
-      "source": "Imbad0202/academic-research-skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
-      "skillPath": "deep-research/SKILL.md",
-      "skillFolderHash": "b2e962bdedbc24168be3712382033c85512b8936",
-      "installedAt": "2026-08-10T07:57:14.365Z",
-      "updatedAt": "2026-09-11T09:06:05.863Z"
-    },
     "opensrc": {
       "source": "vercel-labs/opensrc",
       "sourceType": "github",
