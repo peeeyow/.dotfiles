@@ -9,7 +9,7 @@
     "npm:@gotgenes/pi-permission-system",
     "npm:@narumitw/pi-statusline",
     "npm:pi-usage-bar-focus",
-    "git:github.com/DietrichGebert/ponytail"
+    "npm:@dietrichgebert/ponytail"
   ],
   "hideThinkingBlock": false
 }
