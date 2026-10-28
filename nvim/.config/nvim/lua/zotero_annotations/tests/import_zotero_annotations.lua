@@ -3,7 +3,7 @@ local config_dir = vim.fn.fnamemodify(debug.getinfo(1, "S").source:sub(2), ":p:h
 vim.opt.rtp:prepend(config_dir)
 
 local selected_callback, completed
-local warnings, commands = {}, {}
+local warnings, commands, requests = {}, {}, {}
 vim.notify = function(message) table.insert(warnings, message) end
 local refs = function(key, callback)
   assert(key == "", "The reference picker should open without a search filter")
@@ -22,12 +22,16 @@ spec.config(nil, spec.opts)
 
 local system = vim.system
 vim.system = function(argv, opts, callback)
-  assert(#argv == 4 and vim.fn.executable(argv[1]) == 1)
+  assert(#argv == 7 and vim.fn.executable(argv[1]) == 1)
+  assert(argv[5] == "--existing-stdin" and argv[6] == "--insert-after")
+  assert(tonumber(argv[7]) ~= nil)
+  assert(type(opts.stdin) == "string")
   assert(type(argv[4]) == "string")
   assert(argv[2] == vim.fn.expand "~/obsidian/main-vault/scripts/import_zotero_annotations.py")
   assert(opts.cwd == vim.fn.expand "~/obsidian/main-vault")
   assert(opts.text and opts.timeout == 35000)
   table.insert(commands, argv)
+  table.insert(requests, opts)
   completed = callback
   return {}
 end
@@ -65,9 +69,13 @@ local snippet = {
   ">",
   "> - My $x$ comment.",
   "",
-  "## Notes",
+  "## Unprocessed Notes",
+  "",
+  "<!-- zotero-source: TEXT1234:1 -->",
   "",
   "- My $x$ comment. ([Page. 1](<zotero://open-pdf/library/items/PDF12345?annotation=TEXT1234&page=1>))",
+  "",
+  "## Notes",
   "",
   "## Reference",
   "",
@@ -75,7 +83,7 @@ local snippet = {
   "[Paper title](</references/paper.md>)",
   "",
 }
-local result = { code = 0, stdout = table.concat(snippet, "\n") .. "\n", stderr = "" }
+local result = { code = 0, stdout = "# Paper\n\n" .. table.concat(snippet, "\n") .. "\n", stderr = "" }
 
 local buf = fresh { "# Paper", "## Later section", "Keep this text." }
 start()
@@ -86,7 +94,9 @@ local other = fresh { "Other buffer" }
 pending { value = { key = "ZOT12345", cite = "paper", title = "Paper title" } }
 assert(commands[#commands][3] == "paper", "Use the citation key, not Zotero's item key")
 assert(commands[#commands][4] == "Paper title", "Pass the selected reference's title")
-finish(result)
+assert(requests[#requests].stdin == "# Paper\n## Later section\nKeep this text.\n")
+assert(commands[#commands][7] == "1")
+finish { code = 0, stdout = result.stdout .. "## Later section\nKeep this text.\n", stderr = "" }
 local expected = { "# Paper", "" }
 vim.list_extend(expected, snippet)
 vim.list_extend(expected, { "## Later section", "Keep this text." })
@@ -95,13 +105,27 @@ equal(lines(other), { "Other buffer" })
 assert(vim.api.nvim_get_current_buf() == other)
 
 vim.api.nvim_set_current_buf(buf)
+selected_callback, completed = nil, nil
 start()
-assert(selected_callback == nil)
+assert(selected_callback ~= nil, "Existing sections must allow another import")
+select_paper()
+assert(requests[#requests].stdin == table.concat(expected, "\n") .. "\n")
+finish { code = 0, stdout = "", stderr = "" }
 equal(lines(buf), expected)
-for _, heading in ipairs { "## Notes", "## Annotations", "## Reference" } do
+assert(warnings[#warnings]:find "No new annotations")
+
+start()
+select_paper()
+local updated = vim.deepcopy(expected)
+table.insert(updated, 4, "> New source-ordered annotation.")
+finish { code = 0, stdout = table.concat(updated, "\n") .. "\n", stderr = "" }
+equal(lines(buf), updated)
+
+for _, heading in ipairs { "## Notes", "## Annotations", "## Unprocessed Notes", "## Reference" } do
   buf = fresh { "# Paper", heading, "Existing work" }
   start()
-  assert(selected_callback == nil and completed == nil)
+  select_paper()
+  finish { code = 1, stdout = "Partial output", stderr = "Reimport requires complete sections" }
   equal(lines(buf), { "# Paper", heading, "Existing work" })
 end
 
@@ -113,7 +137,7 @@ start() -- Cancellation does not leave a heading that prevents a retry.
 select_paper()
 finish { code = 0, stdout = "", stderr = "" }
 equal(lines(buf), { "# Paper" })
-assert(warnings[#warnings]:find "No annotations")
+assert(warnings[#warnings]:find "No new annotations")
 
 buf = fresh()
 start()

@@ -6,6 +6,13 @@ return {
   },
   opts = {
     key_type = "better-bibtex",
+    typst_fallback_root = function(bufpath)
+      return vim.fs.find("main.typ", {
+        path = vim.fs.dirname(bufpath),
+        upward = true,
+        type = "file",
+      })[1]
+    end,
     hook = {
       bib_ref = function(e)
         e.zotero_added = e.added

@@ -15,19 +15,13 @@ local function import_annotations()
     vim.notify("The Zotcite picker is unavailable; check Zotcite initialization.", vim.log.levels.ERROR)
     return
   end
-  for _, line in ipairs(vim.api.nvim_buf_get_lines(buf, 0, -1, false)) do
-    if line:match "^##%s+Annotations%s*$" or line:match "^##%s+Notes%s*$" or line:match "^##%s+Reference%s*$" then
-      vim.notify("Annotations, Notes or Reference already exists; leaving the note unchanged.", vim.log.levels.WARN)
-      return
-    end
-  end
-
   if PYTHON == "" or vim.fn.filereadable(IMPORT_SCRIPT) == 0 then
     vim.notify("The Python annotation importer is unavailable: " .. IMPORT_SCRIPT, vim.log.levels.ERROR)
     return
   end
 
   local row = vim.api.nvim_win_get_cursor(0)[1]
+  local snapshot = table.concat(vim.api.nvim_buf_get_lines(buf, 0, -1, false), "\n") .. "\n"
   local tick = vim.api.nvim_buf_get_changedtick(buf)
   local function unchanged()
     if not vim.api.nvim_buf_is_loaded(buf) then return false end
@@ -50,9 +44,19 @@ local function import_annotations()
         vim.notify("The selected reference has no Better BibTeX citation key.", vim.log.levels.ERROR)
         return
       end
-      local started, failure = pcall(vim.system, { PYTHON, IMPORT_SCRIPT, citekey, selection.value.title or citekey }, {
+      local argv = {
+        PYTHON,
+        IMPORT_SCRIPT,
+        citekey,
+        selection.value.title or citekey,
+        "--existing-stdin",
+        "--insert-after",
+        tostring(row),
+      }
+      local started, failure = pcall(vim.system, argv, {
         cwd = VAULT_ROOT,
         text = true,
+        stdin = snapshot,
         timeout = 35000,
       }, function(result)
         vim.schedule(function()
@@ -63,13 +67,12 @@ local function import_annotations()
             return
           end
           if not result.stdout or not result.stdout:find "%S" then
-            vim.notify("No annotations found; leaving the note unchanged.", vim.log.levels.INFO)
+            vim.notify("No new annotations found; leaving the note unchanged.", vim.log.levels.INFO)
             return
           end
           local lines = vim.split(result.stdout, "\n", { plain = true })
           if lines[#lines] == "" then table.remove(lines) end
-          table.insert(lines, 1, "")
-          vim.api.nvim_buf_set_lines(buf, row, row, true, lines)
+          vim.api.nvim_buf_set_lines(buf, 0, -1, true, lines)
         end)
       end)
       if not started then vim.notify(tostring(failure), vim.log.levels.ERROR) end
@@ -82,7 +85,7 @@ function M.setup()
   vim.api.nvim_create_user_command(
     "ImportZoteroAnnotations",
     import_annotations,
-    { desc = "Import Zotero annotation callouts, linked Notes and Reference" }
+    { desc = "Import new Zotero annotations and queue comments in source order" }
   )
 end
 

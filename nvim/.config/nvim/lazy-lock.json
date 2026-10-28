@@ -76,5 +76,5 @@
   "vimtex": { "branch": "master", "commit": "cb81778aee678b513af3de7f1ca5943e7ee31b2f" },
   "which-key.nvim": { "branch": "main", "commit": "fcbf4eea17cb299c02557d576f0d568878e354a4" },
   "yaml-companion.nvim": { "branch": "main", "commit": "fc8dc139ab8f410ae830d5cf48f9558f47c701f8" },
-  "zotcite": { "branch": "master", "commit": "282bd8963218f840d7286ce6874bafc7c6b4b535" }
+  "zotcite": { "branch": "master", "commit": "f57a5ebc67bd7768da1abd5ba270ec7426b32c6a" }
 }
