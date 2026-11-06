@@ -9,7 +9,7 @@
       "skillFolderHash": "3cf9a8db32597ba3e24b584a3d696f4e11c7d7b6",
       "pluginName": "example-skills",
       "installedAt": "2026-08-10T06:39:32.465Z",
-      "updatedAt": "2026-08-10T06:39:32.465Z"
+      "updatedAt": "2026-11-06T05:56:23.396Z"
     },
     "find-skills": {
       "source": "vercel-labs/skills",
@@ -18,7 +18,7 @@
       "skillPath": "skills/find-skills/SKILL.md",
       "skillFolderHash": "76a98a285cb0434f3d39e1a873823556330e398b",
       "installedAt": "2026-08-10T06:39:43.741Z",
-      "updatedAt": "2026-08-10T06:39:43.741Z"
+      "updatedAt": "2026-11-06T05:56:23.406Z"
     },
     "opensrc": {
       "source": "vercel-labs/opensrc",
@@ -27,7 +27,7 @@
       "skillPath": "skills/opensrc/SKILL.md",
       "skillFolderHash": "0584838f454836cf26b7170348df5e266a7c2a79",
       "installedAt": "2026-08-10T12:39:22.881Z",
-      "updatedAt": "2026-08-10T12:39:22.881Z"
+      "updatedAt": "2026-11-06T05:56:23.412Z"
     }
   },
   "dismissed": {

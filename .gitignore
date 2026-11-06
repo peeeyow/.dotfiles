@@ -63,3 +63,7 @@ icons/.icons/default
 
 # Python cache files
 __pycache__/
+
+# Ignore skills by default; add ! exceptions below for skills to commit
+/agents/.agents/skills/*
+/pi/.pi/agent/skills/*

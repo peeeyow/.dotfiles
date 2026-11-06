@@ -39,7 +39,7 @@ flatpak install flathub net.ankiweb.Anki org.freedesktop.Sdk.Extension.texlive
 mkdir -p ~/.ipython/profile_default
 
 # for pi harness
-mkdir -p ~/.pi/agent ~/.agents
+mkdir -p ~/.pi/agent
 
 # molten nvim
 nvim_env="$HOME/workfiles/virtualenvs"
