@@ -4,7 +4,7 @@ return {
   ---@type snacks.Config
   opts = {
     image = {
-      doc = { enabled = true, inline = false },
+      doc = { enabled = true, inline = false, float = false },
       resolve = function(path, src)
         local api = require "obsidian.api"
         if not api.path_is_note(path) then return end
